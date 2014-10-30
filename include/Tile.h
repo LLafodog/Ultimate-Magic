@@ -14,9 +14,6 @@ class Tile : public Positionnable
         void setVisible(bool b) {m_visible=b;}
         void initSquare(float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
 
-        /*const int getPositionX() {return m_cs.getPosition().x;}
-        const int getPositionY() {return m_cs.getPosition().y;}
-        const sf::Vector2f getPosition() {return m_cs.getPosition();}*/
         const int getID() {return m_id;}
         const sf::ConvexShape* getShape() {return &m_cs;}
         const bool isVisible() {return m_visible;}

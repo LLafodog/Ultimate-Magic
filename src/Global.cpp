@@ -1,6 +1,7 @@
 #include "Global.h"
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 const sf::Color Global::BDC=sf::Color(4,139,154);
 
 Global::Global()
@@ -23,6 +24,17 @@ const void Global::showVector(vector<vector<int>> v)
 const bool Global::isInTheRect(float xt,float yt,float xr,float yr,float wr,float hr)
 {
     return(xt>=xr && xt<=xr+wr && yt>=yr && yt<=yr+hr);
+}
+
+const float Global::distanceFromAtoB(float xa, float ya, float xb, float yb)
+{
+    return sqrt( pow(xa-xb,2) + pow(ya-yb,2) );
+}
+
+const int  Global::signOf(float a)
+{
+    if(a!=0)return abs(a)/a;
+    return 0;
 }
 
 Global::~Global()

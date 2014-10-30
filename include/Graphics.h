@@ -18,6 +18,7 @@ class Graphics
         void draw();
             void drawAll();
             void drawTile(Tile*t);
+            void drawVisibleArea();
             void drawTilesAround();
             void drawPlayers();
         void clear() {m_window->clear(Global::BDC);}
@@ -28,7 +29,7 @@ class Graphics
     //MaJ
         void update();
     //Camera
-//        Camera* getCamera() {return m_camera;}
+        Camera* getCamera() {return m_camera;}
         virtual ~Graphics();
 
 
@@ -38,7 +39,7 @@ class Graphics
     int m_refreshTime;
     sf::RenderWindow* m_window;
     World* m_world;
-    //Camera* m_camera;
+    Camera* m_camera;
 
 };
 

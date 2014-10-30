@@ -23,15 +23,13 @@ Graphics::Graphics(RenderWindow* w, World* wo)
    //World
    m_world=wo;
    //camera
-   //m_camera=new Camera(m_window,wo->getPlayer(0));
-   //m_camera->setViewSize(10*Global::TILE_WIDTH,10*Global::TILE_HEIGHT);
-   //m_window->setView(m_camera->getView());
+   m_camera=new Camera(m_window,wo->getPlayer(0),wo);
 }
 
 void Graphics::update()
 {
     if((time(NULL)-m_time)%m_refreshTime==0){needToRefresh=true;} //auto refresh
-    //m_camera->updateView();
+    m_camera->updateView();
 }
 
 
@@ -41,16 +39,16 @@ void Graphics::getInfo()
     cout  << "///////////////////////////////////" << endl
             << "///////// CAMERA //////////////////" <<endl
             << " /******** CAMERA POSITION ********/" <<endl <<
-//            m_camera->getView().getCenter().x <<"   " <<m_camera->getView().getCenter().y << endl
+            m_camera->getView().getCenter().x <<"   " <<m_camera->getView().getCenter().y << endl
         //Taille de la view ?
-            /*<<*/ " /******** CAMERA SIZE ************/" <<endl<<
-//            m_camera->getView().getSize().x <<"   " <<m_camera->getView().getSize().y << endl
-            /*<<*/ "///////////////////////////////////" <<endl;
+            << " /******** CAMERA SIZE ************/" <<endl<<
+            m_camera->getView().getSize().x <<"   " <<m_camera->getView().getSize().y << endl
+            << " Distance from target: " << m_camera->getDistanceFromTarget() <<endl
+            << "///////////////////////////////////" <<endl;
 }
 
 void Graphics::draw()
 {
-    //m_window->setView(m_camera->getView()); //useless?
     if(m_world!=0)
     {
         if(needToRefresh)
@@ -59,9 +57,7 @@ void Graphics::draw()
             needToRefresh=false;
         }
 
-  //      m_window->setView(m_window->getDefaultView());
-        drawTile(new Tile(0,0,0,true,16,16));
-        drawTilesAround();
+        drawVisibleArea();
         drawPlayers();
         m_window->display();
     }
@@ -73,19 +69,17 @@ void Graphics::drawTile(Tile*t)
     if(t->isVisible())m_window->draw(*(t->getShape()));
 }
 
-void Graphics::drawTilesAround()
+void Graphics::drawVisibleArea()
 {
-if(m_world!=0)
+  if(m_world!=0)
     {
-            int nbTileActualized(1);
-            //Centered on the first player TO DO: faire moyenne des joueurs
-            /*int xp=m_camera->getPos()->getPositionX();
-            int yp=m_camera->getPos()->getPositionY();*/
-            int xp=m_world->getPlayer(0)->getPositionX();
-            int yp=m_world->getPlayer(0)->getPositionY();
-            for(int i=(xp>>(4))-nbTileActualized;i<=(xp>>(4))+nbTileActualized+1;i++) // Dacalage de 4 pour la taille de la tile, -10 pour le rayon de la vue.
+            int xp=m_camera->getView().getCenter().x/Global::TILE_WIDTH,
+                yp=m_camera->getView().getCenter().y/Global::TILE_HEIGHT,
+                wp=m_camera->getView().getSize().x/Global::TILE_WIDTH,
+                hp=m_camera->getView().getSize().y/Global::TILE_HEIGHT;
+            for(int i=xp-wp/2;i<=xp+wp/2+1;i++)
             {
-                for (int j=(yp>>(4))-nbTileActualized;j<=(yp>>(4))+nbTileActualized+2;j++)  // Dacalage de 4 pour la taille de la tile, -10 pour le rayon de la vue.
+                for (int j=yp-hp/2;j<=yp+hp/2+1;j++)
                 {
                     //Tile position
                     int x=i*Global::TILE_HEIGHT;
@@ -96,12 +90,48 @@ if(m_world!=0)
                         Tile* t= new Tile(m_world->getTiles()[i][j],x,y,true);
                         drawTile(t);
                         delete t;
+
                     } //Endif in the world
+
 
                 }//endFor horizontally
 
             }//endfor vertically
+    }//endif world=0
 
+}
+
+void Graphics::drawTilesAround()
+{
+if(m_world!=0)
+    {
+            int nbTileActualized(10);
+            //Centered on the first player TO DO: faire moyenne des joueurs
+            int xp=m_camera->getView().getCenter().x;
+            int yp=m_camera->getView().getCenter().y;
+            /*int xp=m_world->getPlayer(0)->getPositionX();
+            int yp=m_world->getPlayer(0)->getPositionY();*/
+            for(int i=(xp>>(4))-nbTileActualized;i<=(xp>>(4))+nbTileActualized+1;i++) // Dacalage de 4 pour la taille de la tile, -10 pour le rayon de la vue.
+            {
+                for (int j=(yp>>(4))-nbTileActualized;j<=(yp>>(4))+nbTileActualized+2;j++)  // Dacalage de 4 pour la taille de la tile, -10 pour le rayon de la vue.
+                {
+
+                    //Tile position
+                    int x=i*Global::TILE_HEIGHT;
+                    int y=j*Global::TILE_WIDTH;
+
+                    if(x>=0 && y>=0 && j<m_world->getWidth() && i<m_world->getHeight()) //In order to stay in the vector(tiles)
+                    {
+                        Tile* t= new Tile(m_world->getTiles()[i][j],x,y,true);
+                        drawTile(t);
+                        delete t;
+
+                    } //Endif in the world
+
+
+                }//endFor horizontally
+
+            }//endfor vertically
     }//endif world=0
 }
 
@@ -127,26 +157,19 @@ void Graphics::drawAll()
             }
         }
    }
+   drawPlayers();
 }
 
 void Graphics::drawPlayers()
 {
-    //if(Keyboard::isKeyPressed(Keyboard::A))id=(id+1)%30;std::cout<<id<<std::endl;;
     for(int i(0);i<m_world->getNumberPlayers();i++)
     {
-        Tile* t=new Tile(1,m_world->getPlayer(i)->getPositionX(),m_world->getPlayer(i)->getPositionY(),true,Global::TILE_WIDTH,2*Global::TILE_HEIGHT); //magic
+        Tile* t=new Tile(3,m_world->getPlayer(i)->getPositionX(),m_world->getPlayer(i)->getPositionY(),true,Global::TILE_WIDTH,2*Global::TILE_HEIGHT); //magic
         drawTile(t);
         delete t;
     }
 
 
-
-    /*for(int i(0);i<m_world->getNumberPlayers();i++)
-    {
-        Tile* t=new Tile(-1,m_world->getPlayer(i)->getX(),m_world->getPlayer(i)->getY(),true,Global::TILE_WIDTH,2*Global::TILE_HEIGHT);
-        drawTile(t);
-        delete t;
-    }*/
 }
 
 

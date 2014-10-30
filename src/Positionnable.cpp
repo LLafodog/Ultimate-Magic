@@ -1,6 +1,6 @@
 #include "Positionnable.h"
 
-Positionnable::Positionnable(float x, float y, int width, int height)
+Positionnable::Positionnable(float x, float y, float width, float height)
 {
     m_x=x;
     m_y=y;

@@ -24,7 +24,7 @@ void TextureEngine::load()
 {
     std::cout<<"Textures loading..."<<std::endl;
     if(
-        loadPNG("data/img/tileset.png",3,1) //tiles
+        loadPNG("data/img/tileset.png",1,3) //tiles
     &&  loadPNG("data/img/dragon.png",4,4,96,96)   //Dragon
        )
     std::cout<<"Successfully loaded the textures."<<std::endl;

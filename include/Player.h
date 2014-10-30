@@ -27,7 +27,7 @@ class Player : public Positionnable
         const void hasMoved() {m_isMoving=false;}
 
         void moveOn(float x, float y);
-        void moveOnF(int nSpeedX, int nSpeedY) {moveOn(nSpeedX*m_speedX,nSpeedY*m_speedY);}
+        void moveOnF(int nSpeedX, int nSpeedY) {moveOn(nSpeedX*m_speed,nSpeedY*m_speed);}
 
         void update();
 
@@ -42,8 +42,7 @@ class Player : public Positionnable
     int m_mana;
     float m_attack;
     float m_magic;
-    float m_speedX;
-    float m_speedY;
+    float m_speed;
 
     //physically
 

@@ -21,6 +21,7 @@ class Core
 
         void update();
             void updateFPS();
+        void draw();
         void showInfo();
 
         static Controller* m_controller;

@@ -14,7 +14,7 @@ World::World(int width, int height, int players)
        for (int j(0);j<width;j++)
        {
            //DEBUG
-           int basic_tile=0; //BASIC TILE
+           int basic_tile=rand()%3; //BASIC TILE
            v.push_back(basic_tile); ///BASIC TILE
        }
        m_tiles.push_back(v);

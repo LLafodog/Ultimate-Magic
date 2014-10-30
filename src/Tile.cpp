@@ -10,8 +10,8 @@ Tile::Tile(int id, int x, int y,bool visible, float width, float height):Positio
     m_id=id;
     m_visible=visible;
 
-    initSquare(m_width,m_height);
-    m_cs.setPosition(m_x,m_y);
+    initSquare(width,height);
+    m_cs.setPosition(x,y);
 
 
 

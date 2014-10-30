@@ -8,12 +8,12 @@
 class Positionnable
 {
     public:
-        Positionnable(float x=0, float y=0, int width=Global::TILE_WIDTH, int height=Global::TILE_HEIGHT);
+        Positionnable(float x=0, float y=0, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
 
         virtual ~Positionnable();
 
-        const int getPositionX() {return m_x;}
-        const int getPositionY() {return m_y;}
+        const float  getPositionX() {return m_x;}
+        const float getPositionY() {return m_y;}
         const sf::Vector2f getPosition() {return sf::Vector2f(m_x,m_y);}
 
         void setPositionX(float x) {m_x=x;}
@@ -22,14 +22,14 @@ class Positionnable
         void setPosition(sf::Vector2f v){m_x=v.x;m_y=v.y;}
 
         const sf::Vector2f getSize() {return sf::Vector2f(m_width,m_height);}
-        void setSize(int w,int h) {m_width=w;m_height=h;}
+        void setSize(float  w,float h) {m_width=w;m_height=h;}
         void setSize(sf::Vector2f v) {setSize(v.x,v.y);}
 
     protected:
         float m_x;
         float m_y;
-        int m_width;
-        int m_height;
+        float  m_width;
+        float m_height;
 };
 
 #endif // POSITIONNABLE_H

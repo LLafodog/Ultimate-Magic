@@ -15,11 +15,13 @@ class Global
        static const int WINDOW_HEIGHT=480;
        static const int TILE_WIDTH=16;
        static const int TILE_HEIGHT=16;
-       static int FPS;
+       static float FPS;
        static const sf::Color BDC;
 
        static const void showVector(vector<vector<int>> v);
        static const bool isInTheRect(float xt,float yt,float xr,float yr,float wr,float hr);
+       static const float distanceFromAtoB(float xa, float ya, float xb, float yb);
+       static const int  signOf(float a);
 
     protected:
     private:

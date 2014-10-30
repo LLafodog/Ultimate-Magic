@@ -22,7 +22,7 @@
 #include "Tile.h"
 
 
-int Global::FPS;
+float Global::FPS;
 
 using namespace sf;
 using namespace std;
@@ -40,7 +40,7 @@ Core::Core(sf::RenderWindow* window)
 void Core::init()
 {
     //World
-    initWorld(50,50); /* MAGIC ! */
+    initWorld(25,25); /* MAGIC ! */
     //Graphics
     initGraphics();
 
@@ -73,15 +73,20 @@ void Core::update()
     WorldManager::updatePlayers(m_world);
     //graphics
     m_graphics->update();
-    m_graphics->draw();
     // debug
-    m_graphics->drawAllTextures();
+    //m_graphics->drawAllTextures();
+}
+
+void Core::draw()
+{
+    m_graphics->draw();
+
 }
 
 void Core::updateFPS()
 {
-    if(m_clock.getElapsedTime().asMicroseconds() != 0) m_fps= 1000000/m_clock.getElapsedTime().asMicroseconds();
-    Global::FPS=m_fps;
+
+    Global::FPS=1000000.f/m_clock.restart().asMicroseconds();
     if(time(NULL)-m_timeStart>0) //l'entier minore la différence de seconde à 0 donc affiche chaque seconde.
     {
         m_timeStart=time(NULL);
@@ -102,7 +107,6 @@ void Core::run()
     {
         while (m_window->isOpen())
         {
-            m_clock.restart();
             while(m_window->pollEvent(*(m_controller->getEvent())))
             {
                 switch(m_controller->getEvent()->type)
@@ -114,7 +118,6 @@ void Core::run()
                 {
                     case Keyboard::Escape : m_window->close();
                     default:
-                        //WorldManager::updateControls(m_world,m_controller->getEvent());
                         break;
                 }
                 //Combine
@@ -124,20 +127,8 @@ void Core::run()
 
             }
 
-            //update();
-            m_window->clear(Color(255,0,0));
-            //m_graphics->drawAllTextures();
-            Tile t(0,111,0,1,1,1);
-            cout << t.getSize().x<<endl;
-
-            m_window->draw(*t.getShape());
-            //View v(Vector2f(0,0),Vector2f(100,100));
-
-            //v.setViewport(FloatRect(0,0,0.5,0.5));
-//            m_window->setView(v);
-            //m_graphics->drawTile(&t);
-            m_graphics=0;
-            m_window->display();
+            update();
+            draw();
 
 
 
