@@ -68,12 +68,13 @@ void Camera::updateView()
         signY=Global::signOf(yp-yv);
 
     Player* p=dynamic_cast<Player*>(m_pos);
-
-    if(!Global::isInTheRect(xp,yp,xv-wv/4,yv-hv/4,wv/2,hv/2) && p!=0 && p->isMoving()) //Si on ne suit pas un player c'est mort
+    ///TO DO: Revoir pour pas que ça tremble
+    if((xp>=xv-wv/4 && xp<=xv-wv/4+wv/2&& yp>=yv-hv/4&& yp<=yv-hv/4+hv/2)&& p!=0 && p->isMoving()) //Si on ne suit pas un player c'est mort
     {
      speed*=distancePV/2;
     }
-    else if(Global::isInTheRect(xp,yp,xv-wv/8,yv-hv/8,wv/4,hv/4) && p!=0 && p->isMoving())
+    //else if(Global::isInTheRect(xp,yp,xv-wv/8,yv-hv/8,wv/4,hv/4) && p!=0 && p->isMoving())
+    else if((xp>=xv-wv/8 && xp<=xv-wv/8+wv/4 && yp>=yv-hv/8 && yp<=yv-hv/8+hv/4)&& p!=0 && p->isMoving())
     {
      speed*=distancePV/5;
     }

@@ -2,6 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+
+using namespace std;
+
 const sf::Color Global::BDC=sf::Color(4,139,154);
 
 Global::Global()
@@ -36,6 +39,15 @@ const int  Global::signOf(float a)
     if(a!=0)return abs(a)/a;
     return 0;
 }
+
+//template<typename T> const bool Global::inVectorDouble(int y, int x, vector<vector<T>> v)
+const bool Global::inVectorDouble(int y, int x, vector<vector<Tile*>> v)
+{
+    return (y<v.size() && y>=0 && x<v[y].size() && y>=0);
+
+}
+
+
 
 Global::~Global()
 {

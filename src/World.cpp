@@ -28,6 +28,7 @@ World::World(int width, int height, int players)
         //Global::showVector(m_tiles);
 
    for(int i(0);i<players;i++){addPlayer();}
+   m_updated=true;
 }
 
 void World::setTiles(std::vector<std::vector<int> >tiles)

@@ -23,6 +23,9 @@ class World
         const int getNumberPlayers() {return m_players.size();}
         Player* getPlayer(unsigned int i) {if(i<m_players.size() && i>=0){return m_players[i];} else{return nullptr;}}
 
+        const bool isUpdated() {return m_updated;} // Actualize the graphics of the world
+        void hasBeenUpdated() {m_updated=false;}
+
         virtual ~World();
 
 
@@ -32,6 +35,7 @@ class World
         std::vector<std::vector<int> >m_tiles;
         int m_width;
         int m_height;
+        bool m_updated;
 };
 
 #endif // WORLD_H

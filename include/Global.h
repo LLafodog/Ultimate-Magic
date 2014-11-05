@@ -5,7 +5,11 @@
 
 #include <vector>
 #include <iostream>
+#include <vector>
+
 using namespace std;
+
+class Tile;
 
 class Global
 {
@@ -22,6 +26,8 @@ class Global
        static const bool isInTheRect(float xt,float yt,float xr,float yr,float wr,float hr);
        static const float distanceFromAtoB(float xa, float ya, float xb, float yb);
        static const int  signOf(float a);
+       //template<typename T> static const bool inVectorDouble(int a, int b, vector<vector<T>> v);
+       static const bool inVectorDouble(int a, int b, vector<vector<Tile*>> v);
 
     protected:
     private:

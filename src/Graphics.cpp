@@ -26,12 +26,43 @@ Graphics::Graphics(RenderWindow* w, World* wo)
    m_camera=new Camera(m_window,wo->getPlayer(0),wo);
 }
 
+void Graphics::initTiles()
+{
+    m_tiles=vector<vector<Tile*>>();
+    for(int i(0);i<m_world->getTiles().size();i++)
+    {
+        std::vector<Tile*> v;
+        for(int j(0);j<m_world->getTiles()[i].size();j++)
+        {
+            v.push_back(new Tile(m_world->getTiles()[i][j],j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT));
+        }
+        m_tiles.push_back(v);
+    }
+}
+
 void Graphics::update()
 {
     if((time(NULL)-m_time)%m_refreshTime==0){needToRefresh=true;} //auto refresh
     m_camera->updateView();
+    updateTiles();
+    //if world modified -> update
+    if(m_world->isUpdated())
+        {
+            initTiles();
+            m_world->hasBeenUpdated();
+        }
 }
 
+void Graphics::updateTiles() //TO DO: in the visible area
+{
+    for(int i(0);i<m_tiles.size();i++)
+    {
+        for(int j(0);j<m_tiles[i].size();j++)
+        {
+            m_tiles[i][j]->update();
+        }
+    }
+}
 
 void Graphics::getInfo()
 {
@@ -81,6 +112,17 @@ void Graphics::drawVisibleArea()
             {
                 for (int j=yp-hp/2;j<=yp+hp/2+1;j++)
                 {
+                    if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)drawTile(m_tiles[j][i]);
+
+
+
+
+
+
+
+
+
+                    /*
                     //Tile position
                     int x=i*Global::TILE_HEIGHT;
                     int y=j*Global::TILE_WIDTH;
@@ -91,8 +133,9 @@ void Graphics::drawVisibleArea()
                         drawTile(t);
                         delete t;
 
-                    } //Endif in the world
 
+                    } //Endif in the world
+*/
 
                 }//endFor horizontally
 

@@ -18,6 +18,8 @@ class Tile : public Positionnable
         const sf::ConvexShape* getShape() {return &m_cs;}
         const bool isVisible() {return m_visible;}
 
+        //Animation
+        void update();
 
         virtual ~Tile();
 

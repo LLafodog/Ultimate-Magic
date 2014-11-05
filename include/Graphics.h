@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Global.h"
+#include <vector>
 
 class Player;
 class World;
@@ -14,6 +15,7 @@ class Graphics
 {
     public:
         Graphics(sf::RenderWindow* w, World* wo=0);
+        void initTiles();
     //drawing
         void draw();
             void drawAll();
@@ -23,11 +25,15 @@ class Graphics
             void drawPlayers();
         void clear() {m_window->clear(Global::BDC);}
         static bool needToRefresh;
+
     //for testing
         void drawAllTextures();
         void getInfo();
+
     //MaJ
         void update();
+        void updateTiles();
+
     //Camera
         Camera* getCamera() {return m_camera;}
         virtual ~Graphics();
@@ -37,6 +43,7 @@ class Graphics
     protected:
     int m_time;
     int m_refreshTime;
+    std::vector<vector<Tile*>> m_tiles;
     sf::RenderWindow* m_window;
     World* m_world;
     Camera* m_camera;

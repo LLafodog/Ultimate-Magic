@@ -32,6 +32,12 @@ void Tile::initSquare(float width, float height)
 
 }
 
+void Tile::update()
+{
+
+}
+
+
 Tile::~Tile()
 {
     //dtor
