@@ -23,12 +23,21 @@ class Global
        static const sf::Color BDC;
 
        static const void showVector(vector<vector<int>> v);
-       static const bool isInTheRect(float xt,float yt,float xr,float yr,float wr,float hr);
-       static const float distanceFromAtoB(float xa, float ya, float xb, float yb);
-       static const int  signOf(float a);
-       //template<typename T> static const bool inVectorDouble(int a, int b, vector<vector<T>> v);
-       static const bool inVectorDouble(int a, int b, vector<vector<Tile*>> v);
 
+///Programming tools C/C
+/*
+    isInTheRect:    (xt>=xr && xt<=xr+wr && yt>=yr && yt<=yr+hr)
+    inVectorDouble: (y<v.size() && y>=0 && x<v[y].size() && y>=0)
+    distanceAtoB:   sqrt( pow(xa-xb,2) + pow(ya-yb,2) )
+    signOf:         if(a!=0)abs(a)/a;
+
+
+
+
+
+
+
+*/
     protected:
     private:
          Global();

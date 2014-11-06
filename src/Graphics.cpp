@@ -113,30 +113,6 @@ void Graphics::drawVisibleArea()
                 for (int j=yp-hp/2;j<=yp+hp/2+1;j++)
                 {
                     if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)drawTile(m_tiles[j][i]);
-
-
-
-
-
-
-
-
-
-                    /*
-                    //Tile position
-                    int x=i*Global::TILE_HEIGHT;
-                    int y=j*Global::TILE_WIDTH;
-
-                    if(x>=0 && y>=0 && j<m_world->getWidth() && i<m_world->getHeight()) //In order to stay in the vector(tiles)
-                    {
-                        Tile* t= new Tile(m_world->getTiles()[i][j],x,y,true);
-                        drawTile(t);
-                        delete t;
-
-
-                    } //Endif in the world
-*/
-
                 }//endFor horizontally
 
             }//endfor vertically
@@ -158,8 +134,8 @@ if(m_world!=0)
             {
                 for (int j=(yp>>(4))-nbTileActualized;j<=(yp>>(4))+nbTileActualized+2;j++)  // Dacalage de 4 pour la taille de la tile, -10 pour le rayon de la vue.
                 {
-
-                    //Tile position
+                    if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)drawTile(m_tiles[j][i]);
+                    /*//Tile position
                     int x=i*Global::TILE_HEIGHT;
                     int y=j*Global::TILE_WIDTH;
 
@@ -168,8 +144,8 @@ if(m_world!=0)
                         Tile* t= new Tile(m_world->getTiles()[i][j],x,y,true);
                         drawTile(t);
                         delete t;
-
-                    } //Endif in the world
+*/
+                    //} //Endif in the world
 
 
                 }//endFor horizontally

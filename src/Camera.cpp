@@ -18,7 +18,14 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     m_window->setView(m_view);
 
 //if out of the world
-if(!Global::isInTheRect(m_view.getCenter().x,m_view.getCenter().y,m_view.getSize().x/2,m_view.getSize().y/2,m_world->getWidth()*Global::TILE_WIDTH,m_world->getHeight()*Global::TILE_HEIGHT))m_view.setCenter(m_view.getSize().x,m_view.getSize().y);
+float   xt=m_view.getCenter().x,
+        yt=m_view.getCenter().y,
+        xr=m_view.getSize().x/2,
+        yr=m_view.getSize().y/2,
+        wr=m_world->getWidth()*Global::TILE_WIDTH,
+        hr=m_world->getHeight()*Global::TILE_HEIGHT;
+
+if(!(xt>=xr && xt<=xr+wr && yt>=yr && yt<=yr+hr))m_view.setCenter(m_view.getSize().x,m_view.getSize().y);
 
 }
 
@@ -44,8 +51,7 @@ float Camera::getDistanceFromTarget()
             xv=m_view.getCenter().x,
             yv=m_view.getCenter().y;
 
-
-    return Global::distanceFromAtoB(xv,yv,xp,yp);
+    return sqrt( pow(xp-xv,2) + pow(yp-yv,2) );
 }
 
 void Camera::updateView()
@@ -64,16 +70,16 @@ void Camera::updateView()
 
     float distancePV=getDistanceFromTarget();
     float speed=1/Global::FPS;
-    float signX=Global::signOf(xp-xv),
-        signY=Global::signOf(yp-yv);
+    float signX; if(xp-xv!=0) signX=abs(xp-xv)/(xp-xv);
+    float signY; if(yp-yv!=0) signY=abs(yp-yv)/(yp-yv);
 
     Player* p=dynamic_cast<Player*>(m_pos);
+
     ///TO DO: Revoir pour pas que ça tremble
-    if((xp>=xv-wv/4 && xp<=xv-wv/4+wv/2&& yp>=yv-hv/4&& yp<=yv-hv/4+hv/2)&& p!=0 && p->isMoving()) //Si on ne suit pas un player c'est mort
+    if((xp>=xv-wv/4 && xp<=xv-wv/4+wv/2 && yp>=yv-hv/4 && yp<=yv-hv/4+hv/2)&& p!=0 && p->isMoving()) //Si on ne suit pas un player c'est mort
     {
      speed*=distancePV/2;
     }
-    //else if(Global::isInTheRect(xp,yp,xv-wv/8,yv-hv/8,wv/4,hv/4) && p!=0 && p->isMoving())
     else if((xp>=xv-wv/8 && xp<=xv-wv/8+wv/4 && yp>=yv-hv/8 && yp<=yv-hv/8+hv/4)&& p!=0 && p->isMoving())
     {
      speed*=distancePV/5;

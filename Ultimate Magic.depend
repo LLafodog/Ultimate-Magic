@@ -1275,7 +1275,7 @@
 	<string>
 	<vector>
 
-1415173657 c:\users\llafodog\documents\github\ultimate-magic\include\global.h
+1415268227 c:\users\llafodog\documents\github\ultimate-magic\include\global.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<iostream>
@@ -1284,7 +1284,7 @@
 1415085293 c:\users\llafodog\documents\github\ultimate-magic\include\core.h
 	<SFML/Graphics.hpp>
 
-1415085295 source:c:\users\llafodog\documents\github\ultimate-magic\src\camera.cpp
+1415268431 source:c:\users\llafodog\documents\github\ultimate-magic\src\camera.cpp
 	"Camera.h"
 	"Positionnable.h"
 	"World.h"
@@ -1352,12 +1352,12 @@
 	"global.h"
 	"Positionnable.h"
 
-1415173689 source:c:\users\llafodog\documents\github\ultimate-magic\src\global.cpp
+1415268228 source:c:\users\llafodog\documents\github\ultimate-magic\src\global.cpp
 	"Global.h"
 	<SFML/Graphics.hpp>
 	<cmath>
 
-1415173835 source:c:\users\llafodog\documents\github\ultimate-magic\src\graphics.cpp
+1415267621 source:c:\users\llafodog\documents\github\ultimate-magic\src\graphics.cpp
 	"Graphics.h"
 	"Player.h"
 	"World.h"
@@ -1371,7 +1371,7 @@
 1415085295 source:c:\users\llafodog\documents\github\ultimate-magic\src\keyboardcontroller.cpp
 	"KeyboardController.h"
 
-1415085295 source:c:\users\llafodog\documents\github\ultimate-magic\src\player.cpp
+1415268633 source:c:\users\llafodog\documents\github\ultimate-magic\src\player.cpp
 	"Player.h"
 	"global.h"
 	"world.h"
