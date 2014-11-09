@@ -1,6 +1,7 @@
 #include "World.h"
 
 #include "Player.h"
+#include "Object.h"
 
 #include "global.h"
 #include "core.h"
@@ -29,11 +30,6 @@ World::World(int width, int height, int players)
 
    for(int i(0);i<players;i++){addPlayer();}
    m_updated=true;
-}
-
-void World::setTiles(std::vector<std::vector<int> >tiles)
-{
-    m_tiles=tiles;
 }
 
 void World::addPlayer()

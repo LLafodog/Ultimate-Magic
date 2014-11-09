@@ -7,11 +7,11 @@
 #include <iostream>
 
 //herit
-#include "Positionnable.h"
+#include "Object.h"
 class Controller;
 class World;
 
-class Player : public Positionnable
+class Player : public Object
 {
     public:
 

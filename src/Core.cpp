@@ -10,6 +10,7 @@
 #include "PlayerManager.h"
 
 #include "textureEngine.h"
+#include "AnimationEngine.h"
 
 #include "Controller.h"
 #include "KeyboardController.h"
@@ -64,6 +65,7 @@ void Core::initGraphics()
 void Core::load()
 {
     TextureEngine::load();
+    AnimationEngine::load(); //Need the textures
 }
 
 void Core::update()

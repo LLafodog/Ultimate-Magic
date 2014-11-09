@@ -9,20 +9,23 @@
 class Player;
 class World;
 class Tile;
+class Object;
 class Camera;
 
 class Graphics
 {
     public:
         Graphics(sf::RenderWindow* w, World* wo=0);
-        void initTiles();
+    //init
+        void init();
+            void initObjects();
+            void initTiles();
     //drawing
         void draw();
             void drawAll();
             void drawTile(Tile*t);
             void drawVisibleArea();
-            void drawTilesAround();
-            void drawPlayers();
+            void drawObjects();
         void clear() {m_window->clear(Global::BDC);}
         static bool needToRefresh;
 
@@ -32,7 +35,8 @@ class Graphics
 
     //MaJ
         void update();
-        void updateTiles();
+            void updateTiles();
+            void updateObjects();
 
     //Camera
         Camera* getCamera() {return m_camera;}
@@ -43,7 +47,8 @@ class Graphics
     protected:
     int m_time;
     int m_refreshTime;
-    std::vector<vector<Tile*>> m_tiles;
+    vector<vector<Tile*>> m_tiles;
+    vector<Tile*> m_objects;
     sf::RenderWindow* m_window;
     World* m_world;
     Camera* m_camera;

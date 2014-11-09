@@ -2,6 +2,8 @@
 
 #include "textureEngine.h"
 #include "Global.h"
+#include "Animation.h"
+#include "AnimationEngine.h"
 
 using namespace sf;
 
@@ -12,12 +14,15 @@ Tile::Tile(int id, int x, int y,bool visible, float width, float height):Positio
 
     initSquare(width,height);
     m_cs.setPosition(x,y);
+    m_animation=AnimationEngine::get(id);
+}
 
-
-
-    if(TextureEngine::get(id,0)!=nullptr){m_cs.setTexture(TextureEngine::get(id,0));}
-        else{m_cs.setFillColor(Global::BDC);}
-
+Tile::Tile(int x, int y, Animation* a, bool visible, float width, float height) : Positionnable(x,y,width, height)
+{
+    m_visible=visible;
+    m_animation=a;
+    initSquare(width,height);
+    m_cs.setPosition(x,y);
 }
 
 void Tile::initSquare(float width, float height)
@@ -32,9 +37,22 @@ void Tile::initSquare(float width, float height)
 
 }
 
+const sf::ConvexShape* Tile::getApparence()
+{
+    if(m_animation!=nullptr)m_cs.setTexture(m_animation->getCurrentFrame());
+    else{m_cs.setTexture(TextureEngine::get("error"));}
+    return &m_cs;
+}
+
 void Tile::update()
 {
-
+    if(m_animation!=nullptr)
+    {
+        m_animation->update();
+        m_cs.setTexture(m_animation->getCurrentFrame());
+    }
+    else{m_cs.setTexture(TextureEngine::get("error"));}
+    m_cs.setPosition(getPosition());
 }
 
 

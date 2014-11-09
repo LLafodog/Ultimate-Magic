@@ -8,7 +8,7 @@
 #include <iostream>
 //
 
-Player::Player() :Positionnable()
+Player::Player()
 {
     initStats();
 
@@ -30,7 +30,7 @@ void Player::initStats()
     m_attack=1;
     m_magic=0;
     //m_speed=32;
-    m_speed=200;
+    m_speed=32;
     //physically
     m_width=Global::TILE_WIDTH;
     m_height=2*Global::TILE_HEIGHT;
@@ -51,8 +51,8 @@ void Player::moveOn(float x, float y)
         wr=m_world->getWidth()*Global::TILE_WIDTH-m_width,
         hr=m_world->getHeight()*Global::TILE_HEIGHT-m_height;
 
-    if(m_x+speedX>=0 && m_x+speedX<=wr && m_y>=0 && m_y<=hr){m_x+=x/Global::FPS;}
-    if(m_x>=0 && m_x<=wr && m_y+speedY>=0 && m_y+speedY<=hr){m_y+=y/Global::FPS;}
+    if(m_x+speedX>=0 && m_x+speedX<=wr ){m_x+=x/Global::FPS;}
+    if(m_y+speedY>=0 && m_y+speedY<=hr){m_y+=y/Global::FPS;}
 }
 
 void Player::update()
