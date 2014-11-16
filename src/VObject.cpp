@@ -1,7 +1,8 @@
 #include "VObject.h"
 
 #include "Object.h"
-#include "AnimationEngine.h""
+#include "AnimationEngine.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -18,7 +19,18 @@ void VObject::update()
 {
     char currentOrientation=m_object->getOrientation();
     if(currentOrientation!=m_orientation)changeOrientation(currentOrientation);
+
+
     setPosition(m_object->getPosition());
+    //TO DO movaBLE
+    Player* p=dynamic_cast<Player*>(m_object);
+    if(p!=nullptr)
+    {
+        if(p->isMoving())
+        {m_animation->run();}
+        else {m_animation->stop();}
+    }
+
     Tile::update();
 
 }

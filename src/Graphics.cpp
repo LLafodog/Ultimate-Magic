@@ -105,13 +105,18 @@ void Graphics::updateTiles() //TO DO: in the visible area
 
 void Graphics::updateObjects()
 {
-
+    int nbPlay=m_world->getNumberPlayers();
     //moovable, direction
-    for(int i(0);i<m_world->getNumberPlayers();i++)
+    for(int i(0);i<nbPlay;i++)
     {
         VObject* vobj=dynamic_cast<VObject*>(m_objects[i]);
         if(vobj!=nullptr)vobj->update(); //If VObject then we focus on its update();
         else m_objects[i]->update();
+    }
+
+    for(int i(nbPlay);i<m_objects.size();i++)
+    {
+        m_objects[i]->update();
     }
 }
 

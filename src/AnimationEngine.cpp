@@ -18,7 +18,7 @@ Animation* AnimationEngine::get(int i)
 {
     if(i<m_animations.size())
     {
-        return &m_animations[i];
+        return new Animation(&m_animations[i]);
     } else {std::cerr <<"get("<<i<<") impossible."<<std::endl;return nullptr;}
 }
 
