@@ -2,7 +2,7 @@
 #define WORLDMANAGER_H
 
 #include <SFML/Graphics.hpp>
-#include "world.h"
+#include "World.h"
 
 class WorldManager
 {

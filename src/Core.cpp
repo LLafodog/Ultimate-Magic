@@ -9,7 +9,7 @@
 #include "WorldManager.h"
 #include "PlayerManager.h"
 
-#include "textureEngine.h"
+#include "TextureEngine.h"
 #include "AnimationEngine.h"
 
 #include "Controller.h"

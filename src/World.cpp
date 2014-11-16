@@ -3,8 +3,8 @@
 #include "Player.h"
 #include "Object.h"
 
-#include "global.h"
-#include "core.h"
+#include "Global.h"
+#include "Core.h"
 
 World::World(int width, int height, int players)
 {
@@ -29,6 +29,7 @@ World::World(int width, int height, int players)
         //Global::showVector(m_tiles);
 
    for(int i(0);i<players;i++){addPlayer();}
+   for(int i(0);i<10;i++) {addObject(new Object(10,i*16,16,16,16,true));}
    m_updated=true;
 }
 

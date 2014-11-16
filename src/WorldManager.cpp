@@ -1,8 +1,8 @@
 #include "WorldManager.h"
 
 #include "Player.h"
-    #include "playerManager.h"
-#include "global.h"
+#include "PlayerManager.h"
+#include "Global.h"
 
 WorldManager::WorldManager(World* w)
 {

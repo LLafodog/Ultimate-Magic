@@ -25,7 +25,10 @@ Texture* TextureEngine::get(string name, int j)
         if(name=="grass")                return get(0,j);
         else if(name=="light_grass")     return get(1,j);
         else if(name=="desert")          return get(2,j);
-        else if(name=="dragon")          return get(3,j);
+        else if(name=="dragon_down")     return get(3,j);
+        else if(name=="dragon_left")     return get(4,j);
+        else if(name=="dragon_right")    return get(5,j);
+        else if(name=="dragon_up")       return get(6,j);
         else if(name=="error")           return get(0,j);
         else cerr<<"Wrong name asked: " << name << endl; return get(0,j);
 

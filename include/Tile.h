@@ -2,7 +2,7 @@
 #define TILE_H
 
 #include <SFML/Graphics.hpp>
-#include "global.h"
+#include "Global.h"
 #include "Positionnable.h"
 
 class Animation;

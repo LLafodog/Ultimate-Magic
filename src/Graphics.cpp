@@ -4,8 +4,9 @@
 #include "World.h"
 #include "Tile.h"
 #include "Object.h"
+#include "VObject.h"
 
-#include "global.h"
+#include "Global.h"
 
 #include "TextureEngine.h"
 #include "AnimationEngine.h"
@@ -62,21 +63,16 @@ void Graphics::initTiles()
 void Graphics::initObjects()
 {
     m_objects.erase(m_objects.begin(),m_objects.end());
+
     //Players
     for(int i(0);i<m_world->getNumberPlayers();i++)
     {
-        float   x=m_world->getPlayer(i)->getPositionX(),
-                y=m_world->getPlayer(i)->getPositionY(),
-                w=m_world->getPlayer(i)->getSize().x,
-                h=m_world->getPlayer(i)->getSize().y;
-        m_objects.push_back(new Tile(x,y,AnimationEngine::get("dragon"),true,w,h)); //texture temporaire
+        m_objects.push_back(new VObject(m_world->getPlayer(i))); //texture temporaire
     }
         //Objects
-    for(int i(0);i<m_world->getNumberObjects();i++)
+    for(int i(m_world->getNumberPlayers());i<m_world->getNumberObjects();i++)
     {
-        float   x=m_world->getObject(i)->getPositionX(),
-                y=m_world->getObject(i)->getPositionY();
-        m_objects.push_back(new Tile(x,y,AnimationEngine::get("desert"))); //texture temporaire
+        m_objects.push_back(new VObject(m_world->getObject(i))); //texture temporaire
     }
 }
 
@@ -113,10 +109,9 @@ void Graphics::updateObjects()
     //moovable, direction
     for(int i(0);i<m_world->getNumberPlayers();i++)
     {
-        float   x=m_world->getPlayer(i)->getPositionX(),
-                y=m_world->getPlayer(i)->getPositionY();
-        m_objects[i]->setPosition(x,y);
-        m_objects[i]->update();
+        VObject* vobj=dynamic_cast<VObject*>(m_objects[i]);
+        if(vobj!=nullptr)vobj->update(); //If VObject then we focus on its update();
+        else m_objects[i]->update();
     }
 }
 

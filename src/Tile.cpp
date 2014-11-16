@@ -1,6 +1,6 @@
 #include "Tile.h"
 
-#include "textureEngine.h"
+#include "TextureEngine.h"
 #include "Global.h"
 #include "Animation.h"
 #include "AnimationEngine.h"
@@ -14,7 +14,7 @@ Tile::Tile(int id, int x, int y,bool visible, float width, float height):Positio
 
     initSquare(width,height);
     m_cs.setPosition(x,y);
-    m_animation=AnimationEngine::get(id);
+    if(id<AnimationEngine::getMax())m_animation=AnimationEngine::get(id); //if it is a tile, not an object.
 }
 
 Tile::Tile(int x, int y, Animation* a, bool visible, float width, float height) : Positionnable(x,y,width, height)

@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#include <iostream>
+
 class Animation
 {
     public:
@@ -15,10 +17,9 @@ class Animation
         //getter
         const float getFrameDelay() {return m_frameDelay;}
         const float getAnimationDelay() {return m_animationDelay;}
-        const sf::Texture* getCurrentFrame() {return m_textures[m_current];}
+        const sf::Texture* getCurrentFrame() {if(m_current<m_textures.size()){return m_textures[m_current];}else{std::cerr<<"Problem in animation !"<<std::endl;}}
 
         void update();
-
         virtual ~Animation();
 
     protected:

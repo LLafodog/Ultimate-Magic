@@ -1,7 +1,7 @@
 #include "Player.h"
 
-#include "global.h"
-#include "world.h"
+#include "Global.h"
+#include "World.h"
 #include "Controller.h"
 
 //errors
@@ -14,7 +14,7 @@ Player::Player()
 
 }
 
-Player::Player(World* w, Controller* c)
+Player::Player(World* w, Controller* c) : Object(Global::ID_player,0,0,Global::TILE_WIDTH,Global::TILE_HEIGHT*2)
 {
     m_world=w;
     m_controller=c;
@@ -29,12 +29,7 @@ void Player::initStats()
     m_mana=0;
     m_attack=1;
     m_magic=0;
-    //m_speed=32;
     m_speed=32;
-    //physically
-    m_width=Global::TILE_WIDTH;
-    m_height=2*Global::TILE_HEIGHT;
-    Positionnable(0,0,m_width,m_height); //Magic
 
     //statu
     m_isMoving=false;
@@ -45,14 +40,21 @@ void Player::moveOn(float x, float y)
 {
     if(Global::FPS==0){Global::FPS=1;} // TO DO WITH HITBOX
     m_isMoving=true;
-    int speedX=x/Global::FPS,
+
+    float speedX=x/Global::FPS,
         speedY=y/Global::FPS,
 
         wr=m_world->getWidth()*Global::TILE_WIDTH-m_width,
         hr=m_world->getHeight()*Global::TILE_HEIGHT-m_height;
 
-    if(m_x+speedX>=0 && m_x+speedX<=wr ){m_x+=x/Global::FPS;}
-    if(m_y+speedY>=0 && m_y+speedY<=hr){m_y+=y/Global::FPS;}
+    if(m_x+speedX>=0 && m_x+speedX<=wr) {m_x+=x/Global::FPS;}
+    if(m_y+speedY>=0 && m_y+speedY<=hr) {m_y+=y/Global::FPS;}
+
+    //updating orientation (peut-être à replacer TO DO)
+    if(y>0)m_orientation='s';
+    else if(y<0)m_orientation='n';
+    if(x>0)m_orientation='e';
+    else if(x<0)m_orientation='w';
 }
 
 void Player::update()
