@@ -37,7 +37,8 @@ class Graphics
         void update();
             void updateTiles();
             void updateObjects();
-
+        void sortObjects();
+            bool needResort;
     //Camera
         Camera* getCamera() {return m_camera;}
         virtual ~Graphics();
@@ -47,8 +48,10 @@ class Graphics
     protected:
     int m_time;
     int m_refreshTime;
+
     vector<vector<Tile*>> m_tiles;
     vector<Tile*> m_objects;
+    vector<Tile*> m_visibleObjects;
     sf::RenderWindow* m_window;
     World* m_world;
     Camera* m_camera;

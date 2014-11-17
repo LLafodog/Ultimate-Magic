@@ -63,7 +63,7 @@ void Graphics::initTiles()
 void Graphics::initObjects()
 {
     m_objects.erase(m_objects.begin(),m_objects.end());
-
+    needToRefresh=true;
     //Players
     for(int i(0);i<m_world->getNumberPlayers();i++)
     {
@@ -105,19 +105,22 @@ void Graphics::updateTiles() //TO DO: in the visible area
 
 void Graphics::updateObjects()
 {
-    int nbPlay=m_world->getNumberPlayers();
+    m_visibleObjects=vector<Tile*>();
     //moovable, direction
-    for(int i(0);i<nbPlay;i++)
+    for(int i(0);i<m_objects.size();i++)
     {
-        VObject* vobj=dynamic_cast<VObject*>(m_objects[i]);
-        if(vobj!=nullptr)vobj->update(); //If VObject then we focus on its update();
-        else m_objects[i]->update();
+        Tile* t=m_objects[i];
+        t->update();
+        float   x=t->getPositionX(),
+                y=t->getPositionY();
+        if(m_camera->isIn(x,y))
+        {
+            t->setVisible(true);
+            m_visibleObjects.push_back(t);
+        }else{t->setVisible(false);}
     }
+    // cout << m_visibleObjects.size()-1<<endl; //to know how many visibles
 
-    for(int i(nbPlay);i<m_objects.size();i++)
-    {
-        m_objects[i]->update();
-    }
 }
 
 void Graphics::getInfo()
@@ -131,7 +134,10 @@ void Graphics::getInfo()
             << " /******** CAMERA SIZE ************/" <<endl<<
             m_camera->getView().getSize().x <<"   " <<m_camera->getView().getSize().y << endl
             << " Distance from target: " << m_camera->getDistanceFromTarget() <<endl
-            << "///////////////////////////////////" <<endl;
+            << "///////////////////////////////////" <<endl
+            << "/////////// OBJECTS ///////////////" << endl
+            << "visibles: " << m_visibleObjects.size() << endl
+            << "total : " << m_objects.size() <<endl;
 }
 
 void Graphics::draw()
@@ -179,12 +185,64 @@ void Graphics::drawVisibleArea()
 
 }
 
+void Graphics::sortObjects() // pbc
+///tri à bulle optimisé
+//To do with hitbox
+{
+    Tile* tmp;
+    bool permut;
+    int nb=0;
+    int remain=m_objects.size()-1;
+
+    VObject* o1= nullptr;
+    int hy1 =0;
+
+    VObject* o2= nullptr;
+    int hy2 =0;
+
+    //cout<<" I start sorting" << rand()*100<<endl; //Pour surveiller quand ca tri
+    do
+    {
+        nb++;
+        permut=false;
+
+        for(int j=0;j<(int)(m_visibleObjects.size()-1);j++)
+        {
+            o1=dynamic_cast<VObject*>(m_visibleObjects[j]);
+            if(o1!=0){hy1=o1->getHitbox().top;}
+            else hy1=0;
+
+            o2=dynamic_cast<VObject*>(m_visibleObjects[j+1]);
+            if(o2!=0){hy2=o2->getHitbox().top;}
+            else hy2=0;
+
+            if(m_visibleObjects[j]->getShape()->getPosition().y +hy1  >  m_visibleObjects[j+1]->getShape()->getPosition().y+ hy2 )
+            {
+                tmp= m_visibleObjects[j];
+                m_visibleObjects[j] = m_visibleObjects[j+1];
+                m_visibleObjects[j+1]=tmp;
+                permut=true;
+            }
+
+            remain--;
+
+        }
+
+    }
+    while(permut && (nb < (int)(m_visibleObjects.size()-1)));
+    //cout<<"             I finished" <<endl; //idem qu'au-dessus
+
+    needResort=false;
+
+}
+
+
 void Graphics::drawObjects()
 {
-
-    for(int i(0);i<m_objects.size();i++)
+    if(needResort || true )sortObjects(); //debug
+    for(int i(0);i<m_visibleObjects.size();i++)
     {
-        drawTile(m_objects[i]);
+        drawTile(m_visibleObjects[i]);
     }
 
 }

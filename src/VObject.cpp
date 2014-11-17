@@ -5,6 +5,7 @@
 #include "Player.h"
 
 using namespace std;
+using namespace sf;
 
 VObject::VObject(Object* o): Tile(o->getId(),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y)
 {
@@ -12,6 +13,7 @@ VObject::VObject(Object* o): Tile(o->getId(),o->getPositionX(), o->getPositionY(
     m_orientation='x';
     m_animations=AnimationEngine::getAllOf("dragon");
     update();
+    m_hitbox=FloatRect(o->getPositionX(), o->getPositionY(),o->getSize().x,o->getSize().y);
 
 }
 
@@ -26,6 +28,10 @@ void VObject::update()
     Player* p=dynamic_cast<Player*>(m_object);
     if(p!=nullptr)
     {
+        //update hitbox
+        m_hitbox.left=m_object->getPosition().x;
+        m_hitbox.top=m_object->getPosition().y;
+
         if(p->isMoving())
         {m_animation->run();}
         else {m_animation->stop();}

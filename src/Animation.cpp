@@ -41,16 +41,16 @@ void Animation::update()
     int time=m_clocky.getElapsedTime().asMilliseconds();
     if(m_textures!=vector<Texture*>()) //If isn't empty
     {
-        if(m_current!=m_textures.size()-1 && m_running) //if didn't reach the end
+        if(m_current!=m_textures.size()-1 && m_running) //if didn't reach the end and running
         {
-            if(time>m_frameDelay )
+            if(time>m_frameDelay)
             {
                 m_current++;
                 m_clocky.restart();
             }
         }else
         {
-            if(time>m_frameDelay+m_animationDelay || !m_running) // added the frameDelay cuz the last one is skipped otherwise
+            if(time>m_frameDelay+m_animationDelay || !m_running) // added the frameDelay cuz the last one is skipped otherwise // We restart from the beginning if stopped
             {
                 m_current=0;
                 m_clocky.restart();

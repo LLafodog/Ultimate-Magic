@@ -14,6 +14,7 @@ class VObject : public Tile
 
         void update();
         void changeOrientation(char c);
+        const sf::FloatRect getHitbox() {return m_hitbox;}
 
         virtual ~VObject();
 
@@ -21,6 +22,7 @@ class VObject : public Tile
         std::vector<Animation*> m_animations;
         Object* m_object;
         char m_orientation;
+        sf::FloatRect m_hitbox;
 
 };
 

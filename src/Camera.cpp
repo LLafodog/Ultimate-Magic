@@ -13,7 +13,7 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     m_window=w;
     m_pos=p;
     m_world=wo;
-    if(m_pos!=nullptr)m_view=View(m_pos->getPosition(),Vector2f(12*Global::TILE_WIDTH,12*Global::TILE_HEIGHT));
+    if(m_pos!=nullptr)m_view=View(m_pos->getPosition(),Vector2f(12*Global::TILE_WIDTH,10*Global::TILE_HEIGHT));
         else cerr<<"Camera target is nullptr" <<endl;
     m_window->setView(m_view);
 
@@ -76,11 +76,11 @@ void Camera::updateView()
     Player* p=dynamic_cast<Player*>(m_pos);
 
     ///TO DO: Revoir pour pas que ça tremble
-    if((xp>=xv-wv/4 && xp<=xv-wv/4+wv/2 && yp>=yv-hv/4 && yp<=yv-hv/4+hv/2)&& p!=0 && p->isMoving()) //Si on ne suit pas un player c'est mort
+    if((xp>=xv-wv/4 && xp<=xv-wv/4+wv/2 && yp>=yv-hv/4 && yp<=yv-hv/4+hv/2)&& (p!=0 && p->isMoving())) //Si on ne suit pas un player c'est mort
     {
      speed*=distancePV/2;
     }
-    else if((xp>=xv-wv/8 && xp<=xv-wv/8+wv/4 && yp>=yv-hv/8 && yp<=yv-hv/8+hv/4)&& p!=0 && p->isMoving())
+    else if((xp>=xv-wv/8 && xp<=xv-wv/8+wv/4 && yp>=yv-hv/8 && yp<=yv-hv/8+hv/4)&& (p!=0 && p->isMoving()))
     {
      speed*=distancePV/5;
     }
@@ -90,6 +90,13 @@ void Camera::updateView()
     }
        move(signX*speed, signY*speed);
 
+}
+
+
+bool Camera::isIn(float x, float y)
+{
+    FloatRect rect(m_view.getCenter().x-m_view.getSize().x/2-Global::TILE_WIDTH,m_view.getCenter().y-m_view.getSize().y/2-Global::TILE_HEIGHT,m_view.getSize().x+Global::TILE_WIDTH,m_view.getSize().y+Global::TILE_HEIGHT);
+    return rect.contains(x,y);
 }
 
 Camera::~Camera()

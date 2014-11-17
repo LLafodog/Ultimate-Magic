@@ -18,6 +18,7 @@ class Camera
             //size
             void setViewSize(int w,int h) {m_view.setSize(w,h);}
             const sf::Vector2f getViewSize() {return m_view.getSize();}
+
             //update
             void updateView();
             void move(float x, float y);
@@ -25,6 +26,9 @@ class Camera
             //getter setter
             void setView(sf::View v) {m_view=v;}
             const sf::View getView() {return m_view;}
+
+            //tools
+            bool isIn(float x, float y);
 
 
 

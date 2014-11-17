@@ -23,7 +23,7 @@ class Tile : public Positionnable
         const bool isVisible() {return m_visible;}
 
         //Animation
-        void update();
+        virtual void update();
         void setAnimation(Animation* anim) {m_animation=anim;}
         const Animation* getAnimation() {return m_animation;}
 
