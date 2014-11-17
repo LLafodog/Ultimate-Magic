@@ -12,12 +12,13 @@ class Tile : public Positionnable
     public:
 
         Tile(int id, int x=0, int y=0, bool visible=true, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
+        Tile(std::string id, int x=0, int y=0, bool visible=true, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
         Tile(int x=0, int y=0, Animation* a=nullptr, bool visible=true, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
 
         void setVisible(bool b) {m_visible=b;}
         void initSquare(float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
 
-        const int getID() {return m_id;}
+        const std::string getID() {return m_id;}
         const sf::ConvexShape* getShape() {return &m_cs;} //Modifier le cs pour qu'il ait la
         const sf::ConvexShape* getApparence();
         const bool isVisible() {return m_visible;}
@@ -35,7 +36,7 @@ class Tile : public Positionnable
         bool m_visible;
         float m_width;
         float m_height;
-        int m_id;
+        std::string m_id;
         Animation* m_animation;
 };
 

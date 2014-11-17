@@ -4,6 +4,7 @@
 #include<iostream>
 
 #include"TextureEngine.h"
+#include"Global.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ AnimationEngine::AnimationEngine()
 
 Animation* AnimationEngine::get(int i)
 {
-    if(i<m_animations.size())
+   if(i<m_animations.size())
     {
         return new Animation(&m_animations[i]);
     } else {std::cerr <<"get("<<i<<") impossible."<<std::endl;return nullptr;}
@@ -31,22 +32,62 @@ Animation* AnimationEngine::get(string name)
         else if(name=="dragon_left")     return get(4);
         else if(name=="dragon_right")    return get(5);
         else if(name=="dragon_up")       return get(6);
-        else cerr<<"Wrong name asked: " << name << endl; return get(0);
+        else if(name=="error")           return get(7);
+        else if(name=="pine_tree")           return get(8);
+
+        else cerr<<"[Animation] Wrong name asked: " << name << endl; return get("error");
 
 }
 
 
 std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
 {
-    if(name=="dragon")
+    vector<Animation*> v;
+
+    if(name=="player")
     {
-        vector<Animation*> v;
+
         v.push_back(get("dragon_up"));
         v.push_back(get("dragon_right"));
         v.push_back(get("dragon_down"));
-        v.push_back(get("dragon_left"));
+        v.push_back(get("dragon_left")); //bug here
         return v;
     }
+    else if(name=="grass")
+    {
+        v.push_back(get("grass"));
+    }
+    else if(name=="light_grass")
+    {
+        v.push_back(get("light_grass"));
+    }
+    else if(name=="desert")
+    {
+        v.push_back(get("desert"));
+    }
+    else if(name=="pine_tree")
+    {
+        v.push_back(get("pine_tree"));
+    }
+
+
+
+    /*else if(name=="")
+    {
+
+    }*/
+    else
+    {
+        v.push_back(get("error"));
+        return v;
+    }
+
+}
+
+
+std::vector<Animation*> AnimationEngine::getAllOf(int id)
+{
+    getAllOf(Global::convertId(id));
 }
 
 void AnimationEngine::load()
@@ -57,9 +98,11 @@ void AnimationEngine::load()
         for(int j(0);j<TextureEngine::getMax(i);j++)
         {
             a.addFrame(TextureEngine::get(i,j));
+            //cout<<"i: " <<i << "     j:" << j <<endl; //to see
         }
         m_animations.push_back(a);
     }
+    cout<<"Successfully loaded animations"<<endl;
 }
 
 AnimationEngine::~AnimationEngine()

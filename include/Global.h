@@ -20,13 +20,10 @@ class Global
        static const int TILE_WIDTH=16;
        static const int TILE_HEIGHT=16;
 
-
-       static const int ID_player=100; // On doit s'en débarasser ! TO DO
-
        static float FPS;
        static const sf::Color BDC;
 
-       static const void showVector(vector<vector<int>> v);
+       static const std::string convertId(int id);
 
 ///Programming tools C/C
 /*

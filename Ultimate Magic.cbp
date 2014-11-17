@@ -51,6 +51,7 @@
 		<Unit filename="include/Graphics.h" />
 		<Unit filename="include/KeyboardController.h" />
 		<Unit filename="include/Object.h" />
+		<Unit filename="include/ObjectEngine.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/PlayerManager.h" />
 		<Unit filename="include/Positionnable.h" />
@@ -69,6 +70,7 @@
 		<Unit filename="src/Graphics.cpp" />
 		<Unit filename="src/KeyboardController.cpp" />
 		<Unit filename="src/Object.cpp" />
+		<Unit filename="src/ObjectEngine.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/PlayerManager.cpp" />
 		<Unit filename="src/Positionnable.cpp" />

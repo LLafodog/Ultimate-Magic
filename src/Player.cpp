@@ -14,7 +14,7 @@ Player::Player()
 
 }
 
-Player::Player(World* w, Controller* c) : Object(Global::ID_player,0,0,Global::TILE_WIDTH,Global::TILE_HEIGHT*2)
+Player::Player(World* w, Controller* c) : Object("player",0,0,Global::TILE_WIDTH,Global::TILE_HEIGHT*2)
 {
     m_world=w;
     m_controller=c;

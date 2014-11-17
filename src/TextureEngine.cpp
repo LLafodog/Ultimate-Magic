@@ -29,7 +29,15 @@ Texture* TextureEngine::get(string name, int j)
         else if(name=="dragon_left")     return get(4,j);
         else if(name=="dragon_right")    return get(5,j);
         else if(name=="dragon_up")       return get(6,j);
-        else if(name=="error")           return get(0,j);
+        else if(name=="error")           return get(7,j);
+        else if(name=="pine_tree_1")           return get(8,j);
+        else if(name=="pine_tree_2")           return get(9,j);
+        else if(name=="pine_tree_3")           return get(10,j);
+        else if(name=="pine_tree_4")           return get(11,j);
+        else if(name=="pine_tree_5")           return get(12,j);
+        else if(name=="pine_tree_6")           return get(13,j);
+        else if(name=="pine_tree_7")           return get(14,j);
+        else if(name=="pine_tree_8")           return get(15,j);
         else cerr<<"Wrong name asked: " << name << endl; return get(0,j);
 
 }
@@ -40,6 +48,8 @@ void TextureEngine::load()
     if(
         loadPNG("data/img/tileset.png",1,3) //tiles
     &&  loadPNG("data/img/dragon.png",4,4,96,96)   //Dragon
+    &&  loadPNG("data/img/error.png",1,1,16,16)
+    &&  loadPNG("data/img/pineTree.png",8,1,64*2,64*2)
        )
     std::cout<<"Successfully loaded the textures."<<std::endl;
     else std::cout<<"Problem loading the textures."<<std::endl;
@@ -56,7 +66,7 @@ bool TextureEngine::loadPNG(std::string fileName, int nbWidth, int nbHeight, int
             if(!t.loadFromFile(fileName,IntRect(j*widthTile,i*heightTile,widthTile,heightTile))) {std::cerr<<"problem loading the textures. " << fileName<<std::endl; return false;}
             v.push_back(t);
             //See everything:
-            //cout<<fileName<<"  i:" <<i<<"  j:"<<j<<endl;
+//            cout<<fileName<<"  i:" <<i<<"  j:"<<j<<endl;
 
         }
         m_textures.push_back(v);

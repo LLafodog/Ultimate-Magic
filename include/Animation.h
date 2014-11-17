@@ -18,7 +18,7 @@ class Animation
         //getter
         const float getFrameDelay() {return m_frameDelay;}
         const float getAnimationDelay() {return m_animationDelay;}
-        const sf::Texture* getCurrentFrame() {if(m_current<m_textures.size()){return m_textures[m_current];}else{std::cerr<<"Problem in animation !"<<std::endl;}}
+        const sf::Texture* getCurrentFrame();
         const std::vector<sf::Texture*> getTextures() {return m_textures;}
 
         void run();

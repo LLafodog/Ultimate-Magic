@@ -11,6 +11,7 @@
 
 #include "TextureEngine.h"
 #include "AnimationEngine.h"
+#include "ObjectEngine.h"
 
 #include "Controller.h"
 #include "KeyboardController.h"
@@ -55,6 +56,7 @@ void Core::init()
 void Core::initWorld(int width, int height, int players)
 {
     m_world=new World(width,height,players);
+    for(int i(0);i<10;i++){m_world->addObject(ObjectEngine::get("pine_tree",i*16,i,64,64));}
 }
 
 void Core::initGraphics()
@@ -75,6 +77,7 @@ void Core::update()
     WorldManager::updatePlayers(m_world);
     //graphics
     m_graphics->update();
+
     // debug
     //m_graphics->drawAllTextures();
 }

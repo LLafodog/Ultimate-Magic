@@ -6,12 +6,14 @@ using namespace std;
 #include<iostream>
 
 Animation::Animation(float frameD, float animD)
+///Create before adding manually textures
 {
     m_frameDelay=frameD;
     m_animationDelay=animD;
     m_current=0;
     m_clocky.restart();
     m_running=true;
+    m_textures=vector<Texture*>();
 }
 
 Animation::Animation(Animation* a)
@@ -24,6 +26,17 @@ Animation::Animation(Animation* a)
     m_running=true;
 }
 
+const sf::Texture* Animation::getCurrentFrame()
+{
+    if(m_current<m_textures.size())
+    {
+        return m_textures[m_current];
+    }
+    else
+    {
+        std::cerr<<"Problem in animation !"<<std::endl;
+    }
+}
 
 void Animation::run()
 {

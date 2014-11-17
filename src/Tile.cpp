@@ -9,6 +9,17 @@ using namespace sf;
 
 Tile::Tile(int id, int x, int y,bool visible, float width, float height):Positionnable(x,y,width, height)
 {
+    m_id=Global::convertId(id); /// WORKING ON ID AND OBJECTS ORDER !!!!!!!!!!!
+    m_visible=visible;
+
+    initSquare(width,height);
+    m_cs.setPosition(x,y);
+    if(id<AnimationEngine::getMax())m_animation=AnimationEngine::get(id); //if it is a tile, not an object.
+}
+
+
+Tile::Tile(std::string id, int x, int y,bool visible, float width, float height):Positionnable(x,y,width, height)
+{
     m_id=id;
     m_visible=visible;
 
@@ -46,7 +57,7 @@ const sf::ConvexShape* Tile::getApparence()
 
 void Tile::update()
 {
-    if(m_animation!=nullptr)
+    if(m_animation!=nullptr && m_animation->getTextures().size()!=0)
     {
         m_animation->update();
         m_cs.setTexture(m_animation->getCurrentFrame());

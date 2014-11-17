@@ -13,18 +13,19 @@ Global::Global()
     FPS=0;
 }
 
-const void Global::showVector(vector<vector<int>> v)
+
+const std::string Global::convertId(int id)
 {
-    for (int i(0);i<v.size();i++)
+    switch(id)
     {
-        for  (int j(0); j<v[i].size();j++)
-        {
-            cout<<"x: " << j << "  y: " << i<< "  val: "<<v[j][i]<<endl;
-        }
+        case 0: return "grass";break;
+        case 1: return "light_grass";break;
+        case 2: return "desert";break;
+        //case 100: return "pine_tree";break;
+
+        default: return "error";break;
     }
 }
-
-
 
 Global::~Global()
 {

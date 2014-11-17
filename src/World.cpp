@@ -29,7 +29,9 @@ World::World(int width, int height, int players)
         //Global::showVector(m_tiles);
 
    for(int i(0);i<players;i++){addPlayer();}
-   for(int i(0);i<10;i++) {addObject(new Object(10,i*16,16,16,16,true));}
+
+   //debug objects
+//   for(int i(0);i<10;i++) {addObject(new Object("pine_tree",i*16,16,64,64,true));}
    m_updated=true;
 }
 
