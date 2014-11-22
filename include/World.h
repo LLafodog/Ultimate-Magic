@@ -19,6 +19,7 @@ class World
 
             //tiles
             const std::vector<std::vector<int>> getTiles() {return m_tiles;}
+            const bool isThisTileSolid(float i, float j);
 
             //objects
             const std::vector<Object*> getObjects() {return m_objects;}

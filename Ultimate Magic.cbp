@@ -45,11 +45,13 @@
 		<Unit filename="include/Animation.h" />
 		<Unit filename="include/AnimationEngine.h" />
 		<Unit filename="include/Camera.h" />
+		<Unit filename="include/Collisionnable.h" />
 		<Unit filename="include/Controller.h" />
 		<Unit filename="include/Core.h" />
 		<Unit filename="include/Global.h" />
 		<Unit filename="include/Graphics.h" />
 		<Unit filename="include/KeyboardController.h" />
+		<Unit filename="include/Movable.h" />
 		<Unit filename="include/Object.h" />
 		<Unit filename="include/ObjectEngine.h" />
 		<Unit filename="include/Player.h" />
@@ -64,11 +66,13 @@
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/AnimationEngine.cpp" />
 		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Collisionnable.cpp" />
 		<Unit filename="src/Controller.cpp" />
 		<Unit filename="src/Core.cpp" />
 		<Unit filename="src/Global.cpp" />
 		<Unit filename="src/Graphics.cpp" />
 		<Unit filename="src/KeyboardController.cpp" />
+		<Unit filename="src/Movable.cpp" />
 		<Unit filename="src/Object.cpp" />
 		<Unit filename="src/ObjectEngine.cpp" />
 		<Unit filename="src/Player.cpp" />

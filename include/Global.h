@@ -17,8 +17,8 @@ class Global
 
        static const int WINDOW_WIDTH=600;
        static const int WINDOW_HEIGHT=480;
-       static const int TILE_WIDTH=16;
-       static const int TILE_HEIGHT=16;
+       static const int TILE_WIDTH=32;
+       static const int TILE_HEIGHT=32;
 
        static float FPS;
        static const sf::Color BDC;

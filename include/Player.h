@@ -15,19 +15,14 @@ class Player : public Object
 {
     public:
 
-        Player();
-        Player(World* w, Controller* c=0);
+        //Player();
+        Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true);
 
         void initStats();
         void setController(Controller* c) {m_controller=c;}
 
         const World* getWorld() {return m_world;}
 
-        const bool isMoving() {return m_isMoving;}
-        const void hasMoved() {m_isMoving=false;}
-
-        void moveOn(float x, float y);
-        void moveOnF(int nSpeedX, int nSpeedY) {moveOn(nSpeedX*m_speed,nSpeedY*m_speed);}
 
         void update();
 
@@ -42,15 +37,12 @@ class Player : public Object
     int m_mana;
     float m_attack;
     float m_magic;
-    float m_speed;
 
     //physically
 
     //Stat
-    bool m_isMoving;
 
     //Controls
-    World* m_world;
     Controller* m_controller;
 
 };

@@ -56,7 +56,7 @@ void Core::init()
 void Core::initWorld(int width, int height, int players)
 {
     m_world=new World(width,height,players);
-    for(int i(0);i<10;i++){m_world->addObject(ObjectEngine::get("pine_tree",i*16,i,64,64));}
+    for(int i(0);i<10;i++){Object* o=ObjectEngine::get("pine_tree",i*16,i,64,64); o->setWorld(m_world);m_world->addObject(o);}
 }
 
 void Core::initGraphics()

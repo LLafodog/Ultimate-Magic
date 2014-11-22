@@ -15,7 +15,7 @@ World::World(int width, int height, int players)
        for (int j(0);j<width;j++)
        {
            //DEBUG
-           int basic_tile=rand()%3; //BASIC TILE
+           int basic_tile=rand()%3;//BASIC TILE
            v.push_back(basic_tile); ///BASIC TILE
        }
        m_tiles.push_back(v);
@@ -35,9 +35,29 @@ World::World(int width, int height, int players)
    m_updated=true;
 }
 
+const bool World::isThisTileSolid(float i, float j)
+{
+    int irounded=(int)(i),
+        jrounded=(int)(j);
+
+    //cout << "i: " << irounded << " j: " << jrounded << " id: " <<m_tiles[jrounded][irounded]<<endl; know where you walk
+    if(irounded<m_tiles.size() && irounded>=0 &&jrounded<m_tiles[irounded].size() && jrounded>=0)
+    {
+        switch(m_tiles[jrounded][irounded])
+        {
+            case 2: return true; //id solids
+            default: return false; //else isn't obvious
+        }
+    }
+    cout<<"Bug i: " << irounded << "   j: " << jrounded <<endl;return false; //obvious if out of world
+
+}
+
+
 void World::addPlayer()
 {
-    m_players.push_back(new Player(this,Core::m_controller));
+    Player* p=new Player("player",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_WIDTH),this,10,10,Global::TILE_WIDTH,Global::TILE_HEIGHT*2);
+    m_players.push_back(p);
 }
 
 World::~World()

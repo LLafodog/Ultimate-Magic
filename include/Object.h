@@ -1,19 +1,20 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include "Positionnable.h"
+#include "Collisionnable.h"
 #include "Global.h"
 
-class Object :public Positionnable
+class World;
+
+class Object :public Collisionnable
 {
     public:
-        Object();
-        Object( int id, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true , sf::FloatRect hitbox=sf::FloatRect(0,0,Global::TILE_WIDTH,Global::TILE_HEIGHT));
-        Object( std::string id, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true , sf::FloatRect hitbox=sf::FloatRect(0,0,Global::TILE_WIDTH,Global::TILE_HEIGHT));
+        //Object();
+        Object( int id,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true);
+        Object( std::string id,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true);
 
 
         const std::string getId() {return m_id;}
-        const char getOrientation() {return m_orientation;}
         const bool isVisible() {return m_visible;}
 
         //getter setter
@@ -24,7 +25,6 @@ class Object :public Positionnable
 
     protected:
         bool m_visible;
-        char m_orientation;
         std::string m_id;
         sf::FloatRect m_hitbox;
 
