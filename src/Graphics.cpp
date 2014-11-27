@@ -64,7 +64,23 @@ void Graphics::initObjects()
 {
     m_objects.erase(m_objects.begin(),m_objects.end());
     needToRefresh=true;
+
+    //Objects
+    for(int i(0);i<m_world->getNumberObjects();i++)
+    {
+        m_objects.push_back(new VObject(m_world->getObject(i))); //texture temporaire
+    }
     //Players
+    for(int i(0);i<m_world->getNumberPlayers();i++)
+    {
+        m_objects.push_back(new VObject(m_world->getPlayer(i))); //texture temporaire
+    }
+
+
+
+
+
+    /*
     for(int i(0);i<m_world->getNumberPlayers();i++)
     {
         m_objects.push_back(new VObject(m_world->getPlayer(i))); //texture temporaire
@@ -74,6 +90,7 @@ void Graphics::initObjects()
     {
         m_objects.push_back(new VObject(m_world->getObject(i))); //texture temporaire
     }
+    */
 }
 
 void Graphics::update()

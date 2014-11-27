@@ -11,7 +11,7 @@ Movable::Movable(World* w, float x, float y, float width, float height) : Positi
     m_orientation='n'; // cuz first anim and every one has at least one anim.
 }
 
-void Movable::moveOn(float x, float y)
+void Movable::moveOn(float x, float y, bool changeOrientation)
 {
     if(m_world!=nullptr)
     {
@@ -27,11 +27,14 @@ void Movable::moveOn(float x, float y)
     if(m_x+speedX>=0 && m_x+speedX<=wr) {m_x+=x/Global::FPS;}
     if(m_y+speedY>=0 && m_y+speedY<=hr) {m_y+=y/Global::FPS;}
 
-    //updating orientation (peut-être à replacer TO DO)
-    if(y>0)m_orientation='s';
-    else if(y<0)m_orientation='n';
-    if(x>0)m_orientation='e';
-    else if(x<0)m_orientation='w';
+        //updating orientation (peut-être à replacer TO DO)
+        if(changeOrientation)
+        {
+        if(y>0)m_orientation='s';
+        else if(y<0)m_orientation='n';
+        if(x>0)m_orientation='e';
+        else if(x<0)m_orientation='w';
+        }
     }else{std::cerr<<"Player without world !"<<std::endl;}
 }
 

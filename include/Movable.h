@@ -23,8 +23,8 @@ class Movable : public Positionnable
         const void hasMoved() {m_isMoving=false;}
         const char getOrientation() {return m_orientation;}
 
-        void moveOn(float x, float y);
-        void moveOnF(int nSpeedX, int nSpeedY) {moveOn(nSpeedX*m_speed,nSpeedY*m_speed);}
+        void moveOn(float x, float y, bool changeOrientation=true);
+            void moveOnF(int nSpeedX, int nSpeedY, bool changeOrientation=true) {moveOn(nSpeedX*m_speed,nSpeedY*m_speed,changeOrientation);}
 
         virtual ~Movable();
 

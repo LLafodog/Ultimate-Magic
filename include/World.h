@@ -55,7 +55,6 @@ class World
 
     protected:
         std::vector<Player*> m_players;
-        //std::vector<std::vector<int> >m_tiles;
         std::vector<std::vector<std::string> >m_tiles;
         std::vector<Object*> m_objects;
         int m_width;

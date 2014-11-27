@@ -9,7 +9,7 @@
 //
 
 
-Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) : Object(id,rect,w,x,y,width,height,visible)
+Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) : Object(id,rect,w,true,x,y,width,height,visible)
 {
     m_controller=c;
     initStats();

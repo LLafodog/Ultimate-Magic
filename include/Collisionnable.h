@@ -4,23 +4,29 @@
 #include "Movable.h"
 
 class World;
+class Object;
 
 class Collisionnable : public Movable
 {
     public:
 
-        Collisionnable(sf::FloatRect hitbox,World* w, float x=0, float y=0, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
+        Collisionnable(sf::FloatRect hitbox,World* w, bool solid=true, float x=0, float y=0, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
 
-        const bool isInCollision() {return m_collide;}
+
+        // getter
         const Collisionnable* getCollision() {return m_collision;}
         const sf::FloatRect getHitbox() {return m_hitbox;}
-        const bool inCollisionWith(Collisionnable* c);
-        void collide(Collisionnable* c) {}
-
-        void colMove(int signX, int signY);
-
-
         void setWorld(World* w) {m_world=w;}
+        const bool isSolid() {return m_solid;}
+
+        // methods
+        void colMove(int signX, int signY);
+        void collide(Object* c) {}
+
+        //update
+        const bool isInCollision() {return m_collide;}
+            const bool inCollisionWith(Object* c);
+            const bool isInCollisionWithObjects(vector<Object*> v);
 
         virtual ~Collisionnable();
 
@@ -29,6 +35,7 @@ class Collisionnable : public Movable
     bool m_collide;
     Collisionnable* m_collision; //The one will be in collision
     sf::FloatRect m_hitbox; //the hitbox is defined relatively to the coordonates of the player, take care too add it when regarding collision.
+    bool m_solid;
 };
 
 #endif // COLLISIONNABLE_H

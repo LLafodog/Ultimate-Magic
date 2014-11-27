@@ -62,7 +62,7 @@ void World::loadWorld(string pathfile)
                 break;
 
                 default:
-                cout << " line: "<<nbLine << " has been misunderstood and negliged. "<<endl;
+                cerr << " line: "<<nbLine << " has been misunderstood and negliged. "<<endl;
                 break;
             }
 
@@ -140,8 +140,10 @@ void World::readObjectLine(string line)
         string word="";
     int wordNumber=0; // determinates which data is being read
 
-    float x=-1, y=-1;
+    //New Object datas
+    float x=-1, y=-1, width_mul=1, height_mult=1;
     string id="";
+    bool visible=true;
 
     for(int i(0);i<=line.size();i++)
     {
@@ -162,23 +164,43 @@ void World::readObjectLine(string line)
                 case 1: //x position
                 {
                     x=strtoi(word);
-                    cout << " x: " << word;
                 }
                 break;
 
                 case 2: //y position
                 {
                     y=strtoi(word);
-                    cout << " y: " << word;
                 }
                 break;
 
                 case 3: //id
                 {
                     id=word;
-                    cout << " id: " << word <<endl;
                 }
                 break;
+
+                case 4: //width multiplicator
+                {
+                    width_mul=strtoi(word);
+                }
+                break;
+
+
+                case 5: // height_multiplicator
+                {
+                    height_mult=strtoi(word);
+                }
+                break;
+
+                case 6: //visible
+                {
+                    if(word=="visible")visible=true;
+                    else visible=false;
+                }
+                break;
+
+
+
 
                 default:
                     cerr<<"[Object line] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
@@ -188,7 +210,7 @@ void World::readObjectLine(string line)
         }
 
     }
-    addObject(ObjectEngine::get(id,x,y));
+    addObject(ObjectEngine::get(id,x,y,width_mul,height_mult,visible));
 }
 
 
@@ -204,7 +226,7 @@ const bool World::isThisTileSolid(float i, float j)
         if(id=="wall"){return true;}
         return false;
     }
-    cout<<"Bug i: " << irounded << "   j: " << jrounded <<endl;return false; //obvious if out of world
+    cerr<<"[World] Bug i: " << irounded << "   j: " << jrounded <<endl;return false; //obvious if out of world
 
 }
 
