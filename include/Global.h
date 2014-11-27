@@ -23,8 +23,6 @@ class Global
        static float FPS;
        static const sf::Color BDC;
 
-       static const std::string convertId(int id);
-
 ///Programming tools C/C
 /*
     isInTheRect:    (xt>=xr && xt<=xr+wr && yt>=yr && yt<=yr+hr)

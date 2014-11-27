@@ -40,7 +40,7 @@ void Player::update()
         colMove(   -m_controller->left()+m_controller->right(),    // x
                         -m_controller->up()+m_controller->down());
 
-        if(m_controller->action()) {std::cout<<"Action.";}
+        if(m_controller->action()) {std::cout<<"Action."; m_visible=true;}
     }else {m_isMoving=false;}
 }
 

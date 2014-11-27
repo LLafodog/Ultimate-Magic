@@ -10,35 +10,30 @@ using namespace sf;
 VObject::VObject(Object* o): Tile(o->getId(),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y)
 {
     m_object=o;
-    m_orientation='x';
+    m_orientation='n';
     m_animations=AnimationEngine::getAllOf(o->getId()); //here working
-    //cout<<o->getId()<<endl; getinfo
+    changeOrientation(m_orientation);
+    //cout<<o->getId()<<endl;
     update();
 
 }
 
 void VObject::update()
 {
+    Tile::update();
     char currentOrientation=m_object->getOrientation();
     if(currentOrientation!=m_orientation)changeOrientation(currentOrientation);
-
-
     setPosition(m_object->getPosition());
-    //TO DO movaBLE
-    Player* p=dynamic_cast<Player*>(m_object);
-    if(p!=nullptr)
-    {
-        if(p->isMoving())
+
+        if(m_object->isMoving())
         {m_animation->run();}
         else {m_animation->stop();}
-    }
-
-    Tile::update();
 
 }
 
 void VObject::changeOrientation(char c)
 {
+    m_orientation =c;
     if(m_animations.size()>=3)
     {
         switch(c)
@@ -50,7 +45,7 @@ void VObject::changeOrientation(char c)
         default: m_animation=AnimationEngine::get("error");
         }
     }
-    else m_animation=m_animations[0];
+    else m_animation=m_animations[0]; // if hasn't 4 animations, take the first;
 
 }
 

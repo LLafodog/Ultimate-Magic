@@ -12,7 +12,6 @@ class AnimationEngine
         static Animation* get(std::string name);
         static Animation* get(int i);
             static std::vector<Animation*> getAllOf(std::string name);
-            static std::vector<Animation*> getAllOf(int id);
 
         static void load();
         static const unsigned int getMax() {return m_animations.size();}

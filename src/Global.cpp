@@ -14,19 +14,6 @@ Global::Global()
 }
 
 
-const std::string Global::convertId(int id)
-{
-    switch(id)
-    {
-        case 0: return "grass";break;
-        case 1: return "light_grass";break;
-        case 2: return "desert";break;
-        //case 100: return "pine_tree";break;
-
-        default: return "error";break;
-    }
-}
-
 Global::~Global()
 {
     //dtor

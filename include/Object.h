@@ -10,7 +10,6 @@ class Object :public Collisionnable
 {
     public:
         //Object();
-        Object( int id,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true);
         Object( std::string id,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true);
 
 

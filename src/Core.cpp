@@ -42,7 +42,7 @@ Core::Core(sf::RenderWindow* window)
 void Core::init()
 {
     //World
-    initWorld(25,25); /* MAGIC ! */
+    initWorld("data/worlds/version0.world"); /* MAGIC ! */
     //Graphics
     initGraphics();
 
@@ -53,10 +53,9 @@ void Core::init()
     m_timeStart=time(NULL);
 }
 
-void Core::initWorld(int width, int height, int players)
+void Core::initWorld(std::string pathfile, int players)
 {
-    m_world=new World(width,height,players);
-    for(int i(0);i<10;i++){Object* o=ObjectEngine::get("pine_tree",i*16,i,64,64); o->setWorld(m_world);m_world->addObject(o);}
+    m_world=new World(pathfile,players);
 }
 
 void Core::initGraphics()

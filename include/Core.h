@@ -16,7 +16,7 @@ class Core
         void run();
         void init();
             void initGraphics();
-            void initWorld(int width, int height, int players=1);
+            void initWorld(std::string pathfile, int players=1);
         void load();
 
         void update();

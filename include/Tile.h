@@ -11,9 +11,7 @@ class Tile : public Positionnable
 {
     public:
 
-        Tile(int id, int x=0, int y=0, bool visible=true, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
         Tile(std::string id, int x=0, int y=0, bool visible=true, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
-        Tile(int x=0, int y=0, Animation* a=nullptr, bool visible=true, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
 
         void setVisible(bool b) {m_visible=b;}
         void initSquare(float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
@@ -27,6 +25,9 @@ class Tile : public Positionnable
         virtual void update();
         void setAnimation(Animation* anim) {m_animation=anim;}
         const Animation* getAnimation() {return m_animation;}
+
+        virtual const bool isVObject() {return false;}
+
 
         virtual ~Tile();
 

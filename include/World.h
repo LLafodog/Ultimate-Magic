@@ -2,6 +2,7 @@
 #define WORLD_H
 
 #include <vector>
+#include <string>
 
 class Player;
 class Object;
@@ -10,7 +11,13 @@ class World
 {
     public:
 
-        World(int width, int height, int players=0);
+        World(std::string pathfile, int players=0);
+
+        ///Initialization
+        void loadWorld(std::string pathfile);
+            void readInformationLine(std::string line);
+            void readTileLine(std::string line);
+            void readObjectLine(std::string line);
 
         //getter
             //size
@@ -18,7 +25,7 @@ class World
             const int getHeight() {return m_height;}
 
             //tiles
-            const std::vector<std::vector<int>> getTiles() {return m_tiles;}
+            const std::vector<std::vector<std::string>> getTiles() {return m_tiles;}
             const bool isThisTileSolid(float i, float j);
 
             //objects
@@ -32,10 +39,10 @@ class World
         //adder
         void addPlayer();
         void addPlayer(Player* p) {if(p!=nullptr)m_players.push_back(p);}
-        void addObject(Object* o) {if(o!=nullptr)m_objects.push_back(o);}
+        void addObject(Object* o);
 
         //setter
-        void setTiles(std::vector<std::vector<int> >tiles)  {m_tiles=tiles;}
+        void setTiles(std::vector<std::vector<std::string> >tiles)  {m_tiles=tiles;}
         void setObjects(std::vector<Object*> obj)           {m_objects=obj;}
 
         //updates
@@ -48,11 +55,17 @@ class World
 
     protected:
         std::vector<Player*> m_players;
-        std::vector<std::vector<int> >m_tiles;
+        //std::vector<std::vector<int> >m_tiles;
+        std::vector<std::vector<std::string> >m_tiles;
         std::vector<Object*> m_objects;
         int m_width;
         int m_height;
         bool m_updated;
+
+        //reading constantes
+        const char tileSeparator='T';
+        const char objectSeparator='O';
+        const char informationSeparator='I';
 };
 
 #endif // WORLD_H

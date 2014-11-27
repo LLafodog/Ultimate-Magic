@@ -46,7 +46,7 @@ void TextureEngine::load()
 {
     std::cout<<"Textures loading..."<<std::endl;
     if(
-        loadPNG("data/img/tileset.png",1,3) //tiles
+        loadPNG("data/img/tileset.png",1,3,16,16) //tiles
     &&  loadPNG("data/img/dragon.png",4,4,96,96)   //Dragon
     &&  loadPNG("data/img/error.png",1,1,16,16)
     &&  loadPNG("data/img/pineTree.png",8,1,64*2,64*2)

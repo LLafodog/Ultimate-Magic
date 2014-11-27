@@ -62,15 +62,15 @@ void Collisionnable::colMove(int signX, int signY)
             //cout << " xt: " << xt << " yt: " << yt << endl;
             switch(signX)
             {
-                case 1: if(m_world->isThisTileSolid(xt+wt,yt+ht/2) ){canGoH=false; std::cout<<"Right !" <<endl;}   break;
-                case -1:if(m_world->isThisTileSolid(xt,yt+ht/2) ){canGoH=false;std::cout<<"Left !" <<endl;}     break;
+                case 1: if(m_world->isThisTileSolid(xt+wt,yt+ht/2) ){canGoH=false;}   break;
+                case -1:if(m_world->isThisTileSolid(xt,yt+ht/2) ){canGoH=false;}     break;
                 default:break;
             }
 
             switch(signY)
             {
-                case 1: if(m_world->isThisTileSolid(xt+wt/2,yt+ht)){canGoV=false;std::cout<<"Down !" <<endl;}     break;
-                case -1:if(m_world->isThisTileSolid(xt+wt/2,yt)  ){canGoV=false;std::cout<<"Up !" <<endl;}       break;
+                case 1: if(m_world->isThisTileSolid(xt+wt/2,yt+ht)){canGoV=false;}     break;
+                case -1:if(m_world->isThisTileSolid(xt+wt/2,yt)  ){canGoV=false;}       break;
                 default:break;
             }
 

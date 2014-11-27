@@ -2827,13 +2827,13 @@
 	<string>
 	<vector>
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Global.h
+1416839623 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Global.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<iostream>
 	<vector>
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Core.h
+1416776528 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Core.h
 	<SFML/Graphics.hpp>
 
 1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Animation.cpp
@@ -2845,23 +2845,23 @@
 	<vector>
 	<iostream>
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/AnimationEngine.cpp
+1416841737 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/AnimationEngine.cpp
 	"AnimationEngine.h"
 	<vector>
 	<iostream>
 	"TextureEngine.h"
 	"Global.h"
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/AnimationEngine.h
+1416754510 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/AnimationEngine.h
 	"Animation.h"
 	<string>
 	<vector>
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/TextureEngine.h
+1416837880 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/TextureEngine.h
 	<SFML/Graphics.hpp>
 	<string>
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Camera.cpp
+1416776879 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Camera.cpp
 	"Camera.h"
 	"Positionnable.h"
 	"World.h"
@@ -2875,15 +2875,16 @@
 	<SFML/Graphics.hpp>
 	"Global.h"
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/World.h
+1417096808 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/World.h
 	<vector>
+	<string>
 
 1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Player.h
 	<string>
 	<iostream>
 	"Object.h"
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Object.h
+1416754748 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Object.h
 	"Collisionnable.h"
 	"Global.h"
 
@@ -2893,7 +2894,7 @@
 1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Controller.h
 	<SFML/Graphics.hpp>
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Core.cpp
+1416837880 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Core.cpp
 	"Core.h"
 	"Global.h"
 	"Graphics.h"
@@ -2911,7 +2912,7 @@
 	<string>
 	"Tile.h"
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Graphics.h
+1416841255 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Graphics.h
 	<SFML/Graphics.hpp>
 	"Global.h"
 	<vector>
@@ -2927,17 +2928,17 @@
 1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/KeyboardController.h
 	"Controller.h"
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Tile.h
+1416841547 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Tile.h
 	<SFML/Graphics.hpp>
 	"Global.h"
 	"Positionnable.h"
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Global.cpp
+1416756246 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Global.cpp
 	"Global.h"
 	<SFML/Graphics.hpp>
 	<cmath>
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Graphics.cpp
+1416841278 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Graphics.cpp
 	"Graphics.h"
 	"Player.h"
 	"World.h"
@@ -2951,18 +2952,18 @@
 	<SFML/Graphics.hpp>
 	<ctime>
 
-1416744513 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/VObject.h
+1416841547 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/VObject.h
 	"Tile.h"
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/KeyboardController.cpp
+1416776803 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/KeyboardController.cpp
 	"KeyboardController.h"
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Object.cpp
+1416754748 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Object.cpp
 	"Object.h"
 	"Global.h"
 	<string>
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Player.cpp
+1416776803 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Player.cpp
 	"Player.h"
 	"Global.h"
 	"World.h"
@@ -2976,23 +2977,26 @@
 1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Positionnable.cpp
 	"Positionnable.h"
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/TextureEngine.cpp
+1416775838 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/TextureEngine.cpp
 	"TextureEngine.h"
 	<iostream>
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Tile.cpp
+1416841596 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Tile.cpp
 	"Tile.h"
 	"TextureEngine.h"
 	"Global.h"
 	"Animation.h"
 	"AnimationEngine.h"
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/World.cpp
+1417097270 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/World.cpp
 	"World.h"
 	"Player.h"
 	"Object.h"
 	"Global.h"
 	"Core.h"
+	"ObjectEngine.h"
+	<fstream>
+	<cmath>
 
 1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/WorldManager.cpp
 	"WorldManager.h"
@@ -3006,23 +3010,23 @@
 1416509243 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Movable.h
 	"Positionnable.h"
 
-1416743226 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Collisionnable.cpp
+1416754266 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Collisionnable.cpp
 	"Collisionnable.h"
 	"World.h"
 	<vector>
 
-1416254656 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/ObjectEngine.h
+1417097708 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/ObjectEngine.h
 	"Object.h"
 
-1416743340 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Movable.cpp
+1416841920 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Movable.cpp
 	"Movable.h"
 	"World.h"
 
-1416668024 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/ObjectEngine.cpp
+1417097840 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/ObjectEngine.cpp
 	"ObjectEngine.h"
 	"Global.h"
 
-1416744513 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/VObject.cpp
+1417096215 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/VObject.cpp
 	"VObject.h"
 	"Object.h"
 	"AnimationEngine.h"

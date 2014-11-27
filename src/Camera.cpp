@@ -54,7 +54,7 @@ float Camera::getDistanceFromTarget()
     return sqrt( pow(xp-xv,2) + pow(yp-yv,2) );
 }
 
-void Camera::updateView()
+void Camera::updateView() //TO DO: Verifier tile pas en dehors du monde max
 {
 
     m_window->setView(m_view);

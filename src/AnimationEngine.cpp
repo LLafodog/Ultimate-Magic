@@ -34,6 +34,7 @@ Animation* AnimationEngine::get(string name)
         else if(name=="dragon_up")       return get(6);
         else if(name=="error")           return get(7);
         else if(name=="pine_tree")           return get(8);
+        else if(name=="player")          {return get("error");}
 
         else cerr<<"[Animation] Wrong name asked: " << name << endl; return get("error");
 
@@ -85,10 +86,6 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
 }
 
 
-std::vector<Animation*> AnimationEngine::getAllOf(int id)
-{
-    getAllOf(Global::convertId(id));
-}
 
 void AnimationEngine::load()
 {

@@ -11,6 +11,7 @@ class World;
 class Tile;
 class Object;
 class Camera;
+class VObject;
 
 class Graphics
 {
@@ -30,7 +31,6 @@ class Graphics
         static bool needToRefresh;
 
     //for testing
-        void drawAllTextures();
         void getInfo();
 
     //MaJ
@@ -50,8 +50,8 @@ class Graphics
     int m_refreshTime;
 
     vector<vector<Tile*>> m_tiles;
-    vector<Tile*> m_objects;
-    vector<Tile*> m_visibleObjects;
+    vector<VObject*> m_objects;
+    vector<VObject*> m_visibleObjects;
     sf::RenderWindow* m_window;
     World* m_world;
     Camera* m_camera;

@@ -7,16 +7,6 @@
 
 using namespace sf;
 
-Tile::Tile(int id, int x, int y,bool visible, float width, float height):Positionnable(x,y,width, height)
-{
-    m_id=Global::convertId(id); /// WORKING ON ID AND OBJECTS ORDER !!!!!!!!!!!
-    m_visible=visible;
-
-    initSquare(width,height);
-    m_cs.setPosition(x,y);
-    if(id<AnimationEngine::getMax())m_animation=AnimationEngine::get(id); //if it is a tile, not an object.
-}
-
 
 Tile::Tile(std::string id, int x, int y,bool visible, float width, float height):Positionnable(x,y,width, height)
 {
@@ -25,15 +15,9 @@ Tile::Tile(std::string id, int x, int y,bool visible, float width, float height)
 
     initSquare(width,height);
     m_cs.setPosition(x,y);
-    if(id<AnimationEngine::getMax())m_animation=AnimationEngine::get(id); //if it is a tile, not an object.
-}
 
-Tile::Tile(int x, int y, Animation* a, bool visible, float width, float height) : Positionnable(x,y,width, height)
-{
-    m_visible=visible;
-    m_animation=a;
-    initSquare(width,height);
-    m_cs.setPosition(x,y);
+    if(!isVObject())m_animation=AnimationEngine::get(id); //if it is a tile, not an object.
+
 }
 
 void Tile::initSquare(float width, float height)

@@ -18,7 +18,6 @@ class TextureEngine
         static const unsigned int getMax() {return m_textures.size();}
         static const unsigned int getMax(unsigned int i) {if(i<m_textures.size())return m_textures[i].size();return 0;}
 
-
     protected:
         static std::vector< std::vector<sf::Texture> > m_textures; // Double pour animations
 

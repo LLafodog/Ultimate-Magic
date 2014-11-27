@@ -52,7 +52,7 @@ void Graphics::initTiles()
         std::vector<Tile*> v;
         for(int j(0);j<m_world->getTiles()[i].size();j++)
         {
-            int id=m_world->getTiles()[i][j];
+            string id=m_world->getTiles()[i][j];
             Tile* t=new Tile(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
             v.push_back(t);
         }
@@ -105,11 +105,11 @@ void Graphics::updateTiles() //TO DO: in the visible area
 
 void Graphics::updateObjects()
 {
-    m_visibleObjects=vector<Tile*>();
-    //moovable, direction
+    m_visibleObjects=vector<VObject*>();
+    //moovable, direction TO DO
     for(int i(0);i<m_objects.size();i++)
     {
-        Tile* t=m_objects[i];
+        VObject* t=m_objects[i];
         t->update();
         float   x=t->getPositionX(),
                 y=t->getPositionY();
@@ -177,7 +177,11 @@ void Graphics::drawVisibleArea()
             {
                 for (int j=yp-hp/2;j<=yp+hp/2+1;j++)
                 {
-                    if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)drawTile(m_tiles[j][i]);
+                    if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
+                    {
+                    //cout<<"i: " << i << " j: " << j << " id: " << m_tiles[j][i]->getID() <<endl;
+                    drawTile(m_tiles[j][i]);
+                    }
                 }//endFor horizontally
 
             }//endfor vertically
@@ -189,7 +193,7 @@ void Graphics::sortObjects() // pbc
 ///tri à bulle optimisé
 //To do with hitbox
 {
-    Tile* tmp;
+    VObject* tmp;
     bool permut;
     int nb=0;
     int remain=m_objects.size()-1;
@@ -270,16 +274,6 @@ void Graphics::drawAll()
         }
 }
 
-//TESTING
-void Graphics::drawAllTextures()
-{
-    for(int i(0);i<TextureEngine::getMax();i++)
-    {
-        Tile* t=new Tile(i,i*Global::TILE_WIDTH,0);
-        drawTile(t);
-        delete t;
-    }
-}
 
 Graphics::~Graphics()
 {

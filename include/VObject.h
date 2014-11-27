@@ -12,9 +12,11 @@ class VObject : public Tile
 
         VObject(Object* o);
 
-        void update();
+        virtual void update();
         void changeOrientation(char c);
         const sf::FloatRect getHitbox();
+
+        virtual const bool isVObject() {return true;}
 
         virtual ~VObject();
 
