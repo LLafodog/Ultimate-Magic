@@ -12,7 +12,7 @@ TextureEngine::TextureEngine()
 }
 
 
-Texture* TextureEngine::get(int i, int j)
+Texture* TextureEngine::get(unsigned int i, unsigned int j)
 {
     if(i<m_textures.size() && j<m_textures[i].size())
     {
@@ -20,7 +20,7 @@ Texture* TextureEngine::get(int i, int j)
     } else {std::cout <<"get("<<i<<","<<j<<") impossible."<<std::endl;return nullptr;}
 }
 
-Texture* TextureEngine::get(string name, int j)
+Texture* TextureEngine::get(string name, unsigned int j)
 {
         if(name=="grass")                return get(0,j);
         else if(name=="light_grass")     return get(1,j);

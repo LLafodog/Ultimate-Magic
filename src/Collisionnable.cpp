@@ -112,7 +112,7 @@ const bool Collisionnable::isInCollisionWithObjects(vector<Object*> v)
     //
     if(isSolid())
     {
-        for(int i(0);i<v.size();i++)
+        for(unsigned int i(0);i<v.size();i++)
         {
             if( v[i]->isSolid() // Solid ?
             &&  abs(m_x-v[i]->getPositionX()) + abs(m_y-v[i]->getPositionY()) // near to me ?

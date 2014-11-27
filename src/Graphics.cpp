@@ -48,10 +48,10 @@ void Graphics::initTiles()
 
     //background
     //The tiles are load in the wrong ordre so we MUST invert each time.
-    for(int i(0);i<m_world->getTiles().size();i++)
+    for(unsigned int i(0);i<m_world->getTiles().size();i++)
     {
         std::vector<Tile*> v;
-        for(int j(0);j<m_world->getTiles()[i].size();j++)
+        for(unsigned int j(0);j<m_world->getTiles()[i].size();j++)
         {
             //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
             string id=m_world->getTiles()[i][j];
@@ -99,9 +99,9 @@ void Graphics::update()
 
 void Graphics::updateTiles() //Done : in the visible area -> No, otherwise the anim stop each time it goes out of camera (strange concept if a moving tree is right there and fix each time we go)
 {
-    for(int i(0);i<m_tiles.size();i++)
+    for(unsigned int i(0);i<m_tiles.size();i++)
     {
-        for(int j(0);j<m_tiles[i].size();j++)
+        for(unsigned int j(0);j<m_tiles[i].size();j++)
         {
             if(m_tiles[i][j]!=nullptr)m_tiles[i][j]->update();
         }
@@ -111,8 +111,7 @@ void Graphics::updateTiles() //Done : in the visible area -> No, otherwise the a
 void Graphics::updateObjects()
 {
     m_visibleObjects=vector<VObject*>();
-    //moovable, direction TO DO
-    for(int i(0);i<m_objects.size();i++)
+    for(unsigned int i(0);i<m_objects.size();i++)
     {
         VObject* t=m_objects[i];
         t->update();
@@ -173,14 +172,14 @@ void Graphics::drawVisibleArea()
 {
     if(m_camera!=nullptr)
     {
-            int xp=m_camera->getView().getCenter().x/Global::TILE_WIDTH,
+            unsigned int xp=m_camera->getView().getCenter().x/Global::TILE_WIDTH,
                 yp=m_camera->getView().getCenter().y/Global::TILE_HEIGHT,
                 wp=m_camera->getView().getSize().x/Global::TILE_WIDTH,
                 hp=m_camera->getView().getSize().y/Global::TILE_HEIGHT;
 
-            for(int i=yp-hp/2;i<=yp+hp/2+1;i++)
+            for(unsigned int i=yp-hp/2;i<=yp+hp/2+1;i++)
             {
-                for (int j=xp-wp/2;j<=xp+wp/2+1;j++) //yp-hp/2;j<=yp+hp/2+1;j++)
+                for (unsigned int j=xp-wp/2;j<=xp+wp/2+1;j++) //yp-hp/2;j<=yp+hp/2+1;j++)
                 {
                     if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
                     {
@@ -196,7 +195,6 @@ void Graphics::drawVisibleArea()
 
 void Graphics::sortObjects() // pbc
 ///tri à bulle optimisé
-//To do with hitbox
 {
     VObject* tmp;
     bool permut;
@@ -249,7 +247,7 @@ void Graphics::sortObjects() // pbc
 void Graphics::drawObjects()
 {
     if(needResort || true )sortObjects(); //debug
-    for(int i(0);i<m_visibleObjects.size();i++)
+    for(unsigned int i(0);i<m_visibleObjects.size();i++)
     {
         drawTile(m_visibleObjects[i]);
     }

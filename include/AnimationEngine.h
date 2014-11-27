@@ -10,7 +10,7 @@ class AnimationEngine
     public:
 
         static Animation* get(std::string name);
-        static Animation* get(int i);
+        static Animation* get(unsigned int i);
             static std::vector<Animation*> getAllOf(std::string name);
 
         static void load();

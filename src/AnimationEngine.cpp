@@ -15,7 +15,7 @@ AnimationEngine::AnimationEngine()
     //ctor
 }
 
-Animation* AnimationEngine::get(int i)
+Animation* AnimationEngine::get(unsigned int i)
 {
    if(i<m_animations.size())
     {
@@ -80,19 +80,18 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
     else
     {
         v.push_back(get("error"));
-        return v;
     }
-
+    return v;
 }
 
 
 
 void AnimationEngine::load()
 {
-    for(int i(0);i<TextureEngine::getMax();i++)
+    for(unsigned int i(0);i<TextureEngine::getMax();i++)
     {
         Animation a(150,00);
-        for(int j(0);j<TextureEngine::getMax(i);j++)
+        for(unsigned int j(0);j<TextureEngine::getMax(i);j++)
         {
             a.addFrame(TextureEngine::get(i,j));
             //cout<<"i: " <<i << "     j:" << j <<endl; //to see

@@ -28,13 +28,14 @@ Animation::Animation(Animation* a)
 
 const sf::Texture* Animation::getCurrentFrame()
 {
-    if(m_current<m_textures.size())
+    if((unsigned int)m_current<m_textures.size())
     {
         return m_textures[m_current];
     }
     else
     {
-        std::cerr<<"Problem in animation !"<<std::endl;
+        std::cerr<<"[Animation ] Current anim greater than the capacity !"<<std::endl;
+        return nullptr;
     }
 }
 
@@ -54,7 +55,7 @@ void Animation::update()
     int time=m_clocky.getElapsedTime().asMilliseconds();
     if(m_textures!=vector<Texture*>()) //If isn't empty
     {
-        if(m_current!=m_textures.size()-1 && m_running) //if didn't reach the end and running
+        if((unsigned int)m_current!=m_textures.size()-1 && m_running) //if didn't reach the end and running
         {
             if(time>m_frameDelay)
             {

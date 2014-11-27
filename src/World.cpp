@@ -16,7 +16,7 @@ using namespace std;
 int strtoi(string number)
 {
     int returned=0;
-    for(int i(0);i<number.size();i++)
+    for(unsigned int i(0);i<number.size();i++)
     {
         int chiffre=atoi(&number[i]);
         returned+=pow(10,i)*chiffre;
@@ -29,7 +29,7 @@ World::World(string pathfile, int players)
 {
    loadWorld(pathfile);
    for(int i(0);i<players;i++){addPlayer();}
-   m_updated=true;
+   m_updated=false;
 }
 
 
@@ -37,7 +37,7 @@ void World::loadWorld(string pathfile)
 ///Used to read a .world file
 {
     ifstream reader(pathfile.c_str());
-    if(!reader.is_open()){cerr<<"Wrong path name ("<<pathfile<<"), the world is gonna be initialized randomly (10,10)."<<endl;  } // TO DO generate bug area
+    if(!reader.is_open()){cerr<<"Wrong path name ("<<pathfile<<"), the world is gonna be initialized based on bugworld.world ."<<endl; loadWorld("data/worlds/bugworld.world");  }
     else
     {
         int nbLine=0;
@@ -76,7 +76,7 @@ void World::readInformationLine(string line)
     string word="";
     int wordNumber=0; // determinates which data is being read
 
-    for(int i(0);i<=line.size();i++)
+    for(unsigned int i(0);i<=line.size();i++)
     {
         char linei=line[i];
         //cout << linei; //
@@ -117,7 +117,7 @@ void World::readTileLine(string line)
 {
     vector<string> v;
     string word="";
-    for(int i(0);i<line.size();i++)
+    for(unsigned int i(0);i<line.size();i++)
     {
         if(line[i]!=tileSeparator && line[i]!='\n' && line[i]!=' ') //look if we are adding the id, not the tool to read it (spaces not even read)
             {word+=line[i];}
@@ -145,7 +145,7 @@ void World::readObjectLine(string line)
     string id="";
     bool visible=true;
 
-    for(int i(0);i<=line.size();i++)
+    for(unsigned int i(0);i<=line.size();i++)
     {
         char linei=line[i];
         //cout << linei; //
@@ -216,8 +216,8 @@ void World::readObjectLine(string line)
 
 const bool World::isThisTileSolid(float i, float j)
 {
-    int irounded=(int)(i),
-        jrounded=(int)(j);
+    unsigned int irounded=(unsigned int)(i),
+        jrounded=(unsigned int)(j);
 
     //cout << "i: " << irounded << " j: " << jrounded << " id: " <<m_tiles[jrounded][irounded]<<endl; know where you walk
     if(jrounded<m_tiles.size() && jrounded>=0 &&irounded<m_tiles[jrounded].size() && irounded>=0)

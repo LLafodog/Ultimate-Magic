@@ -54,7 +54,7 @@ float Camera::getDistanceFromTarget()
     return sqrt( pow(xp-xv,2) + pow(yp-yv,2) );
 }
 
-void Camera::updateView() //TO DO: Verifier tile pas en dehors du monde max
+void Camera::updateView()
 {
 
     m_window->setView(m_view);
@@ -64,9 +64,6 @@ void Camera::updateView() //TO DO: Verifier tile pas en dehors du monde max
     yv=m_view.getCenter().y,
     wv=m_view.getSize().x,
     hv=m_view.getSize().y;
-
-    //if out the world
-
 
     float distancePV=getDistanceFromTarget();
     float speed=1/Global::FPS;
@@ -95,7 +92,7 @@ void Camera::updateView() //TO DO: Verifier tile pas en dehors du monde max
 
 bool Camera::isIn(float x, float y)
 {
-    FloatRect rect(m_view.getCenter().x-m_view.getSize().x/2-Global::TILE_WIDTH,m_view.getCenter().y-m_view.getSize().y/2-Global::TILE_HEIGHT,m_view.getSize().x+Global::TILE_WIDTH,m_view.getSize().y+Global::TILE_HEIGHT);
+    FloatRect rect(m_view.getCenter().x-m_view.getSize().x/2-Global::TILE_WIDTH,m_view.getCenter().y-m_view.getSize().y/2-Global::TILE_HEIGHT*2,m_view.getSize().x+Global::TILE_WIDTH,m_view.getSize().y+Global::TILE_HEIGHT);
     return rect.contains(x,y);
 }
 

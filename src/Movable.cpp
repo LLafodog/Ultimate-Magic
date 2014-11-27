@@ -15,7 +15,7 @@ void Movable::moveOn(float x, float y, bool changeOrientation)
 {
     if(m_world!=nullptr)
     {
-    if(Global::FPS==0){Global::FPS=1;} // TO DO WITH HITBOX
+    if(Global::FPS==0){Global::FPS=1;}
     m_isMoving=true;
 
     float speedX=x/Global::FPS,
@@ -27,7 +27,6 @@ void Movable::moveOn(float x, float y, bool changeOrientation)
     if(m_x+speedX>=0 && m_x+speedX<=wr) {m_x+=x/Global::FPS;}
     if(m_y+speedY>=0 && m_y+speedY<=hr) {m_y+=y/Global::FPS;}
 
-        //updating orientation (peut-être à replacer TO DO)
         if(changeOrientation)
         {
         if(y>0)m_orientation='s';
