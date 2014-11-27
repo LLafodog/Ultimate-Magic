@@ -220,13 +220,13 @@ const bool World::isThisTileSolid(float i, float j)
         jrounded=(int)(j);
 
     //cout << "i: " << irounded << " j: " << jrounded << " id: " <<m_tiles[jrounded][irounded]<<endl; know where you walk
-    if(irounded<m_tiles.size() && irounded>=0 &&jrounded<m_tiles[irounded].size() && jrounded>=0)
+    if(jrounded<m_tiles.size() && jrounded>=0 &&irounded<m_tiles[jrounded].size() && irounded>=0)
     {
         string id=m_tiles[jrounded][irounded];
         if(id=="wall"){return true;}
         return false;
     }
-    cerr<<"[World] Bug i: " << irounded << "   j: " << jrounded <<endl;return false; //obvious if out of world
+    else return true;
 
 }
 

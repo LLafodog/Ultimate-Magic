@@ -47,13 +47,16 @@ void Graphics::initTiles()
     m_tiles=vector<vector<Tile*>>();
 
     //background
+    //The tiles are load in the wrong ordre so we MUST invert each time.
     for(int i(0);i<m_world->getTiles().size();i++)
     {
         std::vector<Tile*> v;
         for(int j(0);j<m_world->getTiles()[i].size();j++)
         {
+            //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
             string id=m_world->getTiles()[i][j];
             Tile* t=new Tile(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
+            //cout << " new tile : x: " <<j*Global::TILE_WIDTH << " y: " << i*Global::TILE_HEIGHT <<endl; // to know where the tiles are created
             v.push_back(t);
         }
         m_tiles.push_back(v);
@@ -68,29 +71,14 @@ void Graphics::initObjects()
     //Objects
     for(int i(0);i<m_world->getNumberObjects();i++)
     {
-        m_objects.push_back(new VObject(m_world->getObject(i))); //texture temporaire
+        m_objects.push_back(new VObject(m_world->getObject(i)));
     }
     //Players
     for(int i(0);i<m_world->getNumberPlayers();i++)
     {
-        m_objects.push_back(new VObject(m_world->getPlayer(i))); //texture temporaire
+        m_objects.push_back(new VObject(m_world->getPlayer(i)));
     }
 
-
-
-
-
-    /*
-    for(int i(0);i<m_world->getNumberPlayers();i++)
-    {
-        m_objects.push_back(new VObject(m_world->getPlayer(i))); //texture temporaire
-    }
-        //Objects
-    for(int i(m_world->getNumberPlayers());i<m_world->getNumberObjects();i++)
-    {
-        m_objects.push_back(new VObject(m_world->getObject(i))); //texture temporaire
-    }
-    */
 }
 
 void Graphics::update()
@@ -109,7 +97,7 @@ void Graphics::update()
         }
 }
 
-void Graphics::updateTiles() //TO DO: in the visible area
+void Graphics::updateTiles() //Done : in the visible area -> No, otherwise the anim stop each time it goes out of camera (strange concept if a moving tree is right there and fix each time we go)
 {
     for(int i(0);i<m_tiles.size();i++)
     {
@@ -190,14 +178,14 @@ void Graphics::drawVisibleArea()
                 wp=m_camera->getView().getSize().x/Global::TILE_WIDTH,
                 hp=m_camera->getView().getSize().y/Global::TILE_HEIGHT;
 
-            for(int i=xp-wp/2;i<=xp+wp/2+1;i++)
+            for(int i=yp-hp/2;i<=yp+hp/2+1;i++)
             {
-                for (int j=yp-hp/2;j<=yp+hp/2+1;j++)
+                for (int j=xp-wp/2;j<=xp+wp/2+1;j++) //yp-hp/2;j<=yp+hp/2+1;j++)
                 {
                     if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
                     {
                     //cout<<"i: " << i << " j: " << j << " id: " << m_tiles[j][i]->getID() <<endl;
-                    drawTile(m_tiles[j][i]);
+                    drawTile(m_tiles[i][j]);
                     }
                 }//endFor horizontally
 
@@ -274,10 +262,10 @@ void Graphics::drawAll()
         t_height=0;
 
         m_window->clear(Global::BDC);
-        for(int i=0;i<t_width;i++) // Dacalage de 4 pour la taille de la tile, -10 pour le rayon de la vue.
+        for(int i=0;i<t_width;i++)
         {
             t_height=m_tiles[i].size();
-            for (int j=0;j<t_height;j++)  // Dacalage de 4 pour la taille de la tile, -10 pour le rayon de la vue.
+            for (int j=0;j<t_height;j++)
             {
                 //Tile position
                 int x=i*Global::TILE_HEIGHT;

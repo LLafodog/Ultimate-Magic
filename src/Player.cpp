@@ -23,7 +23,7 @@ void Player::initStats()
     m_mana=0;
     m_attack=1;
     m_magic=0;
-    m_speed=32;
+    m_speed=320;
 
     //statu
     m_isMoving=false;

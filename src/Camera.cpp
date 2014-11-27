@@ -13,8 +13,8 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     m_window=w;
     m_pos=p;
     m_world=wo;
-    if(m_pos!=nullptr)m_view=View(m_pos->getPosition(),Vector2f(12*Global::TILE_WIDTH,10*Global::TILE_HEIGHT));
-        else cerr<<"Camera target is nullptr" <<endl;
+    if(m_pos!=nullptr){m_view=View(m_pos->getPosition(),Vector2f(12*Global::TILE_WIDTH,10*Global::TILE_HEIGHT));}
+        else {cerr<<"Camera target is nullptr" <<endl; m_view=View(Vector2f(0,0),Vector2f(m_window->getSize())); }
     m_window->setView(m_view);
 
 //if out of the world
