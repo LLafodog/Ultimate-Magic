@@ -66,12 +66,16 @@ void Camera::updateView()
     hv=m_view.getSize().y;
 
     float distancePV=getDistanceFromTarget();
-    float speed=1/Global::FPS;
+    float speedX=1/Global::FPS;
+    float speedY=1/Global::FPS;
     float signX; if(xp-xv!=0) signX=abs(xp-xv)/(xp-xv);
     float signY; if(yp-yv!=0) signY=abs(yp-yv)/(yp-yv);
 
     Player* p=dynamic_cast<Player*>(m_pos);
 
+
+
+    /*** FIRST METHOD
     ///TO DO: Revoir pour pas que ça tremble
     if((xp>=xv-wv/4 && xp<=xv-wv/4+wv/2 && yp>=yv-hv/4 && yp<=yv-hv/4+hv/2)&& (p!=0 && p->isMoving())) //Si on ne suit pas un player c'est mort
     {
@@ -85,7 +89,11 @@ void Camera::updateView()
     {
         speed*=distancePV;
     }
-       move(signX*speed, signY*speed);
+    **/
+    speedX*=pow(xp-xv,2)/10;
+    speedY*=pow(yp-yv,2)/10;
+    ///Second method
+       move(signX*speedX, signY*speedY);
 
 }
 
