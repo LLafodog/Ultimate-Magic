@@ -8,10 +8,12 @@
 
 //herit
 #include "Object.h"
+#include "Alive.h"
+
 class Controller;
 class World;
 
-class Player : public Object
+class Player : public Object, public Alive
 {
     public:
 
@@ -24,7 +26,10 @@ class Player : public Object
         const World* getWorld() {return m_world;}
 
 
-        void update();
+        virtual void update();
+
+        /* ============= COLLISIONNABLE ===================== */
+        void collide(Object* o);
 
 
 
@@ -33,15 +38,9 @@ class Player : public Object
     protected:
     //Intrasecly
     std::string m_name;
-    int m_life;
     int m_mana;
     float m_attack;
     float m_magic;
-
-    //physically
-
-    //Stat
-
     //Controls
     Controller* m_controller;
 

@@ -16,6 +16,9 @@ class Object :public Collisionnable
         const std::string getId() {return m_id;}
         const bool isVisible() {return m_visible;}
 
+        /* ============= COLLISIONNABLE ====================*/
+        void collide(Object* o) {};
+
 
         virtual ~Object();
 

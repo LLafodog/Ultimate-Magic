@@ -44,12 +44,16 @@ const bool Collisionnable::inCollisionWith(Object* c)
 
     if(collision)
     {
-        m_collision=c;
-        m_collide=true;
-        collide(c); // here the collision effect
+        m_collide=true; //We are in collision chef !
+        m_collision=c; // with this guy !
+        collide(c); // Apply the consequences !
 
         //cout<<"In collision with : " << c->getId()<<endl; //to know who you are in collision with
         return true;
+    }
+    else
+    {
+        m_collision=nullptr;
     }
     return false;
 

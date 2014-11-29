@@ -21,7 +21,7 @@ class Collisionnable : public Movable
 
         // methods
         void colMove(int signX, int signY);
-        void collide(Object* c) {}
+        virtual void collide(Object* c)=0;
 
         //update
         const bool isInCollision() {return m_collide;}

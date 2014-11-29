@@ -2880,12 +2880,13 @@
 	<vector>
 	<string>
 
-1417119503 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Player.h
+1417277348 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Player.h
 	<string>
 	<iostream>
 	"Object.h"
+	"Alive.h"
 
-1417119503 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Object.h
+1417276759 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Object.h
 	"Collisionnable.h"
 	"Global.h"
 
@@ -2964,7 +2965,7 @@
 	"Global.h"
 	<string>
 
-1417119503 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Player.cpp
+1417277041 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Player.cpp
 	"Player.h"
 	"Global.h"
 	"World.h"
@@ -2978,7 +2979,7 @@
 1417119503 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Positionnable.cpp
 	"Positionnable.h"
 
-1417194054 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/TextureEngine.cpp
+1417274965 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/TextureEngine.cpp
 	"TextureEngine.h"
 	<iostream>
 
@@ -3005,13 +3006,13 @@
 	"PlayerManager.h"
 	"Global.h"
 
-1417119503 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Collisionnable.h
+1417276708 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Collisionnable.h
 	"Movable.h"
 
 1417119503 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Movable.h
 	"Positionnable.h"
 
-1417119503 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Collisionnable.cpp
+1417276789 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Collisionnable.cpp
 	"Collisionnable.h"
 	"World.h"
 	<vector>
@@ -3021,7 +3022,7 @@
 1417119503 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/ObjectEngine.h
 	"Object.h"
 
-1417119503 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Movable.cpp
+1417275400 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Movable.cpp
 	"Movable.h"
 	"World.h"
 
@@ -3034,4 +3035,11 @@
 	"Object.h"
 	"AnimationEngine.h"
 	"Player.h"
+
+1417277093 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Alive.cpp
+	"Alive.h"
+	<iostream>
+
+1417277093 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Alive.h
+	<SFML/Graphics.hpp>
 
