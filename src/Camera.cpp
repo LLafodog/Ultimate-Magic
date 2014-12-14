@@ -100,10 +100,24 @@ void Camera::updateView()
 
 }
 
+void Camera::zoom(float f)
+{
+    if( f!=0)
+    {
+        if(
+            (f>1 && m_view.getSize().x+ m_view.getSize().y<2*(m_world->getWidth()*Global::TILE_WIDTH+m_world->getHeight()*Global::TILE_HEIGHT))
+        ||  (f<1 && m_view.getSize().x+ m_view.getSize().y>2*Global::TILE_WIDTH+2*Global::TILE_HEIGHT))
+        m_view.zoom(f);
+    }
+
+}
 
 bool Camera::isIn(float x, float y)
 {
-    FloatRect rect(m_view.getCenter().x-m_view.getSize().x/2-Global::TILE_WIDTH,m_view.getCenter().y-m_view.getSize().y/2-Global::TILE_HEIGHT*2,m_view.getSize().x+Global::TILE_WIDTH,m_view.getSize().y+Global::TILE_HEIGHT);
+    FloatRect rect( m_view.getCenter().x-m_view.getSize().x/2-Global::TILE_WIDTH,
+                    m_view.getCenter().y-m_view.getSize().y/2-Global::TILE_HEIGHT*2,
+                    m_view.getSize().x+Global::TILE_WIDTH,
+                    m_view.getSize().y+Global::TILE_HEIGHT*2);
     return rect.contains(x,y);
 }
 

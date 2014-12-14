@@ -31,6 +31,7 @@ void AnimationEngine::load()
         case 10:
         case 15:
         case 16:
+        case 17:
             {Animation a(Global::TEXTURE_NAMES[i],150,100,true);m_animations.push_back(a); add=true; break;}
         case 11:
         case 12:

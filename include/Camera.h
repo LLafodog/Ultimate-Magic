@@ -23,6 +23,7 @@ class Camera
             void updateView();
             void move(float x, float y);
             float getDistanceFromTarget();
+            void zoom(float f);
             //getter setter
             void setView(sf::View v) {m_view=v;}
             const sf::View getView() {return m_view;}

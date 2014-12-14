@@ -39,8 +39,9 @@ void TextureEngine::load()
     &&  loadPNG(Global::TO_DATA+"img/light_grass.png",1,1,16,16)
     &&  loadPNG(Global::TO_DATA+"img/desert.png",1,1,16,16)
     &&  loadPNG(Global::TO_DATA+"img/dragon.png",4,4,96,96)   //Dragon
-    &&  loadPNG(Global::TO_DATA+"img/error.png",1,1,16,16)
+    &&  loadPNG(Global::TO_DATA+"img/error.png",1,1)
     &&  loadPNG(Global::TO_DATA+"img/pineTree.png",8,1,64*2,64*2)
+    &&  loadPNG(Global::TO_DATA+"img/invisible.png",1,1)
        )
     std::cout<<"Successfully loaded the textures."<<std::endl;
     else std::cout<<"Problem loading the textures."<<std::endl;

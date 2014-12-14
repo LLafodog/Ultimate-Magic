@@ -62,7 +62,7 @@ void Editor::createTemplateWorld(int w, int h)
         {
             for(int j(0);j<w; j++)
             {
-                writter << "T invisible ";
+                writter << "T grass ";
             }
             writter << endl;
         }
@@ -130,14 +130,20 @@ void Editor::run()
                     {
                         default: break;
                         case Event::Closed: {m_window->close();}
+
+                        /// KEY PRESSED
                         case Event::KeyPressed:
                         {
                             switch(m_controller->getEvent()->key.code)
                             {
                                 default:break;
                                 case Keyboard::Escape   : m_window->close();
+                                case Keyboard::Subtract    : m_graphics->getCamera()->zoom(0.90);
+                                case Keyboard::Add      : m_graphics->getCamera()->zoom(1.05);
                             }
                         }
+
+                        /// KEY RELEASED
                         case Event::KeyReleased:
                         {
                             switch(m_controller->getEvent()->key.code)

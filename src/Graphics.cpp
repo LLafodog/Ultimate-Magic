@@ -183,15 +183,19 @@ void Graphics::drawVisibleArea()
                 hp=m_camera->getView().getSize().y/Global::TILE_HEIGHT/2;
 
             /// /!\ INT is REALLY IMPORTANT
-            for(int i=yp-hp;i<=yp+hp+1;i++)
+            for(int i=yp-hp-1;i<=yp+hp+1;i++)
             {
                 /// /!\ INT is REALLY IMPORTANT
-                for (int j=xp-wp;j<=xp+wp+1;j++)
+                for (int j=xp-wp-1;j<=xp+wp+1;j++)
                 {
                     if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
                     {
                     //cout<<"i: " << i << " j: " << j << " id: " << m_tiles[j][i]->getID() <<endl;
                     drawTile(m_tiles[i][j]);
+                    }
+                    else{ /// Completing the wholes
+                    Tile* t=new Tile("error",i*Global::TILE_WIDTH,j*Global::TILE_HEIGHT);drawTile(t);delete t;
+
                     }
                 }//endFor horizontally
 

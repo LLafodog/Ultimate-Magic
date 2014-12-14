@@ -10,7 +10,9 @@ const vector<string> Global::TEXTURE_NAMES={"grass_tl","grass_t","grass_tr","gra
                                             "desert", //11
                                             "dragon_down","dragon_left","dragon_right","dragon_up", //15
                                             "error", //16
-                                            "pine_tree"}; //17
+                                            "pine_tree",  //17
+                                            "invisible" //18
+                                            };
 
 const string Global::TO_DATA="../data/";
 
