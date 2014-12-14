@@ -30,6 +30,7 @@ World::World(string pathfile, int players)
 void World::loadWorld(string pathfile)
 ///Used to read a .world file
 {
+    m_tiles=vector<vector<string>>();
     ifstream reader(pathfile.c_str());
     if(!reader.is_open()){cerr<<"Wrong path name ("<<pathfile<<"), the world is gonna be initialized based on bugworld.world ."<<endl; loadWorld(Global::TO_DATA+"worlds/bugworld.world");  }
     else
@@ -227,6 +228,18 @@ void World::addObject(Object* o)
     {
     o->setWorld(this);
     m_objects.push_back(o);
+    }
+}
+
+void World::modifyTile(sf::Vector2f v, int id)
+{
+    float   x=v.x/Global::TILE_WIDTH,
+            y=v.y/Global::TILE_HEIGHT;
+    if(x>=0 && x<m_width && y>=0 && y<m_height && id>=0 && id<Global::TEXTURE_NAMES.size())
+    {
+        m_tiles[y][x]=Global::TEXTURE_NAMES[id];
+        cout << " Tile in position x: " << (int)x << " y :" << (int)y << " has been changed in " <<  Global::TEXTURE_NAMES[id] <<endl;
+        needToBeUpdated();
     }
 }
 

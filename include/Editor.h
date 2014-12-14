@@ -9,7 +9,6 @@ class Movable;
 class Editor : public Core
 {
     public:
- public:
         Editor(sf::RenderWindow* window, int w, int h);
 
         ///MAIN
@@ -24,6 +23,9 @@ class Editor : public Core
             void updateFPS();
         /// EDITOR
         void draw();
+        void modifyTile(sf::Vector2f v);
+        const void saveWorld(World* w);
+        void loadWorld();
 
         virtual ~Editor();
     protected:

@@ -156,10 +156,15 @@ void Editor::run()
                             }
                         }
                     }
-                //Combine
+                ///Combine
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::R)){Graphics::needToRefresh=true;} //Let you refresh when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::C)){m_graphics->clear();} //Let you clear when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();} //Let you know evrything when you wanna
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::S)){saveWorld(m_world);} //Allow to save the world under an asked name
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::L)){loadWorld();} //Allow to save the world under an asked name
+                ///Mouse
+                if(Mouse::isButtonPressed(Mouse::Left)){modifyTile(m_window->mapPixelToCoords(Mouse::getPosition(*m_window)));}
+
 
             }
             update();
@@ -169,6 +174,52 @@ void Editor::run()
 
         }
     } else {cerr<<"the window didn't open."<<endl;}
+}
+
+const void Editor::saveWorld(World* w)
+{
+    if(w!=nullptr)
+    {
+        string worldname=Global::TO_DATA+"worlds/", name;
+        cout    << "==================================================="<<endl
+                << "====                   SAVING                  ===="<<endl
+                << "==== How would you like to name this world ?   ====" << endl;
+        cin >>name;
+            worldname+=name + ".world"; //extension
+
+
+        ofstream writter;
+        writter.open(worldname.c_str());
+        vector<vector<string>>v=w->getTiles();
+        for(int y(0);y<v.size();y++)
+        {
+            for(int x(0);x<v[y].size();x++)
+            {
+                writter << " T " << v[y][x];
+            }
+            writter << endl;
+        }
+        cout << "Your world named " << worldname << " has been saved." << endl;
+        writter.close();
+    }
+}
+
+void Editor::loadWorld()
+{
+    string worldname=Global::TO_DATA+"worlds/", name;
+        cout    << "==================================================="<<endl
+                << "====              LOADING                   ===="<<endl
+                << "==== Which level would you like to load ?   ====" << endl;
+        cin >>name;
+            worldname+=name + ".world"; //extension
+    m_world->loadWorld(worldname.c_str());
+    m_world->needToBeUpdated();
+    cout << " World charged. " << endl;
+}
+
+void Editor::modifyTile(sf::Vector2f v)
+{
+    m_world->modifyTile(v,m_actual);
 }
 
 Editor::~Editor()

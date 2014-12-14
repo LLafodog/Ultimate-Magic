@@ -1,6 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include<SFML/System/Vector2.hpp>
+
 #include <vector>
 #include <string>
 
@@ -44,11 +46,13 @@ class World
 
         //setter
         void setTiles(std::vector<std::vector<std::string> >tiles)  {m_tiles=tiles;}
+        void modifyTile(sf::Vector2f v, int id);
         void setObjects(std::vector<Object*> obj)           {m_objects=obj;}
 
         //updates
         const bool isUpdated() {return m_updated;} // Actualize the graphics of the world
         void hasBeenUpdated() {m_updated=false;}
+        void needToBeUpdated(){m_updated=true;}
 
         virtual ~World();
 
