@@ -11,10 +11,11 @@ class Controller;
 class Core
 {
     public:
+        Core(){}
         Core(sf::RenderWindow* window);
 
         void run();
-        void init();
+        virtual void init();
             void initGraphics();
             void initWorld(std::string pathfile, int players=1);
         void load();

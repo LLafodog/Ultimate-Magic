@@ -2833,7 +2833,7 @@
 	<iostream>
 	<string>
 
-1417429581 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Core.h
+1418549321 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Core.h
 	<SFML/Graphics.hpp>
 
 1417429581 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Animation.cpp
@@ -2864,7 +2864,7 @@
 	<string>
 	"Global.h"
 
-1417429581 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Camera.cpp
+1418549922 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Camera.cpp
 	"Camera.h"
 	"Positionnable.h"
 	"World.h"
@@ -2898,7 +2898,7 @@
 1417429581 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Controller.h
 	<SFML/Graphics.hpp>
 
-1418506116 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Core.cpp
+1418549993 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Core.cpp
 	"Core.h"
 	"Global.h"
 	"Graphics.h"
@@ -2942,7 +2942,7 @@
 	<SFML/Graphics.hpp>
 	<cmath>
 
-1417429581 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Graphics.cpp
+1418548212 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Graphics.cpp
 	"Graphics.h"
 	"Player.h"
 	"World.h"
@@ -2967,7 +2967,7 @@
 	"Global.h"
 	<string>
 
-1418505160 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Player.cpp
+1418550622 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Player.cpp
 	"Player.h"
 	"Global.h"
 	"World.h"
@@ -3024,7 +3024,7 @@
 1417429581 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/ObjectEngine.h
 	"Object.h"
 
-1417429581 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Movable.cpp
+1418550373 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Movable.cpp
 	"Movable.h"
 	"World.h"
 
@@ -3032,14 +3032,13 @@
 	"ObjectEngine.h"
 	"Global.h"
 
-1417429581 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/VObject.cpp
+1418548208 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/VObject.cpp
 	"VObject.h"
 	"Object.h"
 	"AnimationEngine.h"
 	"Player.h"
-	"Name.h"
 
-1417429581 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Alive.cpp
+1418548469 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Alive.cpp
 	"Alive.h"
 	<iostream>
 

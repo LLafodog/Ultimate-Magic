@@ -15,17 +15,41 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     m_world=wo;
     if(m_pos!=nullptr){m_view=View(m_pos->getPosition(),Vector2f(12*Global::TILE_WIDTH,10*Global::TILE_HEIGHT));}
         else {cerr<<"Camera target is nullptr" <<endl; m_view=View(Vector2f(0,0),Vector2f(m_window->getSize())); }
-    m_window->setView(m_view);
+    m_window->setView(m_view); ///To comment if no view
 
-//if out of the world
-float   xt=m_view.getCenter().x,
-        yt=m_view.getCenter().y,
-        xr=m_view.getSize().x/2,
-        yr=m_view.getSize().y/2,
-        wr=m_world->getWidth()*Global::TILE_WIDTH,
-        hr=m_world->getHeight()*Global::TILE_HEIGHT;
+    ///some fixes
+    if(m_world!=nullptr)
+    {
+    float   xt=m_view.getCenter().x,
+            yt=m_view.getCenter().y,
+            xr=m_view.getSize().x/2,
+            yr=m_view.getSize().y/2,
+            wr=m_world->getWidth()*Global::TILE_WIDTH,
+            hr=m_world->getHeight()*Global::TILE_HEIGHT,
+            width=Global::TILE_WIDTH,
+            height=Global::TILE_HEIGHT;
+    //If bigger than the world
+    if(2*xr >wr){m_view.setSize(wr,2*yr);}
+    if(2*yr >hr){m_view.setSize(2*xr,hr);}
 
-if(!(xt>=xr && xt<=xr+wr && yt>=yr && yt<=yr+hr))m_view.setCenter(m_view.getSize().x,m_view.getSize().y);
+    if(2*xr >wr || 2*yr >hr)
+    {
+        if(2*xr >wr)
+        {
+            if(wr > 10*width) {m_view.setSize(wr,2*yr);}
+            else {m_view.setSize(10*width,2*yr);}
+        }
+
+        if(2*yr >hr)
+        {
+            if(hr > 10*height){m_view.setSize(2*xr,hr);}
+            else {m_view.setSize(2*xr,10*height);}
+        }
+    }
+    //If out of the world
+    if(!(xt>=xr && xt<=xr+wr && yt>=yr && yt<=yr+hr)){m_view.setCenter(wr/2,hr/2);}
+
+    }
 
 }
 
@@ -37,9 +61,9 @@ void Camera::move(float x, float y)
             hv=m_view.getSize().y/2,
             ww=m_world->getWidth()*Global::TILE_WIDTH,
             hw=m_world->getHeight()*Global::TILE_HEIGHT;
-
         if(xv-wv+x>=0 && xv + wv +x < ww)m_view.move(x,0);
         if(yv-hv+y>=0 && yv + hv +y < hw)m_view.move(0,y);
+        //cout << "min: " << yv-hv+y << " on : " <<  yv << " max : " << yv + hv +y << " on : " << hw <<endl;
 
 
 }
@@ -57,41 +81,20 @@ float Camera::getDistanceFromTarget()
 void Camera::updateView()
 {
 
-    m_window->setView(m_view);
-    float xp=m_pos->getPositionX(),
-    yp=m_pos->getPositionY(),
-    xv=m_view.getCenter().x,
-    yv=m_view.getCenter().y,
-    wv=m_view.getSize().x,
-    hv=m_view.getSize().y;
+    m_window->setView(m_view);///To comment if no view
+    float   xp=m_pos->getPositionX(),
+            yp=m_pos->getPositionY(),
+            xv=m_view.getCenter().x,
+            yv=m_view.getCenter().y;
 
-    float distancePV=getDistanceFromTarget();
+    //Speed depending on the FPS
     float speedX=1/Global::FPS;
     float speedY=1/Global::FPS;
     float signX; if(xp-xv!=0) signX=abs(xp-xv)/(xp-xv);
     float signY; if(yp-yv!=0) signY=abs(yp-yv)/(yp-yv);
 
-    Player* p=dynamic_cast<Player*>(m_pos);
-
-
-
-    /*** FIRST METHOD
-    ///TO DO: Revoir pour pas que ça tremble
-    if((xp>=xv-wv/4 && xp<=xv-wv/4+wv/2 && yp>=yv-hv/4 && yp<=yv-hv/4+hv/2)&& (p!=0 && p->isMoving())) //Si on ne suit pas un player c'est mort
-    {
-     speed*=distancePV/2;
-    }
-    else if((xp>=xv-wv/8 && xp<=xv-wv/8+wv/4 && yp>=yv-hv/8 && yp<=yv-hv/8+hv/4)&& (p!=0 && p->isMoving()))
-    {
-     speed*=distancePV/5;
-    }
-    else
-    {
-        speed*=distancePV;
-    }
-    **/
-    speedX*=pow(xp-xv,2)/10;
-    speedY*=pow(yp-yv,2)/10;
+    speedX*=pow(xp-xv,2)/10; //Magic !
+    speedY*=pow(yp-yv,2)/10; //Magic !
     ///Second method
        move(signX*speedX, signY*speedY);
 

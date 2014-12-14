@@ -175,14 +175,18 @@ void Graphics::drawVisibleArea()
 {
     if(m_camera!=nullptr)
     {
-            unsigned int xp=m_camera->getView().getCenter().x/Global::TILE_WIDTH,
+            /// Positions in tile expression
+            /// /!\ INT is REALLY IMPORTANT
+            int xp=m_camera->getView().getCenter().x/Global::TILE_WIDTH,
                 yp=m_camera->getView().getCenter().y/Global::TILE_HEIGHT,
-                wp=m_camera->getView().getSize().x/Global::TILE_WIDTH,
-                hp=m_camera->getView().getSize().y/Global::TILE_HEIGHT;
+                wp=m_camera->getView().getSize().x/Global::TILE_WIDTH/2,
+                hp=m_camera->getView().getSize().y/Global::TILE_HEIGHT/2;
 
-            for(unsigned int i=yp-hp/2;i<=yp+hp/2+1;i++)
+            /// /!\ INT is REALLY IMPORTANT
+            for(int i=yp-hp;i<=yp+hp+1;i++)
             {
-                for (unsigned int j=xp-wp/2;j<=xp+wp/2+1;j++) //yp-hp/2;j<=yp+hp/2+1;j++)
+                /// /!\ INT is REALLY IMPORTANT
+                for (int j=xp-wp;j<=xp+wp+1;j++)
                 {
                     if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
                     {

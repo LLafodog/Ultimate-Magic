@@ -1,4 +1,4 @@
-#include "Core.h"
+#include "Editor.h"
 
 #include "Global.h"
 
@@ -7,6 +7,7 @@
 
 #include "World.h"
 #include "WorldManager.h"
+
 #include "PlayerManager.h"
 
 #include "TextureEngine.h"
@@ -19,30 +20,27 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <fstream>
 
 //test
 #include "Tile.h"
 
-
-float Global::FPS;
-
 using namespace sf;
 using namespace std;
-
-Controller* Core::m_controller=new KeyboardController();
-
-
-Core::Core(sf::RenderWindow* window)
+Editor::Editor(sf::RenderWindow* window, int w, int h)
 {
     m_window=window;
     load(); //texture graphics load
-    init(); // Initialise son graphics (les textures), le FPS et crÈe le monde.
+    init(w,h); // Initialise son graphics (les textures), le FPS et cr√©e le monde.
 }
 
-void Core::init()
+void Editor::init(int w, int h)
 {
     //World
-    initWorld(Global::TO_DATA+"worlds/version0.world");
+    createTemplateWorld(w,h);
+    initWorld(Global::TO_DATA+"worlds/template.world",0);
+    //Center camera
+    m_world->addPlayer(new Player("builder",m_controller,FloatRect(0,0,0,0),m_world,0,0,16,16,false));
     //Graphics
     initGraphics();
 
@@ -53,23 +51,38 @@ void Core::init()
     m_timeStart=time(NULL);
 }
 
-void Core::initWorld(std::string pathfile, int players)
+void Editor::createTemplateWorld(int w, int h)
+{
+    ofstream writter;
+    writter.open(Global::TO_DATA+"worlds/template.world");
+    if(writter)
+    {
+        writter << "I " << w << " " << h <<endl;
+        for(int i(0); i<h;i++)
+        {
+            for(int j(0);j<w; j++)
+            {
+                writter << "T invisible ";
+            }
+            writter << endl;
+        }
+        writter.close();
+    }else{cerr << " Couldn't create template world." << endl;}
+
+}
+
+void Editor::initWorld(std::string pathfile, int players)
 {
     m_world=new World(pathfile,players);
 }
 
-void Core::initGraphics()
+void Editor::initGraphics()
 {
     m_graphics=new Graphics(m_window,m_world);
 }
 
-void Core::load()
-{
-    TextureEngine::load();
-    AnimationEngine::load(); //Need the textures
-}
 
-void Core::update()
+void Editor::update()
 {
     //datas
     updateFPS();
@@ -81,27 +94,27 @@ void Core::update()
     //m_graphics->drawAllTextures();
 }
 
-void Core::draw()
+void Editor::draw()
 {
     m_graphics->draw();
 
 }
 
-void Core::updateFPS()
+void Editor::updateFPS()
 {
 
     Global::FPS=1000000.f/m_clock.restart().asMicroseconds();
-    if(time(NULL)-m_timeStart>0) //l'entier minore la diffÈrence de seconde ‡ 0 donc affiche chaque seconde.
+    if(time(NULL)-m_timeStart>0) //l'entier minore la diff√©rence de seconde √† 0 donc affiche chaque seconde.
     {
         m_timeStart=time(NULL);
         ostringstream c;
         c << Global::FPS;
-        std::string s="Ultimate Magic |FPS: "  +  c.str()    ;
+        std::string s="[UM] Editor |FPS: "  +  c.str()    ;
         m_window->setTitle(s);
     }
 }
 
-void Core::run()
+void Editor::run()
 {
 
     /* TEST */
@@ -117,13 +130,22 @@ void Core::run()
                     {
                         default: break;
                         case Event::Closed: {m_window->close();}
+                        case Event::KeyPressed:
+                        {
+                            switch(m_controller->getEvent()->key.code)
+                            {
+                                default:break;
+                                case Keyboard::Escape   : m_window->close();
+                            }
+                        }
+                        case Event::KeyReleased:
+                        {
+                            switch(m_controller->getEvent()->key.code)
+                            {
+                                default: break;
+                            }
+                        }
                     }
-                switch(m_controller->getEvent()->key.code)
-                {
-                    case Keyboard::Escape : m_window->close();
-                    default:
-                        break;
-                }
                 //Combine
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::R)){Graphics::needToRefresh=true;} //Let you refresh when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::C)){m_graphics->clear();} //Let you clear when you wanna
@@ -139,25 +161,6 @@ void Core::run()
     } else {cerr<<"the window didn't open."<<endl;}
 }
 
-void Core::showInfo()
+Editor::~Editor()
 {
-    cout <<
-    "/////////////////////////////////////" << endl <<
-    "/********** WORLD ******************/" << endl <<
-    "/ size: w:"<<m_world->getWidth() << " h:" << m_world->getHeight() << " nPlayer:" << m_world->getNumberPlayers() << " nTiles: " << m_world->getTiles().size() <<endl <<
-    "/********** PLAYER *****************/" << endl;
-    if(m_world->getPlayer(0)!=nullptr)
-    {cout << "/ P1: x:" << m_world->getPlayer(0)->getPositionX() << " y:" << m_world->getPlayer(0)->getPositionY() << endl;}
-    cout << "/********** GRAPHICS ***************/" << endl;
-    m_graphics->getInfo() ; cout <<
-    "/********** TEXTURES ***************/" << endl <<
-    "/ nbText:" << TextureEngine::getMax() << endl <<
-    "/////////////////////////////////////" <<endl <<endl;
-
-}
-
-
-Core::~Core()
-{
-   delete m_graphics;
 }

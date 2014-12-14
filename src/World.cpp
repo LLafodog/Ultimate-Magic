@@ -15,13 +15,7 @@ using namespace std;
 /* =================== UNIQUE FUNCTION ============== */
 int strtoi(string number)
 {
-    int returned=0;
-    for(unsigned int i(0);i<number.size();i++)
-    {
-        int chiffre=atoi(&number[i]);
-        returned+=pow(10,i)*chiffre;
-    }
-    return returned;
+    return atoi(number.c_str());
 }
 
 /* ==================== CLASS ======================= */

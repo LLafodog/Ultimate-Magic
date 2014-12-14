@@ -34,7 +34,7 @@ void Player::update()
     Alive::update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
     /// MOVING
-    if(!isDead())
+    if(!isDead() || true ) /* todo */
     {
         /* ================== PLAYER =============== */
         if(m_controller!=0 && !m_controller->noOp())
