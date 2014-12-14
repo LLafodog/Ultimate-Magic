@@ -26,6 +26,8 @@ class Editor : public Core
         void modifyTile(sf::Vector2f v);
         const void saveWorld(World* w);
         void loadWorld();
+        bool command();
+        bool youAgree();
 
         virtual ~Editor();
     protected:

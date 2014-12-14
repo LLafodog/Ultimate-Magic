@@ -161,7 +161,8 @@ void Editor::run()
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::C)){m_graphics->clear();} //Let you clear when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();} //Let you know evrything when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::S)){saveWorld(m_world);} //Allow to save the world under an asked name
-                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::L)){loadWorld();} //Allow to save the world under an asked name
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::L)){loadWorld();} //Allow to load a world
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::K)){command();} //Allow to do many things !
                 ///Mouse
                 if(Mouse::isButtonPressed(Mouse::Left)){modifyTile(m_window->mapPixelToCoords(Mouse::getPosition(*m_window)));}
 
@@ -190,16 +191,32 @@ const void Editor::saveWorld(World* w)
 
         ofstream writter;
         writter.open(worldname.c_str());
+        ///================= DATAS ==================
+        writter << "I " << m_world->getWidth() << " " << m_world->getHeight() <<endl;
+
+        ///================= TILES ==================
         vector<vector<string>>v=w->getTiles();
         for(int y(0);y<v.size();y++)
         {
             for(int x(0);x<v[y].size();x++)
             {
-                writter << " T " << v[y][x];
+                writter << "T " << v[y][x];
             }
             writter << endl;
         }
-        cout << "Your world named " << worldname << " has been saved." << endl;
+
+
+        /// ================ OBJECTS ================
+        for(int i(0);i<m_world->getNumberObjects();i++)
+        {
+            cout << " OBJECT SAVE ! " << endl;
+            Object* o=m_world->getObject(i);
+            if(o!=nullptr){writter << "O " << o->getPositionY() << " " << o->getPositionX() << " "<<o->getId() << " "  << (int)(o->getSize().x/Global::TILE_WIDTH) << " " << (int)(o->getSize().y/Global::TILE_HEIGHT) << " " << o->isVisible() << " " << o->isSolid() <<endl;}
+        }
+
+
+
+        cout << "Your world named " << name << " has been saved ( here: " << worldname <<")." << endl;
         writter.close();
     }
 }
@@ -220,6 +237,90 @@ void Editor::loadWorld()
 void Editor::modifyTile(sf::Vector2f v)
 {
     m_world->modifyTile(v,m_actual);
+}
+
+bool Editor::command()
+/// BOOL method to go out quickly
+{
+    string order;
+    cout    << " ==========================" << endl
+            << " == Whut ?               ==" <<endl;
+    cin >> order;
+
+    for(int i(0);i<Global::TEXTURE_NAMES.size();i++)
+    {
+        if(order==Global::TEXTURE_NAMES[i])
+        {
+            m_actual=i;
+            return true;
+            cout << " Actual changed to " << order <<endl;
+        }
+
+        if(order=="obj")
+        {
+            string id;
+            float x,y,wm,hm;
+            bool visible, solid;
+            /// ID
+            cout << "-> Which ID ?" <<endl;
+                do
+                {
+                id="";
+                cin>>id;
+                }while(!youAgree());
+
+            ///POSITION
+            cout << "-> Where ? " <<endl;
+                do
+                {
+                cout << " X = ? " << endl;
+                cin >> x; cout << endl;
+
+                cout << " Y = ? " << endl;
+                cin >> y; cout << endl;
+                }while(!youAgree());
+            ///SIZE
+            cout << "-> What dimensions ?" <<endl;
+            do
+            {
+                cout << " Width multiplicator = ? " << endl;
+                cin >> wm; cout << endl;
+
+                cout << " height multiplicator = ? " << endl;
+                cin >> hm; cout << endl;
+            }while(!youAgree());
+            /// VISIBLE
+            cout << "-> Is visible." << endl;
+            visible=youAgree();
+            /// Solide
+            cout << "-> Is solide." << endl;
+            solid=youAgree();
+
+            m_world->addObject(ObjectEngine::get(id,x,y,wm,hm,visible,solid));
+            cout << " I did my best adding a " << id << " object at ("<<x<<","<<y<<") solide= " << boolalpha<<solid << " visible= " << boolalpha<< visible <<endl;
+            m_world->needToBeUpdated();
+            return true;
+        }
+    }
+
+
+
+
+    //command();
+
+
+
+}
+
+bool Editor::youAgree()
+{
+    char asw;
+    cout << " Is it okay ? " << endl;
+    cin >> asw;
+    if(toupper(asw) == 'Y') {return true;}
+    else if (toupper(asw)=='N'){return false;}
+    youAgree();
+
 }
 
 Editor::~Editor()

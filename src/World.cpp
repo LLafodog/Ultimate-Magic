@@ -30,7 +30,10 @@ World::World(string pathfile, int players)
 void World::loadWorld(string pathfile)
 ///Used to read a .world file
 {
+    ///Destruction of old world
     m_tiles=vector<vector<string>>();
+    for(int i(0):m_objects){delete m_objects[i];}m_objects=vector<Object*>();
+
     ifstream reader(pathfile.c_str());
     if(!reader.is_open()){cerr<<"Wrong path name ("<<pathfile<<"), the world is gonna be initialized based on bugworld.world ."<<endl; loadWorld(Global::TO_DATA+"worlds/bugworld.world");  }
     else
@@ -42,18 +45,26 @@ void World::loadWorld(string pathfile)
             nbLine++;
             const char separator=line[0]; //The first character is the separator and identify the data following
 
-            switch(separator) // According to the first char, we work the line in a different way
+            switch(separator) /// According to the first char, we work the line in a different way
             {
                 case 'I': //for initialization
                     readInformationLine(line);
                 break;
 
-                case 'T': //for Tile
+                case 'T': ///for Tile
                         readTileLine(line);
                 break;
 
-                case 'O': // for Object
+                case 'O': /// for Object premade
                         readObjectLine(line);
+                break;
+
+                case 'o': /// for Object premade
+                        readObjectLine(line);
+                break;
+
+                case '%':
+                        ///This is a comment line
                 break;
 
                 default:
@@ -79,20 +90,20 @@ void World::readInformationLine(string line)
         {
             word+=linei;
         }
-        else if(word!="")  //security
+        else if(word!="")  ///security
         {
             wordNumber++;
 
             ///transcription
             switch(wordNumber)
             {
-                case 1: //width
+                case 1: ///width
                 {
                     m_width=strtoi(word);
                 }
                 break;
 
-                case 2: //height
+                case 2: ///height
                 {
                     m_height=strtoi(word);
                 }
@@ -118,7 +129,7 @@ void World::readTileLine(string line)
             {word+=line[i];}
         else
         {
-            if(word!="") //security
+            if(word!="") ///security
             {
                 v.push_back(word);
                 word="";
@@ -138,7 +149,7 @@ void World::readObjectLine(string line)
     //New Object datas
     float x=-1, y=-1, width_mul=1, height_mult=1;
     string id="";
-    bool visible=true;
+    bool visible=true, solid=true;
 
     for(unsigned int i(0);i<=line.size();i++)
     {
@@ -156,41 +167,47 @@ void World::readObjectLine(string line)
             switch(wordNumber)
             {
                 //case 1: break; //This is the 'O' for Object.
-                case 1: //x position
+                case 1: ///x position
                 {
                     x=strtoi(word);
                 }
                 break;
 
-                case 2: //y position
+                case 2: ///y position
                 {
                     y=strtoi(word);
                 }
                 break;
 
-                case 3: //id
+                case 3: ///id
                 {
                     id=word;
                 }
                 break;
 
-                case 4: //width multiplicator
+                case 4: ///width multiplicator
                 {
                     width_mul=strtoi(word);
                 }
                 break;
 
 
-                case 5: // height_multiplicator
+                case 5: /// height_multiplicator
                 {
                     height_mult=strtoi(word);
                 }
                 break;
 
-                case 6: //visible
+                case 6: ///visible
                 {
-                    if(word=="visible")visible=true;
+                    if(word=="1")visible=true;
                     else visible=false;
+                }
+
+                case 7: ///solid
+                {
+                    if(word=="1")solid=true;
+                    else solid=false;
                 }
                 break;
 
@@ -205,8 +222,63 @@ void World::readObjectLine(string line)
         }
 
     }
-    addObject(ObjectEngine::get(id,x,y,width_mul,height_mult,visible));
+    addObject(ObjectEngine::get(id,x,y,width_mul,height_mult,visible,solid));
 }
+
+
+void World::readPremadeLine(string line)
+{
+        string word="";
+    int wordNumber=0; // determinates which data is being read
+
+    //New Object datas
+    float x=-1, y=-1;
+    string id="";
+
+    for(unsigned int i(0);i<=line.size();i++)
+    {
+        char linei=line[i];
+        //cout << linei; //
+        if(linei!=premadeSeparator && linei!='\n' && linei!=' ' && i!=line.size()) //look if we are adding the id, not the tool to read it (spaces not even read)
+        {
+            word+=linei;
+        }
+        else if(word!="")  ///security
+        {
+            wordNumber++;
+
+            ///transcription
+            switch(wordNumber)
+            {
+                case 1: ///x position
+                {
+                    x=strtoi(word);
+                }
+                break;
+
+                case 2: ///y position
+                {
+                    y=strtoi(word);
+                }
+                break;
+
+                case 3: ///id
+                {
+                    id=word;
+                }
+                break;
+
+                default:
+                    cerr<<"[Premade Object line] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
+                break;
+            }
+            word="";
+        }
+
+    }
+    addObject(ObjectEngine::getPremade(id,x,y));
+}
+
 
 
 const bool World::isThisTileSolid(float i, float j)

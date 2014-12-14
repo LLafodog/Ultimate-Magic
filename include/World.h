@@ -20,6 +20,7 @@ class World
             void readInformationLine(std::string line);
             void readTileLine(std::string line);
             void readObjectLine(std::string line);
+                void readPremadeLine(std::string line);
 
         //getter
             //size
@@ -70,6 +71,8 @@ class World
         const char tileSeparator='T';
         const char objectSeparator='O';
         const char informationSeparator='I';
+        const char commentSeparator='%';
+        const char premadeSeparator='o';
 };
 
 #endif // WORLD_H
