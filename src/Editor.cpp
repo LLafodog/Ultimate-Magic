@@ -29,6 +29,7 @@ using namespace sf;
 using namespace std;
 Editor::Editor(sf::RenderWindow* window, int w, int h)
 {
+    m_actual=0;
     m_window=window;
     load(); //texture graphics load
     init(w,h); // Initialise son graphics (les textures), le FPS et crée le monde.
@@ -94,6 +95,7 @@ void Editor::update()
     //m_graphics->drawAllTextures();
 }
 
+
 void Editor::draw()
 {
     m_graphics->draw();
@@ -137,9 +139,11 @@ void Editor::run()
                             switch(m_controller->getEvent()->key.code)
                             {
                                 default:break;
-                                case Keyboard::Escape   : m_window->close();
-                                case Keyboard::Subtract    : m_graphics->getCamera()->zoom(0.90);
-                                case Keyboard::Add      : m_graphics->getCamera()->zoom(1.05);
+                                case Keyboard::Escape   : m_window->close();break;
+                                case Keyboard::Subtract : m_graphics->getCamera()->zoom(0.90);break;
+                                case Keyboard::Add      : m_graphics->getCamera()->zoom(1.05);break;
+                                case Keyboard::PageUp   : {m_actual=(m_actual+1)%Global::TEXTURE_NAMES.size();              cout << "Actual tile is " << Global::TEXTURE_NAMES[m_actual]<<endl;}break;
+                                case Keyboard::PageDown : {m_actual=m_actual-1+(m_actual==0)*Global::TEXTURE_NAMES.size(); cout << "Actual tile is " << Global::TEXTURE_NAMES[m_actual]<<endl;}break;
                             }
                         }
 
@@ -170,3 +174,4 @@ void Editor::run()
 Editor::~Editor()
 {
 }
+
