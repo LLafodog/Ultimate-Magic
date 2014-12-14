@@ -109,6 +109,7 @@ void Graphics::updateTiles() //Done : in the visible area -> No, otherwise the a
 }
 
 void Graphics::updateObjects()
+/// Reinitialize the visible objects
 {
     m_visibleObjects=vector<VObject*>();
     for(unsigned int i(0);i<m_objects.size();i++)
@@ -117,6 +118,8 @@ void Graphics::updateObjects()
         t->update();
         float   x=t->getPositionX(),
                 y=t->getPositionY();
+
+        ///Is in the camera view ?
         if(m_camera->isIn(x,y))
         {
             t->setVisible(true);
@@ -154,7 +157,7 @@ void Graphics::draw()
             needToRefresh=false;
         }
         drawVisibleArea();
-        drawObjects();
+        drawVisibleObjects();
         m_window->display();
     }
 
@@ -244,14 +247,20 @@ void Graphics::sortObjects() // pbc
 }
 
 
-void Graphics::drawObjects()
+void Graphics::drawVisibleObjects()
 {
-    if(needResort || true )sortObjects(); //debug
+// \todo (llafodog#1#): Besoin de trier au moment opportun les objets. Peut-être quand l'un d'eux bouge (depuis l'update par exemple) ?
+    if(needResort || true )sortObjects();
     for(unsigned int i(0);i<m_visibleObjects.size();i++)
     {
-        drawTile(m_visibleObjects[i]);
+        drawObject(m_visibleObjects[i]);
     }
 
+}
+
+void Graphics::drawObject(VObject* o)
+{
+    drawTile(o);
 }
 
 void Graphics::drawAll()

@@ -26,7 +26,7 @@ void Alive::die()
     m_healthRegen=0;
 }
 
-void Alive::suffer(float damage) ///TO DO with effects
+void Alive::suffer(float damage) //TO DO with effects
 /// Suffer from damages and next effects.
 /// Look if die in the end.
 {

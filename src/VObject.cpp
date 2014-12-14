@@ -16,19 +16,37 @@ VObject::VObject(Object* o): Tile(o->getId(),o->getPositionX(), o->getPositionY(
     //cout<<o->getId()<<endl;
     update();
 
+
 }
 
 void VObject::update()
 {
+    // Tile update
     Tile::update();
+
+    // Orientation update
     char currentOrientation=m_object->getOrientation();
     if(currentOrientation!=m_orientation)changeOrientation(currentOrientation);
     setPosition(m_object->getPosition());
 
-        if(m_object->isMoving())
-        {m_animation->run();}
-        else {m_animation->stop();}
+    // if dead then look dead
+    if(m_object->isAlive())
+    {
+        Alive* a=dynamic_cast<Alive*>(m_object);
+        if(a->isDead())
+        {
+            m_animations=AnimationEngine::getAllOf("dead_player");
+            changeOrientation("first");
+        }
+        //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
+    }
+    if(m_object->isMoving())m_animation->run();
+    else{m_animation->stop();} // To do: if dead animation quand même running
 
+}
+void VObject::changeOrientation(std::string orientation) //to do something ?
+{
+    changeOrientation('n');
 }
 
 void VObject::changeOrientation(char c)
@@ -56,5 +74,5 @@ const sf::FloatRect VObject::getHitbox()
 
 VObject::~VObject()
 {
-    //dtor
+    delete m_name;
 }

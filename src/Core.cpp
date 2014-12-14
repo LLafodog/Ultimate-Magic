@@ -42,7 +42,7 @@ Core::Core(sf::RenderWindow* window)
 void Core::init()
 {
     //World
-    initWorld("data/worlds/version0.world"); /* MAGIC ! */
+    initWorld(Global::TO_DATA+"worlds/version0.world"); /* MAGIC ! */
     //Graphics
     initGraphics();
 
@@ -130,7 +130,6 @@ void Core::run()
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();} //Let you know evrything when you wanna
 
             }
-
             update();
             draw();
 

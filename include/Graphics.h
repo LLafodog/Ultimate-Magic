@@ -26,7 +26,8 @@ class Graphics
             void drawAll();
             void drawTile(Tile*t);
             void drawVisibleArea();
-            void drawObjects();
+            void drawVisibleObjects();
+            void drawObject(VObject* o);
         void clear() {m_window->clear(Global::BDC);}
         static bool needToRefresh;
 

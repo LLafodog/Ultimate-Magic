@@ -4,71 +4,97 @@
 #include<iostream>
 
 #include"TextureEngine.h"
-#include"Global.h"
 
+#include"Global.h"
 using namespace std;
 
 std::vector<Animation> AnimationEngine::m_animations;
 
-AnimationEngine::AnimationEngine()
+void AnimationEngine::load()
 {
-    //ctor
+    bool add=false;
+    for(int i(0);i<Global::TEXTURE_NAMES.size();i++)
+// \note (llafodog#1#): Peut-être un switch finira par être plus pratique pour la spécialisation de l'animation. En attendant je laisse des if plus globaux.
+    {
+        switch(i)
+        {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 15:
+        case 16:
+            {Animation a(Global::TEXTURE_NAMES[i],150,100,true);m_animations.push_back(a); add=true; break;}
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+            {Animation a(Global::TEXTURE_NAMES[i],150,100,false);m_animations.push_back(a); add=true; break;}
+
+        default: {Animation a("error",150,100,true);m_animations.push_back(a); add=true; cerr<<"[AnimationEngine] This number : " << i << " doesn't match any animation." <<endl; break;}
+        }
+        /*if(i<11 || i==16 || i==17)
+        {
+        Animation a(Global::TEXTURE_NAMES[i],150,100,true);m_animations.push_back(a); add=true;
+        }
+        if(i>=11 && i<14)
+        {
+        Animation a(Global::TEXTURE_NAMES[i],150,100,false);m_animations.push_back(a); add=true;
+        }
+        if(!add)
+        {
+        Animation a("error",150,100,true);m_animations.push_back(a); add=true; cerr<<"[AnimationEngine] This number : " << i << " doesn't match any animation." <<endl;
+        }*/
+    }
 }
 
 Animation* AnimationEngine::get(unsigned int i)
 {
-   if(i<m_animations.size())
+   if(i<m_animations.size() && i>=0)
     {
         return new Animation(&m_animations[i]);
-    } else {std::cerr <<"get("<<i<<") impossible."<<std::endl;return nullptr;}
+    } else {std::cerr <<"[AnimationEngine] get("<<i<<") impossible."<<std::endl;return nullptr;}
 }
 
 Animation* AnimationEngine::get(string name)
 {
-        if(name=="grass")                return get(0);
-        else if(name=="light_grass")     return get(1);
-        else if(name=="desert")          return get(2);
-        else if(name=="dragon_down")     return get(3);
-        else if(name=="dragon_left")     return get(4);
-        else if(name=="dragon_right")    return get(5);
-        else if(name=="dragon_up")       return get(6);
-        else if(name=="error")           return get(7);
-        else if(name=="pine_tree")           return get(8);
-        else if(name=="player")          {return get("error");}
-
-        else cerr<<"[Animation] Wrong name asked: " << name << endl; return get("error");
-
+        for(int i(0);i<Global::TEXTURE_NAMES.size();i++)
+        {
+        if(Global::TEXTURE_NAMES[i]==name){return get(i);}
+        }
+        cerr<<"[Animation] Wrong name asked_: " << name << endl; return get("error");
 }
-
 
 std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
 {
     vector<Animation*> v;
 
+    /** =========== PLAYER =========== */
     if(name=="player")
     {
 
         v.push_back(get("dragon_up"));
         v.push_back(get("dragon_right"));
         v.push_back(get("dragon_down"));
-        v.push_back(get("dragon_left")); //bug here
+        v.push_back(get("dragon_left"));
         return v;
     }
-    else if(name=="grass")
-    {
-        v.push_back(get("grass"));
-    }
-    else if(name=="light_grass")
-    {
-        v.push_back(get("light_grass"));
-    }
-    else if(name=="desert")
-    {
-        v.push_back(get("desert"));
-    }
-    else if(name=="pine_tree")
+    else if(name=="dead_player")
     {
         v.push_back(get("pine_tree"));
+    }
+
+    /** =================== TILE ================== */
+    for(int i(0);i<Global::TEXTURE_NAMES.size();i++)
+    {
+        if(name==Global::TEXTURE_NAMES[i])v.push_back(get(name));
     }
 
 
@@ -77,28 +103,11 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
     {
 
     }*/
-    else
+    if(v==vector<Animation*>())
     {
         v.push_back(get("error"));
     }
     return v;
-}
-
-
-
-void AnimationEngine::load()
-{
-    for(unsigned int i(0);i<TextureEngine::getMax();i++)
-    {
-        Animation a(150,00);
-        for(unsigned int j(0);j<TextureEngine::getMax(i);j++)
-        {
-            a.addFrame(TextureEngine::get(i,j));
-            //cout<<"i: " <<i << "     j:" << j <<endl; //to see
-        }
-        m_animations.push_back(a);
-    }
-    cout<<"Successfully loaded animations"<<endl;
 }
 
 AnimationEngine::~AnimationEngine()

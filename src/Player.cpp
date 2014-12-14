@@ -33,18 +33,22 @@ void Player::update()
     /* ================== ALIVE =============== */
     Alive::update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
+    /// MOVING
     if(!isDead())
     {
         /* ================== PLAYER =============== */
         if(m_controller!=0 && !m_controller->noOp())
         {
+            try
+            {
             colMove(   -m_controller->left()+m_controller->right(),    // x
                             -m_controller->up()+m_controller->down());
+            }
+            catch(exception& e){cout << e.what();}
 
-            if(m_controller->action()) {std::cout<<"Action."; m_visible=true;}
+            if(m_controller->action()) {std::cout<<"Action.";}
         }else {m_isMoving=false;}
     }
-
 }
 
 void Player::collide(Object* o)

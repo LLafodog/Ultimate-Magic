@@ -37,7 +37,7 @@ void World::loadWorld(string pathfile)
 ///Used to read a .world file
 {
     ifstream reader(pathfile.c_str());
-    if(!reader.is_open()){cerr<<"Wrong path name ("<<pathfile<<"), the world is gonna be initialized based on bugworld.world ."<<endl; loadWorld("data/worlds/bugworld.world");  }
+    if(!reader.is_open()){cerr<<"Wrong path name ("<<pathfile<<"), the world is gonna be initialized based on bugworld.world ."<<endl; loadWorld(Global::TO_DATA+"worlds/bugworld.world");  }
     else
     {
         int nbLine=0;
@@ -216,18 +216,8 @@ void World::readObjectLine(string line)
 
 const bool World::isThisTileSolid(float i, float j)
 {
-    unsigned int irounded=(unsigned int)(i),
-        jrounded=(unsigned int)(j);
-
-    //cout << "i: " << irounded << " j: " << jrounded << " id: " <<m_tiles[jrounded][irounded]<<endl; know where you walk
-    if(jrounded<m_tiles.size() && jrounded>=0 &&irounded<m_tiles[jrounded].size() && irounded>=0)
-    {
-        string id=m_tiles[jrounded][irounded];
-        if(id=="wall"){return true;}
-        return false;
-    }
-    else return true;
-
+    if(getTile(i,j)=="wall")return true;
+    return false;
 }
 
 

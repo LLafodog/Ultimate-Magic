@@ -79,6 +79,8 @@ void Collisionnable::colMove(int signX, int signY)
                     wt=m_hitbox.width/tw,
                     ht=m_hitbox.height/th;
 
+                    //cout << xt <<" "<< yt <<" "<< wt <<" "<< ht << endl;
+
         /// Tile looking
             switch(signX)
             {

@@ -5,7 +5,7 @@
 
 #include <vector>
 #include <iostream>
-#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -22,6 +22,8 @@ class Global
 
        static float FPS;
        static const sf::Color BDC;
+       static const string TO_DATA;
+       static const vector<string> TEXTURE_NAMES;
 
 ///Programming tools C/C
 /*

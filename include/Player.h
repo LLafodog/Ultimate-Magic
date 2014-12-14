@@ -23,13 +23,19 @@ class Player : public Object, public Alive
         void initStats();
         void setController(Controller* c) {m_controller=c;}
 
+        /* ============= GETTER ==================== */
         const World* getWorld() {return m_world;}
+        const std::string getName() {return m_name;}
 
 
         virtual void update();
 
         /* ============= COLLISIONNABLE ===================== */
         void collide(Object* o);
+
+        /* ============= CONVERSION ========================= */
+        virtual const bool isAlive() {return true;}
+        virtual const bool isPlayer() {return true;}
 
 
 

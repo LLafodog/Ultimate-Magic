@@ -16,9 +16,12 @@ class Object :public Collisionnable
         const std::string getId() {return m_id;}
         const bool isVisible() {return m_visible;}
 
-        /* ============= COLLISIONNABLE ====================*/
+        /* ============= COLLISIONNABLE ==================== */
         void collide(Object* o) {};
 
+        /* ============= CONVERSION ======================== */
+        virtual const bool isAlive() {return false;}
+        virtual const bool isPlayer() {return false;}
 
         virtual ~Object();
 

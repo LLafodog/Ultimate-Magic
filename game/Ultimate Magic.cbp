@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Ultimate Magic" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Ultimate Magic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-DSFML_STATIC" />
+					<Add directory="../include" />
+				</Compiler>
+				<Linker>
+					<Add option="-lsfml-graphics" />
+					<Add option="-lsfml-window" />
+					<Add option="-lsfml-system" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Ultimate Magic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="../include/Alive.h" />
+		<Unit filename="../include/Animation.h" />
+		<Unit filename="../include/AnimationEngine.h" />
+		<Unit filename="../include/Camera.h" />
+		<Unit filename="../include/Collisionnable.h" />
+		<Unit filename="../include/Controller.h" />
+		<Unit filename="../include/Core.h" />
+		<Unit filename="../include/Global.h" />
+		<Unit filename="../include/Graphics.h" />
+		<Unit filename="../include/KeyboardController.h" />
+		<Unit filename="../include/Movable.h" />
+		<Unit filename="../include/Object.h" />
+		<Unit filename="../include/ObjectEngine.h" />
+		<Unit filename="../include/Player.h" />
+		<Unit filename="../include/PlayerManager.h" />
+		<Unit filename="../include/Positionnable.h" />
+		<Unit filename="../include/TextureEngine.h" />
+		<Unit filename="../include/Tile.h" />
+		<Unit filename="../include/VObject.h" />
+		<Unit filename="../include/World.h" />
+		<Unit filename="../include/WorldManager.h" />
+		<Unit filename="../src/Alive.cpp" />
+		<Unit filename="../src/Animation.cpp" />
+		<Unit filename="../src/AnimationEngine.cpp" />
+		<Unit filename="../src/Camera.cpp" />
+		<Unit filename="../src/Collisionnable.cpp" />
+		<Unit filename="../src/Controller.cpp" />
+		<Unit filename="../src/Core.cpp" />
+		<Unit filename="../src/Global.cpp" />
+		<Unit filename="../src/Graphics.cpp" />
+		<Unit filename="../src/KeyboardController.cpp" />
+		<Unit filename="../src/Movable.cpp" />
+		<Unit filename="../src/Object.cpp" />
+		<Unit filename="../src/ObjectEngine.cpp" />
+		<Unit filename="../src/Player.cpp" />
+		<Unit filename="../src/PlayerManager.cpp" />
+		<Unit filename="../src/Positionnable.cpp" />
+		<Unit filename="../src/TextureEngine.cpp" />
+		<Unit filename="../src/Tile.cpp" />
+		<Unit filename="../src/VObject.cpp" />
+		<Unit filename="../src/World.cpp" />
+		<Unit filename="../src/WorldManager.cpp" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
