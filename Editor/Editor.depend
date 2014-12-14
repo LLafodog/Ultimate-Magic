@@ -340,7 +340,7 @@
 	<string>
 	<vector>
 
-1418504104 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Global.h
+1418558782 /home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/include/Global.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<iostream>
@@ -384,7 +384,7 @@
 	<string>
 	<vector>
 
-1418557400 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Camera.cpp
+1418558235 source:/home/llafodog/Programmation/C++/Ultimate Magic/Ultimate-Magic/src/Camera.cpp
 	"Camera.h"
 	"Positionnable.h"
 	"World.h"
