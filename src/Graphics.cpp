@@ -74,11 +74,6 @@ void Graphics::initObjects()
     {
         m_objects.push_back(new VObject(m_world->getObject(i)));
     }
-    //Players
-    for(int i(0);i<m_world->getNumberPlayers();i++)
-    {
-        m_objects.push_back(new VObject(m_world->getPlayer(i)));
-    }
 
 }
 

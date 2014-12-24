@@ -30,9 +30,13 @@ void Player::initStats()
 
 void Player::update()
 {
+    /* ================== OBJECT =============== */
+    Object::update();
     /* ================== ALIVE =============== */
     Alive::update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
+    //to throw
+    if(m_collide){suffer(10);m_collide=false;}
     /// MOVING
     if(!isDead() )
     {
@@ -49,11 +53,6 @@ void Player::update()
             if(m_controller->action()) {std::cout<<"Action.";}
         }else {m_isMoving=false;}
     }
-}
-
-void Player::collide(Object* o)
-{
-    if(o!=nullptr)suffer(10); //To throw away
 }
 
 Player::~Player()

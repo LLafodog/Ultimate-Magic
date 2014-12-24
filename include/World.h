@@ -33,13 +33,10 @@ class World
             const std::vector<Object*> getObjects() {return m_objects;}
             const int getNumberObjects() {return m_objects.size();}
             Object* getObject(unsigned int i) {if(i<m_objects.size() && i>=0){return m_objects[i];} else{return nullptr;}}
-                //players
-                const int getNumberPlayers() {return m_players.size();}
-                Player* getPlayer(unsigned int i) {if(i<m_players.size() && i>=0){return m_players[i];} else{return nullptr;}}
 
         //adder
         void addPlayer();
-        void addPlayer(Player* p) {if(p!=nullptr)m_players.push_back(p);}
+        void addPlayer(Player* p);
         void addObject(Object* o);
 
         //setter
@@ -56,7 +53,6 @@ class World
 
 
     protected:
-        std::vector<Player*> m_players;
         std::vector<std::vector<std::string> >m_tiles;
         std::vector<Object*> m_objects;
         int m_width;

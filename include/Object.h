@@ -19,10 +19,9 @@ class Object :public Collisionnable
         const bool isVisible() {return m_visible;}
 
         /* ============= COLLISIONNABLE ==================== */
-        void collide(Object* o) {};
 
         /* ============= CONVERSION ======================== */
-        virtual const bool isLivingSoul() {return false;}
+        virtual const bool isLivingSoul();
         virtual const bool isPlayer() {return false;}
         virtual void update(){}
 

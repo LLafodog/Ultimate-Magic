@@ -1,5 +1,5 @@
 #include "Object.h"
-
+#include "Alive.h"
 #include"Global.h"
 
 #include<string>
@@ -16,6 +16,13 @@ Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSo
     m_visible=o->isVisible();
     m_id=o->getID();
     m_orientation=o->getOrientation();
+}
+
+const bool Object::isLivingSoul()
+{
+    Alive* a=dynamic_cast<Alive*>(this);
+    if(a!=nullptr)return true;
+    return false;
 }
 
 Object::~Object()

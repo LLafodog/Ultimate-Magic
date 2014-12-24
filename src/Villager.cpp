@@ -11,8 +11,17 @@ Villager::Villager(Object* o, Behavior* b) : NPC(o,b)
 void Villager::update()
 {
     Object::update();
+    Alive::update();
+    //to throw
+    if(m_collide){suffer(10);m_collide=false;}
     m_behavior->update();
 }
+
+void Villager::collide(Object* o)
+{
+    if(o!=nullptr)suffer(10); //To throw away
+}
+
 
 Villager::~Villager()
 {

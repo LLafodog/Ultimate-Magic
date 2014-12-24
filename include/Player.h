@@ -25,8 +25,6 @@ class Player : public Object, public Alive
 
         /* ============= GETTER ==================== */
         const World* getWorld() {return m_world;}
-        const std::string getName() {return m_name;}
-        virtual const bool isLivingSoul(){return true;}
 
 
         void update();
@@ -35,7 +33,6 @@ class Player : public Object, public Alive
         void collide(Object* o);
 
         /* ============= CONVERSION ========================= */
-        virtual const bool isAlive() {return true;}
         virtual const bool isPlayer() {return true;}
 
 

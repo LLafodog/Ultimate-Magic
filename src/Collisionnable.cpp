@@ -18,10 +18,10 @@ Collisionnable::Collisionnable( sf::FloatRect hitbox, World* w, bool solid,  flo
     m_collision=nullptr;
 }
 
-const bool Collisionnable::inCollisionWith(Object* c)
+bool Collisionnable::inCollisionWith(Object* c)
 /// Return true if the floatrect of hitbox intersects
 {
-    if(c!=nullptr && m_solid)
+    if(c!=nullptr && m_solid && c!=this)
     {
     FloatRect c_hitb=c->getHitbox();
     float   x=c->getPositionX(),
@@ -46,8 +46,9 @@ const bool Collisionnable::inCollisionWith(Object* c)
     {
         m_collide=true; //We are in collision chef !
         m_collision=c; // with this guy !
-        collide(c); // Apply the consequences !
 
+        /// Apply the consequences !
+        collide(c);
         //cout<<"In collision with : " << c->getId()<<endl; //to know who you are in collision with
         return true;
     }
@@ -62,6 +63,14 @@ const bool Collisionnable::inCollisionWith(Object* c)
     }
     else return false;
 
+}
+
+void Collisionnable::collide(Object* c)
+{
+    m_collide=true;
+    c->setCollide(true);
+    setCollision(c);
+    c->setCollision(this);
 }
 
 void Collisionnable::colMove(int signX, int signY)
@@ -98,8 +107,8 @@ void Collisionnable::colMove(int signX, int signY)
             }
 
         /// Object looking
-        // We move, we look if in collision, and if yes we are we back. To great.
 
+        // We move, we look if in collision, and if yes we are we back. To great.
         moveOnF(signX*canGoH,signY*canGoV);
         if(isInCollisionWithObjects(m_world->getObjects()))moveOnF(-signX*canGoH,-signY*canGoV, false);
 
@@ -122,12 +131,16 @@ const bool Collisionnable::isInCollisionWithObjects(vector<Object*> v)
         for(unsigned int i(0);i<v.size();i++)
         {
             if( v[i]->isSolid() // Solid ?
-            &&  abs(m_x-v[i]->getPositionX()) + abs(m_y-v[i]->getPositionY()) // near to me ?
-            &&  inCollisionWith(v[i]))return true; // in collision ?
+            &&  (abs(m_x-v[i]->getPositionX()) + abs(m_y-v[i]->getPositionY()))<100 // near to me ?
+            &&  inCollisionWith(v[i]))
+            {
+            return true; // in collision ?
+            }
         }
     }
     return false;
 }
+
 
 Collisionnable::~Collisionnable()
 {

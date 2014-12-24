@@ -25,9 +25,10 @@ class Alive
         const float getHealthRegen() {return m_healthRegen;}
         void setHealthRegen(float hr) {m_healthRegen=hr;}
         //Global
+
         //statu
         const bool isDead() {return !m_alive;}
-        virtual const bool isLivingSoul(){return true;};
+        virtual const bool isLivingSoul(){return true;}
         const bool isInvincible() {return m_invincible;}
         //datas
         const float getLifeRatio(){if(m_maxHealth!=0)return m_health/m_maxHealth; return false;}

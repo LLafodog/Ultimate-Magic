@@ -19,14 +19,16 @@ class Collisionnable : public Movable
         void setWorld(World* w) {m_world=w;}
         World* getWorld() {return m_world;}
         const bool isSolid() {return m_solid;}
-
+        //setter
+        void setCollide(bool b){m_collide=b;}
+        void setCollision(Collisionnable* c) {m_collision=c;}
         // methods
         void colMove(int signX, int signY);
-        virtual void collide(Object* c)=0;
+        void collide(Object* c);
 
         //update
         const bool isInCollision() {return m_collide;}
-            const bool inCollisionWith(Object* c);
+             bool inCollisionWith(Object* c);
             const bool isInCollisionWithObjects(vector<Object*> v);
 
         virtual ~Collisionnable();
