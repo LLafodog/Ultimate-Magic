@@ -115,19 +115,31 @@ void Core::run()
             {
                 switch(m_controller->getEvent()->type)
                     {
-                        default: break;
                         case Event::Closed: {m_window->close();}
+                        case Event::KeyPressed:
+                        {
+                            switch(m_controller->getEvent()->key.code)
+                            {
+                                case Keyboard::Escape : m_window->close();break;
+                                default:break;
+                            }
+
+                        }
+                        case Event::KeyReleased:
+                        {
+                            switch(m_controller->getEvent()->key.code)
+                            {
+                                default:break;
+                            }
+
+                        }
+                        default: break;
                     }
-                switch(m_controller->getEvent()->key.code)
-                {
-                    case Keyboard::Escape : m_window->close();
-                    default:
-                        break;
-                }
                 //Combine
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::R)){Graphics::needToRefresh=true;} //Let you refresh when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::C)){m_graphics->clear();} //Let you clear when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();} //Let you know evrything when you wanna
+                if(Keyboard::isKeyPressed(Keyboard::Tab)) {m_graphics->setAllowDetails(true);}else {m_graphics->setAllowDetails(false);}
 
             }
             update();
@@ -160,4 +172,5 @@ void Core::showInfo()
 Core::~Core()
 {
    delete m_graphics;
+   delete m_controller;
 }

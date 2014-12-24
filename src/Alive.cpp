@@ -5,6 +5,8 @@
 
 using namespace std;
 
+//const int Alive::m_timesleeping=500; //0.5sec
+
 Alive::Alive(float maxHealth, float healthRegen, bool alive)
 {
     //begin full life
@@ -15,6 +17,9 @@ Alive::Alive(float maxHealth, float healthRegen, bool alive)
     m_timeBetweenHeal=1000; //ms
     //begin alive haha
     m_alive=alive;
+
+    m_tempClock.restart();
+    m_invincible=false;
 }
 
 
@@ -30,18 +35,28 @@ void Alive::suffer(float damage) //TO DO with effects
 /// Suffer from damages and next effects.
 /// Look if die in the end.
 {
-    if(m_health>0)m_health-=damage;
-    else die();
+    if(!m_invincible)
+    {
+        if(m_health>0){m_health-=damage; m_tempClock.restart();}
+        else die();
+    }
+
 }
 
 void Alive::update()
 {
+    ///Update health regen
     if(m_clock.getElapsedTime().asMilliseconds()>=m_timeBetweenHeal)
     {
         float heal=m_healthRegen*m_maxHealth;
         if(m_health+heal<=m_maxHealth)m_health+=heal;
         m_clock.restart();
     }
+    ///Update invincibility
+    if(m_tempClock.getElapsedTime().asMilliseconds()<=m_timesleeping)
+    {
+        m_invincible=true;
+    }else {m_invincible=false;}
 
 }
 

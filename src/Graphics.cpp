@@ -38,6 +38,7 @@ Graphics::Graphics(RenderWindow* w, World* wo)
 
 void Graphics::init()
 {
+    m_details=false;
     initTiles();
     initObjects();
 }
@@ -130,7 +131,7 @@ void Graphics::updateObjects()
 
 }
 
-void Graphics::getInfo()
+const void Graphics::getInfo()
 {
         // Position de la view ?
     cout  << "///////////////////////////////////" << endl
@@ -147,7 +148,7 @@ void Graphics::getInfo()
             << "total : " << m_objects.size() <<endl;
 }
 
-void Graphics::draw()
+const void Graphics::draw()
 {
     if(m_world!=0)
     {
@@ -163,7 +164,7 @@ void Graphics::draw()
 
 }
 
-void Graphics::drawTile(Tile*t)
+const void Graphics::drawTile(Tile*t)
 {
     if( t!=nullptr && t->isVisible())
     {
@@ -171,7 +172,7 @@ void Graphics::drawTile(Tile*t)
     }
 }
 
-void Graphics::drawVisibleArea()
+const void Graphics::drawVisibleArea()
 {
     if(m_camera!=nullptr)
     {
@@ -255,7 +256,7 @@ void Graphics::sortObjects() // pbc
 }
 
 
-void Graphics::drawVisibleObjects()
+const void Graphics::drawVisibleObjects()
 {
 // \todo (llafodog#1#): Besoin de trier au moment opportun les objets. Peut-être quand l'un d'eux bouge (depuis l'update par exemple) ?
     if(needResort || true )sortObjects();
@@ -266,12 +267,67 @@ void Graphics::drawVisibleObjects()
 
 }
 
-void Graphics::drawObject(VObject* o)
+const void Graphics::drawObject(VObject* o)
 {
+    if(o->isLivingSoul())
+    {
+        drawAboutAlive(o);
+    }
     drawTile(o);
+
 }
 
-void Graphics::drawAll()
+const void Graphics::drawAboutAlive(VObject* o)
+/// Here we draw eveyrthing that concern an alive object
+{
+    Alive* a=dynamic_cast<Alive*>(o->getObject());
+    if( a!= nullptr && (m_details ||a->getLifeRatio()!=1))
+    ///We draw the life bar if we wanna see the details, or we aren't full Life
+    {
+        drawLifeBar(o);
+    }
+
+
+}
+
+const void Graphics::drawLifeBar(VObject* o)
+/**
+    Draw a life bar with two rectange:  one totally black representing the full life
+                                        one red representig the life (how mainstream)
+**/
+{
+    Alive* a=dynamic_cast<Alive*>(o->getObject());
+    if(o!=nullptr && a!=nullptr) //if has a life // just be secure
+    {
+    float   x=o->getPositionX(),
+            y=o->getPositionY(),
+            w=o->getSize().x,
+            wquart=w/4,
+            hr=Global::TILE_HEIGHT>>3; //height of the life bar
+
+    float lratio=a->getLifeRatio();
+    Vector2f    fullsize(w+wquart*2,hr),
+                lifesize((w+wquart*2)*lratio,hr),
+                position(x-wquart,y-hr-1);
+
+    RectangleShape  fulllifebar(fullsize),
+                    lifebar(lifesize);
+
+    fulllifebar.setPosition(position);
+    lifebar.setPosition(position);
+
+    fulllifebar.setFillColor(Color::Black);
+    lifebar.setFillColor(Color::Red);
+    //cout << "drawn in x:" << x << " y: " << y << " lenght of " << w <<endl;
+    m_window->draw(fulllifebar);
+    m_window->draw(lifebar);
+
+    }
+    else{cout<< "shitty"<<endl;}
+}
+
+
+const void Graphics::drawAll()
 {
     int t_width=m_tiles.size(),
         t_height=0;

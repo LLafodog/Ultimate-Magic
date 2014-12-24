@@ -30,7 +30,7 @@ void VObject::update()
     setPosition(m_object->getPosition());
 
     // if dead then look dead
-    if(m_object->isAlive())
+    if(m_object->isLivingSoul())
     {
         Alive* a=dynamic_cast<Alive*>(m_object);
         if(a->isDead())
@@ -65,6 +65,11 @@ void VObject::changeOrientation(char c)
     }
     else m_animation=m_animations[0]; // if hasn't 4 animations, take the first;
 
+}
+
+const bool VObject::isLivingSoul()
+{
+    return m_object->isLivingSoul();
 }
 
 const sf::FloatRect VObject::getHitbox()

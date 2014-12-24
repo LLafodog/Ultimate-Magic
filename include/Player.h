@@ -26,6 +26,7 @@ class Player : public Object, public Alive
         /* ============= GETTER ==================== */
         const World* getWorld() {return m_world;}
         const std::string getName() {return m_name;}
+        virtual const bool isLivingSoul(){return true;}
 
 
         virtual void update();

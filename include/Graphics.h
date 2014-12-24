@@ -17,30 +17,33 @@ class Graphics
 {
     public:
         Graphics(sf::RenderWindow* w, World* wo=0);
-    //init
+    ///init
         void init();
             void initObjects();
             void initTiles();
-    //drawing
-        void draw();
-            void drawAll();
-            void drawTile(Tile*t);
-            void drawVisibleArea();
-            void drawVisibleObjects();
-            void drawObject(VObject* o);
-        void clear() {m_window->clear(Global::BDC);}
+    ///drawing
+        const void draw();
+            const void drawAll();
+            const void drawTile(Tile*t);
+            const void drawVisibleArea();
+            const void drawVisibleObjects();
+            const void drawObject(VObject* o);
+                const void drawAboutAlive(VObject* );
+            const void drawLifeBar(VObject* o);
+        const void clear() {m_window->clear(Global::BDC);}
         static bool needToRefresh;
 
-    //for testing
-        void getInfo();
+    ///for testing
+        const void getInfo();
 
-    //MaJ
+    ///MaJ
         void update();
             void updateTiles();
             void updateObjects();
         void sortObjects();
             bool needResort;
-    //Camera
+        void setAllowDetails(bool b){m_details=b;}
+    ///Camera
         Camera* getCamera() {return m_camera;}
         virtual ~Graphics();
 
@@ -56,6 +59,7 @@ class Graphics
     sf::RenderWindow* m_window;
     World* m_world;
     Camera* m_camera;
+    bool m_details; //allow to draw all details like lifebar
 
 };
 

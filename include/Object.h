@@ -20,7 +20,7 @@ class Object :public Collisionnable
         void collide(Object* o) {};
 
         /* ============= CONVERSION ======================== */
-        virtual const bool isAlive() {return false;}
+        virtual const bool isLivingSoul() {return false;}
         virtual const bool isPlayer() {return false;}
 
         virtual ~Object();

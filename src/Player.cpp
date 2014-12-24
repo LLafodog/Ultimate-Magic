@@ -53,7 +53,7 @@ void Player::update()
 
 void Player::collide(Object* o)
 {
-    if(o!=nullptr)suffer(1); //debug
+    if(o!=nullptr)suffer(10); //To throw away
 }
 
 Player::~Player()

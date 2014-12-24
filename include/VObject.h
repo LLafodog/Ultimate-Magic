@@ -19,6 +19,8 @@ class VObject : public Tile
 
         /* =============== GETTER ====================== */
         const sf::FloatRect getHitbox();
+        Object* getObject() {return m_object;}
+        const bool isLivingSoul();
 
         /* =============== CONVERSION ================== */
         virtual const bool isVObject() {return true;}

@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
+class Lifebar;
+
 class Alive
 {
     public:
@@ -23,8 +25,12 @@ class Alive
         const float getHealthRegen() {return m_healthRegen;}
         void setHealthRegen(float hr) {m_healthRegen=hr;}
         //Global
+        //statu
         const bool isDead() {return !m_alive;}
-
+        virtual const bool isLivingSoul(){return true;};
+        const bool isInvincible() {return m_invincible;}
+        //datas
+        const float getLifeRatio(){if(m_maxHealth!=0)return m_health/m_maxHealth; return false;}
 
         virtual ~Alive();
 
@@ -35,6 +41,10 @@ class Alive
         bool m_alive;
         float m_timeBetweenHeal;
         sf::Clock m_clock;
+        ///Effect
+        sf::Clock m_tempClock; //usefull for lil time like has been damaged
+        const int m_timesleeping=500; // time during which anything can happen //0.5sec
+        bool m_invincible;
 };
 
 #endif // ALIVE_H
