@@ -53,6 +53,7 @@ const bool Collisionnable::inCollisionWith(Object* c)
     }
     else
     {
+        m_collide=false;
         m_collision=nullptr;
     }
     return false;

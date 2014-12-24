@@ -78,7 +78,7 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
     vector<Animation*> v;
 
     /** =========== PLAYER =========== */
-    if(name=="player")
+    if(name=="dragon")
     {
 
         v.push_back(get("dragon_up"));

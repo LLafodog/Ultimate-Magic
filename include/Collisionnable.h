@@ -17,6 +17,7 @@ class Collisionnable : public Movable
         const Collisionnable* getCollision() {return m_collision;}
         const sf::FloatRect getHitbox() {return m_hitbox;}
         void setWorld(World* w) {m_world=w;}
+        World* getWorld() {return m_world;}
         const bool isSolid() {return m_solid;}
 
         // methods

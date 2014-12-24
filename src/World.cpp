@@ -1,6 +1,8 @@
 #include "World.h"
 
 #include "Player.h"
+#include "Villager.h"
+    #include "IddleBehavior.h"
 #include "Object.h"
 
 #include "Global.h"
@@ -24,6 +26,8 @@ World::World(string pathfile, int players)
    loadWorld(pathfile);
    for(int i(0);i<players;i++){addPlayer();}
    m_updated=false;
+   /// TEST To throw
+   addObject(new Villager(ObjectEngine::get("dragon"),new IddleBehavior()));
 }
 
 
@@ -217,9 +221,11 @@ const bool World::isThisTileSolid(float i, float j)
 
 void World::addPlayer()
 {
-    Player* p=new Player("player",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,10,10,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
+    Player* p=new Player("dragon",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,10,10,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
     m_players.push_back(p);
 }
+
+
 
 void World::addObject(Object* o)
 {
@@ -230,6 +236,18 @@ void World::addObject(Object* o)
     }
 }
 
+void World::update()
+{
+    for(int i(0); i<m_objects.size(); i++)
+    {
+        if(m_objects[i]!=nullptr)m_objects[i]->update();
+    }
+    //to throw
+    for(int i(0); i<m_players.size(); i++)
+    {
+        if(m_players[i]!=nullptr)m_players[i]->update();
+    }
+}
 
 World::~World()
 {

@@ -7,11 +7,11 @@
 using namespace std;
 using namespace sf;
 
-VObject::VObject(Object* o): Tile(o->getId(),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y)
+VObject::VObject(Object* o): Tile(o->getID(),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y)
 {
     m_object=o;
     m_orientation='n';
-    m_animations=AnimationEngine::getAllOf(o->getId()); //here working
+    m_animations=AnimationEngine::getAllOf(o->getID()); //here working
     changeOrientation(m_orientation);
     //cout<<o->getId()<<endl;
     update();

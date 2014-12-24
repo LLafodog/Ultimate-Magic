@@ -73,7 +73,7 @@ void Core::update()
 {
     //datas
     updateFPS();
-    WorldManager::updatePlayers(m_world);
+    m_world->update();
     //graphics
     m_graphics->update();
 
@@ -153,18 +153,6 @@ void Core::run()
 
 void Core::showInfo()
 {
-    cout <<
-    "/////////////////////////////////////" << endl <<
-    "/********** WORLD ******************/" << endl <<
-    "/ size: w:"<<m_world->getWidth() << " h:" << m_world->getHeight() << " nPlayer:" << m_world->getNumberPlayers() << " nTiles: " << m_world->getTiles().size() <<endl <<
-    "/********** PLAYER *****************/" << endl;
-    if(m_world->getPlayer(0)!=nullptr)
-    {cout << "/ P1: x:" << m_world->getPlayer(0)->getPositionX() << " y:" << m_world->getPlayer(0)->getPositionY() << endl;}
-    cout << "/********** GRAPHICS ***************/" << endl;
-    m_graphics->getInfo() ; cout <<
-    "/********** TEXTURES ***************/" << endl <<
-    "/ nbText:" << TextureEngine::getMax() << endl <<
-    "/////////////////////////////////////" <<endl <<endl;
 
 }
 

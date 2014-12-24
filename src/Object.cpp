@@ -11,6 +11,13 @@ Object::Object( std::string id, sf::FloatRect rect, World* w, bool solid, float 
     m_orientation='n'; //n cuz first anime
 }
 
+Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSolid(), o->getPositionX(), o->getPositionY(), o->getSize().x, o->getSize().y)
+{
+    m_visible=o->isVisible();
+    m_id=o->getID();
+    m_orientation=o->getOrientation();
+}
+
 Object::~Object()
 {
     //dtor

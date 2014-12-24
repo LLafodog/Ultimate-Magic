@@ -29,7 +29,7 @@ class Player : public Object, public Alive
         virtual const bool isLivingSoul(){return true;}
 
 
-        virtual void update();
+        void update();
 
         /* ============= COLLISIONNABLE ===================== */
         void collide(Object* o);

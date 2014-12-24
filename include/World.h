@@ -47,6 +47,7 @@ class World
         void setObjects(std::vector<Object*> obj)           {m_objects=obj;}
 
         //updates
+        void update();
         const bool isUpdated() {return m_updated;} // Actualize the graphics of the world
         void hasBeenUpdated() {m_updated=false;}
 
