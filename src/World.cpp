@@ -23,11 +23,12 @@ int strtoi(string number)
 /* ==================== CLASS ======================= */
 World::World(string pathfile, int players)
 {
-   for(int i(0);i<players;i++){addPlayer();}
    loadWorld(pathfile);
-   m_updated=false;
    /// TEST To throw
-   addObject(new Villager(ObjectEngine::get("dragon",100,100),new IddleBehavior()));
+   addObject(new Villager(ObjectEngine::get("dragon",10,100),new IddleBehavior()));
+   for(int i(0);i<players;i++){addPlayer();}
+   m_updated=false;
+
 }
 
 
@@ -64,7 +65,7 @@ void World::loadWorld(string pathfile)
                 break;
 
                 case 'o': /// for Object premade
-                        readObjectLine(line);
+                        readPremadeLine(line);
                 break;
 
                 case '%':
@@ -294,8 +295,9 @@ const bool World::isThisTileSolid(float i, float j)
 
 void World::addPlayer()
 {
-    Player* p=new Player("dragon",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,10,10,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
+    Player* p=new Player("dragon",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,10,100,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
     m_objects.push_back(p);
+
 }
 
 void World::addPlayer(Player* p)

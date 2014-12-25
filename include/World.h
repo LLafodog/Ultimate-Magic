@@ -13,7 +13,7 @@ class World
 {
     public:
 
-        World(std::string pathfile, int players=0);
+        World(std::string pathfile, int players=1);
 
         ///Initialization
         void loadWorld(std::string pathfile);

@@ -32,7 +32,7 @@ Graphics::Graphics(RenderWindow* w, World* wo)
    m_world=wo;
 
    //camera
-   m_camera=new Camera(m_window,wo->getObject(0),wo);
+   m_camera=new Camera(m_window,wo->getObject(m_world->getNumberObjects()-1),wo);//to do reperer le player
    init();
 }
 

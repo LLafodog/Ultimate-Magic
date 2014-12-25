@@ -15,7 +15,7 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     m_world=wo;
     if(m_pos!=nullptr){m_view=View(m_pos->getPosition(),Vector2f(12*Global::TILE_WIDTH,10*Global::TILE_HEIGHT));}
         else {cerr<<"Camera target is nullptr" <<endl; m_view=View(Vector2f(0,0),Vector2f(m_window->getSize())); }
-   // m_window->setView(m_view); ///To comment if no view
+    m_window->setView(m_view); ///To comment if no view
 
     ///some fixes
     if(m_world!=nullptr)
@@ -81,7 +81,7 @@ float Camera::getDistanceFromTarget()
 void Camera::updateView()
 {
 
-    //m_window->setView(m_view);///To comment if no view
+    m_window->setView(m_view);///To comment if no view
     float   xp=m_pos->getPositionX(),
             yp=m_pos->getPositionY(),
             xv=m_view.getCenter().x,
