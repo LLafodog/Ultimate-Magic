@@ -2380,7 +2380,7 @@
 	"Global.h"
 	<vector>
 
-1419175623 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
+1419535953 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
 	<SFML/Graphics.hpp>
 	"World.h"
 
@@ -2442,7 +2442,7 @@
 	"TextureEngine.h"
 	<iostream>
 
-1419510243 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Tile.cpp
+1419535518 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Tile.cpp
 	"Tile.h"
 	"TextureEngine.h"
 	"Global.h"
@@ -2461,11 +2461,11 @@
 	<fstream>
 	<cmath>
 
-1419420003 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
+1419535871 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
 	"WorldManager.h"
-	"Player.h"
-	"PlayerManager.h"
 	"Global.h"
+	<vector>
+	<string>
 
 1419505847 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/VObject.cpp
 	"VObject.h"

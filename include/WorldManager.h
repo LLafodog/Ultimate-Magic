@@ -9,9 +9,8 @@ class WorldManager
     public:
 
         //WorldManager(World* w);
-
-        static const void  updatePlayers(World* w);
-        static const void  updateControls(World* w, sf::Event* e);
+        static void createWorld();
+        static std::string pickBiome(int nb_biome);
 
         virtual ~WorldManager();
 

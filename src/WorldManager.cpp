@@ -1,25 +1,25 @@
 #include "WorldManager.h"
 
-#include "Player.h"
-#include "PlayerManager.h"
 #include "Global.h"
 
-WorldManager::WorldManager(World* w)
+#include<vector>
+#include<string>
+
+using namespace std;
+
+vector<string>biomes={"prairie","desert"};
+
+void WorldManager::createWorld()
 {
-    //m_world=w;
+    vector<string> world();
+    int nb_biome=2;
+    string biome=pickBiome(nb_biome);
+
 }
 
-
-const void  WorldManager::updateControls(World* w, sf::Event* e)
+string WorldManager::pickBiome(int nb_biome)
 {
-
-
-}
-
-
-const void  WorldManager::updatePlayers(World* w)
-{
-
+    return biomes[rand()%biomes.size()];
 }
 
 WorldManager::~WorldManager()
