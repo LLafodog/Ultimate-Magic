@@ -18,7 +18,6 @@ class Villager : public NPC
 
         /// =========== CASUAL METHODS ====
         void update();
-        void collide(Object* o);
 
         virtual ~Villager();
 

@@ -22,10 +22,14 @@ class IddleBehavior : public Behavior
         void choseRandomLocation();
         virtual void update();
             void moveTowardDestination();
+            void pickActionTime();
 
         virtual ~IddleBehavior();
     protected:
         sf::Vector2f m_destination;
+        sf::Clock m_clock;
+        int m_timePaused;
+        int m_timeAction;
 };
 
 #endif // IDDLEBEHAVIOR_H

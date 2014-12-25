@@ -1,5 +1,6 @@
 #include "IddleBehavior.h"
 #include "Object.h"
+#include "Alive.h"
 #include "World.h"
 
 #include<iostream>
@@ -18,9 +19,16 @@ bool quiteEquals(Vector2f a, Vector2f b)
 IddleBehavior::IddleBehavior(Object* o) : Behavior(o)
 {
     choseRandomLocation();
+    m_clock.restart();
+    pickActionTime();
 
 }
 
+void IddleBehavior::pickActionTime()
+{
+    m_timePaused=rand()%10000+500; //between 0.5 sec and 10sec
+    m_timeAction=rand()%10000+500;
+}
 
 /// ======== CASUALS ============
 void IddleBehavior::think()
@@ -29,7 +37,7 @@ void IddleBehavior::think()
     {
         Vector2f pos(m_object->getPosition());
         //cout << boolalpha << m_object->isInCollision() <<endl;
-        if(m_object->isInCollision() || quiteEquals(pos,m_destination))choseRandomLocation();
+        if(m_object->isInCollision() || quiteEquals(pos,m_destination) || m_object->getWorld()->isThisTileSolid(m_object->getPositionX(), m_object->getPositionY()))choseRandomLocation();
     }
 
 }
@@ -61,12 +69,16 @@ void IddleBehavior::moveTowardDestination()
 {
     float   x=m_destination.x - m_object->getPositionX(),
             y=m_destination.y - m_object->getPositionY();
-    if(x!=0 && y!=0)
+    Alive* a=dynamic_cast<Alive*>(m_object);
+    if(x!=0 && y!=0 && a !=nullptr && !a->isDead())
     {
         int signX=x/abs(x),
         signY=y/abs(y);
+        if(abs(x)<32){signX=0;}
+        if(abs(y)<32){signY=0;}
         //cout << "x: " << signX << " y: " << signY <<endl;
-        m_object->colMove(signX,signY);
+        if(m_clock.getElapsedTime().asMilliseconds()>m_timePaused){m_object->colMove(signX,signY);}
+        if(m_clock.getElapsedTime().asMilliseconds()>m_timePaused+m_timeAction){m_clock.restart();pickActionTime();}
     }
 
 }

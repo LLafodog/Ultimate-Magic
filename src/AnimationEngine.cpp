@@ -89,7 +89,7 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
     }
     else if(name=="dead_player")
     {
-        v.push_back(get("pine_tree"));
+        v.push_back(get("error"));
     }
 
     /** =================== TILE ================== */

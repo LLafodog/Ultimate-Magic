@@ -27,7 +27,7 @@ World::World(string pathfile, int players)
    loadWorld(pathfile);
    m_updated=false;
    /// TEST To throw
-   addObject(new Villager(ObjectEngine::get("dragon"),new IddleBehavior()));
+   addObject(new Villager(ObjectEngine::get("dragon",100,100),new IddleBehavior()));
 }
 
 

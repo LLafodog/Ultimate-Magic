@@ -31,7 +31,7 @@ void Tile::initSquare(float width, float height)
     m_cs= cs;
 
 }
-ń
+
 const sf::ConvexShape* Tile::getApparence()
 {
     if(m_animation!=nullptr)m_cs.setTexture(m_animation->getCurrentFrame());

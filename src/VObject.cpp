@@ -33,14 +33,15 @@ void VObject::update()
     if(m_object->isLivingSoul())
     {
         Alive* a=dynamic_cast<Alive*>(m_object);
-        if(a->isDead())
+        if(a !=nullptr && a->isDead())
         {
             m_animations=AnimationEngine::getAllOf("dead_player");
             changeOrientation("first");
+            m_animation->run();
         }
         //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
     }
-    if(m_object->isMoving())m_animation->run();
+    if(m_object->isMoving()){m_animation->run();}
     else{m_animation->stop();} // To do: if dead animation quand même running
 
 }

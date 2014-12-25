@@ -36,7 +36,7 @@ void Player::update()
     Alive::update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
     //to throw
-    if(m_collide){suffer(10);m_collide=false;}
+    if(m_collide){suffer(10);}
     /// MOVING
     if(!isDead() )
     {
