@@ -1,4 +1,4 @@
-I 20 60
+I 34 60
 T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t
 T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t
 T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t
@@ -59,7 +59,8 @@ T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t 
 T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t
 T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t
 T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t T grass_t
-O 100 100 pine_tree 1 1  visible
-O 200 100 pine_tree 1 1  visible
-O 300 100 pine_tree 1 1  visible
-O 400 100 pine_tree 1 1  visible
+O 100 100 pine_tree 1 1 1 1
+O 200 100 pine_tree 1 1 1 1
+O 300 100 pine_tree 1 1 1 1
+O 400 100 pine_tree 1 1 1 1
+o 100 100 pn

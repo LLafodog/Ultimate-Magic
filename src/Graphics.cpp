@@ -190,7 +190,7 @@ const void Graphics::drawVisibleArea()
                     drawTile(m_tiles[i][j]);
                     }
                     else{ /// Completing the wholes
-                    Tile* t=new Tile("error",i*Global::TILE_WIDTH,j*Global::TILE_HEIGHT);drawTile(t);delete t;
+                    Tile* t=new Tile("error",j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);drawTile(t);delete t;
 
                     }
                 }//endFor horizontally

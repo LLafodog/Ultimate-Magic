@@ -1,6 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include<SFML/System/Vector2.hpp>
+
 #include <vector>
 #include <string>
 
@@ -18,6 +20,7 @@ class World
             void readInformationLine(std::string line);
             void readTileLine(std::string line);
             void readObjectLine(std::string line);
+                void readPremadeLine(std::string line);
 
         //getter
             //size
@@ -41,12 +44,14 @@ class World
 
         //setter
         void setTiles(std::vector<std::vector<std::string> >tiles)  {m_tiles=tiles;}
+        void modifyTile(sf::Vector2f v, int id);
         void setObjects(std::vector<Object*> obj)           {m_objects=obj;}
 
         //updates
         void update();
         const bool isUpdated() {return m_updated;} // Actualize the graphics of the world
         void hasBeenUpdated() {m_updated=false;}
+        void needToBeUpdated(){m_updated=true;}
 
         virtual ~World();
 
@@ -63,6 +68,8 @@ class World
         const char tileSeparator='T';
         const char objectSeparator='O';
         const char informationSeparator='I';
+        const char commentSeparator='%';
+        const char premadeSeparator='o';
 };
 
 #endif // WORLD_H
