@@ -9,15 +9,22 @@ using namespace std;
 
 vector<string>biomes={"prairie","desert"};
 
-void WorldManager::createWorld()
+void WorldManager::createWorld(World* w )
 {
-    vector<string> world();
-    int nb_biome=2;
-    string biome=pickBiome(nb_biome);
+    int sq=50+rand()%50;
+
+    int nb_biome=1+rand()%5; //jusqu'à 5 biomes
+    vector<string>picked;
+    for(int i(0);i<nb_biome;i++)
+    {
+    picked.push_back(pickBiome(biomes.size()));
+    }
+
+
 
 }
 
-string WorldManager::pickBiome(int nb_biome)
+string WorldManager::pickBiome(unsigned int nb_biome)
 {
     return biomes[rand()%biomes.size()];
 }

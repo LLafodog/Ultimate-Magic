@@ -9,8 +9,8 @@ class WorldManager
     public:
 
         //WorldManager(World* w);
-        static void createWorld();
-        static std::string pickBiome(int nb_biome);
+        static void createWorld(World* w);
+        static std::string pickBiome(unsigned int nb_biome);
 
         virtual ~WorldManager();
 
