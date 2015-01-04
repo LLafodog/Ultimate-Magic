@@ -14,6 +14,7 @@ const vector<string> Global::TEXTURE_NAMES={"grass_tl","grass_t","grass_tr","gra
                                             "invisible" //18
                                             };
 
+
 const string Global::TO_DATA="../data/";
 
 const sf::Color Global::BDC=sf::Color(4,139,154);

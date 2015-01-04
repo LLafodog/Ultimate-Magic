@@ -153,6 +153,8 @@ void Core::run()
 
 void Core::showInfo()
 {
+    cout << "======= WORLD ============" <<endl;
+    cout << " Width : " << m_world->getWidth() << " Height: " << m_world->getHeight() << endl << " Number of objects : " << m_world->getNumberObjects() <<endl;
     cout << "======= OBJECTS ==========" <<endl;
     for(int i(0);i<m_world->getNumberObjects();i++){cout << m_world->getObject(i)->getID() << "x: " << m_world->getObject(i)->getPositionX() << " y: " << m_world->getObject(i)->getPositionY()  << endl;} cout <<endl;
     cout << "======= CAMERA ==========" <<endl;

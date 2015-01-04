@@ -2336,7 +2336,7 @@
 	<SFML/Graphics.hpp>
 	"Global.h"
 
-1419539105 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
+1420113478 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
 	<SFML/System/Vector2.hpp>
 	<vector>
 	<string>
@@ -2358,7 +2358,7 @@
 1419175623 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Controller.h
 	<SFML/Graphics.hpp>
 
-1419539105 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Core.cpp
+1420113646 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Core.cpp
 	"Core.h"
 	"Global.h"
 	"Graphics.h"
@@ -2381,7 +2381,7 @@
 	"Global.h"
 	<vector>
 
-1419548677 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
+1420365826 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
 	<SFML/Graphics.hpp>
 	"World.h"
 
@@ -2410,7 +2410,7 @@
 	"Global.h"
 	"Positionnable.h"
 
-1419340829 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Global.cpp
+1420365694 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Global.cpp
 	"Global.h"
 	<SFML/Graphics.hpp>
 	<cmath>
@@ -2458,14 +2458,14 @@
 
 1419538045 D
 
-1419539086 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Tile.cpp
+1419886226 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Tile.cpp
 	"Tile.h"
 	"TextureEngine.h"
 	"Global.h"
 	"Animation.h"
 	"AnimationEngine.h"
 
-1419539397 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
+1419886226 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
 	"World.h"
 	"Player.h"
 	"Villager.h"
@@ -2478,11 +2478,12 @@
 	<fstream>
 	<cmath>
 
-1419539086 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
+1419889069 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
 	"WorldManager.h"
 	"Global.h"
 	<vector>
 	<string>
+	<iostream>
 
 1419536125 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/VObject.cpp
 	"VObject.h"
@@ -2513,7 +2514,7 @@
 1419175623 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Movable.h
 	"Positionnable.h"
 
-1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Movable.cpp
+1419886223 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Movable.cpp
 	"Movable.h"
 	"World.h"
 
