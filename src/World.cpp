@@ -325,16 +325,24 @@ void World::update()
     }
 }
 
-void World::modifyTile(sf::Vector2f v, int id)
+void World::modifyTile(sf::Vector2f v, string id, bool abs) ///EDITOR BUG ?
 {
-    float   x=v.x/Global::TILE_WIDTH,
-            y=v.y/Global::TILE_HEIGHT;
-    if(x>=0 && x<m_width && y>=0 && y<m_height && id>=0 && id<Global::TEXTURE_NAMES.size())
+    int x=v.x,
+        y=v.y;
+
+    if(!abs)
     {
-        m_tiles[y][x]=Global::TEXTURE_NAMES[id];
-        cout << " Tile in position x: " << (int)x << " y :" << (int)y << " has been changed in " <<  Global::TEXTURE_NAMES[id] <<endl;
-        needToBeUpdated();
+    x/=Global::TILE_WIDTH;
+    y/=Global::TILE_HEIGHT;
     }
+
+    if(x>0 && y>0 && x<m_width && y<m_height)
+    {
+        m_tiles[y][x]=id;
+        needToBeUpdated();
+        //cout << " Changed tile ("<<x<<","<<y<<") in " << id <<"."<<endl;
+    }
+    //else {    cout << " Tryied to change tile ("<<x<<","<<y<<") in " << id <<"."<<endl;}
 }
 
 World::~World()

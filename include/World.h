@@ -44,7 +44,7 @@ class World
 
         //setter
         void setTiles(std::vector<std::vector<std::string>>tiles)  {m_tiles=tiles; m_width=m_tiles.size(); m_height=m_tiles[0].size();needToBeUpdated();}
-        void modifyTile(sf::Vector2f v, int id);
+        void modifyTile(sf::Vector2f v, std::string id,bool abs=false);
         void setObjects(std::vector<Object*> obj)           {m_objects=obj;}
 
         //updates

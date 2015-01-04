@@ -2305,7 +2305,7 @@
 	<string>
 	<iostream>
 
-1419536125 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/AnimationEngine.cpp
+1420390784 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/AnimationEngine.cpp
 	"AnimationEngine.h"
 	<vector>
 	<iostream>
@@ -2322,7 +2322,7 @@
 	<string>
 	"Global.h"
 
-1419537841 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Camera.cpp
+1420370843 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Camera.cpp
 	"Camera.h"
 	"Positionnable.h"
 	"World.h"
@@ -2336,7 +2336,7 @@
 	<SFML/Graphics.hpp>
 	"Global.h"
 
-1420113478 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
+1420391560 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
 	<SFML/System/Vector2.hpp>
 	<vector>
 	<string>
@@ -2381,7 +2381,7 @@
 	"Global.h"
 	<vector>
 
-1420365826 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
+1420391676 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
 	<SFML/Graphics.hpp>
 	"World.h"
 
@@ -2465,7 +2465,7 @@
 	"Animation.h"
 	"AnimationEngine.h"
 
-1419886226 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
+1420391638 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
 	"World.h"
 	"Player.h"
 	"Villager.h"
@@ -2478,12 +2478,15 @@
 	<fstream>
 	<cmath>
 
-1419889069 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
+1420391560 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
 	"WorldManager.h"
 	"Global.h"
+	"ObjectEngine.h"
 	<vector>
 	<string>
 	<iostream>
+	<cmath>
+	"Global.h"
 
 1419536125 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/VObject.cpp
 	"VObject.h"
