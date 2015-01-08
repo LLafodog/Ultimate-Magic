@@ -18,10 +18,30 @@ using namespace std;
 
 
 /* ==================== CLASS ======================= */
+
+World::World(int w, int h, std::string val)
+{
+    for(int i(0);i<h;i++)
+    {
+        vector<string> temp;
+        for(int j(0);j<w;j++)
+        {
+            temp.push_back(val);
+        }
+        m_tiles.push_back(temp);
+    }
+    m_width=w;
+    m_height=h;
+    m_updated=false;
+
+    addPlayer();
+}
+
+
 World::World(string pathfile, int players)
 {
-   //loadWorld(pathfile); // to load
-   WorldManager::createWorld(this);//to create
+   loadWorld(pathfile); // to load
+//   WorldManager::createWorld(this);//to create
    /// TEST To throw
    addObject(new Villager(ObjectEngine::get("dragon",10,100),new IddleBehavior()));
    for(int i(0);i<players;i++){addPlayer();}

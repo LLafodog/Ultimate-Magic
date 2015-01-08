@@ -42,7 +42,9 @@ Core::Core(sf::RenderWindow* window)
 void Core::init()
 {
     //World
-    initWorld(Global::TO_DATA+"worlds/version0.world");
+    //initWorldFromFile(Global::TO_DATA+"worlds/version0.world");
+    //initWorld(50,50);
+    m_world=WorldManager::get()->newWorld();
     //Graphics
     initGraphics();
 
@@ -53,9 +55,14 @@ void Core::init()
     m_timeStart=time(NULL);
 }
 
-void Core::initWorld(std::string pathfile, int players)
+void Core::initWorldFromFile(std::string pathfile, int players)
 {
     m_world=new World(pathfile,players);
+}
+
+void Core::initWorld(int w, int h)
+{
+    m_world=new World(w,h);
 }
 
 void Core::initGraphics()
@@ -65,6 +72,7 @@ void Core::initGraphics()
 
 void Core::load()
 {
+    new WorldManager();
     TextureEngine::load();
     AnimationEngine::load(); //Need the textures
 }

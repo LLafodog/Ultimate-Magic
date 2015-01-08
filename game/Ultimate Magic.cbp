@@ -58,6 +58,7 @@
 		<Unit filename="../include/NPC.h" />
 		<Unit filename="../include/Object.h" />
 		<Unit filename="../include/ObjectEngine.h" />
+		<Unit filename="../include/Perlin.h" />
 		<Unit filename="../include/Player.h" />
 		<Unit filename="../include/PlayerManager.h" />
 		<Unit filename="../include/Positionnable.h" />
@@ -83,6 +84,7 @@
 		<Unit filename="../src/NPC.cpp" />
 		<Unit filename="../src/Object.cpp" />
 		<Unit filename="../src/ObjectEngine.cpp" />
+		<Unit filename="../src/Perlin.cpp" />
 		<Unit filename="../src/Player.cpp" />
 		<Unit filename="../src/PlayerManager.cpp" />
 		<Unit filename="../src/Positionnable.cpp" />

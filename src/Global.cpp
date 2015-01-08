@@ -15,6 +15,20 @@ const vector<string> Global::TEXTURE_NAMES={"grass_tl","grass_t","grass_tr","gra
                                             };
 
 
+/*
+const vector<string> Global::TEXTURE_NAMES={"grass",
+                                            "light_grass", //10
+                                            "dark_grass",
+                                            "water", //11
+                                            "mount"
+                                            "dragon_down","dragon_left","dragon_right","dragon_up", //15
+                                            "error", //16
+                                            "pine_tree",  //17
+                                            "invisible" //18
+                                            };*/
+
+
+
 const string Global::TO_DATA="../data/";
 
 const sf::Color Global::BDC=sf::Color(4,139,154);

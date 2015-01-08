@@ -14,6 +14,7 @@ class World
     public:
 
         World(std::string pathfile, int players=1);
+        World(int w, int h, std::string val="grass");
 
         ///Initialization
         void loadWorld(std::string pathfile);
