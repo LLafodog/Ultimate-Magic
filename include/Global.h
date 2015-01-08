@@ -26,19 +26,13 @@ class Global
        static const vector<string> TEXTURE_NAMES;
 
 ///Programming tools C/C
-/*
-    isInTheRect:    (xt>=xr && xt<=xr+wr && yt>=yr && yt<=yr+hr)
-    inVectorDouble: (y<v.size() && y>=0 && x<v[y].size() && y>=0)
-    distanceAtoB:   sqrt( pow(xa-xb,2) + pow(ya-yb,2) )
-    signOf:         if(a!=0)abs(a)/a;
+        static bool Proba(float p);
+        static float strtoi(string number);
 
 
 
 
 
-
-
-*/
     protected:
     private:
          Global();

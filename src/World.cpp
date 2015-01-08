@@ -16,11 +16,6 @@
 #include <cmath>
 using namespace std;
 
-/* =================== UNIQUE FUNCTION ============== */
-int strtoi(string number)
-{
-    return atoi(number.c_str());
-}
 
 /* ==================== CLASS ======================= */
 World::World(string pathfile, int players)
@@ -107,13 +102,13 @@ void World::readInformationLine(string line)
             {
                 case 1: ///width
                 {
-                    m_width=strtoi(word);
+                    m_width=Global::strtoi(word);
                 }
                 break;
 
                 case 2: ///height
                 {
-                    m_height=strtoi(word);
+                    m_height=Global::strtoi(word);
                 }
                 break;
 
@@ -177,13 +172,13 @@ void World::readObjectLine(string line)
                 //case 1: break; //This is the 'O' for Object.
                 case 1: ///x position
                 {
-                    x=strtoi(word);
+                    x=Global::strtoi(word);
                 }
                 break;
 
                 case 2: ///y position
                 {
-                    y=strtoi(word);
+                    y=Global::strtoi(word);
                 }
                 break;
 
@@ -195,14 +190,14 @@ void World::readObjectLine(string line)
 
                 case 4: ///width multiplicator
                 {
-                    width_mul=strtoi(word);
+                    width_mul=Global::strtoi(word);
                 }
                 break;
 
 
                 case 5: /// height_multiplicator
                 {
-                    height_mult=strtoi(word);
+                    height_mult=Global::strtoi(word);
                 }
                 break;
 
@@ -260,13 +255,13 @@ void World::readPremadeLine(string line)
             {
                 case 1: ///x position
                 {
-                    x=strtoi(word);
+                    x=Global::strtoi(word);
                 }
                 break;
 
                 case 2: ///y position
                 {
-                    y=strtoi(word);
+                    y=Global::strtoi(word);
                 }
                 break;
 

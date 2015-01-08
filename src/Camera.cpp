@@ -17,7 +17,8 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
         else {cerr<<"Camera target is nullptr" <<endl; m_view=View(Vector2f(0,0),Vector2f(m_window->getSize())); }
     m_window->setView(m_view); ///To comment if no view
 
-    m_view.setSize(m_world->getWidth()*Global::TILE_WIDTH,m_world->getHeight()*Global::TILE_HEIGHT); // TO RETIRE
+    // TO RETIRE
+    //m_view.setSize(m_world->getWidth()*Global::TILE_WIDTH,m_world->getHeight()*Global::TILE_HEIGHT);
 
     ///some fixes
     if(m_world!=nullptr)

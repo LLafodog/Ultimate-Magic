@@ -19,6 +19,16 @@ const string Global::TO_DATA="../data/";
 
 const sf::Color Global::BDC=sf::Color(4,139,154);
 
+bool Global::Proba(float p)
+{
+    return(rand()%(int)(1/p)==0);
+}
+
+float Global::strtoi(string number)
+{
+    return atof(number.c_str());
+}
+
 Global::Global()
 {
     //ctor

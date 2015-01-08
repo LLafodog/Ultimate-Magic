@@ -70,7 +70,7 @@ Animation* AnimationEngine::get(string name)
         {
         if(Global::TEXTURE_NAMES[i]==name){return get(i);}
         }
-        cerr<<"[Animation] Wrong name asked_: " << name << endl; return get("error");
+//        cerr<<"[Animation] Wrong name asked_: " << name << endl; return get("error"); // HEREEE
 }
 
 std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
