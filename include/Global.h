@@ -10,6 +10,7 @@
 using namespace std;
 
 class Tile;
+class WorldManager;
 
 class Global
 {
@@ -29,7 +30,13 @@ class Global
         static bool Proba(float p);
         static float strtoi(string number);
 
-
+/*
+no known conversion for argument 2 from
+‘void (WorldManager::*)(std::string) {aka void (WorldManager::*)(std::basic_string<char>)}’ to
+‘void (*)              (std::string) {aka void (*)              (std::basic_string<char>)}’|
+*/
+        typedef void( WorldManager::*PtrFonct )(string);
+        static bool readFile(std::string path, PtrFonct);
 
 
 

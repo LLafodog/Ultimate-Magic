@@ -16,13 +16,6 @@ class World
         World(std::string pathfile, int players=1);
         World(int w, int h, std::string val="grass");
 
-        ///Initialization
-        void loadWorld(std::string pathfile);
-            void readInformationLine(std::string line);
-            void readTileLine(std::string line);
-            void readObjectLine(std::string line);
-                void readPremadeLine(std::string line);
-
         //getter
             //size
             const int getWidth() {return m_width;}
@@ -47,6 +40,9 @@ class World
         void setTiles(std::vector<std::vector<std::string>>tiles)  {m_tiles=tiles; m_width=m_tiles.size(); m_height=m_tiles[0].size();needToBeUpdated();}
         void modifyTile(sf::Vector2f v, std::string id,bool abs=false);
         void setObjects(std::vector<Object*> obj)           {m_objects=obj;}
+        void setWidth(int w) {m_width=w;}
+        void setHeight(int h) {m_height=h;}
+        void addTileLine(std::vector<std::string> v) {if (v.size()==m_width || v.size() == m_height) m_tiles.push_back(v);}
 
         //updates
         void update();

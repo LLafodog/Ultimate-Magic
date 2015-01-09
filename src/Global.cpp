@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <fstream>
 
 using namespace std;
 
@@ -26,7 +27,21 @@ const vector<string> Global::TEXTURE_NAMES={"grass",
                                             "pine_tree",  //17
                                             "invisible" //18
                                             };*/
-
+//typedef void (*PtrFonct)(std::string line);
+bool Global::readFile(std::string path, PtrFonct)
+{
+    ifstream reader(path.c_str());
+    if(!reader){cerr << " Problem loading " << path << "file"<<endl; return false;}
+    else
+    {
+        string line;
+        while(getline(reader,line))
+        {
+            PtrFonct(line);
+        }
+        return true;
+    }
+}
 
 
 const string Global::TO_DATA="../data/";

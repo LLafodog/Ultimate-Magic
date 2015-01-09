@@ -2285,7 +2285,7 @@
 	<string>
 	<vector>
 
-1420639892 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Global.h
+1420804452 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Global.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<iostream>
@@ -2336,7 +2336,7 @@
 	<SFML/Graphics.hpp>
 	"Global.h"
 
-1420732311 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
+1420799957 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
 	<SFML/System/Vector2.hpp>
 	<vector>
 	<string>
@@ -2381,7 +2381,7 @@
 	"Global.h"
 	<vector>
 
-1420734162 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
+1420800008 /home/llafodog/Programmation/C++/Ultimate-Magic/include/WorldManager.h
 	<SFML/Graphics.hpp>
 	"World.h"
 	<vector>
@@ -2412,10 +2412,11 @@
 	"Global.h"
 	"Positionnable.h"
 
-1420737468 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Global.cpp
+1420801167 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Global.cpp
 	"Global.h"
 	<SFML/Graphics.hpp>
 	<cmath>
+	<fstream>
 
 1420477599 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Graphics.cpp
 	"Graphics.h"
@@ -2454,7 +2455,7 @@
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Positionnable.cpp
 	"Positionnable.h"
 
-1420737468 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
+1420798320 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
 	"TextureEngine.h"
 	<iostream>
 
@@ -2467,7 +2468,7 @@
 	"Animation.h"
 	"AnimationEngine.h"
 
-1420732311 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
+1420799957 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
 	"World.h"
 	"Player.h"
 	"Villager.h"

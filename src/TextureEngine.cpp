@@ -33,6 +33,7 @@ Texture* TextureEngine::get(string name, unsigned int j)
 void TextureEngine::load()
 {
     std::cout<<"Textures loading..."<<std::endl;
+
     if(
         //loadPNG("data/img/tileset.png",1,3,16,16) //tiles
         loadBasicPNG(Global::TO_DATA+"img/basic_grass.png",3,3,32,32)
