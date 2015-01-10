@@ -27,7 +27,8 @@ WorldManager::WorldManager()
 World* WorldManager::newWorld()
 {
     // The tiles will be deducted from here
-    m_alt=new Perlin(rand()%50+50,rand()%50+50,rand()%15+10);
+    m_alt=new Perlin(rand()%50+50,rand()%50+50,rand()%15+10); // petit monde
+    //m_alt->display();
 
     // Create the game-world
     int h=m_alt->getHeight(),
@@ -65,10 +66,10 @@ World* WorldManager::newWorld()
 /// ===========================
 enum prob
 {
-    P_AUX1=0,
-    P_AUX2=1,
-    P_OBJ1=2,
-    P_OBJ2=3
+    P_AUX1=1,
+    P_AUX2=2,
+    P_OBJ1=3,
+    P_OBJ2=4
 };
 
 void WorldManager::loadProba(std::string biome)
@@ -106,7 +107,7 @@ void WorldManager::loadProba(std::string biome)
                     ///transcription
                     switch(wordNumber)
                     {
-                        case 1: /// is
+                        case 1: /// id
                         {
                         temp.first=word;
                         }
@@ -141,7 +142,7 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
                 case P_AUX1:{w->modifyTile(Vector2f(x,y),m_areaData[i].first,true);}break;
                 case P_AUX2:{w->modifyTile(Vector2f(x,y),m_areaData[i].first,true);}break;
                 case P_OBJ1:{w->addObject(ObjectEngine::getPremade(m_areaData[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
-                default: {w->modifyTile(Vector2f(x,y),m_areaData[i].first,true);} break;
+                default: {w->modifyTile(Vector2f(x,y),m_areaData[i].first,true);} break; //basic
             }
         }
     }
@@ -155,17 +156,17 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 void WorldManager::loadWorld(string pathfile, World* wo)
 ///Used to read a .world file
 {
-    m_actual=wo;
+
     if(wo!=nullptr)
     {
+        m_actual=wo;
         ///Destruction of old world
         m_actual->setTiles(vector<vector<string>>());
         for(Object* o:m_actual->getObjects()){if(!o->isPlayer()){delete o;};}
             m_actual->setObjects(vector<Object*>());
 
-void(WorldManager::*ptr)(string)=&WorldManager::readWorldLine;
-
-Global::readFile(pathfile,ptr);
+        void(WorldManager::*ptr)(string)=&WorldManager::readWorldLine;
+        Global::readFile(pathfile,ptr);
 
 
 
@@ -423,5 +424,5 @@ void WorldManager::readPremadeLine(string line)
 
 WorldManager::~WorldManager()
 {
-    delete self;
+
 }

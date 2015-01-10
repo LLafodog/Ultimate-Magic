@@ -5,28 +5,40 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-#include "Global.h"
 
 class TextureEngine
 {
     public:
 
+        TextureEngine();
+        /// ========== STATIC =========
+        static TextureEngine* getInstance() {return m_self;}
+        // TO IMPROVE
+        static TextureEngine* m_self;
+        static int convertID(std::string id);
+
+
         /* ============ LOADING =============== */
-        static void load();
-            static bool loadPNG(std::string fileName, int nbWidth, int nbHeight, int widthTile=Global::TILE_WIDTH, int heightTile=Global::TILE_HEIGHT);
-            static bool loadBasicPNG(std::string fileName, int nbWidth, int nbHeight, int widthTile, int heightTile);
+         void load();
+             void readLine(std::string line);
+             void test(std::string line);
+             bool loadPNG(std::string line);
+             bool loadBasicPNG(std::string line);
+        /* ============ ANIMATION ============= */
+        void const createAnimations();
 
         /* ============= GETTER =============== */
-        static sf::Texture* get(unsigned int i, unsigned int j);
-        static sf::Texture* get(std::string name, unsigned int j=0);
-        static std::vector<sf::Texture*> getAllOf(std::string name);
-        static const unsigned int getMax() {return m_textures.size();}
-        static const unsigned int getMax(unsigned int i) {if(i<m_textures.size())return m_textures[i].size();return 0;}
+         sf::Texture* get(unsigned int i, unsigned int j);
+         sf::Texture* get(std::string name, unsigned int j=0);
+         const unsigned int getMax() {return m_textures.size();}
+         const unsigned int getMax(unsigned int i) {if(i<m_textures.size())return m_textures[i].size();return 0;}
+            virtual ~TextureEngine();
 
     protected:
-        static std::vector< std::vector<sf::Texture> > m_textures; // Double pour animations
-        TextureEngine();
-        virtual ~TextureEngine();
+
+        std::vector< std::vector<sf::Texture*> > m_textures; // Double pour animations
+
+        static std::vector<std::string> m_names;
 };
 
 #endif // TEXTUREENGINE_H

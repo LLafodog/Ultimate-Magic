@@ -44,7 +44,7 @@ void Core::init()
     //World
     //initWorldFromFile(Global::TO_DATA+"worlds/version0.world");
     //initWorld(50,50);
-    m_world=WorldManager::get()->newWorld();
+    m_world=WorldManager::getInstance()->newWorld();
     //Graphics
     initGraphics();
 
@@ -72,9 +72,10 @@ void Core::initGraphics()
 
 void Core::load()
 {
-    new WorldManager();
-    TextureEngine::load();
-    AnimationEngine::load(); //Need the textures
+    m_wm=new WorldManager();
+    m_ae=new AnimationEngine();
+    m_te=new TextureEngine();
+    //AnimationEngine::load(); //Need the textures
 }
 
 void Core::update()
@@ -147,6 +148,7 @@ void Core::run()
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::R)){Graphics::needToRefresh=true;} //Let you refresh when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::C)){m_graphics->clear();} //Let you clear when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();} //Let you know evrything when you wanna
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::P)){m_graphics->getCamera()->getView().setCenter(m_world->getObject(0)->getPosition());} //Let you know evrything when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::Tab)) {m_graphics->setAllowDetails(true);}else {m_graphics->setAllowDetails(false);}
 
             }
@@ -174,4 +176,6 @@ Core::~Core()
 {
    delete m_graphics;
    delete m_controller;
+   delete m_te;
+   delete m_wm;
 }

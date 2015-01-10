@@ -18,8 +18,8 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     m_window->setView(m_view); ///To comment if no view
 
     // TO RETIRE
-    m_view.setSize(m_world->getWidth()*Global::TILE_WIDTH,m_world->getHeight()*Global::TILE_HEIGHT);
-
+    //m_view.setSize(m_world->getWidth()*Global::TILE_WIDTH,m_world->getHeight()*Global::TILE_HEIGHT);
+m_view.setCenter(m_pos->getPosition());
     ///some fixes
     if(m_world!=nullptr)
     {

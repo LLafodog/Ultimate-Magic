@@ -32,8 +32,11 @@ Graphics::Graphics(RenderWindow* w, World* wo)
    m_world=wo;
 
    //camera
-   m_camera=new Camera(m_window,wo->getObject(m_world->getNumberObjects()-1),wo);//to do reperer le player
+   m_camera=new Camera(m_window,wo->getObject(0),wo);//to do reperer le player
    init();
+
+   // in case of error
+   m_error =new Tile("error",-50,-50);
 }
 
 void Graphics::init()
@@ -47,8 +50,8 @@ void Graphics::initTiles()
 {
     m_tiles=vector<vector<Tile*>>();
 
-    //background
-    //The tiles are load in the wrong ordre so we MUST invert each time.
+    ///background
+    //The tiles are loaded in the wrong ordre so we MUST invert each time.
     for(unsigned int i(0);i<m_world->getTiles().size();i++)
     {
         std::vector<Tile*> v;
@@ -154,6 +157,7 @@ const void Graphics::draw()
         }
         drawVisibleArea();
         drawVisibleObjects();
+
         m_window->display();
     }
 
@@ -190,7 +194,8 @@ const void Graphics::drawVisibleArea()
                     drawTile(m_tiles[i][j]);
                     }
                     else{ /// Completing the wholes
-                    Tile* t=new Tile("error",j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);drawTile(t);delete t;
+                    m_error->setPosition(i*Global::TILE_HEIGHT,j*Global::TILE_WIDTH);
+                    drawTile(m_error);
 
                     }
                 }//endFor horizontally
@@ -273,7 +278,7 @@ const void Graphics::drawObject(VObject* o)
 }
 
 const void Graphics::drawAboutAlive(VObject* o)
-/// Here we draw eveyrthing that concern an alive object
+/// Here we draw everything that concern an alive object
 {
     Alive* a=dynamic_cast<Alive*>(o->getObject());
     if( a!= nullptr && (m_details ||a->getLifeRatio()!=1))

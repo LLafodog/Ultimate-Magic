@@ -1,7 +1,6 @@
-desert 0.99
+water 0.99
 
-grass 0.01
+desert 0.01
 
-water 0.001
+light_grass 0.001
 
-pine_tree 0.01

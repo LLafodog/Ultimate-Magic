@@ -60,6 +60,7 @@ class Graphics
     World* m_world;
     Camera* m_camera;
     bool m_details; //allow to draw all details like lifebar
+    Tile* m_error;
 
 };
 

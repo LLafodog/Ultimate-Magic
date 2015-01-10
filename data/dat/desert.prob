@@ -1,7 +1,5 @@
 desert 0.99
 
-grass 0.01
+ground 0.01
 
 water 0.001
-
-pine_tree 0.01

@@ -8,19 +8,22 @@
 class AnimationEngine
 {
     public:
+        AnimationEngine();
+        static AnimationEngine* getInstance() {return m_self;}
+            static AnimationEngine* m_self;
 
-        static Animation* get(std::string name);
-        static Animation* get(unsigned int i);
-            static std::vector<Animation*> getAllOf(std::string name);
+         Animation* get(std::string name);
+         Animation* get(unsigned int i);
+             std::vector<Animation*> getAllOf(std::string name);
 
-        static void load();
-        static const unsigned int getMax() {return m_animations.size();}
+        void addAnimation(Animation* a) {if(a!=nullptr){Animation anim(*a);m_animations.push_back(anim);}}
+         const unsigned int getMax() {return m_animations.size();}
 
         virtual ~AnimationEngine();
 
     protected:
-        static std::vector<Animation> m_animations;
-        AnimationEngine();
+        std::vector<Animation> m_animations;
+
 };
 
 #endif // ANIMATIONENGINE_H

@@ -3,46 +3,27 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <fstream>
+// test
+#include "TextureEngine.h"
 
 using namespace std;
 
-const vector<string> Global::TEXTURE_NAMES={"grass_tl","grass_t","grass_tr","grass_l","grass","grass_r","grass_bl","grass_b","grass_br", //9 en tout
-                                            "light_grass", //10
-                                            "desert", //11
-                                            "dragon_down","dragon_left","dragon_right","dragon_up", //15
-                                            "error", //16
-                                            "pine_tree",  //17
-                                            "invisible" //18
-                                            };
-
-
-/*
-const vector<string> Global::TEXTURE_NAMES={"grass",
-                                            "light_grass", //10
-                                            "dark_grass",
-                                            "water", //11
-                                            "mount"
-                                            "dragon_down","dragon_left","dragon_right","dragon_up", //15
-                                            "error", //16
-                                            "pine_tree",  //17
-                                            "invisible" //18
-                                            };*/
-//typedef void (*PtrFonct)(std::string line);
-bool Global::readFile(std::string path, PtrFonct)
+bool Global::readFile(std::string path, WMf)
 {
-    ifstream reader(path.c_str());
+    fstream reader(path.c_str());
     if(!reader){cerr << " Problem loading " << path << "file"<<endl; return false;}
     else
     {
         string line;
         while(getline(reader,line))
         {
-            PtrFonct(line);
+            WMf(line);
         }
         return true;
     }
 }
 
+void test(string test){cout << "pendant" ;}
 
 const string Global::TO_DATA="../data/";
 

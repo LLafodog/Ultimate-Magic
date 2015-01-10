@@ -1,7 +1,7 @@
-desert 0.99
+ground 0.99
 
-grass 0.01
+dark_grass 0.01
 
-water 0.001
+water 0.01
 
-pine_tree 0.01
+pine_tree 0.001

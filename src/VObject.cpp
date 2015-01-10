@@ -11,10 +11,11 @@ VObject::VObject(Object* o): Tile(o->getID(),o->getPositionX(), o->getPositionY(
 {
     m_object=o;
     m_orientation='n';
-    m_animations=AnimationEngine::getAllOf(o->getID()); //here working
+    m_animations=AnimationEngine::getInstance()->getAllOf(o->getID());
     changeOrientation(m_orientation);
     //cout<<o->getId()<<endl;
     update();
+
 
 
 }
@@ -35,14 +36,18 @@ void VObject::update()
         Alive* a=dynamic_cast<Alive*>(m_object);
         if(a !=nullptr && a->isDead())
         {
-            m_animations=AnimationEngine::getAllOf("dead_player");
+            m_animations=AnimationEngine::getInstance()->getAllOf("dead_player");
             changeOrientation("first");
             m_animation->run();
         }
         //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
     }
+    if(m_animation!=nullptr && m_object!=nullptr)
+    {
     if(m_object->isMoving()){m_animation->run();}
     else{m_animation->stop();} // To do: if dead animation quand même running
+    }
+
 
 }
 void VObject::changeOrientation(std::string orientation) //to do something ?
@@ -57,11 +62,11 @@ void VObject::changeOrientation(char c)
     {
         switch(c)
         {
-        case 'n': m_animation=m_animations[0];break;
-        case 'e': m_animation=m_animations[1];break;
-        case 's': m_animation=m_animations[2];break;
-        case 'w': m_animation=m_animations[3];break;
-        default: m_animation=AnimationEngine::get("error");
+        case 'n': m_animation=m_animations[3];break;
+        case 'e': m_animation=m_animations[2];break;
+        case 's': m_animation=m_animations[0];break;
+        case 'w': m_animation=m_animations[1];break;
+        default: m_animation=AnimationEngine::getInstance()->get("error");
         }
     }
     else m_animation=m_animations[0]; // if hasn't 4 animations, take the first;

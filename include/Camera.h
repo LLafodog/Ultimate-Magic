@@ -26,7 +26,7 @@ class Camera
             void zoom(float f);
             //getter setter
             void setView(sf::View v) {m_view=v;}
-            const sf::View getView() {return m_view;}
+            sf::View getView() {return m_view;}
 
             //tools
             bool isIn(float x, float y);

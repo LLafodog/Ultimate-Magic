@@ -22,6 +22,7 @@ class Animation
         const sf::Texture* getCurrentFrame();
         const std::vector<sf::Texture*> getTextures() {return m_textures;}
         const bool isRandom() {return m_random;}
+        const std::string getID() {return m_ID;}
 
         /* ================ SETTER ============= */
         void setFrameDelay( float val) {if(val>0)m_frameDelay=val;}
@@ -37,6 +38,7 @@ class Animation
         virtual ~Animation();
 
     protected:
+        std::string m_ID;
         std::vector<sf::Texture*> m_textures;
         int m_current;
         float m_frameDelay;

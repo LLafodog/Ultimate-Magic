@@ -6,6 +6,7 @@ using namespace std;
 #include<iostream>
 
 #include "TextureEngine.h"
+#include "AnimationEngine.h"
 
 Animation::Animation(string name, float frameD, float animD, bool randomAnimDelay)
 ///Create before adding manually textures
@@ -16,11 +17,15 @@ Animation::Animation(string name, float frameD, float animD, bool randomAnimDela
     m_clocky.restart();
     m_running=true;
     m_random=randomAnimDelay;
-    m_textures=TextureEngine::getAllOf(name);
+    m_ID=name;
+    //m_textures=AnimationEngine::getInstance()->get(name)->getTextures();
+
+//    m_textures=TextureEngine::getInstance()->getAllOf(name);
 }
 
 Animation::Animation(Animation* a)
 {
+    m_ID=a->getID();
     m_frameDelay=a->getFrameDelay();
     m_animationDelay=a->getAnimationDelay();
     m_current=0;
@@ -29,6 +34,7 @@ Animation::Animation(Animation* a)
     m_running=true;
     m_random=a->isRandom();
 }
+
 
 const sf::Texture* Animation::getCurrentFrame()
 {

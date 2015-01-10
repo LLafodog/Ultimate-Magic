@@ -11,6 +11,7 @@ using namespace std;
 
 class Tile;
 class WorldManager;
+class TextureEngine;
 
 class Global
 {
@@ -24,7 +25,6 @@ class Global
        static float FPS;
        static const sf::Color BDC;
        static const string TO_DATA;
-       static const vector<string> TEXTURE_NAMES;
 
 ///Programming tools C/C
         static bool Proba(float p);
@@ -35,8 +35,12 @@ no known conversion for argument 2 from
 ‘void (WorldManager::*)(std::string) {aka void (WorldManager::*)(std::basic_string<char>)}’ to
 ‘void (*)              (std::string) {aka void (*)              (std::basic_string<char>)}’|
 */
-        typedef void( WorldManager::*PtrFonct )(string);
-        static bool readFile(std::string path, PtrFonct);
+
+        typedef void( WorldManager::*WMf)(string);
+        static bool readFile(std::string path, WMf);
+
+        typedef void( TextureEngine::*TEf)(string);
+        static bool readFile(std::string path, TEf);
 
 
 

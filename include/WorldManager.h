@@ -16,7 +16,9 @@ class WorldManager
 
         WorldManager();
 
-        static WorldManager* get() {return self;}
+        static WorldManager* getInstance() {return self;}
+
+        // TO IMPROVE Self protected
         static WorldManager* self;
 
         World* newWorld();

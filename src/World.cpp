@@ -40,7 +40,7 @@ World::World(int w, int h, std::string val)
 
 World::World(string pathfile, int players)
 {
-   WorldManager::get()->loadWorld(pathfile,this); // to load
+   WorldManager::getInstance()->loadWorld(pathfile,this); // to load
 //   WorldManager::createWorld(this);//to create
    /// TEST To throw
    addObject(new Villager(ObjectEngine::get("dragon",10,100),new IddleBehavior()));

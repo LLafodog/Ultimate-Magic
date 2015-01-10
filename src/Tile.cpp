@@ -16,7 +16,8 @@ Tile::Tile(std::string id, int x, int y,bool visible, float width, float height)
     initSquare(width,height);
     m_cs.setPosition(x,y);
 
-    if(!isVObject())m_animation=AnimationEngine::get(id); //if it is a tile, not an object.
+    //if(!isVObject()){m_animation=AnimationEngine::getInstance()->getAllOf(id)[0];}//if it is a tile, not an object.
+    if(!isVObject()){m_animation=AnimationEngine::getInstance()->get(id);}//if it is a tile, not an object.
 
 }
 
@@ -35,7 +36,7 @@ void Tile::initSquare(float width, float height)
 const sf::ConvexShape* Tile::getApparence()
 {
     if(m_animation!=nullptr)m_cs.setTexture(m_animation->getCurrentFrame());
-    else{m_cs.setTexture(TextureEngine::get("error"));}
+    else{m_cs.setTexture(TextureEngine::getInstance()->get("error"));}
     return &m_cs;
 }
 
@@ -46,12 +47,12 @@ void Tile::update()
         m_animation->update();
         m_cs.setTexture(m_animation->getCurrentFrame());
     }
-    else{m_cs.setTexture(TextureEngine::get("error"));}
+    else{m_cs.setTexture(TextureEngine::getInstance()->get("error"));}
     m_cs.setPosition(getPosition());
 }
 
 
 Tile::~Tile()
 {
-    //dtor
+    delete m_animation;
 }

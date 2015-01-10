@@ -7,6 +7,9 @@
 class Graphics;
 class World;
 class Controller;
+class TextureEngine;
+class WorldManager;
+class AnimationEngine;
 
 class Core
 {
@@ -37,6 +40,10 @@ class Core
         sf::Clock m_clock;
         float m_fps;
         int m_timeStart;
+
+        WorldManager* m_wm;
+        TextureEngine* m_te;
+        AnimationEngine* m_ae;
 };
 
 #endif // CORE_H
