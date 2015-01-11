@@ -5,3 +5,7 @@ forest
 grassland
 mount
 sea
+deep_sea
+beach
+snow
+ground

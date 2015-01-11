@@ -59,7 +59,7 @@ void Graphics::initTiles()
         {
             //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
             string id=m_world->getTiles()[i][j];
-            Tile* t=new Tile(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
+            Tile* t=new Tile(id,i*Global::TILE_WIDTH,j*Global::TILE_HEIGHT);
             //cout << " new tile : x: " <<j*Global::TILE_WIDTH << " y: " << i*Global::TILE_HEIGHT <<endl; // to know where the tiles are created
             v.push_back(t);
         }

@@ -7,37 +7,78 @@
 using namespace std;
 
 
-Perlin::Perlin(int w, int h, int step)
+Perlin::Perlin(int w, int h, int step, int style, int min, int max)
 {
-    /*int wt=81;
-    int ht=81;*/
     int wt=w+(step-w%step+1);
     int ht=h+(step-h%step+1);
     m_tab=vector<vector<double>>();
     m_width=wt;
     m_height=ht;
     m_step=step;
+    switch(style)
+    {
+    case 0: initTab(min,max);break;
+    case 1: initDoubleStrip(min,max) ;break;
+    default: initTab(min,max);
+    }
 
-    initTab();
+    //initTab();
     interpolate();
 
 }
 
-void Perlin::initTab()
+void Perlin::initTab(int min, int max)
 {
     for(int i(0);i<m_height;i++)
     {
         vector<double> temp;
         for(int j(0);j<m_width;j++)
         {
-
-
-            if(i%m_step==0 && j%m_step==0){temp.push_back(random(0,100));}
+            if(i%m_step==0 && j%m_step==0){temp.push_back(random(min,max));}
             else{temp.push_back(0);}
         }
         m_tab.push_back(temp);
     }
 }
+
+
+void Perlin::initDoubleStrip(int min, int max)
+{
+    int x=random(0,m_width/m_step);
+    int y=random(0,m_height/m_step);
+
+    for(int i(0);i<m_height;i++)
+    {
+        vector<double> temp;
+        for(int j(0);j<m_width;j++)
+        {
+            if(i%m_step==0 && j%m_step==0)
+            {
+                // giving some alea to do not get a straight river
+                if(j/m_step ==x || i/m_step == y)
+                {
+                    temp.push_back(random(min,max));
+
+                }
+                else
+                {
+                    temp.push_back(random());
+                }
+            }
+            else{temp.push_back(0);}
+        }
+        m_tab.push_back(temp);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 double Perlin::linear_interpolation(double a, double b, double t)
 {
@@ -92,9 +133,9 @@ void Perlin::interpolate()
 
                 if(inMap(Cx,Cy))
                 {
-                m_tab[Ex][Ey]=linear_interpolation(m_tab[Ax][Ay],m_tab[Bx][By],(double)(Ex-Ax)/(double)(Bx-Ax));
-                m_tab[Fx][Fy]=linear_interpolation(m_tab[Dx][Dy],m_tab[Cx][Cy],(double)(Fx-Dx)/(double)(Cx-Dx));
-                m_tab[j][i]=linear_interpolation(m_tab[Ex][Ey],m_tab[Fx][Fy],(double)(i-Ey)/(double)(Fy-Ey));
+                m_tab[Ex][Ey]=polynomial_interpolation(m_tab[Ax][Ay],m_tab[Bx][By],(double)(Ex-Ax)/(double)(Bx-Ax));
+                m_tab[Fx][Fy]=polynomial_interpolation(m_tab[Dx][Dy],m_tab[Cx][Cy],(double)(Fx-Dx)/(double)(Cx-Dx));
+                m_tab[j][i]=polynomial_interpolation(m_tab[Ex][Ey],m_tab[Fx][Fy],(double)(i-Ey)/(double)(Fy-Ey));
                 }
         }
     }
@@ -121,3 +162,4 @@ Perlin::~Perlin()
 {
     //dtor
 }
+

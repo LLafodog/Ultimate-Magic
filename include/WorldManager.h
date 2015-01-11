@@ -40,8 +40,10 @@ class WorldManager
 
 
     protected:
-        Perlin* m_alt;
+
         World* m_actual;
+        std::vector<Perlin*> m_alt;
+        std::vector<Perlin*> m_humidity;
         std::vector<std::vector<World*>> m_worlds;
 
         std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> m_tileProbabilities;

@@ -14,7 +14,7 @@ class World
     public:
 
         World(std::string pathfile, int players=1);
-        World(int w, int h, std::string val="grass");
+        World(int w, int h, std::string val="error");
 
         //getter
             //size

@@ -22,6 +22,7 @@ WorldManager::WorldManager()
     m_worlds={};
     m_actual=nullptr;
     getProbabilities(Global::TO_DATA+"dat/tile_probabilities.txt");
+
     }
 
 }
@@ -29,12 +30,21 @@ WorldManager::WorldManager()
 World* WorldManager::newWorld()
 {
     // The tiles will be deducted from here
-    m_alt=new Perlin(rand()%50+50,rand()%50+50,rand()%15+10); // petit monde
+    int step=rand()%15+10;
+    int w=rand()%50+50;
+    int h=rand()%50+50;
+    int style=rand()%10;
+    Perlin* alt=new Perlin(w,h,step,style);
+    m_alt.push_back(alt); // petit monde
+
+
+
+    Perlin* humid= new Perlin(w,h,step,style);
+    m_humidity.push_back(humid);
     //m_alt->display();
 
     // Create the game-world
-    int h=m_alt->getHeight(),
-        w=m_alt->getWidth();
+
 
     World* wo=new World(w,h);
 
@@ -44,12 +54,43 @@ World* WorldManager::newWorld()
         for(int j(0);j<w;j++)
         {
         // D'après http://fr.wikipedia.org/wiki/Altitude#mediaviewer/File:Earth_elevation_histogram_fr.jpg sur les 35 premiers %
-            double val=m_alt->get(i,j);
-            if(val<=14.28){pickElementOf(wo,i,j,"sea");} //5% de l'image
-            if(val>14.28 && val <=57.14 ){pickElementOf(wo,i,j,"grassland");} //20% de l'image
-            if(val>57.14 && val <=71.43 ){pickElementOf(wo,i,j,"forest");} //5% de l'image
-            if(val>71.43 && val <=80 ){pickElementOf(wo,i,j,"deep_forest");} //3% de l'image
-            if(val>80){pickElementOf(wo,i,j,"mount");} //5% de l'image
+        // to do: with .wdat value
+            double altitude=alt->get(i,j);
+            double humidity=humid->get(i,j);
+            if(altitude<=14.28) // water etc
+            {
+                if(humidity<30){pickElementOf(wo,i,j,"sea");}
+                else{pickElementOf(wo,i,j,"deep_sea");}
+
+            }
+
+            else if(altitude>14.28 && altitude<=57.14 ) // first level
+            {
+                if(humidity>80) {pickElementOf(wo,i,j,"sea");}
+                else {pickElementOf(wo,i,j,"beach");}
+            }
+
+            else if(altitude>57.14 && altitude<=71.43 ) // second level
+            {
+                if(humidity<=20){pickElementOf(wo,i,j,"desert");}
+                else if(humidity >20  && humidity <60) {pickElementOf(wo,i,j,"grassland");}
+                else if(humidity >60  && humidity <80) {pickElementOf(wo,i,j,"forest");}
+                else{pickElementOf(wo,i,j,"deep_forest");}
+            }
+
+            else if(altitude>71.43 && altitude<=80 ) // third level
+            {
+                if(humidity<=30){pickElementOf(wo,i,j,"mount");}
+                else if(humidity>30 && humidity < 50 ){pickElementOf(wo,i,j,"grassland");}
+                else {pickElementOf(wo,i,j,"forest");}
+            }
+
+            else if(altitude>80) // last level
+            {
+                if(humidity<80){pickElementOf(wo,i,j,"ground");}
+                else {pickElementOf(wo,i,j,"snow");}
+
+            }
 
             /* // TESTING
             if(val<=14.28){wo->modifyTile(Vector2f(i,j),"invisible",true);} //5% de l'image
@@ -135,7 +176,7 @@ enum prob
 void WorldManager::getProbabilities(std::string path)
 {
     m_tileProbabilities=Loader::getInstance()->getTileProbabilities(path);
-    cout << " Size : " << m_tileProbabilities.size() << " Id : " << m_tileProbabilities[0].first <<endl;
+    //cout << " Size : " << m_tileProbabilities.size() << " Id : " << m_tileProbabilities[0].first <<endl;
 }
 
 void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)

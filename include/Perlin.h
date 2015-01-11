@@ -7,11 +7,13 @@ class Perlin
 {
     public:
 
-        Perlin(int w, int h, int step);
+        Perlin(int w, int h, int step, int style=-1, int min=0, int max=100);
 
-        void initTab();
+        void initTab(int min=0, int max=100);
+        void initDoubleStrip(int min, int max);
 
-        int random(int min, int max);
+        int random(int min=0, int max=100);
+
 
         void interpolate();
             double linear_interpolation(double a, double b, double t);

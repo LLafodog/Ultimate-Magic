@@ -190,14 +190,6 @@ bool TextureEngine::loadPNG(std::string line)
 
         AnimationEngine::getInstance()->addAnimation(a);
     }
-    //for(int j(0);j<m_names.size();j++)cout << "name: " << m_names[j] <<endl;
-    cout << " TE max: " << getMax() << " AE max: " << AnimationEngine::getInstance()->getMax() <<endl;
-
-    //cout << " size : " << m_textures.size();
-
-    /// Including animation
-
-
     return true;
 }
 /*

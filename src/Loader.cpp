@@ -101,7 +101,7 @@ std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> Lo
             }
 
 
-        cout << "ize : " << probabilities.size() << " id : " << probabilities[0].first <<endl;
+        //cout << "size : " << probabilities.size() << " id : " << probabilities[0].first <<endl;
         }
 
    return probabilities;
