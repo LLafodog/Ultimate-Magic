@@ -24,7 +24,7 @@ class WorldManager
         World* newWorld();
 
         /// Loading Data
-        void loadProba(std::string biome);
+        void getProbabilities(std::string path);
         void pickElementOf(World* w, int x, int y, std::string biome);
 
         /// Loading World
@@ -43,12 +43,9 @@ class WorldManager
         Perlin* m_alt;
         World* m_actual;
         std::vector<std::vector<World*>> m_worlds;
-        std::vector<std::pair<std::string,float>> m_areaData;
 
-        // TO DO in file.txt
-
-
-        //World* m_world;
+        std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> m_tileProbabilities;
+        //std::vector<std::pair<std::string,vector<std::string>>> m_properties;
 };
 
 #endif // WORLDMANAGER_H

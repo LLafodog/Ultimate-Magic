@@ -7,6 +7,7 @@
 #include "Perlin.h"
 #include "Global.h"
 #include "ObjectEngine.h"
+#include "Loader.h"
 
 using namespace sf;
 using namespace std;
@@ -20,6 +21,7 @@ WorldManager::WorldManager()
     self=this;
     m_worlds={};
     m_actual=nullptr;
+    getProbabilities(Global::TO_DATA+"dat/tile_probabilities.txt");
     }
 
 }
@@ -72,7 +74,7 @@ enum prob
     P_OBJ2=4
 };
 
-void WorldManager::loadProba(std::string biome)
+/*void WorldManager::loadProba(std::string biome)
 /// Load the probabilities from a .prob file
 {
     // RE-init
@@ -128,21 +130,36 @@ void WorldManager::loadProba(std::string biome)
         }
     }
 }
+*/
 
+void WorldManager::getProbabilities(std::string path)
+{
+    m_tileProbabilities=Loader::getInstance()->getTileProbabilities(path);
+    cout << " Size : " << m_tileProbabilities.size() << " Id : " << m_tileProbabilities[0].first <<endl;
+}
 
 void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 {
-    loadProba(biome);
+    /// find the right biome
+    vector<pair<string,float>> v;
+    for(int i(0);i<m_tileProbabilities.size();i++)
+    {
+        if(m_tileProbabilities[i].first==biome)
+        {
+            v=m_tileProbabilities[i].second;
+        }
+    }
+    //loadProba(biome);
     for(int i(0);i<sizeof(prob);i++)
     {
-        if(i<m_areaData.size() && Global::Proba(m_areaData[i].second))
+        if(i<v.size() && Global::Proba(v[i].second))
         {
             switch(i)
             {
-                case P_AUX1:{w->modifyTile(Vector2f(x,y),m_areaData[i].first,true);}break;
-                case P_AUX2:{w->modifyTile(Vector2f(x,y),m_areaData[i].first,true);}break;
-                case P_OBJ1:{w->addObject(ObjectEngine::getPremade(m_areaData[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
-                default: {w->modifyTile(Vector2f(x,y),m_areaData[i].first,true);} break; //basic
+                case P_AUX1:{w->modifyTile(Vector2f(x,y),v[i].first,true);}break;
+                case P_AUX2:{w->modifyTile(Vector2f(x,y),v[i].first,true);}break;
+                case P_OBJ1:{w->addObject(ObjectEngine::getPremade(v[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
+                default: {w->modifyTile(Vector2f(x,y),v[i].first,true);} break; //basic
             }
         }
     }
@@ -424,5 +441,4 @@ void WorldManager::readPremadeLine(string line)
 
 WorldManager::~WorldManager()
 {
-
 }

@@ -23,7 +23,6 @@ class TextureEngine
              void readLine(std::string line);
              void test(std::string line);
              bool loadPNG(std::string line);
-             bool loadBasicPNG(std::string line);
         /* ============ ANIMATION ============= */
         void const createAnimations();
 

@@ -53,6 +53,7 @@
 		<Unit filename="../include/Graphics.h" />
 		<Unit filename="../include/IddleBehavior.h" />
 		<Unit filename="../include/KeyboardController.h" />
+		<Unit filename="../include/Loader.h" />
 		<Unit filename="../include/Movable.h" />
 		<Unit filename="../include/NPC.h" />
 		<Unit filename="../include/Object.h" />
@@ -79,6 +80,7 @@
 		<Unit filename="../src/Graphics.cpp" />
 		<Unit filename="../src/IddleBehavior.cpp" />
 		<Unit filename="../src/KeyboardController.cpp" />
+		<Unit filename="../src/Loader.cpp" />
 		<Unit filename="../src/Movable.cpp" />
 		<Unit filename="../src/NPC.cpp" />
 		<Unit filename="../src/Object.cpp" />

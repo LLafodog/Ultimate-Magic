@@ -2,9 +2,9 @@ S grass 1 1 32 32
 S light_grass 1 1 32 32  
 S dark_grass 1 1 32 32 
 S desert 1 1 16 16  
-S dragon 4 4 96 96 
+S dragon 4 4 96 96 100 0 false 
 S error 1 1 32 32 
 S ground 1 1 32 32 
 S water 1 1 32 32 
-S invisible 1 1 32 32
-S pine_tree 8 1 128 128
+S invisible 1 1 32 32 
+S pine_tree 8 1 128 128 

@@ -1,0 +1,7 @@
+deep_forest
+desert
+error
+forest
+grassland
+mount
+sea

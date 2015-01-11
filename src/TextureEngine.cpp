@@ -24,7 +24,7 @@ TextureEngine::TextureEngine()
     m_textures=vector<vector<Texture*>>();
     m_names=std::vector<std::string>();
     load();
-    createAnimations();
+    //createAnimations();
     }
 }
 
@@ -42,7 +42,7 @@ Texture* TextureEngine::get(unsigned int i, unsigned int j)
 {
     if(i<m_textures.size() && j<m_textures[i].size())
     {
-        return new Texture(*m_textures[i][j]);
+        return m_textures[i][j];
     } else {std::cout <<"[TextureEngine] get("<<i<<","<<j<<") impossible."<<std::endl;return nullptr;}
 }
 
@@ -66,7 +66,7 @@ void TextureEngine::load()
     if(!reader){cerr << " Problem loading " << path << "file"<<endl;}
     else
     {
-        cout << "path : " << path <<endl;
+        //cout << "path : " << path <<endl;
         string line;
         while(getline(reader,line))
         {
@@ -91,7 +91,6 @@ void TextureEngine::readLine(string line)
     {
         switch(line[0])
         {
-            case 'B': {loadBasicPNG(line);}break;
             case 'S': {loadPNG(line);}break;
             default: cerr<<"[TextureEngine] This line:" << line << " has been misunderstood and negliged."<<endl;break;
         }
@@ -105,13 +104,17 @@ bool TextureEngine::loadPNG(std::string line)
     string word="",path="troll";
     int wordnumber=0;
 
-    //dat
+    ///data
+    // texture
     int nb_x=1,nb_y=2,w=3, h=4;
+
+    // animation
+    int frameD=500,animeD=0; bool random=true;
 
     for(int i(0);i<line.size();i++)
     {
         char letter=line[i];
-        if(letter!='S' && letter!='\n' && letter !=' ' && i!=line.size()-1)
+        if(letter!='S' && letter!='\n' && letter !=' ' )
         {
         word+=letter;
 
@@ -122,7 +125,7 @@ bool TextureEngine::loadPNG(std::string line)
             //cout <<endl << wordnumber << " : " << word <<endl;
             switch(wordnumber)
             {
-            case 1:
+            case 1: //id
                 path=word;
                 break;
             case 2: //nb_x
@@ -140,6 +143,16 @@ bool TextureEngine::loadPNG(std::string line)
             case 5: //h
                 h=Global::strtoi(word);
                 break;
+            case 6: // frame delay
+                frameD=Global::strtoi(word);
+                break;
+            case 7: // frame delay
+                animeD=Global::strtoi(word);
+                break;
+            case 8: // frame delay
+                random=(word=="random");
+                break;
+
             default: break;
             }
             word="";
@@ -155,114 +168,104 @@ bool TextureEngine::loadPNG(std::string line)
     {
 
         vector<Texture*> v;
+        string suffix=""; if(i!=0)suffix+=to_string(i);
+        // cout << " Name :" << path << " w: " << w << " h: " << h <<endl;
+        Animation* a=new Animation(path+suffix,frameD,animeD,random);
         for(int j(0);j<nb_x;j++) //horizontal
         {
             Texture* t= new Texture;
             if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(j*w,i*h,w,h))) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
+            else{a->addFrame(t);}
             v.push_back(t);
             //See everything:
             //cout<<fileName<<"  i:" <<i<<"  j:"<<j<<endl;
 
         }
-            string suffix=""; if(i!=0)suffix+=to_string(i);
+
         m_names.push_back(path+suffix);
         m_textures.push_back(v);
+
+        /// Animation
+
+
+        AnimationEngine::getInstance()->addAnimation(a);
     }
+    //for(int j(0);j<m_names.size();j++)cout << "name: " << m_names[j] <<endl;
+    cout << " TE max: " << getMax() << " AE max: " << AnimationEngine::getInstance()->getMax() <<endl;
+
     //cout << " size : " << m_textures.size();
+
+    /// Including animation
+
+
     return true;
 }
-
-bool TextureEngine::loadBasicPNG(std::string line)
-{
-        /// Reading
-    string word="",path;
-    int wordnumber=0;
-
-    //dat
-    int nb_x,nb_y,w, h;
-
-    for(char letter: line)
-    {
-        if(letter!='B' && letter!='\n' && letter !=' ')
-        {
-        word+=letter;
-        }
-        else if(word!="")
-        {
-            wordnumber++;
-
-            switch(wordnumber)
-            {
-            case 1:
-                path=word;
-                break;
-            case 2: //nb_x
-                nb_x=Global::strtoi(word);
-                break;
-
-            case 3: //nb_y
-                nb_y=Global::strtoi(word);
-                break;
-
-            case 4: //w
-                w=Global::strtoi(word);
-                break;
-
-            case 5: //h
-                h=Global::strtoi(word);
-                break;
-            default: break;
-            }
-        }
-    }
-
-    /// Including texture
-    for(int i(0);i<nb_y;i++)
-    {
-        vector<Texture*> v;
-        for(int j(0);j<nb_x;j++)
-        {
-
-            Texture* t= new Texture;
-            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT))) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
-            v.push_back(t);
-
-            //v.erase(v.begin(),v.end());
-        }
-        string suffix=""; if(i!=0)suffix+=to_string(i);
-        m_names.push_back(path+suffix);
-        m_textures.push_back(v);
-    }
-
-}
-
+/*
 void const TextureEngine::createAnimations()
 /// TO DO with file.anim
 {
-    for(int i(0);i<m_textures.size();i++)
-    {
-        //cout << " mname: " << m_names.size() << " m_tex: " << m_textures.size() << endl;
-        Animation* a;
-        if(m_names[i]!="dragon"&&m_names[i]!="dragon1"&&m_names[i]!="dragon2"&&m_names[i]!="dragon3")
-        {
-        a=new Animation(m_names[i],rand()%50+100,rand()%500+1000,true);
-        }
+
+        string line;
+        ifstream reader(Global::TO_DATA+"dat/animations_setup.txt");
+
+        if(!reader){cerr << " Problem loading animations. " << endl;}
         else
         {
-        a=new Animation(m_names[i],rand()%50+100,false);
-        }
+            while(getline(reader,line))
+            {
+                //dat
+                int frameD=500,animD=0;
+                bool random=true;
+                string name="";
+                /// Reading
+                string word="";
+                int wordnumber=0;
 
-        for(Texture* t:m_textures[i])
-        {
-            a->addFrame(new Texture(*t));
+                for(char letter: line)
+                {
+                    if(letter!='\n' && letter !=' ')
+                    {
+                    word+=letter;
+                    }
+                    else if(word!="")
+                    {
+                        wordnumber++;
+
+                        switch(wordnumber)
+                        {
+                        case 1: //id
+                            name=word;
+                            break;
+                        case 2: // frameD
+                            frameD=Global::strtoi(word);
+                            break;
+                        case 3: // animD
+                            animD=Global::strtoi(word);
+                            break;
+
+                        case 4: // random anim ?
+                            random=(word=="random");
+                            break;
+
+                        default: break;
+                        }
+                    }
+                    cout << " FRAMED : " << frameD << " ANIMD : " << animD << " random : " << random << " name : " << name <<endl;
+                    AnimationEngine::getInstance()->addAnimation(new Animation(name,frameD,animD,random));
+                }
+
+
+            }
         }
-        AnimationEngine::getInstance()->addAnimation(a);
-    }
-    for(int j(0);j<m_names.size();j++)cout << "name: " << m_names[j] <<endl;
-    cout << " TE max: " << getMax() << " AE max: " << AnimationEngine::getInstance()->getMax() <<endl;
+        reader.close();
 
 }
 
+    //for(int j(0);j<m_names.size();j++)cout << "name: " << m_names[j] <<endl;
+    //cout << " TE max: " << getMax() << " AE max: " << AnimationEngine::getInstance()->getMax() <<endl;
+
+
+*/
 
 TextureEngine::~TextureEngine()
 {
