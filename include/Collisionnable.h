@@ -39,6 +39,8 @@ class Collisionnable : public Movable
     Collisionnable* m_collision; //The one will be in collision
     sf::FloatRect m_hitbox; //the hitbox is defined relatively to the coordonates of the player, take care too add it when regarding collision.
     bool m_solid;
+    sf::Clock m_between;
+    const int m_delay=300;
 };
 
 #endif // COLLISIONNABLE_H

@@ -43,7 +43,7 @@ class Alive
         float m_timeBetweenHeal;
         sf::Clock m_clock;
         ///Effect
-        sf::Clock m_tempClock; //usefull for lil time like has been damaged
+        sf::Clock m_invincibleClock; //usefull for lil time like has been damaged
         const int m_timesleeping=500; // time during which anything can happen //0.5sec
         bool m_invincible;
 };

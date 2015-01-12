@@ -16,13 +16,17 @@ Collisionnable::Collisionnable( sf::FloatRect hitbox, World* w, bool solid,  flo
 
     m_collide=false;
     m_collision=nullptr;
+
+    m_between.restart();
 }
 
 bool Collisionnable::inCollisionWith(Object* c)
 /// Return true if the floatrect of hitbox intersects
 {
-    if(c!=nullptr && m_solid && c!=this)
+    if(c!=nullptr && m_solid && c->isSolid() && c!=this)
     {
+
+    /// Initialisation of Hitbox
     FloatRect c_hitb=c->getHitbox();
     float   x=c->getPositionX(),
             y=c->getPositionY();
@@ -39,27 +43,32 @@ bool Collisionnable::inCollisionWith(Object* c)
 */
     ///
 
+    /// is there a colision with hime ?
+    if(m_between.getElapsedTime().asMilliseconds()>m_delay){m_collision=nullptr;}
+
 
     bool collision=(mine.intersects(his));
+        if(collision)
+        {
+            // if we didn't already collide with him
+            if(m_collision!=c )
+            {
+                //We are in collision chef !
+                m_collide=true;
+                // let's collide
+                collide(c);
+                m_collision=c; // with this guy !
+                m_between.restart();
+            }
+            return true;
+        }
 
-    if(collision)
-    {
-        m_collide=true; //We are in collision chef !
-        m_collision=c; // with this guy !
-
-        /// Apply the consequences !
-        collide(c);
-        //cout<<"In collision with : " << c->getId()<<endl; //to know who you are in collision with
-        return true;
-    }
-    else
-    {
-        m_collide=false;
-        m_collision=nullptr;
-    }
-    return false;
-
-
+        // No colision
+        else
+        {
+            m_collide=false;
+            return false;
+        }
     }
     else return false;
 
@@ -69,6 +78,7 @@ void Collisionnable::collide(Object* c)
 {
     m_collide=true;
     c->setCollide(true);
+
     setCollision(c);
     c->setCollision(this);
 }

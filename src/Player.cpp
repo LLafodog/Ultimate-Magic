@@ -8,6 +8,10 @@
 #include <iostream>
 //
 
+
+/// EFFECTS
+#include "Ablaze.h"
+
 #include"Alive.h"
 
 Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) :
@@ -39,7 +43,7 @@ void Player::update()
     m_alive->update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
     //to throw
-    if(m_collide){m_alive->suffer(10);}
+    if(m_collide){addEffect(new Ablaze(this,2,10000)); m_collide=false;}
     /// MOVING
     if(!m_alive->isDead() )
     {

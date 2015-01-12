@@ -18,7 +18,7 @@ Alive::Alive(float maxHealth, float healthRegen, bool alive)
     //begin alive haha
     m_alive=alive;
 
-    m_tempClock.restart();
+    m_invincibleClock.restart();
     m_invincible=false;
 }
 
@@ -38,7 +38,7 @@ void Alive::suffer(float damage) //TO DO with effects
     if(!m_invincible)
     {
         //cout << " suffered " <<endl;
-        if(m_health>0){m_health-=damage; m_tempClock.restart();}
+        if(m_health>0){m_health-=damage; m_invincibleClock.restart();}
         else die();
     }
 
@@ -51,12 +51,12 @@ void Alive::update()
     if(m_clock.getElapsedTime().asMilliseconds()>=m_timeBetweenHeal)
     {
         //cout << "healed " << endl;
-        float heal=m_healthRegen*m_maxHealth;
+        float heal=m_healthRegen;
         if(m_health+heal<=m_maxHealth)m_health+=heal;
         m_clock.restart();
     }
     ///Update invincibility
-    if(m_tempClock.getElapsedTime().asMilliseconds()<=m_timesleeping)
+    if(m_invincibleClock.getElapsedTime().asMilliseconds()<=m_timesleeping)
     {
         m_invincible=true;
     }else {m_invincible=false;}

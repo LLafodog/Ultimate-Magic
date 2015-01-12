@@ -12,6 +12,7 @@
 class Controller;
 class World;
 class Alive;
+class Effect;
 
 class Player : public Object
 {
@@ -23,6 +24,9 @@ class Player : public Object
         void initStats();
         void setController(Controller* c) {m_controller=c;}
 
+
+        /* ============= EFFECT ==================== */
+        void addEffect(Effect* e) {m_effects.push_back(e);}
         /* ============= GETTER ==================== */
         const World* getWorld() {return m_world;}
 

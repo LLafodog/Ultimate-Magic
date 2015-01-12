@@ -7,8 +7,8 @@
 #include <iostream>
 
 class World;
-
 class Alive;
+class Effect;
 
 class Object :public Collisionnable
 {
@@ -23,9 +23,7 @@ class Object :public Collisionnable
         /* ============= What is it ?======================== */
         virtual Alive* getAlive() {return m_alive;}
         virtual bool isPlayer() {return false;}
-
-
-        virtual void update(){}
+        virtual void update();
 
         virtual ~Object();
 
@@ -34,6 +32,7 @@ class Object :public Collisionnable
         std::string m_id;
 
         Alive* m_alive;
+        std::vector<Effect*> m_effects;
 
 };
 
