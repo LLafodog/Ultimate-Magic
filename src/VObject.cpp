@@ -4,6 +4,8 @@
 #include "AnimationEngine.h"
 #include "Player.h"
 
+#include "Alive.h"
+
 using namespace std;
 using namespace sf;
 
@@ -31,15 +33,12 @@ void VObject::update()
     setPosition(m_object->getPosition());
 
     // if dead then look dead
-    if(m_object->isLivingSoul())
+    Alive* a=m_object->getAlive();
+    if(a!=nullptr && a->isDead())
     {
-        Alive* a=dynamic_cast<Alive*>(m_object);
-        if(a !=nullptr && a->isDead())
-        {
             m_animations=AnimationEngine::getInstance()->getAllOf("dead_player");
             changeOrientation("first");
             m_animation->run();
-        }
         //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
     }
     if(m_animation!=nullptr && m_object!=nullptr)
@@ -73,10 +72,6 @@ void VObject::changeOrientation(char c)
 
 }
 
-const bool VObject::isLivingSoul()
-{
-    return m_object->isLivingSoul();
-}
 
 const sf::FloatRect VObject::getHitbox()
 {

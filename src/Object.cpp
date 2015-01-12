@@ -9,6 +9,8 @@ Object::Object( std::string id, sf::FloatRect rect, World* w, bool solid, float 
     m_visible=visible;
     m_id=id;
     m_orientation='n'; //n cuz first anime
+
+    m_alive=nullptr;
 }
 
 Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSolid(), o->getPositionX(), o->getPositionY(), o->getSize().x, o->getSize().y)
@@ -16,13 +18,6 @@ Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSo
     m_visible=o->isVisible();
     m_id=o->getID();
     m_orientation=o->getOrientation();
-}
-
-const bool Object::isLivingSoul()
-{
-    Alive* a=dynamic_cast<Alive*>(this);
-    if(a!=nullptr)return true;
-    return false;
 }
 
 Object::~Object()

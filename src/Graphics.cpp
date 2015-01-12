@@ -3,7 +3,10 @@
 #include "Player.h"
 #include "World.h"
 #include "Tile.h"
+
 #include "Object.h"
+#include "Alive.h"
+
 #include "VObject.h"
 
 #include "Global.h"
@@ -188,10 +191,10 @@ const void Graphics::drawVisibleArea()
                 /// /!\ INT is REALLY IMPORTANT
                 for (int j=xp-wp-1;j<=xp+wp+1;j++)
                 {
-                    if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
+                    if(j<m_tiles.size() && j>=0 && i<m_tiles[j].size() && i>=0)
                     {
                     //cout<<"i: " << i << " j: " << j << " id: " << m_tiles[j][i]->getID() <<endl;
-                    drawTile(m_tiles[i][j]);
+                    drawTile(m_tiles[j][i]);
                     }
                     else{ /// Completing the wholes
                     m_error->setPosition(i*Global::TILE_HEIGHT,j*Global::TILE_WIDTH);
@@ -269,7 +272,8 @@ const void Graphics::drawVisibleObjects()
 
 const void Graphics::drawObject(VObject* o)
 {
-    if(o->isLivingSoul())
+
+    if(o->getObject()->getAlive()!=nullptr)
     {
         drawAboutAlive(o);
     }
@@ -280,7 +284,7 @@ const void Graphics::drawObject(VObject* o)
 const void Graphics::drawAboutAlive(VObject* o)
 /// Here we draw everything that concern an alive object
 {
-    Alive* a=dynamic_cast<Alive*>(o->getObject());
+    Alive* a=o->getObject()->getAlive();
     if( a!= nullptr && (m_details ||a->getLifeRatio()!=1))
     ///We draw the life bar if we wanna see the details, or we aren't full Life
     {
@@ -296,34 +300,38 @@ const void Graphics::drawLifeBar(VObject* o)
                                         one red representig the life (how mainstream)
 **/
 {
-    Alive* a=dynamic_cast<Alive*>(o->getObject());
-    if(o!=nullptr && a!=nullptr) //if has a life // just be secure
+    if(o!=nullptr && o->getObject()!=nullptr )
     {
-    float   x=o->getPositionX(),
-            y=o->getPositionY(),
-            w=o->getSize().x,
-            wquart=w/4,
-            hr=Global::TILE_HEIGHT>>3; //height of the life bar
+        Alive* a=o->getObject()->getAlive();
+        if(a!=nullptr) //if has a life // just be secure
+        {
+        float   x=o->getPositionX(),
+                y=o->getPositionY(),
+                w=o->getSize().x,
+                wquart=w/4,
+                hr=Global::TILE_HEIGHT>>3; //height of the life bar
 
-    float lratio=a->getLifeRatio();
-    Vector2f    fullsize(w+wquart*2,hr),
-                lifesize((w+wquart*2)*lratio,hr),
-                position(x-wquart,y-hr-1);
+        float lratio=a->getLifeRatio();
+        //cout << "x: " << x << " y: " << y << " w " << w << " ratio : " << lratio << endl;
+        Vector2f    fullsize(w+wquart*2,hr),
+                    lifesize((w+wquart*2)*lratio,hr),
+                    position(x-wquart,y-hr-1);
 
-    RectangleShape  fulllifebar(fullsize),
-                    lifebar(lifesize);
+        RectangleShape  fulllifebar(fullsize),
+                        lifebar(lifesize);
 
-    fulllifebar.setPosition(position);
-    lifebar.setPosition(position);
+        fulllifebar.setPosition(position);
+        lifebar.setPosition(position);
 
-    fulllifebar.setFillColor(Color::Black);
-    lifebar.setFillColor(Color::Red);
-    //cout << "drawn in x:" << x << " y: " << y << " lenght of " << w <<endl;
-    m_window->draw(fulllifebar);
-    m_window->draw(lifebar);
+        fulllifebar.setFillColor(Color::Black);
+        lifebar.setFillColor(Color::Red);
+        //cout << "drawn in x:" << x << " y: " << y << " lenght of " << w <<endl;
+        m_window->draw(fulllifebar);
+        m_window->draw(lifebar);
 
+        }
+        else{cout<< "shitty"<<endl;}
     }
-    else{cout<< "shitty"<<endl;}
 }
 
 

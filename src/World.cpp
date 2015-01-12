@@ -55,7 +55,7 @@ World::World(string pathfile, int players)
 const bool World::isThisTileSolid(float i, float j)
 {
 
-    if(getTile(i,j)=="wall")return true;
+    if(getTile(i,j)[0]=='S')return true;
     return false;
 }
 

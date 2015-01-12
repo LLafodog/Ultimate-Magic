@@ -8,17 +8,20 @@
 #include <iostream>
 //
 
+#include"Alive.h"
 
 Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) :
-    Object(id,rect,w,true,x,y,width,height,visible),
-    Alive()
+    Object(id,rect,w,true,x,y,width,height,visible)
 {
     m_controller=c;
+    m_alive=new Alive();
     initStats();
 }
 
 void Player::initStats()
 {
+
+
     //intrasecly
     m_name="Anonymous";
     m_mana=0;
@@ -33,12 +36,12 @@ void Player::update()
     /* ================== OBJECT =============== */
     Object::update();
     /* ================== ALIVE =============== */
-    Alive::update();
+    m_alive->update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
     //to throw
-    if(m_collide){suffer(10);}
+    if(m_collide){m_alive->suffer(10);}
     /// MOVING
-    if(!isDead() )
+    if(!m_alive->isDead() )
     {
         /* ================== PLAYER =============== */
         if(m_controller!=0 && !m_controller->noOp())
@@ -57,5 +60,5 @@ void Player::update()
 
 Player::~Player()
 {
-    //dtor
+    delete m_alive;
 }

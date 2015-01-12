@@ -44,7 +44,7 @@ const sf::Texture* Animation::getCurrentFrame()
     }
     else
     {
-//        std::cerr<<"[Animation ] Current anim greater than the capacity !"<<std::endl;
+        std::cerr<<"[Animation ] Current anim greater than the capacity !"<<std::endl;
         return nullptr;
     }
 }

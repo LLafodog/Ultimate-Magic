@@ -16,6 +16,8 @@
 #include "Controller.h"
 #include "KeyboardController.h"
 
+#include "Loader.h"
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -75,6 +77,7 @@ void Core::load()
     m_wm=new WorldManager();
     m_ae=new AnimationEngine();
     m_te=new TextureEngine();
+    new Loader();
     //AnimationEngine::load(); //Need the textures
 }
 
@@ -163,10 +166,16 @@ void Core::run()
 
 void Core::showInfo()
 {
+
+
     cout << "======= WORLD ============" <<endl;
     cout << " Width : " << m_world->getWidth() << " Height: " << m_world->getHeight() << endl << " Number of objects : " << m_world->getNumberObjects() <<endl;
-    cout << "======= OBJECTS ==========" <<endl;
-    for(int i(0);i<m_world->getNumberObjects();i++){cout << m_world->getObject(i)->getID() << "x: " << m_world->getObject(i)->getPositionX() << " y: " << m_world->getObject(i)->getPositionY()  << endl;} cout <<endl;
+    //cout << "======= OBJECTS ==========" <<endl;
+    //for(int i(0);i<m_world->getNumberObjects();i++){cout << m_world->getObject(i)->getID() << "x: " << m_world->getObject(i)->getPositionX() << " y: " << m_world->getObject(i)->getPositionY()  << endl;} cout <<endl;
+    /*
+    cout << "======= PLAYER ==========" << endl;
+    cout << " x: " << m_world->getObject(0)->getPositionX() << " y: " << m_world->getObject(0)->getPositionY() << " alive : " << m_world->getObject(0)->getAlive()->isDead() <<endl;
+    */
     cout << "======= CAMERA ==========" <<endl;
     cout << "x: " << m_graphics->getCamera()->getPos()->getPositionX() << " y: " << m_graphics->getCamera()->getPos()->getPositionY() <<endl;
 }

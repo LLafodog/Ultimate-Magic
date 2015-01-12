@@ -8,6 +8,8 @@
 
 class World;
 
+class Alive;
+
 class Object :public Collisionnable
 {
     public:
@@ -18,11 +20,11 @@ class Object :public Collisionnable
         const std::string getID() {return m_id;}
         const bool isVisible() {return m_visible;}
 
-        /* ============= COLLISIONNABLE ==================== */
+        /* ============= What is it ?======================== */
+        virtual Alive* getAlive() {return m_alive;}
+        virtual bool isPlayer() {return false;}
 
-        /* ============= CONVERSION ======================== */
-        virtual const bool isLivingSoul();
-        virtual const bool isPlayer() {return false;}
+
         virtual void update(){}
 
         virtual ~Object();
@@ -30,6 +32,8 @@ class Object :public Collisionnable
     protected:
         bool m_visible;
         std::string m_id;
+
+        Alive* m_alive;
 
 };
 

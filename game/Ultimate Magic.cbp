@@ -41,6 +41,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="../include/Ablaze.h" />
 		<Unit filename="../include/Alive.h" />
 		<Unit filename="../include/Animation.h" />
 		<Unit filename="../include/AnimationEngine.h" />
@@ -49,6 +50,7 @@
 		<Unit filename="../include/Collisionnable.h" />
 		<Unit filename="../include/Controller.h" />
 		<Unit filename="../include/Core.h" />
+		<Unit filename="../include/Effect.h" />
 		<Unit filename="../include/Global.h" />
 		<Unit filename="../include/Graphics.h" />
 		<Unit filename="../include/IddleBehavior.h" />
@@ -68,6 +70,7 @@
 		<Unit filename="../include/Villager.h" />
 		<Unit filename="../include/World.h" />
 		<Unit filename="../include/WorldManager.h" />
+		<Unit filename="../src/Ablaze.cpp" />
 		<Unit filename="../src/Alive.cpp" />
 		<Unit filename="../src/Animation.cpp" />
 		<Unit filename="../src/AnimationEngine.cpp" />
@@ -76,6 +79,7 @@
 		<Unit filename="../src/Collisionnable.cpp" />
 		<Unit filename="../src/Controller.cpp" />
 		<Unit filename="../src/Core.cpp" />
+		<Unit filename="../src/Effect.cpp" />
 		<Unit filename="../src/Global.cpp" />
 		<Unit filename="../src/Graphics.cpp" />
 		<Unit filename="../src/IddleBehavior.cpp" />

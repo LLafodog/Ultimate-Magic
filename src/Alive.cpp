@@ -37,6 +37,7 @@ void Alive::suffer(float damage) //TO DO with effects
 {
     if(!m_invincible)
     {
+        //cout << " suffered " <<endl;
         if(m_health>0){m_health-=damage; m_tempClock.restart();}
         else die();
     }
@@ -46,8 +47,10 @@ void Alive::suffer(float damage) //TO DO with effects
 void Alive::update()
 {
     ///Update health regen
+    //cout << boolalpha << isDead() <<endl;
     if(m_clock.getElapsedTime().asMilliseconds()>=m_timeBetweenHeal)
     {
+        //cout << "healed " << endl;
         float heal=m_healthRegen*m_maxHealth;
         if(m_health+heal<=m_maxHealth)m_health+=heal;
         m_clock.restart();

@@ -8,12 +8,12 @@
 
 //herit
 #include "Object.h"
-#include "Alive.h"
 
 class Controller;
 class World;
+class Alive;
 
-class Player : public Object, public Alive
+class Player : public Object
 {
     public:
 
@@ -33,7 +33,8 @@ class Player : public Object, public Alive
         void collide(Object* o);
 
         /* ============= CONVERSION ========================= */
-        virtual const bool isPlayer() {return true;}
+        virtual bool isPlayer() {return true;}
+        virtual Alive* getAlive() {return m_alive;}
 
 
 
@@ -47,6 +48,8 @@ class Player : public Object, public Alive
     float m_magic;
     //Controls
     Controller* m_controller;
+
+    Alive* m_alive;
 
 };
 
