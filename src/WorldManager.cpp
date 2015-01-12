@@ -101,6 +101,33 @@ World* WorldManager::newWorld()
             */
         }
     }
+
+    //Second passage
+    /*
+    for (int i(0);i<h;i++)
+    {
+        for(int j(0);j<w;j++)
+        {
+            string tile=wo->getTile(i,j),;
+
+            bool   tile_sup=wo->getTile(i,j)==tile,
+                   tile_inf=wo->getTile(i,j)==tile,
+                   tile_right=wo->getTile(i,j)==tile,
+                   tile_left=wo->getTile(i,j)==tile;
+            int sum=tile_inf+tile_left+tile_right+tile_sup;
+            switch(sum)
+            {
+            case 0: wo->modifyTile(Vector2f(i,j),wo->getTile(i-1,j),true);break;
+            case 1:
+            {
+                if(tile_sup){modif}
+            }
+                break;
+            }
+
+        }
+    }
+    */
     m_actual=wo;
     return wo;
 }
@@ -197,8 +224,46 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
         {
             switch(i)
             {
-                case P_AUX1:{w->modifyTile(Vector2f(x,y),v[i].first,true);}break;
-                case P_AUX2:{w->modifyTile(Vector2f(x,y),v[i].first,true);}break;
+                case P_AUX1:
+                {
+                    /// Draw a cross with an alea error;
+                    /*
+                                   X A X
+                                   A A A
+                                   X A X
+
+                    */
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x,y),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y-1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x,y-1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y-1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y+1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x,y+1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y+1),v[i].first,true);}
+
+                }break;
+                case P_AUX2:
+                {
+                    /// Draw a cross with an alea error;
+                    /*
+                                   X A X
+                                   A A A
+                                   X A X
+
+                    */
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x,y),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y-1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x,y-1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y-1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y+1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x,y+1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y+1),v[i].first,true);}
+
+                }break;
                 case P_OBJ1:{w->addObject(ObjectEngine::getPremade(v[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
                 default: {w->modifyTile(Vector2f(x,y),v[i].first,true);} break; //basic
             }
