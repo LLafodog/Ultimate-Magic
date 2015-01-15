@@ -34,8 +34,8 @@ int TextureEngine::convertID(std::string id)
     {
         if(m_names[i]==id){return i;}
     }
-    cout << " [TextureEngine] Can't convert the id " << id << " into a known texture. Return error instead." << endl;
-    return convertID("error");
+    cout << " [TextureEngine] Can't convert the id " << id << " into a known texture. Please add it to 'dat/textures.txt'. Return invisible instead." << endl;
+    return convertID("invisible");
 }
 
 Texture* TextureEngine::get(unsigned int i, unsigned int j)
@@ -92,13 +92,14 @@ void TextureEngine::readLine(string line)
         switch(line[0])
         {
             case 'S': {loadPNG(line);}break;
+            case 'P': {loadPNG(line,true);} break;
             default: cerr<<"[TextureEngine] This line:" << line << " has been misunderstood and negliged."<<endl;break;
         }
     }
 
 }
 
-bool TextureEngine::loadPNG(std::string line)
+bool TextureEngine::loadPNG(std::string line, bool particles)
 {
     /// Reading
     string word="",path="troll";
@@ -114,7 +115,7 @@ bool TextureEngine::loadPNG(std::string line)
     for(int i(0);i<line.size();i++)
     {
         char letter=line[i];
-        if(letter!='S' && letter!='\n' && letter !=' ' )
+        if(letter!='S' && letter != 'P' && letter!='\n' && letter !=' ' )
         {
         word+=letter;
 
@@ -183,6 +184,27 @@ bool TextureEngine::loadPNG(std::string line)
         }
 
         m_names.push_back(path+suffix);
+        m_textures.push_back(v);
+
+        /// Animation
+
+
+        AnimationEngine::getInstance()->addAnimation(a);
+    }
+
+    /// Including particles
+    if(particles)
+    {
+        path+="_particles";
+        vector<Texture*> v;
+
+        // cout << " Name :" << path << " w: " << w << " h: " << h <<endl;
+        Animation* a=new Animation(path,frameD,animeD,random);
+            Texture* t= new Texture;
+            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(0,0,w,h))) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
+            else{a->addFrame(t);}
+            v.push_back(t);
+        m_names.push_back(path);
         m_textures.push_back(v);
 
         /// Animation

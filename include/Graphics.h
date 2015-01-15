@@ -33,6 +33,10 @@ class Graphics
         const void clear() {m_window->clear(Global::BDC);}
         static bool needToRefresh;
 
+    /// ========= STATIC =============
+    static sf::ConvexShape* getTriangle(int x, int y, char dir='t');
+
+
     ///for testing
         const void getInfo();
 
@@ -60,7 +64,9 @@ class Graphics
     World* m_world;
     Camera* m_camera;
     bool m_details; //allow to draw all details like lifebar
+
     Tile* m_error;
+    sf::RectangleShape* m_particle;
 
 };
 

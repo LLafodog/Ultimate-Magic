@@ -34,7 +34,10 @@ World* WorldManager::newWorld()
     int w=rand()%50+50;
     int h=rand()%50+50;
     int style=rand()%10;
-    Perlin* alt=new Perlin(w,h,step,style);
+
+    style=1;
+
+    Perlin* alt=new Perlin(w,h,step,style,0,50);
     m_alt.push_back(alt); // petit monde
 
 
@@ -57,10 +60,12 @@ World* WorldManager::newWorld()
         // to do: with .wdat value
             double altitude=alt->get(i,j);
             double humidity=humid->get(i,j);
-            if(altitude<=14.28) // water etc
+            // To do : with humidity
+            if(altitude<=5){pickElementOf(wo,i,j,"deep_sea");}
+
+            if(altitude>5 && altitude<=14.28) // water etc
             {
-                if(humidity<30){pickElementOf(wo,i,j,"sea");}
-                else{pickElementOf(wo,i,j,"deep_sea");}
+                {pickElementOf(wo,i,j,"sea");}
 
             }
 
@@ -110,24 +115,25 @@ World* WorldManager::newWorld()
         {
             string tile=wo->getTile(i,j),;
 
-            bool   tile_sup=wo->getTile(i,j)==tile,
-                   tile_inf=wo->getTile(i,j)==tile,
-                   tile_right=wo->getTile(i,j)==tile,
-                   tile_left=wo->getTile(i,j)==tile;
-            int sum=tile_inf+tile_left+tile_right+tile_sup;
-            switch(sum)
-            {
-            case 0: wo->modifyTile(Vector2f(i,j),wo->getTile(i-1,j),true);break;
-            case 1:
-            {
-                if(tile_sup){modif}
-            }
-                break;
-            }
+            string tile_sup=wo->getTile(i-1,j),
+                   tile_sup_left=wo->getTile(i-1,j-1),
+                   tile_sup_right=wo->getTile(i-1,j+1),
+
+                   tile_right=wo->getTile(i,j+1),
+                   tile_left=wo->getTile(i,j-1);
+
+                   tile_inf=wo->getTile(i+1,j),
+                   tile_inf_left=wo->getTile(i+1,j-1),
+                   tile_inf_right=wo->getTile(i+1,j+1);
+
+            string corrected=tile;
+            if(tile!=tile_sup){corrected+="_t";}
+            if(tile!=tile_sup){corrected+="";}
+            if(tile!=tile_sup){corrected+="_t";}
+
 
         }
-    }
-    */
+    }*/
     m_actual=wo;
     return wo;
 }
@@ -205,6 +211,10 @@ void WorldManager::getProbabilities(std::string path)
     m_tileProbabilities=Loader::getInstance()->getTileProbabilities(path);
     //cout << " Size : " << m_tileProbabilities.size() << " Id : " << m_tileProbabilities[0].first <<endl;
 }
+
+
+
+
 
 void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 {

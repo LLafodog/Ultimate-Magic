@@ -40,6 +40,7 @@ Graphics::Graphics(RenderWindow* w, World* wo)
 
    // in case of error
    m_error =new Tile("error",-50,-50);
+   m_particle= new RectangleShape(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
 }
 
 void Graphics::init()
@@ -62,7 +63,7 @@ void Graphics::initTiles()
         {
             //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
             string id=m_world->getTiles()[i][j];
-            Tile* t=new Tile(id,i*Global::TILE_WIDTH,j*Global::TILE_HEIGHT);
+            Tile* t=new Tile(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
             //cout << " new tile : x: " <<j*Global::TILE_WIDTH << " y: " << i*Global::TILE_HEIGHT <<endl; // to know where the tiles are created
             v.push_back(t);
         }
@@ -166,11 +167,172 @@ const void Graphics::draw()
 
 }
 
+ConvexShape* Graphics::getTriangle(int x, int y, char dir)
+{
+        ConvexShape cs;
+
+        float w=Global::TILE_WIDTH;
+        float h=Global::TILE_HEIGHT;
+
+            cs.setPointCount(3);
+            cs.setPoint(0,Vector2f(0,0));
+            cs.setPoint(1,Vector2f(w,0));
+            cs.setPoint(2,Vector2f(w/2,h/2));
+
+            cs.setOrigin(w/2,h/2);
+
+            switch(dir)
+            {
+            default:break;
+            case 'b': cs.rotate(180);break;
+            case 'l': cs.rotate(-90);break;
+            case 'r': cs.rotate(90);break;
+            }
+
+
+
+            cs.setPosition(x+w/2,y+h/2);
+
+
+            return new ConvexShape(cs);
+}
+
+
+
+
+
+
+
 const void Graphics::drawTile(Tile*t)
 {
     if( t!=nullptr && t->isVisible())
     {
+
         m_window->draw(*(t->getApparence()));
+
+        /// Now trying to smooth a bit
+        // var
+        int x=t->getPositionX()/Global::TILE_WIDTH,
+            y=t->getPositionY()/Global::TILE_HEIGHT;
+        float xabs=t->getPositionX(),
+              yabs=t->getPositionY();
+
+        // neighboors
+        string  up      = m_world->getTile(x,y-1),
+                down    = m_world->getTile(x,y+1),
+                left    = m_world->getTile(x-1,y),
+                right   = m_world->getTile(x+1,y),
+                actual = t->getID();
+
+
+
+
+//if(x%2 == 0 ||  y%2==0)
+{
+
+        TextureEngine* te=TextureEngine::getInstance();
+
+
+
+
+/// =================== Third method ========================
+        RectangleShape rc(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
+        if(actual != up && up!="error")
+        {
+            m_particle->setTexture(te->get(up+"_particles"));
+            m_particle->setPosition(xabs,yabs);
+                m_window->draw(*m_particle);
+        }
+
+        if(actual != left && left!="error")
+        {
+            m_particle->setTexture(te->get(left+"_particles"));
+            m_particle->setPosition(xabs,yabs);
+                m_window->draw(*m_particle);
+        }
+
+        if(actual != right && right!="error")
+        {
+            m_particle->setTexture(te->get(right+"_particles"));
+            m_particle->setPosition(xabs,yabs);
+                m_window->draw(*m_particle);
+        }
+
+        if(actual != down && down!="error")
+        {
+            m_particle->setTexture(te->get(down+"_particles"));
+            m_particle->setPosition(xabs,yabs);
+                m_window->draw(*m_particle);
+        }
+
+
+/// =================== Second method ========================
+/*
+        if(actual != up)
+        {
+            ConvexShape cs1= *getTriangle(xabs,yabs,'t');
+                cs1.setTexture(te->get(up+"_particles"));
+                m_window->draw(cs1);
+        }
+
+        if(actual != left)
+        {
+            ConvexShape cs1= *getTriangle(xabs,yabs,'l');
+                cs1.setTexture(te->get(left+"_particles"));
+                m_window->draw(cs1);
+        }
+
+        if(actual != right)
+        {
+            ConvexShape cs1= *getTriangle(xabs,yabs,'r');
+                cs1.setTexture(te->get(right+"_particles"));
+                m_window->draw(cs1);
+        }
+
+        if(actual != down)
+        {
+            ConvexShape cs1= *getTriangle(xabs,yabs,'b');
+                cs1.setTexture(te->get(down+"_particles"));
+                m_window->draw(cs1);
+        }
+*/
+}
+
+
+
+
+
+
+
+
+
+
+/// =================== First method ========================
+
+/*
+        if(!(actual == up && actual == down && actual == left && actual == right ))
+        {
+            TextureEngine* te=TextureEngine::getInstance();
+
+            ConvexShape cs1= *getTriangle(xabs,yabs,'t');
+                cs1.setTexture(te->get(up));
+
+            ConvexShape cs2= *getTriangle(xabs,yabs,'b');
+                cs2.setTexture(te->get(down));
+
+            ConvexShape cs3= *getTriangle(xabs,yabs,'l');
+                cs3.setTexture(te->get(left));
+
+            ConvexShape cs4= *getTriangle(xabs,yabs,'r');
+                cs4.setTexture(te->get(right));
+
+            m_window->draw(cs1);
+            m_window->draw(cs2);
+            m_window->draw(cs3);
+            m_window->draw(cs4);
+        }*/
+
+
     }
 }
 
@@ -191,10 +353,10 @@ const void Graphics::drawVisibleArea()
                 /// /!\ INT is REALLY IMPORTANT
                 for (int j=xp-wp-1;j<=xp+wp+1;j++)
                 {
-                    if(j<m_tiles.size() && j>=0 && i<m_tiles[j].size() && i>=0)
+                    if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
                     {
                     //cout<<"i: " << i << " j: " << j << " id: " << m_tiles[j][i]->getID() <<endl;
-                    drawTile(m_tiles[j][i]);
+                    drawTile(m_tiles[i][j]);
                     }
                     else{ /// Completing the wholes
                     m_error->setPosition(i*Global::TILE_HEIGHT,j*Global::TILE_WIDTH);
@@ -277,7 +439,7 @@ const void Graphics::drawObject(VObject* o)
     {
         drawAboutAlive(o);
     }
-    drawTile(o);
+    m_window->draw(*o->getApparence());
 
 }
 
