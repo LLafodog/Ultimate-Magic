@@ -12,7 +12,7 @@
 using namespace sf;
 using namespace std;
 
-std::vector<std::string> TextureEngine::m_names=std::vector<std::string> ();
+//std::vector<std::string> TextureEngine::m_names=std::vector<std::string> ();
 
 TextureEngine* TextureEngine::m_self=nullptr;
 
@@ -21,13 +21,17 @@ TextureEngine::TextureEngine()
     if(m_self==nullptr)
     {
     m_self=this;
+    m_textures.empty();
+    /*
     m_textures=vector<vector<Texture*>>();
     m_names=std::vector<std::string>();
+    */
     load();
     //createAnimations();
     }
 }
 
+/*
 int TextureEngine::convertID(std::string id)
 {
     for(int i(0); i<m_names.size();i++)
@@ -37,18 +41,20 @@ int TextureEngine::convertID(std::string id)
     cout << " [TextureEngine] Can't convert the id " << id << " into a known texture. Please add it to 'dat/textures.txt'. Return invisible instead." << endl;
     return convertID("invisible");
 }
-
-Texture* TextureEngine::get(unsigned int i, unsigned int j)
+*/
+/*
+Texture* TextureEngine::get(string id, unsigned int j)
 {
-    if(i<m_textures.size() && j<m_textures[i].size())
+    if(j<m_textures[id].size())
     {
-        return m_textures[i][j];
-    } else {std::cout <<"[TextureEngine] get("<<i<<","<<j<<") impossible."<<std::endl;return nullptr;}
+        return m_textures[id][j];
+    } else {std::cout <<"[TextureEngine] get("<<id<<","<<j<<") impossible."<<std::endl;return nullptr;}
 }
-
+*/
 Texture* TextureEngine::get(string name, unsigned int j)
 {
-        return(get(TextureEngine::convertID(name),j));
+        if(j<m_textures[name].size() && j>=0)return(m_textures[name][j]);
+        return nullptr;
 }
 
 void TextureEngine::load()
@@ -182,10 +188,12 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
             //cout<<fileName<<"  i:" <<i<<"  j:"<<j<<endl;
 
         }
+        m_textures.insert(pair<std::string,vector<Texture*>>(path+suffix,v));
 
+/*
         m_names.push_back(path+suffix);
         m_textures.push_back(v);
-
+*/
         /// Animation
 
 
@@ -204,9 +212,12 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
             if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(0,0,w,h))) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
             else{a->addFrame(t);}
             v.push_back(t);
+
+        m_textures.insert(pair<std::string,vector<Texture*>>(path,v));
+/*
         m_names.push_back(path);
         m_textures.push_back(v);
-
+*/
         /// Animation
 
 

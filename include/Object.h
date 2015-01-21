@@ -20,10 +20,13 @@ class Object :public Collisionnable
         const std::string getID() {return m_id;}
         const bool isVisible() {return m_visible;}
 
+        /* ============= REDEFINE ======================== */
+
         /* ============= What is it ?======================== */
         virtual Alive* getAlive() {return m_alive;}
         virtual bool isPlayer() {return false;}
         virtual void update();
+        virtual void addEffect(Effect* e) {if(e!=nullptr)m_effects.push_back(e);}
 
         virtual ~Object();
 

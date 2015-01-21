@@ -3,16 +3,24 @@
 
 #include<SFML/Graphics.hpp>
 
+class Object;
+
 class Effect
 {
     public:
-        Effect();
+        Effect(std::string id, Object* o, double value, int duration, int delay=10);
 
-        virtual const int getDuration()=0;
-        virtual void restart()=0;
-        virtual bool isActive()=0;
-        virtual void end() =0;
-        virtual void update()=0;
+        virtual void restart() {m_clock.restart();}
+        virtual void end();
+        virtual void update();
+
+        /// ========== GETTER ===========
+        virtual const std::string getID() {return m_id;}
+        virtual Object* getTarget() {return m_object;}
+        virtual int getDuration() {return m_duration;}
+        virtual bool isActive() {return m_active;}
+        virtual int getElapsedTime() {return m_clock.getElapsedTime().asMilliseconds();}
+
 
         virtual ~Effect();
 
@@ -22,6 +30,10 @@ class Effect
         int m_duration;
         int m_delay;
         bool m_active;
+        bool m_singleEffect;
+        double m_value;
+        std::string m_id;
+        Object* m_object;
 };
 
 #endif // EFFECT_H

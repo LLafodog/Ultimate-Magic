@@ -23,7 +23,7 @@ class Collisionnable : public Movable
         void setCollide(bool b){m_collide=b;}
         void setCollision(Collisionnable* c) {m_collision=c;}
         // methods
-        void colMove(int signX, int signY);
+        virtual void colMove(int signX, int signY);
         void collide(Object* c);
 
         //update

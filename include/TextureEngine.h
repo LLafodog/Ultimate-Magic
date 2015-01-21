@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
+#include<unordered_map>
 
 class TextureEngine
 {
@@ -15,7 +16,6 @@ class TextureEngine
         static TextureEngine* getInstance() {return m_self;}
         // TO IMPROVE
         static TextureEngine* m_self;
-        static int convertID(std::string id);
 
 
         /* ============ LOADING =============== */
@@ -27,17 +27,14 @@ class TextureEngine
         void const createAnimations();
 
         /* ============= GETTER =============== */
-         sf::Texture* get(unsigned int i, unsigned int j);
          sf::Texture* get(std::string name, unsigned int j=0);
          const unsigned int getMax() {return m_textures.size();}
-         const unsigned int getMax(unsigned int i) {if(i<m_textures.size())return m_textures[i].size();return 0;}
+         const unsigned int getMax(std::string id) {return m_textures[id].size();}
             virtual ~TextureEngine();
 
     protected:
 
-        std::vector< std::vector<sf::Texture*> > m_textures; // Double pour animations
-
-        static std::vector<std::string> m_names;
+        std::unordered_map<std::string,std::vector<sf::Texture*>> m_textures;
 };
 
 #endif // TEXTUREENGINE_H

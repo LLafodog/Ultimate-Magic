@@ -4,6 +4,7 @@
 #include"Animation.h"
 #include<string>
 #include<vector>
+#include<unordered_map>
 
 class AnimationEngine
 {
@@ -13,16 +14,15 @@ class AnimationEngine
             static AnimationEngine* m_self;
 
          Animation* get(std::string name);
-         Animation* get(unsigned int i);
              std::vector<Animation*> getAllOf(std::string name);
 
-        void addAnimation(Animation* a) {if(a!=nullptr){Animation anim(*a);m_animations.push_back(anim);}}
+        void addAnimation(Animation* a) {if(a!=nullptr){m_animations.insert(std::pair<std::string,Animation*>(a->getID(),a));}}
          const unsigned int getMax() {return m_animations.size();}
 
         virtual ~AnimationEngine();
 
     protected:
-        std::vector<Animation> m_animations;
+        std::unordered_map<std::string,Animation*> m_animations;
 
 };
 

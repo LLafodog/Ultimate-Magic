@@ -36,7 +36,7 @@ void Tile::initSquare(float width, float height)
 const sf::ConvexShape* Tile::getApparence()
 {
     if(m_animation!=nullptr)m_cs.setTexture(m_animation->getCurrentFrame());
-    else{cerr<< " Problem with id: " << m_id << endl; m_cs.setTexture(TextureEngine::getInstance()->get("error"));}
+    else{cerr<< " [Tile::getApparence] Problem with id: " << m_id << endl; m_cs.setTexture(TextureEngine::getInstance()->get("error"));}
     return &m_cs;
 }
 

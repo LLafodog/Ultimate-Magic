@@ -18,36 +18,41 @@ Loader::Loader()
     }
 }
 
-std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> Loader::getTileProbabilities(std::string path)
-/// Load the probabilities from a .prob file packed in a tile_probabilities.txt file
+unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileProbabilities(string path)
+/// Load the probabilities from a .prob file, all of the .prob files are packed in a tile_probabilities.txt file
 {
-
-
+    /// Vars
     string txt_line;
     ifstream txt_reader(path.c_str());
-    vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> probabilities;
+    unordered_map<string,std::vector<std::pair<std::string,float>>> probabilities;
 
+    /// Opening the txt file
     if(!txt_reader.is_open()){cerr << " Problem opening " << path << "file. " <<endl;}
     else
     {
-        std::pair<std::string,std::vector<std::pair<std::string,float>>> link_prob_name;
-        link_prob_name.first=txt_line;
+        pair<string,std::vector<std::pair<std::string,float>>> link_prob_name;
+
+        /// Reading the .txt file
         while(getline(txt_reader,txt_line))
         {
             //cout << " TXT line : " << txt_line <<endl;
-            string prob_line;
-            ifstream prob_reader(Global::TO_DATA+"dat/"+txt_line.c_str()+".prob");
 
-            vector<pair<string,float>> prob_data;
+            string prob_line; // will contain the .prob line
+            ifstream prob_reader(Global::TO_DATA+"dat/"+txt_line.c_str()+".prob"); // will open it
 
+            // Var
+            std::vector<std::pair<std::string,float>> prob_data;
+
+            /// OPENING THE .PROB FILE
             if(!prob_reader.is_open()){cerr << " Problem opening " << txt_line << ".prob file. " <<endl;}
             else
             {
             pair<string,float> temp={"nope",-1};
+
+            /// READING THE .PROB FILE
             while(getline(prob_reader,prob_line))
                 {
-               // cout << " prob line : " << prob_line <<endl;
-                // tools to read
+                /// VARS
                 string word="";
                 int wordNumber=0; // determinates which word is being read
 
@@ -84,11 +89,10 @@ std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> Lo
                         }
                     }
                 }
-                if(temp.second!=0)prob_data.push_back( temp );
             }
             link_prob_name.first=txt_line;
-            link_prob_name.second=vector<pair<string,float>>(prob_data);
-            probabilities.push_back(link_prob_name);
+            link_prob_name.second=std::vector<std::pair<std::string,float>>(prob_data);
+            probabilities.insert(link_prob_name);
 
 /*
             for(int k(0);k<link_prob_name.second.size();k++)

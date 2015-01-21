@@ -30,12 +30,13 @@ void Object::update()
 {
     for(int i(0);i<m_effects.size();i++)
     {
-        cout << "id : " << m_id << " nb of effects : " <<  m_effects.size() << endl;
+        cout << "id : " << m_id << " nb of effects : " <<  m_effects.size() << "id : " << m_effects[i]->getID() << " duration : " << m_effects[i]->getElapsedTime() << " speed : " << m_speed << endl;
         Effect* e=m_effects[i];
         if(e!=nullptr && e->isActive()){e->update();}
-        else{delete e;m_effects.erase(m_effects.begin()+i)  ;}
+        else{delete e;m_effects.erase(m_effects.begin()+i);}
     }
 }
+
 
 Object::~Object()
 {

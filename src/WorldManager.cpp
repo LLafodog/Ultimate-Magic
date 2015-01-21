@@ -60,7 +60,8 @@ World* WorldManager::newWorld()
         // to do: with .wdat value
             double altitude=alt->get(i,j);
             double humidity=humid->get(i,j);
-            // To do : with humidity
+
+            /// TO IMPROVE WITH .GENERATE FILE
             if(altitude<=5){pickElementOf(wo,i,j,"deep_sea");}
 
             if(altitude>5 && altitude<=14.28) // water etc
@@ -96,115 +97,25 @@ World* WorldManager::newWorld()
                 else {pickElementOf(wo,i,j,"snow");}
 
             }
-
-            /* // TESTING
-            if(val<=14.28){wo->modifyTile(Vector2f(i,j),"invisible",true);} //5% de l'image
-            if(val>14.28 && val <=57.14 ){wo->modifyTile(Vector2f(i,j),"desert",true);} //20% de l'image
-            if(val>57.14 && val <=71.43 ){wo->modifyTile(Vector2f(i,j),"grass",true);} //5% de l'image
-            if(val>71.43 && val <=80 ){wo->modifyTile(Vector2f(i,j),"light_grass",true);} //3% de l'image
-            if(val>80){wo->modifyTile(Vector2f(i,j),"error",true);} //5% de l'image
-            */
         }
     }
 
-    //Second passage
-    /*
-    for (int i(0);i<h;i++)
-    {
-        for(int j(0);j<w;j++)
-        {
-            string tile=wo->getTile(i,j),;
-
-            string tile_sup=wo->getTile(i-1,j),
-                   tile_sup_left=wo->getTile(i-1,j-1),
-                   tile_sup_right=wo->getTile(i-1,j+1),
-
-                   tile_right=wo->getTile(i,j+1),
-                   tile_left=wo->getTile(i,j-1);
-
-                   tile_inf=wo->getTile(i+1,j),
-                   tile_inf_left=wo->getTile(i+1,j-1),
-                   tile_inf_right=wo->getTile(i+1,j+1);
-
-            string corrected=tile;
-            if(tile!=tile_sup){corrected+="_t";}
-            if(tile!=tile_sup){corrected+="";}
-            if(tile!=tile_sup){corrected+="_t";}
-
-
-        }
-    }*/
     m_actual=wo;
     return wo;
 }
 
 
-/// ===========================
-enum prob
+/// ================================
+///         NO MORE LOADING
+/// ================================
+
+enum ENUM_PROBABILITIES
 {
     P_AUX1=1,
     P_AUX2=2,
     P_OBJ1=3,
     P_OBJ2=4
 };
-
-/*void WorldManager::loadProba(std::string biome)
-/// Load the probabilities from a .prob file
-{
-    // RE-init
-    m_areaData=vector<pair<string,float>>();
-
-    // prepare to read
-    string line;
-    ifstream reader(Global::TO_DATA+"dat/"+biome.c_str()+".prob");
-
-    //reading
-    if(!reader.is_open()){cerr<<"Problem loading the " << biome << ".prob"<<endl; loadProba("error");} // TO DO ?
-    else
-        {
-        pair<string,float> temp={"nope",-1};
-        while(getline(reader,line))
-            {
-            // tools to read
-            string word="";
-            int wordNumber=0; // determinates which word is being read
-
-            /// analysis of the line
-            for(unsigned int i(0);i<=line.size();i++)
-                {
-                char linei=line[i];
-                if(linei!='\n' && linei!=' ' && i!=line.size()) // useless char
-                {
-                word+=linei; // building the word
-                }
-                else if(word!="") ///security
-                {
-                    wordNumber++; // counting how many word have pasted
-                    ///transcription
-                    switch(wordNumber)
-                    {
-                        case 1: /// id
-                        {
-                        temp.first=word;
-                        }
-                        break;
-                        case 2: /// float value
-                        {
-                        temp.second=atof(word.c_str());
-                        }
-                        break;
-                        default:
-                        cerr<<"[Probability loading] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
-                        break;
-                }
-                if(temp.second>0 && temp.first!=""){m_areaData.push_back(temp); temp=pair<string,float>();}
-                word="";
-                }
-            }
-        }
-    }
-}
-*/
 
 void WorldManager::getProbabilities(std::string path)
 {
@@ -214,27 +125,18 @@ void WorldManager::getProbabilities(std::string path)
 
 
 
-
-
 void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 {
     /// find the right biome
-    vector<pair<string,float>> v;
-    for(int i(0);i<m_tileProbabilities.size();i++)
+    vector<pair<string,float>> probabilities=m_tileProbabilities[biome];
+
+    for(int i(0);i<sizeof(ENUM_PROBABILITIES);i++)
     {
-        if(m_tileProbabilities[i].first==biome)
-        {
-            v=m_tileProbabilities[i].second;
-        }
-    }
-    //loadProba(biome);
-    for(int i(0);i<sizeof(prob);i++)
-    {
-        if(i<v.size() && Global::Proba(v[i].second))
+        if(i<probabilities.size() && Global::Proba(probabilities[i].second))
         {
             switch(i)
             {
-                case P_AUX1:
+                case P_AUX1: P_AUX2:
                 {
                     /// Draw a cross with an alea error;
                     /*
@@ -243,39 +145,22 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
                                    X A X
 
                     */
-                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x,y),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y-1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x,y-1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y-1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y+1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x,y+1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y+1),v[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y-1),probabilities[i].first,true);}  if(rand()%2==0){w->modifyTile(Vector2f(x,y-1),probabilities[i].first,true);}    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y-1),probabilities[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y),probabilities[i].first,true);}    if(rand()%2==0){w->modifyTile(Vector2f(x,y),probabilities[i].first,true);}  if(rand()%2==0){w->modifyTile(Vector2f(x+1,y),probabilities[i].first,true);}
+                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y+1),probabilities[i].first,true);}  if(rand()%2==0){w->modifyTile(Vector2f(x,y+1),probabilities[i].first,true);}    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y+1),probabilities[i].first,true);}
+
+
+
+
+
+
+
 
                 }break;
-                case P_AUX2:
-                {
-                    /// Draw a cross with an alea error;
-                    /*
-                                   X A X
-                                   A A A
-                                   X A X
 
-                    */
-                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x,y),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y-1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x,y-1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y-1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x-1,y+1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x,y+1),v[i].first,true);}
-                    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y+1),v[i].first,true);}
+                case P_OBJ1:{w->addObject(ObjectEngine::getPremade(probabilities[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
 
-                }break;
-                case P_OBJ1:{w->addObject(ObjectEngine::getPremade(v[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
-                default: {w->modifyTile(Vector2f(x,y),v[i].first,true);} break; //basic
+                default: {w->modifyTile(Vector2f(x,y),probabilities[i].first,true);} break; //basic
             }
         }
     }

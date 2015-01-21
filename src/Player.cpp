@@ -10,7 +10,7 @@
 
 
 /// EFFECTS
-#include "Ablaze.h"
+#include "Effect.h"
 
 #include"Alive.h"
 
@@ -43,7 +43,7 @@ void Player::update()
     m_alive->update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
     //to throw
-    if(m_collide){addEffect(new Ablaze(this,2,10000)); m_collide=false;}
+    if(m_collide){addEffect(new Effect("ablaze",this,50,2000)); m_collide=false;}
     /// MOVING
     if(!m_alive->isDead() )
     {

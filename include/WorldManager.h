@@ -7,6 +7,7 @@
 
 #include<vector>
 #include<string>
+#include<unordered_map>
 
 class Perlin;
 
@@ -46,7 +47,9 @@ class WorldManager
         std::vector<Perlin*> m_humidity;
         std::vector<std::vector<World*>> m_worlds;
 
-        std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> m_tileProbabilities;
+        std::unordered_map<std::string,std::vector<std::pair<std::string,float>>> m_tileProbabilities;
+
+        //std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> m_tileProbabilities;
         //std::vector<std::pair<std::string,vector<std::string>>> m_properties;
 };
 

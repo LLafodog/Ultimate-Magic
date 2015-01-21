@@ -38,7 +38,11 @@ void Alive::suffer(float damage) //TO DO with effects
     if(!m_invincible)
     {
         //cout << " suffered " <<endl;
-        if(m_health>0){m_health-=damage; m_invincibleClock.restart();}
+        if(m_health>0)
+        {
+            m_health-=damage;
+//            m_invincibleClock.restart();
+        }
         else die();
     }
 

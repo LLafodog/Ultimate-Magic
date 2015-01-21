@@ -41,7 +41,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="../include/Ablaze.h" />
 		<Unit filename="../include/Alive.h" />
 		<Unit filename="../include/Animation.h" />
 		<Unit filename="../include/AnimationEngine.h" />
@@ -70,7 +69,6 @@
 		<Unit filename="../include/Villager.h" />
 		<Unit filename="../include/World.h" />
 		<Unit filename="../include/WorldManager.h" />
-		<Unit filename="../src/Ablaze.cpp" />
 		<Unit filename="../src/Alive.cpp" />
 		<Unit filename="../src/Animation.cpp" />
 		<Unit filename="../src/AnimationEngine.cpp" />
