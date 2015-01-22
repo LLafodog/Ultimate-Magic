@@ -6,7 +6,8 @@ Movable::Movable(World* w, float x, float y, float width, float height) : Positi
 {
     m_world=w;
 
-    m_speed=320;
+    m_speed=0;
+    m_effectiveSpeed=m_speed;
     m_isMoving=true;
     m_orientation='n'; // cuz first anim and every one has at least one anim.
 }

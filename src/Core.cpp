@@ -37,8 +37,13 @@ Controller* Core::m_controller=new KeyboardController();
 Core::Core(sf::RenderWindow* window)
 {
     m_window=window;
-    load(); //texture graphics load
-    init(); // Initialise son graphics (les textures), le FPS et crée le monde.
+    if(window!=nullptr)
+    {
+        m_window->setVerticalSyncEnabled(true);
+        load(); //texture graphics load
+        init(); // Initialise son graphics (les textures), le FPS et crée le monde.
+    }
+
 }
 
 void Core::init()

@@ -8,6 +8,7 @@
 
 class Player;
 class Object;
+class Effect;
 
 class World
 {
@@ -25,6 +26,7 @@ class World
             const std::vector<std::vector<std::string>> getTiles() {return m_tiles;}
             const std::string getTile(int i, int j) {if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0)return m_tiles[j][i]; else return"error";}
             const bool isThisTileSolid(float i, float j);
+            Effect* getTileEffect(int i, int j, Object* o);
 
             //objects
             const std::vector<Object*> getObjects() {return m_objects;}

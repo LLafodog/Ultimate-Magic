@@ -18,7 +18,7 @@ AnimationEngine::AnimationEngine()
 Animation* AnimationEngine::get(string name)
 {
         //cout << " Name : " << name << " converted into : " << TextureEngine::convertID(name) <<endl;
-        return m_animations[name];
+        return new Animation(*m_animations[name]);
 }
 
 std::vector<Animation*> AnimationEngine::getAllOf(std::string name)

@@ -9,15 +9,18 @@ using namespace std;
 
 Alive::Alive(float maxHealth, float healthRegen, bool alive)
 {
-    //begin full life
+    /// It begins full life
     m_health=maxHealth;
     m_maxHealth=maxHealth;
-    //Health Regeneration
+
+    /// Health Regeneration initialized
     m_healthRegen=healthRegen;
-    m_timeBetweenHeal=1000; //ms
-    //begin alive haha
+    m_timeBetweenHeal=1000; /// ms !
+
+    /// Better start alive...
     m_alive=alive;
 
+    /// Allows a litle pause when hit
     m_invincibleClock.restart();
     m_invincible=false;
 }
@@ -37,28 +40,30 @@ void Alive::suffer(float damage) //TO DO with effects
 {
     if(!m_invincible)
     {
-        //cout << " suffered " <<endl;
         if(m_health>0)
         {
             m_health-=damage;
-//            m_invincibleClock.restart();
         }
-        else die();
+        else die(); /// WE DIED !
     }
 
 }
 
 void Alive::update()
+/**
+    Main method of Alive
+    It waits the right time ( m_timeBetweenHeal ) to let the Health Regeneration act.
+    Then it looks if the Alive entity is actually invincible.
+**/
 {
     ///Update health regen
-    //cout << boolalpha << isDead() <<endl;
     if(m_clock.getElapsedTime().asMilliseconds()>=m_timeBetweenHeal)
     {
-        //cout << "healed " << endl;
         float heal=m_healthRegen;
         if(m_health+heal<=m_maxHealth)m_health+=heal;
         m_clock.restart();
     }
+
     ///Update invincibility
     if(m_invincibleClock.getElapsedTime().asMilliseconds()<=m_timesleeping)
     {

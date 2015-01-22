@@ -5,7 +5,7 @@ using namespace sf;
 
 Villager::Villager(Object* o, Behavior* b) : NPC(o,b)
 {
-    m_speed=32;
+    initSpeed(32);
 }
 
 void Villager::update()

@@ -11,9 +11,13 @@ using namespace sf;
 
 int main()
 {
+    // init random
     srand(time(NULL));
 
+    // the game window starts
     RenderWindow window(VideoMode(Global::WINDOW_WIDTH,Global::WINDOW_HEIGHT),"Useless title");
+
+    // let's play !
     Core core(&window);
     core.run();
 

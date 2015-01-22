@@ -3,7 +3,9 @@
 #include "Player.h"
 #include "Villager.h"
     #include "IddleBehavior.h"
+
 #include "Object.h"
+#include "Effect.h"
 
 #include "Global.h"
 #include "Core.h"
@@ -96,8 +98,8 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs) ///EDITOR BUG ?
 
     if(!abs)
     {
-    x/=Global::TILE_WIDTH;
-    y/=Global::TILE_HEIGHT;
+        x/=Global::TILE_WIDTH;
+        y/=Global::TILE_HEIGHT;
     }
 
     if(x>0 && y>0 && x<m_width && y<m_height)
@@ -107,6 +109,27 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs) ///EDITOR BUG ?
         //cout << " Changed tile ("<<x<<","<<y<<") in " << id <<"."<<endl;
     }
     //else {    cout << " Tryied to change tile ("<<x<<","<<y<<") in " << id <<"."<<endl;}
+}
+
+Effect* World::getTileEffect(int i, int j, Object* o)
+{
+    if(o!=nullptr)
+    {
+        string tile=getTile(i,j);
+
+        if(tile =="water" || tile=="dark_water")
+        {
+            return(new Effect(CHANGE_SPEED,o,80));
+            //cout << " World: J'ai ralenti notre ami " << o->getID() << endl;
+        }
+
+        else
+        {
+            return(new Effect(NONE,o));
+        }
+    }
+
+
 }
 
 World::~World()

@@ -21,17 +21,22 @@ class Movable : public Positionnable
         const void hasMoved() {m_isMoving=false;}
         const char getOrientation() {return m_orientation;}
         const float getSpeed() {return m_speed;}
-        void setSpeedFactor(float factor) {m_speed*=factor;}
+        const float getEffectiveSpeed() {return m_speed;}
+        void setSpeedFactor(float factor) {m_effectiveSpeed*=factor;}
         /// ============ METHODS =============
         void moveOn(float x, float y, bool changeOrientation=true);
-            void moveOnF(int nSpeedX, int nSpeedY, bool changeOrientation=true) {moveOn(nSpeedX*m_speed,nSpeedY*m_speed,changeOrientation);}
+            void moveOnF(int nSpeedX, int nSpeedY, bool changeOrientation=true) {moveOn(nSpeedX*m_effectiveSpeed,nSpeedY*m_effectiveSpeed,changeOrientation);}
 
+        /// ============ SETTER =================
+        void restoreSpeed() {m_effectiveSpeed=m_speed;}
+        void initSpeed(float val) {m_speed=val; m_effectiveSpeed=val;}
         virtual ~Movable();
 
     protected:
 
     World* m_world;
     float m_speed;
+    float m_effectiveSpeed;
     bool m_isMoving;
     char m_orientation;
 };

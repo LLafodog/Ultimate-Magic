@@ -25,7 +25,7 @@ Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, floa
 void Player::initStats()
 {
 
-
+    initSpeed(320);
     //intrasecly
     m_name="Anonymous";
     m_mana=0;
@@ -43,7 +43,7 @@ void Player::update()
     m_alive->update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
     //to throw
-    if(m_collide){addEffect(new Effect("ablaze",this,50,2000)); m_collide=false;}
+    if(m_collide){m_collide=false;}
     /// MOVING
     if(!m_alive->isDead() )
     {

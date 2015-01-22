@@ -2,6 +2,7 @@
 #define COLLISIONNABLE_H
 
 #include "Movable.h"
+#include<SFML/Graphics.hpp>
 
 class World;
 class Object;
@@ -19,6 +20,8 @@ class Collisionnable : public Movable
         void setWorld(World* w) {m_world=w;}
         World* getWorld() {return m_world;}
         const bool isSolid() {return m_solid;}
+        sf::Vector2f getPositionWithHitbox() {return sf::Vector2f(m_x+m_hitbox.left,m_y+m_hitbox.top);}
+        sf::Vector2f getCenterWithHitbox() {return sf::Vector2f(m_x+m_hitbox.left+m_hitbox.width/2,m_y+m_hitbox.top+m_hitbox.height/2);}
         //setter
         void setCollide(bool b){m_collide=b;}
         void setCollision(Collisionnable* c) {m_collision=c;}
