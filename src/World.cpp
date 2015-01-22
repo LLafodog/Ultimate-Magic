@@ -9,6 +9,7 @@
 
 #include "Global.h"
 #include "Core.h"
+#include "Tile.h"
 
 #include"ObjectEngine.h"
 
@@ -25,10 +26,10 @@ World::World(int w, int h, std::string val)
 {
     for(int i(0);i<h;i++)
     {
-        vector<string> temp;
+        vector<Tile*> temp;
         for(int j(0);j<w;j++)
         {
-            temp.push_back(val);
+            temp.push_back(new Tile(val));
         }
         m_tiles.push_back(temp);
     }
@@ -36,6 +37,7 @@ World::World(int w, int h, std::string val)
     m_height=h;
     m_updated=false;
 
+    // to improve
     addPlayer();
 }
 
@@ -57,10 +59,19 @@ World::World(string pathfile, int players)
 const bool World::isThisTileSolid(float i, float j)
 {
 
-    if(getTile(i,j)[0]=='S')return true;
+    if(getTileID(i,j)[0]=='S')return true; // to do
     return false;
 }
 
+const std::string World::getTileID(int i, int j)
+{
+    if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr )return m_tiles[j][i]->getID(); else return "error";
+}
+
+Tile* World::getTile(int i, int j)
+{
+    if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr ) {return m_tiles[j][i];}return nullptr;
+}
 
 void World::addPlayer()
 {
@@ -91,7 +102,7 @@ void World::update()
     }
 }
 
-void World::modifyTile(sf::Vector2f v, string id, bool abs) ///EDITOR BUG ?
+void World::modifyTile(sf::Vector2f v, string id, bool abs)
 {
     int x=v.x,
         y=v.y;
@@ -102,9 +113,9 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs) ///EDITOR BUG ?
         y/=Global::TILE_HEIGHT;
     }
 
-    if(x>0 && y>0 && x<m_width && y<m_height)
+    if(x>0 && y>0 && x<m_width && y<m_height && m_tiles[y][x]!=nullptr)
     {
-        m_tiles[y][x]=id;
+        m_tiles[y][x]->setID(id);
         needToBeUpdated();
         //cout << " Changed tile ("<<x<<","<<y<<") in " << id <<"."<<endl;
     }
@@ -115,7 +126,7 @@ Effect* World::getTileEffect(int i, int j, Object* o)
 {
     if(o!=nullptr)
     {
-        string tile=getTile(i,j);
+        string tile=getTileID(i,j);
 
         if(tile =="water" || tile=="dark_water")
         {
@@ -134,4 +145,12 @@ Effect* World::getTileEffect(int i, int j, Object* o)
 
 World::~World()
 {
+    for(int i(0);i<m_tiles.size();i++)
+    {
+    for(Tile* t:m_tiles[i]){delete t;}
+    }
+
+    for(Object* o:m_objects){delete o;}
+
+
 }

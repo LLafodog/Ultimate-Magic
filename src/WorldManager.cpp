@@ -4,6 +4,8 @@
 
 #include<fstream>
 
+#include "Tile.h"
+
 #include "Perlin.h"
 #include "Global.h"
 #include "ObjectEngine.h"
@@ -21,7 +23,7 @@ WorldManager::WorldManager()
     self=this;
     m_worlds={};
     m_actual=nullptr;
-    getProbabilities(Global::TO_DATA+"dat/tile_probabilities.txt");
+    getProbabilities(Global::TO_DATA+"dat/biomes.txt");
 
     }
 
@@ -60,6 +62,9 @@ World* WorldManager::newWorld()
         // to do: with .wdat value
             double altitude=alt->get(i,j);
             double humidity=humid->get(i,j);
+
+            Tile* t=wo->getTile(i,j);
+            if(t!=nullptr)t->setAltitude(altitude);
 
             /// TO IMPROVE WITH .GENERATE FILE
             if(altitude<=5){pickElementOf(wo,i,j,"deep_sea");}
@@ -105,9 +110,9 @@ World* WorldManager::newWorld()
 }
 
 
-/// ================================
-///         NO MORE LOADING
-/// ================================
+///     ================================    ///
+///             NO MORE LOADING             ///
+///     ================================    ///
 
 enum ENUM_PROBABILITIES
 {
@@ -179,7 +184,7 @@ void WorldManager::loadWorld(string pathfile, World* wo)
     {
         m_actual=wo;
         ///Destruction of old world
-        m_actual->setTiles(vector<vector<string>>());
+        m_actual->setTiles(vector<vector<Tile*>>());
         for(Object* o:m_actual->getObjects()){if(!o->isPlayer()){delete o;};}
             m_actual->setObjects(vector<Object*>());
 
@@ -270,8 +275,8 @@ void WorldManager::readInformationLine(string line)
 void WorldManager::readTileLine(string line)
 {
     char tileSeparator='T';
-    vector<string> v;
-    vector<vector<string>>tiles;
+    vector<Tile*> v;
+    vector<vector<Tile*>>tiles;
     string word="";
     for(unsigned int i(0);i<line.size();i++)
     {
@@ -281,7 +286,7 @@ void WorldManager::readTileLine(string line)
         {
             if(word!="") ///security
             {
-                v.push_back(word);
+                v.push_back(new Tile(word));
                 word="";
             }
 

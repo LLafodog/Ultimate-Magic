@@ -2,7 +2,7 @@
 
 #include "Player.h"
 #include "World.h"
-#include "Tile.h"
+#include "EntityGraphic.h"
 
 #include "Object.h"
 #include "Alive.h"
@@ -16,6 +16,9 @@
 
 #include "Camera.h"
 
+#include "Tile.h"
+
+#include<cmath>
 
 #include <SFML/Graphics.hpp>
 #include <ctime>
@@ -39,8 +42,12 @@ Graphics::Graphics(RenderWindow* w, World* wo)
    init();
 
    // in case of error
-   m_error =new Tile("error",-50,-50);
+   //m_error =new EntityGraphic("error",-50,-50);
+   m_error = new EntityGraphic(new Tile("error",0,true),0,0);
+
+
    m_particle= new RectangleShape(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
+   m_shadow = new RectangleShape(*m_particle);
 }
 
 void Graphics::init()
@@ -52,18 +59,23 @@ void Graphics::init()
 
 void Graphics::initTiles()
 {
-    m_tiles=vector<vector<Tile*>>();
+    m_tiles=vector<vector<EntityGraphic*>>();
 
     ///background
     //The tiles are loaded in the wrong ordre so we MUST invert each time.
     for(unsigned int i(0);i<m_world->getTiles().size();i++)
     {
-        std::vector<Tile*> v;
+        std::vector<EntityGraphic*> v;
         for(unsigned int j(0);j<m_world->getTiles()[i].size();j++)
         {
             //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
-            string id=m_world->getTiles()[i][j];
-            Tile* t=new Tile(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
+
+            //EntityGraphic* t=new EntityGraphic(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
+
+            Tile* ti=m_world->getTile(j,i);
+            if(ti==nullptr){ti=new Tile("error",100);}
+            EntityGraphic* t=new EntityGraphic(ti,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT,true);
+
             //cout << " new tile : x: " <<j*Global::TILE_WIDTH << " y: " << i*Global::TILE_HEIGHT <<endl; // to know where the tiles are created
             v.push_back(t);
         }
@@ -199,17 +211,23 @@ ConvexShape* Graphics::getTriangle(int x, int y, char dir)
 
 
 
-
-
-
-
-const void Graphics::drawTile(Tile*t)
+void Graphics::drawShadow(EntityGraphic* t)
 {
-    if( t!=nullptr && t->isVisible())
-    {
+    /// SHADOW
+    Tile* ti=t->getTile();
+    double alt=ti->getAltitude();
+    double shadow = 0;
+    short lim=40;
+    short shadow_max=120;
+    if(alt<40){shadow=shadow_max*(1.0-(alt+100-lim)/100.0);}
 
-        m_window->draw(*(t->getApparence()));
+    m_shadow->setFillColor(Color(0,0,0,shadow));
+    m_shadow->setPosition(t->getPosition());
+    m_window->draw(*m_shadow);
+}
 
+void Graphics::drawTileParticles(EntityGraphic* t)
+{
         /// Now trying to smooth a bit
         // var
         int x=t->getPositionX()/Global::TILE_WIDTH,
@@ -218,22 +236,17 @@ const void Graphics::drawTile(Tile*t)
               yabs=t->getPositionY();
 
         // neighboors
-        string  up      = m_world->getTile(x,y-1),
-                down    = m_world->getTile(x,y+1),
-                left    = m_world->getTile(x-1,y),
-                right   = m_world->getTile(x+1,y),
+        string  up      = m_world->getTileID(x,y-1),
+                down    = m_world->getTileID(x,y+1),
+                left    = m_world->getTileID(x-1,y),
+                right   = m_world->getTileID(x+1,y),
                 actual = t->getID();
-
-
-
-
-//if(x%2 == 0 ||  y%2==0)
-{
 
         TextureEngine* te=TextureEngine::getInstance();
 
+        drawShadow(t);
 
-
+                        /// PARTICLES
 
 /// =================== Third method ========================
         RectangleShape rc(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
@@ -266,73 +279,16 @@ const void Graphics::drawTile(Tile*t)
         }
 
 
-/// =================== Second method ========================
-/*
-        if(actual != up)
-        {
-            ConvexShape cs1= *getTriangle(xabs,yabs,'t');
-                cs1.setTexture(te->get(up+"_particles"));
-                m_window->draw(cs1);
-        }
-
-        if(actual != left)
-        {
-            ConvexShape cs1= *getTriangle(xabs,yabs,'l');
-                cs1.setTexture(te->get(left+"_particles"));
-                m_window->draw(cs1);
-        }
-
-        if(actual != right)
-        {
-            ConvexShape cs1= *getTriangle(xabs,yabs,'r');
-                cs1.setTexture(te->get(right+"_particles"));
-                m_window->draw(cs1);
-        }
-
-        if(actual != down)
-        {
-            ConvexShape cs1= *getTriangle(xabs,yabs,'b');
-                cs1.setTexture(te->get(down+"_particles"));
-                m_window->draw(cs1);
-        }
-*/
 }
 
+const void Graphics::drawTile(EntityGraphic*t)
+{
+    if( t!=nullptr && t->isVisible())
+    {
 
-
-
-
-
-
-
-
-
-/// =================== First method ========================
-
-/*
-        if(!(actual == up && actual == down && actual == left && actual == right ))
-        {
-            TextureEngine* te=TextureEngine::getInstance();
-
-            ConvexShape cs1= *getTriangle(xabs,yabs,'t');
-                cs1.setTexture(te->get(up));
-
-            ConvexShape cs2= *getTriangle(xabs,yabs,'b');
-                cs2.setTexture(te->get(down));
-
-            ConvexShape cs3= *getTriangle(xabs,yabs,'l');
-                cs3.setTexture(te->get(left));
-
-            ConvexShape cs4= *getTriangle(xabs,yabs,'r');
-                cs4.setTexture(te->get(right));
-
-            m_window->draw(cs1);
-            m_window->draw(cs2);
-            m_window->draw(cs3);
-            m_window->draw(cs4);
-        }*/
-
-
+        m_window->draw(*(t->getApparence()));
+        drawTileParticles(t);
+        drawShadow(t);
     }
 }
 

@@ -8,7 +8,7 @@
 
 class Player;
 class World;
-class Tile;
+class EntityGraphic;
 class Object;
 class Camera;
 class VObject;
@@ -24,8 +24,10 @@ class Graphics
     ///drawing
         const void draw();
             const void drawAll();
-            const void drawTile(Tile*t);
+            const void drawTile(EntityGraphic*t);
             const void drawVisibleArea();
+                void drawShadow(EntityGraphic* t);
+                void drawTileParticles(EntityGraphic* t);
             const void drawVisibleObjects();
             const void drawObject(VObject* o);
                 const void drawAboutAlive(VObject* );
@@ -57,7 +59,7 @@ class Graphics
     int m_time;
     int m_refreshTime;
 
-    vector<vector<Tile*>> m_tiles;
+    vector<vector<EntityGraphic*>> m_tiles;
     vector<VObject*> m_objects;
     vector<VObject*> m_visibleObjects;
     sf::RenderWindow* m_window;
@@ -65,7 +67,8 @@ class Graphics
     Camera* m_camera;
     bool m_details; //allow to draw all details like lifebar
 
-    Tile* m_error;
+    EntityGraphic* m_error;
+    sf::RectangleShape* m_shadow;
     sf::RectangleShape* m_particle;
 
 };

@@ -5,11 +5,12 @@
 #include "Player.h"
 
 #include "Alive.h"
+#include "Tile.h"
 
 using namespace std;
 using namespace sf;
 
-VObject::VObject(Object* o): Tile(o->getID(),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y)
+VObject::VObject(Object* o): EntityGraphic(new Tile(o->getID()),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y)
 {
     m_object=o;
     m_orientation='n';
@@ -25,7 +26,7 @@ VObject::VObject(Object* o): Tile(o->getID(),o->getPositionX(), o->getPositionY(
 void VObject::update()
 {
     // Tile update
-    Tile::update();
+    EntityGraphic::update();
 
     // Orientation update
     char currentOrientation=m_object->getOrientation();

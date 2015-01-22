@@ -38,7 +38,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
             //cout << " TXT line : " << txt_line <<endl;
 
             string prob_line; // will contain the .prob line
-            ifstream prob_reader(Global::TO_DATA+"dat/"+txt_line.c_str()+".prob"); // will open it
+            ifstream prob_reader(Global::TO_DATA+"dat/prob/"+txt_line.c_str()+".prob"); // will open it
 
             // Var
             std::vector<std::pair<std::string,float>> prob_data;

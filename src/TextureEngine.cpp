@@ -62,7 +62,7 @@ void TextureEngine::load()
     /// DISPLAY
     std::cout<<"Textures loading..."<<std::endl;
     //var
-    string path=Global::TO_DATA+"dat/textures.txt";
+    string path=Global::TO_DATA+"dat/textures_loading.txt";
 
 
     /*void(TextureEngine::*ptr)(string)=&TextureEngine::readLine;

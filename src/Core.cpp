@@ -23,7 +23,7 @@
 #include <string>
 
 //test
-#include "Tile.h"
+#include "EntityGraphic.h"
 
 
 float Global::FPS;

@@ -1,13 +1,13 @@
 #ifndef VOBJECT_H
 #define VOBJECT_H
 
-#include "Tile.h"
+#include "EntityGraphic.h"
 
 class Object;
 class Animation;
 class Name;
 
-class VObject : public Tile
+class VObject : public EntityGraphic
 {
     public:
 

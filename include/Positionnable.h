@@ -12,9 +12,9 @@ class Positionnable
 
         virtual ~Positionnable();
 
-        const float  getPositionX() {return m_x;}
-        const float getPositionY() {return m_y;}
-        const sf::Vector2f getPosition() {return sf::Vector2f(m_x,m_y);}
+        virtual const float  getPositionX() {return m_x;}
+        virtual const float getPositionY() {return m_y;}
+        virtual sf::Vector2f getPosition() {return sf::Vector2f(m_x,m_y);}
 
         void setPositionX(float x) {m_x=x;}
         void setPositionY(float y) {m_y=y;}

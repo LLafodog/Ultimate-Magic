@@ -10,6 +10,8 @@ class Player;
 class Object;
 class Effect;
 
+#include"Tile.h" //to improve ?
+
 class World
 {
     public:
@@ -23,8 +25,9 @@ class World
             const int getHeight() {return m_height;}
 
             //tiles
-            const std::vector<std::vector<std::string>> getTiles() {return m_tiles;}
-            const std::string getTile(int i, int j) {if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0)return m_tiles[j][i]; else return"error";}
+            const std::vector<std::vector<Tile*>> getTiles() {return m_tiles;}
+            const std::string getTileID(int i, int j);
+            Tile* getTile(int i, int j);
             const bool isThisTileSolid(float i, float j);
             Effect* getTileEffect(int i, int j, Object* o);
 
@@ -39,12 +42,13 @@ class World
         void addObject(Object* o);
 
         //setter
-        void setTiles(std::vector<std::vector<std::string>>tiles)  {m_tiles=tiles; m_width=m_tiles.size(); m_height=m_tiles[0].size();needToBeUpdated();}
+        void setTiles(std::vector<std::vector<Tile*>>tiles)  {m_tiles=tiles; m_width=m_tiles.size(); m_height=m_tiles[0].size();needToBeUpdated();}
         void modifyTile(sf::Vector2f v, std::string id,bool abs=false);
         void setObjects(std::vector<Object*> obj)           {m_objects=obj;}
         void setWidth(int w) {m_width=w;}
         void setHeight(int h) {m_height=h;}
-        void addTileLine(std::vector<std::string> v) {if (v.size()==m_width || v.size() == m_height) m_tiles.push_back(v);}
+
+        void addTileLine(std::vector<Tile*> v) {if (v.size()==m_width || v.size() == m_height) m_tiles.push_back(v);}
 
         //updates
         void update();
@@ -57,7 +61,7 @@ class World
 
 
     protected:
-        std::vector<std::vector<std::string> >m_tiles;
+        std::vector<std::vector<Tile*> >m_tiles;
         std::vector<Object*> m_objects;
         int m_width;
         int m_height;
