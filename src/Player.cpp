@@ -64,5 +64,5 @@ void Player::update()
 
 Player::~Player()
 {
-    delete m_alive;
+
 }

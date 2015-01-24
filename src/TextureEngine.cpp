@@ -21,7 +21,7 @@ TextureEngine::TextureEngine()
     if(m_self==nullptr)
     {
     m_self=this;
-    m_textures.empty();
+    m_textures.clear();
     /*
     m_textures=vector<vector<Texture*>>();
     m_names=std::vector<std::string>();
@@ -292,8 +292,20 @@ void const TextureEngine::createAnimations()
 
 */
 
+void TextureEngine::free()
+{
+    for(auto a:m_textures)
+    {
+        for(auto b:a.second)
+        {
+            delete b;
+        }
+    }
+    delete m_self;
+}
+
 TextureEngine::~TextureEngine()
 {
-    //dtor
+
 }
 

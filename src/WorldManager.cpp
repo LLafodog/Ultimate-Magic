@@ -29,6 +29,7 @@ WorldManager::WorldManager()
 
 }
 
+
 World* WorldManager::newWorld()
 {
     // The tiles will be deducted from here
@@ -36,8 +37,6 @@ World* WorldManager::newWorld()
     int w=rand()%50+50;
     int h=rand()%50+50;
     int style=rand()%10;
-
-    style=1;
 
     Perlin* alt=new Perlin(w,h,step,style,0,50);
     m_alt.push_back(alt); // petit monde
@@ -444,7 +443,17 @@ void WorldManager::readPremadeLine(string line)
 
 
 
+void WorldManager::free()
+{
+    for(Perlin* p: m_alt){delete p;}
+    for(Perlin* p: m_humidity){delete p;}
+    //for(World* w: m_worlds){delete w;}
+    for(auto w:m_worlds){for(auto x:w){delete x;}}
+    delete self;
+}
 
 WorldManager::~WorldManager()
 {
+
 }
+

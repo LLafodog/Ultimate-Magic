@@ -19,7 +19,7 @@ class Object :public Collisionnable
 
         /* ============= CASUAL METHODS ============= */
         virtual void update();
-        virtual void addEffect(Effect* e) {if(e!=nullptr)m_effects.push_back(e);}
+        virtual void addEffect(Effect* e);
         void updateCurrentTileEffect();
 
         /* ============= GETTER ===================== */

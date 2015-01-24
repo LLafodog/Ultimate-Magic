@@ -13,6 +13,9 @@ class Tile
     public:
         Tile(std::string id, double altitude=0, bool solid=false, Effect* e=nullptr);
 
+        /// ========= CASUAL METHODS ========
+        void initEffect();
+
         /// ========= GETTER =========
         Effect* getEffect() const {return m_effect;}
         std::string getID() const {return m_id;}
@@ -20,7 +23,7 @@ class Tile
         double getAltitude() const {return m_altitude;}
 
         /// ========= SETTER =========
-        void setID(std::string val) {m_id = val;}
+        void setID(std::string val) {m_id = val; initEffect();}
         void setAltitude(double val) {m_altitude=val;}
 
 

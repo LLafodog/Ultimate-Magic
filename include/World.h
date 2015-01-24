@@ -29,7 +29,7 @@ class World
             const std::string getTileID(int i, int j);
             Tile* getTile(int i, int j);
             const bool isThisTileSolid(float i, float j);
-            Effect* getTileEffect(int i, int j, Object* o);
+            Effect* getTileEffect(int i, int j);
 
             //objects
             const std::vector<Object*> getObjects() {return m_objects;}

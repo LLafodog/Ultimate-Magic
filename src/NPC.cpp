@@ -11,5 +11,5 @@ NPC::NPC(Object* o, Behavior* b) : Object(o)
 
 NPC::~NPC()
 {
-    //dtor
+    delete m_behavior;
 }

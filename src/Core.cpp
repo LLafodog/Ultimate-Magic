@@ -190,6 +190,9 @@ Core::~Core()
 {
    delete m_graphics;
    delete m_controller;
-   delete m_te;
-   delete m_wm;
+
+   m_te->free();
+   m_wm->free();
+   Loader::getInstance()->free();
+
 }

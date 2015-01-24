@@ -53,8 +53,6 @@ class Player : public Object
     //Controls
     Controller* m_controller;
 
-    Alive* m_alive;
-
 };
 
 #endif // PLAYER_H

@@ -14,8 +14,8 @@ class TextureEngine
         TextureEngine();
         /// ========== STATIC =========
         static TextureEngine* getInstance() {return m_self;}
-        // TO IMPROVE
-        static TextureEngine* m_self;
+        void free();
+
 
 
         /* ============ LOADING =============== */
@@ -34,6 +34,7 @@ class TextureEngine
 
     protected:
 
+        static TextureEngine* m_self;
         std::unordered_map<std::string,std::vector<sf::Texture*>> m_textures;
 };
 

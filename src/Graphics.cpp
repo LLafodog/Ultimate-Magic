@@ -63,10 +63,10 @@ void Graphics::initTiles()
 
     ///background
     //The tiles are loaded in the wrong ordre so we MUST invert each time.
-    for(unsigned int i(0);i<m_world->getTiles().size();i++)
+    for(unsigned int i(0);i<m_world->getHeight();i++)
     {
         std::vector<EntityGraphic*> v;
-        for(unsigned int j(0);j<m_world->getTiles()[i].size();j++)
+        for(unsigned int j(0);j<m_world->getWidth();j++)
         {
             //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
 
@@ -126,7 +126,7 @@ void Graphics::updateTiles() //Done : in the visible area -> No, otherwise the a
 void Graphics::updateObjects()
 /// Reinitialize the visible objects
 {
-    m_visibleObjects=vector<VObject*>();
+    m_visibleObjects.clear();
     for(unsigned int i(0);i<m_objects.size();i++)
     {
         VObject* t=m_objects[i];
@@ -221,7 +221,7 @@ void Graphics::drawShadow(EntityGraphic* t)
     short shadow_max=120;
     if(alt<40){shadow=shadow_max*(1.0-(alt+100-lim)/100.0);}
 
-    m_shadow->setFillColor(Color(0,0,0,shadow));
+    m_shadow->setFillColor(Color(100,100,100,shadow));
     m_shadow->setPosition(t->getPosition());
     m_window->draw(*m_shadow);
 }
@@ -479,6 +479,9 @@ const void Graphics::drawAll()
 
 Graphics::~Graphics()
 {
-   delete m_world;
+   for(VObject* vo:m_objects){delete vo;}
+   for(auto e:m_tiles){for(auto f:e){delete f;};}
+   delete m_shadow;
+   delete m_particle;
    delete m_camera;
 }

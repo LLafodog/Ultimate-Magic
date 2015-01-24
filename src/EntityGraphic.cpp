@@ -29,7 +29,7 @@ EntityGraphic::EntityGraphic(Tile* t, int x, int y, bool visible, float width, f
     if(t!=nullptr)
     {
 
-        cout << " ID : " << t->getID() << endl;
+        //cout << " ID : " << t->getID() << endl;
         m_tile=t;
         m_id=t->getID();
         m_visible = visible;
@@ -88,5 +88,5 @@ void EntityGraphic::update()
 
 EntityGraphic::~EntityGraphic()
 {
-    delete m_animation;
+    delete m_tile;
 }

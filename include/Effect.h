@@ -38,6 +38,8 @@ class Effect
         virtual double getValue() const {return m_value;}
         /// ========= SETTER =============
         virtual void setValue(double val) {m_value=val;}
+        virtual void setObject(Object* o) {m_object=o;}
+        virtual void setActive(bool b) {m_active=b;}
 
 
         virtual ~Effect();

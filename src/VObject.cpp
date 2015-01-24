@@ -81,6 +81,5 @@ const sf::FloatRect VObject::getHitbox()
 
 VObject::~VObject()
 {
-    delete m_name;
-    for(Animation* a: m_animations){delete a;}
+
 }

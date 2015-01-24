@@ -12,7 +12,7 @@ AnimationEngine* AnimationEngine::m_self=nullptr;
 
 AnimationEngine::AnimationEngine()
 {
-    if (AnimationEngine::m_self==nullptr){AnimationEngine::m_self=this; m_animations.empty();}
+    if (AnimationEngine::m_self==nullptr){AnimationEngine::m_self=this; m_animations.clear();}
 }
 
 Animation* AnimationEngine::get(string name)
@@ -46,6 +46,14 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
     {
     v.push_back(get(name));
     return v;
+    }
+}
+
+void AnimationEngine::free()
+{
+    for(auto a:m_animations)
+    {
+        delete a.second;
     }
 }
 

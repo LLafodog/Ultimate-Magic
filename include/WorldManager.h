@@ -18,9 +18,9 @@ class WorldManager
         WorldManager();
 
         static WorldManager* getInstance() {return self;}
+        void free();
 
-        // TO IMPROVE Self protected
-        static WorldManager* self;
+
 
         World* newWorld();
 
@@ -41,6 +41,7 @@ class WorldManager
 
 
     protected:
+        static WorldManager* self;
 
         World* m_actual;
         std::vector<Perlin*> m_alt;

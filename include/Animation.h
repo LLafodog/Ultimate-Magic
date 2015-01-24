@@ -8,6 +8,9 @@
 #include <iostream>
 
 class Animation
+/**
+    Class Animation aims to display various number of texture regarding a clock and looping at every time.
+**/
 {
     public:
 

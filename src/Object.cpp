@@ -33,10 +33,10 @@ void Object::updateCurrentTileEffect()
             y=getCenterWithHitbox().y/Global::TILE_HEIGHT;
             //if(m_id == "dragon")cout << " x: " << x << " y : " << y << endl;
 
-    Effect* e=m_world->getTileEffect(x,y,this);
+    Effect* e=m_world->getTileEffect(x,y);
 
 
-    if(m_tileEffect!=nullptr)
+    if(m_tileEffect!=nullptr && e!=nullptr)
     {
         if(e->getID()==m_tileEffect->getID() && e->getValue()==m_tileEffect->getValue() )
         {
@@ -44,15 +44,30 @@ void Object::updateCurrentTileEffect()
         }
         else
         {
-            if(m_tileEffect->isActive()){m_tileEffect->end();}
+            //if(m_tileEffect->isActive())
+            {m_tileEffect->end();}
             delete m_tileEffect;
+
             m_tileEffect=e;
+            m_tileEffect->setObject(this);
+            m_tileEffect->setActive(true);
         }
     }
 
     m_tileEffect->update();
 
 
+}
+
+void Object::addEffect(Effect* e)
+{
+    if(e!=nullptr)
+    {
+        m_effects.push_back(e);
+        e->setObject(this);
+        e->setActive(true);
+
+    }
 }
 
 void Object::update()
@@ -75,5 +90,6 @@ void Object::update()
 
 Object::~Object()
 {
-    //dtor
+    for(Effect* e:m_effects){delete e;}
+    delete m_tileEffect;
 }

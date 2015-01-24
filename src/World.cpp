@@ -122,10 +122,21 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs)
     //else {    cout << " Tryied to change tile ("<<x<<","<<y<<") in " << id <<"."<<endl;}
 }
 
-Effect* World::getTileEffect(int i, int j, Object* o)
+Effect* World::getTileEffect(int i, int j)
 {
-    if(o!=nullptr)
+    if(getTile(i,j) != nullptr)
     {
+
+        Tile* ti=getTile(i,j);
+        Effect* tile=ti->getEffect();
+        if(ti!=nullptr && tile!=nullptr)
+        {
+            Effect* e=new Effect(*tile);
+            return e;
+        }
+        else return new Effect(NONE,nullptr);
+
+        /*
         string tile=getTileID(i,j);
 
         if(tile =="water" || tile=="dark_water")
@@ -138,6 +149,7 @@ Effect* World::getTileEffect(int i, int j, Object* o)
         {
             return(new Effect(NONE,o));
         }
+        */
     }
 
 
@@ -147,10 +159,7 @@ World::~World()
 {
     for(int i(0);i<m_tiles.size();i++)
     {
-    for(Tile* t:m_tiles[i]){delete t;}
+        for(Tile* t: m_tiles[i]){delete t;}
     }
-
     for(Object* o:m_objects){delete o;}
-
-
 }

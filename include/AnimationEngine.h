@@ -11,7 +11,7 @@ class AnimationEngine
     public:
         AnimationEngine();
         static AnimationEngine* getInstance() {return m_self;}
-            static AnimationEngine* m_self;
+            void free();
 
          Animation* get(std::string name);
              std::vector<Animation*> getAllOf(std::string name);
@@ -22,6 +22,7 @@ class AnimationEngine
         virtual ~AnimationEngine();
 
     protected:
+        static AnimationEngine* m_self;
         std::unordered_map<std::string,Animation*> m_animations;
 
 };

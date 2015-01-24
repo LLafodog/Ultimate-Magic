@@ -5,7 +5,6 @@
 
 class Object;
 class Animation;
-class Name;
 
 class VObject : public EntityGraphic
 {
@@ -33,7 +32,6 @@ class VObject : public EntityGraphic
         std::vector<Animation*> m_animations;
         Object* m_object;
         char m_orientation;
-        Name* m_name;
 
 
 };

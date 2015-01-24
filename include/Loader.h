@@ -13,12 +13,13 @@ class Loader
 
         // TO IMPROVE
         static Loader* getInstance() {return m_self;}
-        static Loader* m_self;
+        void free() {delete m_self;}
 
         std::unordered_map<std::string,std::vector<std::pair<std::string,float>>> getTileProbabilities(std::string path);
         virtual ~Loader();
+
     protected:
-    private:
+        static Loader* m_self;
 };
 
 #endif // LOADER_H

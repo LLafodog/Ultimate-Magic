@@ -13,7 +13,7 @@ Effect::Effect(int id, Object* o, double value, int duration, int delay)
     m_duration=duration;
     m_delay=delay;
     m_singleEffect=true; // Let an effect that acts only once to do so
-    m_active=true;
+    m_active=false;
 
     m_clock.restart();
     m_between.restart();
@@ -47,7 +47,7 @@ void Effect::update()
 void Effect::act()
 {
     // player effect:
-    if(m_object->getID()=="dragon")cout << " Object " << m_object->getID() << " ID: " << m_id << " val : " << m_value << " duratio " << m_duration << endl;
+    //if(m_object->getID()=="dragon")cout << " Object " << m_object->getID() << " ID: " << m_id << " val : " << m_value << " duratio " << m_duration << endl;
     switch(m_id)
     {
         case ABLAZE:
@@ -67,7 +67,7 @@ void Effect::act()
         {
 
             if(m_singleEffect){m_singleEffect=false; m_object->setSpeedFactor(1-(m_value/100));}
-            cout << " New speed = " << m_object->getSpeed() << rand()%10 ;
+            //cout << " New speed = " << m_object->getSpeed() << rand()%10 ;
 
         }break;
 
@@ -82,7 +82,7 @@ void Effect::end()
     if(m_id==CHANGE_SPEED)
     {
         m_object->restoreSpeed();
-        cout << " Restore speed = " << m_object->getSpeed() << rand()%10 ;
+        //cout << " Restore speed = " << m_object->getSpeed() << rand()%10 ;
     }
     m_active=false;
 }

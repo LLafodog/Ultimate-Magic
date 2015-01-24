@@ -50,6 +50,7 @@
 		<Unit filename="../include/Controller.h" />
 		<Unit filename="../include/Core.h" />
 		<Unit filename="../include/Effect.h" />
+		<Unit filename="../include/EffectEngine.h" />
 		<Unit filename="../include/EntityGraphic.h" />
 		<Unit filename="../include/Global.h" />
 		<Unit filename="../include/Graphics.h" />
@@ -79,6 +80,7 @@
 		<Unit filename="../src/Controller.cpp" />
 		<Unit filename="../src/Core.cpp" />
 		<Unit filename="../src/Effect.cpp" />
+		<Unit filename="../src/EffectEngine.cpp" />
 		<Unit filename="../src/EntityGraphic.cpp" />
 		<Unit filename="../src/Global.cpp" />
 		<Unit filename="../src/Graphics.cpp" />
