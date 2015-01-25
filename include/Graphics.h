@@ -35,10 +35,6 @@ class Graphics
         const void clear() {m_window->clear(Global::BDC);}
         static bool needToRefresh;
 
-    /// ========= STATIC =============
-    static sf::ConvexShape* getTriangle(int x, int y, char dir='t');
-
-
     ///for testing
         const void getInfo();
 

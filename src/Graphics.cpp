@@ -13,6 +13,7 @@
 
 #include "TextureEngine.h"
 #include "AnimationEngine.h"
+#include "TileEngine.h"
 
 #include "Camera.h"
 
@@ -43,7 +44,7 @@ Graphics::Graphics(RenderWindow* w, World* wo)
 
    // in case of error
    //m_error =new EntityGraphic("error",-50,-50);
-   m_error = new EntityGraphic(new Tile("error",0,true),0,0);
+   m_error = new EntityGraphic(TileEngine::getInstance()->get("ground"),-50,-50,true);
 
 
    m_particle= new RectangleShape(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
@@ -59,7 +60,7 @@ void Graphics::init()
 
 void Graphics::initTiles()
 {
-    m_tiles=vector<vector<EntityGraphic*>>();
+    m_tiles.clear();
 
     ///background
     //The tiles are loaded in the wrong ordre so we MUST invert each time.
@@ -73,7 +74,7 @@ void Graphics::initTiles()
             //EntityGraphic* t=new EntityGraphic(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
 
             Tile* ti=m_world->getTile(j,i);
-            if(ti==nullptr){ti=new Tile("error",100);}
+            if(ti==nullptr){ti=TileEngine::getInstance()->get("error");}
             EntityGraphic* t=new EntityGraphic(ti,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT,true);
 
             //cout << " new tile : x: " <<j*Global::TILE_WIDTH << " y: " << i*Global::TILE_HEIGHT <<endl; // to know where the tiles are created
@@ -89,9 +90,9 @@ void Graphics::initObjects()
     needToRefresh=true;
 
     //Objects
-    for(int i(0);i<m_world->getNumberObjects();i++)
+    for(Object* o:m_world->getObjects())
     {
-        m_objects.push_back(new VObject(m_world->getObject(i)));
+        m_objects.push_back(new VObject(o));
     }
 
 }
@@ -179,35 +180,6 @@ const void Graphics::draw()
 
 }
 
-ConvexShape* Graphics::getTriangle(int x, int y, char dir)
-{
-        ConvexShape cs;
-
-        float w=Global::TILE_WIDTH;
-        float h=Global::TILE_HEIGHT;
-
-            cs.setPointCount(3);
-            cs.setPoint(0,Vector2f(0,0));
-            cs.setPoint(1,Vector2f(w,0));
-            cs.setPoint(2,Vector2f(w/2,h/2));
-
-            cs.setOrigin(w/2,h/2);
-
-            switch(dir)
-            {
-            default:break;
-            case 'b': cs.rotate(180);break;
-            case 'l': cs.rotate(-90);break;
-            case 'r': cs.rotate(90);break;
-            }
-
-
-
-            cs.setPosition(x+w/2,y+h/2);
-
-
-            return new ConvexShape(cs);
-}
 
 
 
@@ -236,15 +208,13 @@ void Graphics::drawTileParticles(EntityGraphic* t)
               yabs=t->getPositionY();
 
         // neighboors
-        string  up      = m_world->getTileID(x,y-1),
-                down    = m_world->getTileID(x,y+1),
-                left    = m_world->getTileID(x-1,y),
-                right   = m_world->getTileID(x+1,y),
+        string  up      = m_world->getTile(x,y-1)->getID(),
+                down    = m_world->getTile(x,y+1)->getID(),
+                left    = m_world->getTile(x-1,y)->getID(),
+                right   = m_world->getTile(x+1,y)->getID(),
                 actual = t->getID();
 
         TextureEngine* te=TextureEngine::getInstance();
-
-        drawShadow(t);
 
                         /// PARTICLES
 
@@ -348,11 +318,11 @@ void Graphics::sortObjects() // pbc
 
         for(int j=0;j<(int)(m_visibleObjects.size()-1);j++)
         {
-            o1=dynamic_cast<VObject*>(m_visibleObjects[j]);
-            if(o1!=0){hy1=o1->getHitbox().top;}
+            o1=m_visibleObjects[j];
+            if(o1!=nullptr){hy1=o1->getHitbox().top;}
             else hy1=0;
 
-            o2=dynamic_cast<VObject*>(m_visibleObjects[j+1]);
+            o2=m_visibleObjects[j+1];
             if(o2!=0){hy2=o2->getHitbox().top;}
             else hy2=0;
 
@@ -381,10 +351,7 @@ const void Graphics::drawVisibleObjects()
 {
 // \todo (llafodog#1#): Besoin de trier au moment opportun les objets. Peut-être quand l'un d'eux bouge (depuis l'update par exemple) ?
     if(needResort || true )sortObjects();
-    for(unsigned int i(0);i<m_visibleObjects.size();i++)
-    {
-        drawObject(m_visibleObjects[i]);
-    }
+    for(VObject* o:m_visibleObjects){drawObject(o);}
 
 }
 
@@ -448,27 +415,26 @@ const void Graphics::drawLifeBar(VObject* o)
         m_window->draw(lifebar);
 
         }
-        else{cout<< "shitty"<<endl;}
     }
 }
 
 
 const void Graphics::drawAll()
 {
-    int t_width=m_tiles.size(),
-        t_height=0;
+    int t_width=0,
+        t_height=m_tiles.size();
 
         m_window->clear(Global::BDC);
-        for(int i=0;i<t_width;i++)
+        for(int i=0;i<t_height;i++)
         {
-            t_height=m_tiles[i].size();
-            for (int j=0;j<t_height;j++)
+            t_width=m_tiles[i].size();
+            for (int j=0;j<t_width;j++)
             {
                 //Tile position
-                int x=i*Global::TILE_HEIGHT;
-                int y=j*Global::TILE_WIDTH;
+                int x=j*Global::TILE_HEIGHT;
+                int y=i*Global::TILE_WIDTH;
 
-                if(x>=0 && y>=0 && j<m_world->getWidth() && i<m_world->getHeight()) //In order to stay in the vector(tiles)
+                if(x>=0 && y>=0 && j<m_world->getHeight() && i<m_world->getWidth()) //In order to stay in the vector(tiles)
                 {
                     drawTile(m_tiles[i][j]);
                 }

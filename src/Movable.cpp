@@ -35,7 +35,7 @@ void Movable::moveOn(float x, float y, bool changeOrientation)
         if(x>0)m_orientation='e';
         else if(x<0)m_orientation='w';
         }
-    }else{std::cerr<<"Player without world !"<<std::endl;}
+    }else{std::cerr<<"Movable without world !"<<std::endl;}
 }
 
 Movable::~Movable()

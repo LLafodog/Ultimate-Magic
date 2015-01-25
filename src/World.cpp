@@ -65,14 +65,17 @@ const bool World::isThisTileSolid(float i, float j)
     return true;
 }
 
+/*
 const std::string World::getTileID(int i, int j)
 {
     if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr )return m_tiles[j][i]->getID(); else return "error";
 }
+*/
 
 Tile* World::getTile(int i, int j)
 {
-    if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr ) {return m_tiles[j][i];}return nullptr;
+    if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr ) {return m_tiles[j][i];}
+    else{return TileEngine::getInstance()->get("error");}
 }
 
 void World::addPlayer()

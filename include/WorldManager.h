@@ -27,6 +27,7 @@ class WorldManager
         /// Loading Data
         void getProbabilities(std::string path);
         void pickElementOf(World* w, int x, int y, std::string biome);
+        void purgeWorld(World* wo);
 
         /// Loading World
         void loadWorld(std::string pathfile, World* wo);

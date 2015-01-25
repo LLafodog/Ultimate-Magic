@@ -9,8 +9,11 @@ using namespace std;
 
 Perlin::Perlin(int w, int h, int step, int style, int min, int max)
 {
-    int wt=w+(step-w%step+1);
-    int ht=h+(step-h%step+1);
+    int wt=w/step*step+1;
+    int ht=h/step*step+1;
+
+
+
     m_tab=vector<vector<double>>();
     m_width=wt;
     m_height=ht;
@@ -35,7 +38,7 @@ void Perlin::initTab(int min, int max)
         for(int j(0);j<m_width;j++)
         {
             if(i%m_step==0 && j%m_step==0){temp.push_back(random(min,max));}
-            else{temp.push_back(0);}
+            else{temp.push_back(-1);}
         }
         m_tab.push_back(temp);
     }
@@ -65,7 +68,7 @@ void Perlin::initDoubleStrip(int min, int max)
                     temp.push_back(random());
                 }
             }
-            else{temp.push_back(0);}
+            else{temp.push_back(-1);}
         }
         m_tab.push_back(temp);
     }

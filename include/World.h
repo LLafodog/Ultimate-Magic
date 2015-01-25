@@ -26,7 +26,7 @@ class World
 
             //tiles
             const std::vector<std::vector<Tile*>> getTiles() {return m_tiles;}
-            const std::string getTileID(int i, int j);
+           // const std::string getTileID(int i, int j);
             Tile* getTile(int i, int j);
             const bool isThisTileSolid(float i, float j);
             Effect* getTileEffect(int i, int j);
@@ -48,6 +48,7 @@ class World
         void setWidth(int w) {m_width=w;}
         void setHeight(int h) {m_height=h;}
 
+        /// Modificator
         void addTileLine(std::vector<Tile*> v) {if (v.size()==m_width || v.size() == m_height) m_tiles.push_back(v);}
 
         //updates

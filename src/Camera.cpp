@@ -18,7 +18,8 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     m_window->setView(m_view); ///To comment if no view
 
     // TO RETIRE
-    //m_view.setSize(m_world->getWidth()*Global::TILE_WIDTH,m_world->getHeight()*Global::TILE_HEIGHT);
+    m_view.setSize(m_world->getWidth()*Global::TILE_WIDTH,m_world->getHeight()*Global::TILE_HEIGHT);
+
     m_view.setCenter(m_pos->getPosition());
     ///some fixes
     if(m_world!=nullptr)
@@ -64,6 +65,8 @@ void Camera::move(float x, float y)
             hv=m_view.getSize().y/2,
             ww=m_world->getWidth()*Global::TILE_WIDTH,
             hw=m_world->getHeight()*Global::TILE_HEIGHT;
+
+
         if(xv-wv+x>=0 && xv + wv +x < ww)m_view.move(x,0);
         if(yv-hv+y>=0 && yv + hv +y < hw)m_view.move(0,y);
         //cout << "min: " << yv-hv+y << " on : " <<  yv << " max : " << yv + hv +y << " on : " << hw <<endl;

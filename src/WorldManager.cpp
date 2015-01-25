@@ -38,7 +38,7 @@ World* WorldManager::newWorld()
     int h=rand()%50+50;
     int style=rand()%10;
 
-    Perlin* alt=new Perlin(w,h,step,style,0,50);
+    Perlin* alt=new Perlin(w,h,step,style);
     m_alt.push_back(alt); // petit monde
 
 
@@ -50,7 +50,7 @@ World* WorldManager::newWorld()
     // Create the game-world
 
 
-    World* wo=new World(w,h);
+    World* wo=new World(alt->getWidth(),alt->getHeight());
 
 
     for (int i(0);i<h;i++)
@@ -115,6 +115,7 @@ World* WorldManager::newWorld()
 
 enum ENUM_PROBABILITIES
 {
+    P_BASIC,
     P_AUX1,
     P_AUX2,
     P_OBJ1,
@@ -163,7 +164,7 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 
                 }break;
 
-                case P_OBJ1:{w->addObject(ObjectEngine::getPremade(probabilities[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
+                case P_OBJ1:{;w->addObject(ObjectEngine::getPremade(probabilities[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
 
                 default: {w->modifyTile(Vector2f(x,y),probabilities[i].first,true);} break; //basic
             }
