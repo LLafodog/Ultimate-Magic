@@ -195,9 +195,9 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
         }
 
     }
-    e=EffectEngine::getInstance()->get(effect);
+    e=EffectEngine::getInstance()->get(effect,value);
 
-//    cout << " Added tile : id: " << id << " solid : " << boolalpha << solid << " effect : " << effect <<endl;
+    cout << " Added tile : id: " << id << " solid : " << boolalpha << solid << " effect : " << effect << " value : " << value <<endl;
     if(e!=nullptr)
     {
         e->setValue(value);

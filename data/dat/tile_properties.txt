@@ -5,6 +5,6 @@ sand false speed 10
 error true none
 ground false none
 water false speed 50
-dark_water false slow 80
+dark_water false speed 80
 invisible true none
 snow false speed 30

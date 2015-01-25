@@ -21,7 +21,7 @@ class Camera
 
             //update
             void updateView();
-            void move(float x, float y);
+            bool move(float x, float y);
             float getDistanceFromTarget();
             void zoom(float f);
             //getter setter
