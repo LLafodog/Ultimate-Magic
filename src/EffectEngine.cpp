@@ -9,17 +9,16 @@ EffectEngine::EffectEngine()
     if(m_self==nullptr){m_self=this;}
 }
 
-/*
-Effect* EffectEngine::get(std::string id, double value=0, int duration=1000, int delay=10)
+
+Effect* EffectEngine::get(std::string id, double value, int duration, int delay)
 {
-    if(id=="water")
+    if(id=="speed")
     {
-        return new Effect(id,nullptr,value,duration,delay);
+        return new Effect(CHANGE_SPEED,nullptr,value,duration,delay);
     }
     else
     {return nullptr;}
 }
-*/
 
 EffectEngine::~EffectEngine()
 {

@@ -1,12 +1,10 @@
-grass 
-light_grass 
-dark_grass 
-sand 
-dragon 
-error 
-ground 
-water 
-dark_water 
-invisible 
-pine_tree 
-snow 
+grass false none
+light_grass false none
+dark_grass false none
+sand false speed 10 
+error true none
+ground false none
+water false speed 50
+dark_water false slow 80
+invisible true none
+snow false speed 30

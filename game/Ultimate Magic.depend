@@ -2285,7 +2285,7 @@
 	<string>
 	<vector>
 
-1421917412 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Global.h
+1422175439 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Global.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<iostream>
@@ -2338,7 +2338,7 @@
 	<SFML/Graphics.hpp>
 	"Global.h"
 
-1422096936 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
+1422176870 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
 	<SFML/System/Vector2.hpp>
 	<vector>
 	<string>
@@ -2360,7 +2360,7 @@
 1419175623 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Controller.h
 	<SFML/Graphics.hpp>
 
-1422018850 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Core.cpp
+1422174498 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Core.cpp
 	"Core.h"
 	"Global.h"
 	"Graphics.h"
@@ -2371,6 +2371,7 @@
 	"TextureEngine.h"
 	"AnimationEngine.h"
 	"ObjectEngine.h"
+	"TileEngine.h"
 	"Controller.h"
 	"KeyboardController.h"
 	"Loader.h"
@@ -2415,7 +2416,7 @@
 	<string>
 	"Positionnable.h"
 
-1421057819 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Global.cpp
+1422175439 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Global.cpp
 	"Global.h"
 	<SFML/Graphics.hpp>
 	<cmath>
@@ -2466,7 +2467,7 @@
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Positionnable.cpp
 	"Positionnable.h"
 
-1422020012 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
+1422176106 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
 	"TextureEngine.h"
 	"Global.h"
 	"AnimationEngine.h"
@@ -2477,11 +2478,11 @@
 
 1419538045 D
 
-1422095535 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Tile.cpp
+1422176444 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Tile.cpp
 	"Tile.h"
 	"Effect.h"
 
-1422096977 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
+1422176656 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
 	"World.h"
 	"Player.h"
 	"Villager.h"
@@ -2492,11 +2493,12 @@
 	"Core.h"
 	"Tile.h"
 	"ObjectEngine.h"
+	"TileEngine.h"
 	"WorldManager.h"
 	<fstream>
 	<cmath>
 
-1422037823 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
+1422176769 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
 	"WorldManager.h"
 	<SFML/Graphics.hpp>
 	<fstream>
@@ -3163,13 +3165,16 @@
 	<iostream>
 	<cmath>
 
-1421916436 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Loader.cpp
+1422175870 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Loader.cpp
 	"Loader.h"
 	"Global.h"
 	<iostream>
 	<fstream>
+	"Tile.h"
+	"Effect.h"
+	"EffectEngine.h"
 
-1422018850 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Loader.h
+1422125495 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Loader.h
 	<vector>
 	<string>
 	<unordered_map>
@@ -3204,9 +3209,19 @@
 	"Tile.h"
 	"Object.h"
 
-1422094783 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/EffectEngine.cpp
+1422121822 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/EffectEngine.cpp
 	"EffectEngine.h"
 	"Effect.h"
 
-1422094783 /home/llafodog/Programmation/C++/Ultimate-Magic/include/EffectEngine.h
+1422121808 /home/llafodog/Programmation/C++/Ultimate-Magic/include/EffectEngine.h
+	"Effect.h"
+
+1422175575 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TileEngine.cpp
+	"TileEngine.h"
+	"Loader.h"
+	"Global.h"
+
+1422131856 /home/llafodog/Programmation/C++/Ultimate-Magic/include/TileEngine.h
+	<unordered_map>
+	"Tile.h"
 

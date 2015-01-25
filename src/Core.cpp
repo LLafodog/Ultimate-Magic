@@ -12,6 +12,7 @@
 #include "TextureEngine.h"
 #include "AnimationEngine.h"
 #include "ObjectEngine.h"
+#include "TileEngine.h"
 
 #include "Controller.h"
 #include "KeyboardController.h"
@@ -79,10 +80,15 @@ void Core::initGraphics()
 
 void Core::load()
 {
+    new Loader();
+    new TileEngine();
     m_wm=new WorldManager();
     m_ae=new AnimationEngine();
     m_te=new TextureEngine();
-    new Loader();
+
+
+
+
     //AnimationEngine::load(); //Need the textures
 }
 

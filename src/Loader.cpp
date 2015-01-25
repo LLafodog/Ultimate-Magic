@@ -7,6 +7,10 @@ using namespace std;
 #include<iostream>
 #include<fstream>
 
+#include"Tile.h"
+#include"Effect.h"
+#include"EffectEngine.h"
+
 Loader* Loader::m_self=nullptr;
 
 
@@ -15,6 +19,7 @@ Loader::Loader()
     if(m_self==nullptr)
     {
         m_self=this;
+        //cout << "loader created. " << endl;
     }
 }
 
@@ -111,9 +116,127 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
    return probabilities;
 }
 
+typedef void( Loader::*loaderFunction)(std::string);
+bool readFile(std::string path, loaderFunction)
+{
+    fstream reader(path.c_str());
+    if(!reader){cerr << " [Loader::readFile] Problem loading " << path << "file"<<endl; return false;}
+    else
+    {
+        string line;
+        while(getline(reader,line))
+        {
+            loaderFunction(line);
+        }
+        return true;
+    }
+}
 
+pair<string,Tile*> Loader::readTileLine(std::string line)
+{
+    pair<string,Tile*> result;
+    string word="";
+    int wordNumber=0; // determinates which data is being read
+
+    //New Object datas
+
+    string id="", effect="";
+    bool solid=false;
+    Effect* e=nullptr;
+    double value=0;
+
+    for(unsigned int i(0);i<=line.size();i++)
+    {
+        char linei=line[i];
+        //cout << linei; //
+        if(linei!='\n' && linei!=' ' && i!=line.size()) //look if we are adding the id, not the tool to read it (spaces not even read)
+        {
+            word+=linei;
+        }
+        else if(word!="")  //security
+        {
+            wordNumber++;
+
+            ///transcription
+            switch(wordNumber)
+            {
+                //case 1: break; //This is the 'O' for Object.
+                case 1: ///x position
+                {
+                    id=word;
+                }
+                break;
+
+                case 2: ///y position
+                {
+                    solid=(word=="true");
+                    //cout << boolalpha << solid << endl;
+                }
+                break;
+
+                case 3: ///id
+                {
+                    effect=word;
+                }
+                break;
+
+                case 4: ///width multiplicator
+                {
+                    value=Global::strtoi(word);
+                }
+                break;
+
+
+                default:
+                    cerr<<"[Object line] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
+                break;
+            }
+            word="";
+        }
+
+    }
+    e=EffectEngine::getInstance()->get(effect);
+
+//    cout << " Added tile : id: " << id << " solid : " << boolalpha << solid << " effect : " << effect <<endl;
+    if(e!=nullptr)
+    {
+        e->setValue(value);
+        result.second=new Tile(id,0,solid,e);
+    }
+    else{result.second=new Tile(id,0,solid,new Effect(NONE,nullptr));}
+
+    result.first=id;
+    return result;
+
+
+}
+
+
+std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
+{
+    std::unordered_map<std::string,Tile*> tiles;
+    tiles.clear();
+
+    fstream reader(path.c_str());
+    if(!reader){cerr << " [Loader::getPremadeTiles] Problem loading " << path << "file"<<endl; return tiles;}
+    else
+    {
+        string line;
+        while(getline(reader,line))
+        {
+            tiles.insert(readTileLine(line));
+        }
+        return tiles;
+
+
+
+
+
+    }
+}
 
 Loader::~Loader()
 {
     //dtor
 }
+

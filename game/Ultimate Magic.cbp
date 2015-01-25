@@ -67,6 +67,7 @@
 		<Unit filename="../include/Positionnable.h" />
 		<Unit filename="../include/TextureEngine.h" />
 		<Unit filename="../include/Tile.h" />
+		<Unit filename="../include/TileEngine.h" />
 		<Unit filename="../include/VObject.h" />
 		<Unit filename="../include/Villager.h" />
 		<Unit filename="../include/World.h" />
@@ -97,6 +98,7 @@
 		<Unit filename="../src/Positionnable.cpp" />
 		<Unit filename="../src/TextureEngine.cpp" />
 		<Unit filename="../src/Tile.cpp" />
+		<Unit filename="../src/TileEngine.cpp" />
 		<Unit filename="../src/VObject.cpp" />
 		<Unit filename="../src/Villager.cpp" />
 		<Unit filename="../src/World.cpp" />

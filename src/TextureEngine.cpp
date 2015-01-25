@@ -60,7 +60,7 @@ Texture* TextureEngine::get(string name, unsigned int j)
 void TextureEngine::load()
 {
     /// DISPLAY
-    std::cout<<"Textures loading..."<<std::endl;
+    std::cout<<"Textures and Animations loading..."<<std::endl;
     //var
     string path=Global::TO_DATA+"dat/textures_loading.txt";
 
@@ -69,7 +69,7 @@ void TextureEngine::load()
     if(ptr==nullptr || !Global::readFile(Global::TO_DATA+"dat/textures.txt",ptr)){cerr<<"Problem loading the textures !"<<endl;} */
 
     ifstream reader(path.c_str());
-    if(!reader){cerr << " Problem loading " << path << "file"<<endl;}
+    if(!reader){cerr << " [TextureEngine::load] Problem loading " << path << "file"<<endl;}
     else
     {
         //cout << "path : " << path <<endl;
@@ -107,6 +107,7 @@ void TextureEngine::readLine(string line)
 
 bool TextureEngine::loadPNG(std::string line, bool particles)
 {
+
     /// Reading
     string word="",path="troll";
     int wordnumber=0;
@@ -166,6 +167,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         }
 
     }
+    cout << "- Loading  " << path << " texture." << endl;
     //cout << "File : " << path << " nb_x: " << nb_x << " nb_y :" << nb_y << " width " << w << " height " << h << endl;
 
 
@@ -188,7 +190,9 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
             //cout<<fileName<<"  i:" <<i<<"  j:"<<j<<endl;
 
         }
+
         m_textures.insert(pair<std::string,vector<Texture*>>(path+suffix,v));
+        cout << "-- Successfully added " << path+suffix << " texture." << endl;
 
 /*
         m_names.push_back(path+suffix);
@@ -198,6 +202,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
 
 
         AnimationEngine::getInstance()->addAnimation(a);
+        cout << "-- Successfully added " << path+suffix << " animation." << endl;
     }
 
     /// Including particles
@@ -214,6 +219,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
             v.push_back(t);
 
         m_textures.insert(pair<std::string,vector<Texture*>>(path,v));
+        cout << "-- Successfully added " << path << " texture_particles." << endl;
 /*
         m_names.push_back(path);
         m_textures.push_back(v);
@@ -222,6 +228,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
 
 
         AnimationEngine::getInstance()->addAnimation(a);
+        cout << "-- Successfully added " << path<< " animation_particles." << endl;
     }
     return true;
 }

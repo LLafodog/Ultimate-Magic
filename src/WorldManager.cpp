@@ -115,10 +115,11 @@ World* WorldManager::newWorld()
 
 enum ENUM_PROBABILITIES
 {
-    P_AUX1=1,
-    P_AUX2=2,
-    P_OBJ1=3,
-    P_OBJ2=4
+    P_AUX1,
+    P_AUX2,
+    P_OBJ1,
+    P_OBJ2,
+    END_ENUM_PROBABILITIES
 };
 
 void WorldManager::getProbabilities(std::string path)
@@ -134,7 +135,7 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
     /// find the right biome
     vector<pair<string,float>> probabilities=m_tileProbabilities[biome];
 
-    for(int i(0);i<sizeof(ENUM_PROBABILITIES);i++)
+    for(int i(0);i<END_ENUM_PROBABILITIES;i++)
     {
         if(i<probabilities.size() && Global::Proba(probabilities[i].second))
         {

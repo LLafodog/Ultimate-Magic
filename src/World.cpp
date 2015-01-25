@@ -12,6 +12,7 @@
 #include "Tile.h"
 
 #include"ObjectEngine.h"
+#include"TileEngine.h"
 
 #include"WorldManager.h"
 
@@ -59,8 +60,9 @@ World::World(string pathfile, int players)
 const bool World::isThisTileSolid(float i, float j)
 {
 
-    if(getTileID(i,j)[0]=='S')return true; // to do
-    return false;
+    Tile* t=getTile(i,j);
+    if(t!=nullptr)return t->isSolide();
+    return true;
 }
 
 const std::string World::getTileID(int i, int j)
@@ -113,14 +115,29 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs)
         y/=Global::TILE_HEIGHT;
     }
 
-    if(x>0 && y>0 && x<m_width && y<m_height && m_tiles[y][x]!=nullptr)
+    if(x>0 && y>0 && x<m_width && y<m_height)// && m_tiles[y][x]!=nullptr)
     {
-        m_tiles[y][x]->setID(id);
+
+
+
+        Tile* ti=TileEngine::getInstance()->get(id);
+
+        /// KEEP THE ALTITUDE !!
+        double altitude = getTile(x,y)->getAltitude();
+        delete getTile(x,y);
+        ti->setAltitude(altitude);
+        ///
+
+        m_tiles[y][x]=ti;
+
+        //m_tiles[y][x]->setID(id);
         needToBeUpdated();
         //cout << " Changed tile ("<<x<<","<<y<<") in " << id <<"."<<endl;
     }
     //else {    cout << " Tryied to change tile ("<<x<<","<<y<<") in " << id <<"."<<endl;}
 }
+
+
 
 Effect* World::getTileEffect(int i, int j)
 {

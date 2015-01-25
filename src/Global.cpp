@@ -11,7 +11,7 @@ using namespace std;
 bool Global::readFile(std::string path, WMf)
 {
     fstream reader(path.c_str());
-    if(!reader){cerr << " Problem loading " << path << "file"<<endl; return false;}
+    if(!reader){cerr << " [Global::readFile] Problem loading " << path << "file"<<endl; return false;}
     else
     {
         string line;
@@ -22,8 +22,6 @@ bool Global::readFile(std::string path, WMf)
         return true;
     }
 }
-
-void test(string test){cout << "pendant" ;}
 
 const string Global::TO_DATA="../data/";
 
