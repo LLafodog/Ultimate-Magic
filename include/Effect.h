@@ -9,6 +9,7 @@ enum ENUM_EFFECTS
 {
     NONE,
     ABLAZE,
+    T_ABLAZE,
     POISONNED,
     CHANGE_SPEED
 };

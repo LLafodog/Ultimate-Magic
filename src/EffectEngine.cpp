@@ -22,6 +22,14 @@ Effect* EffectEngine::get(std::string id, double value, int duration, int delay)
     {
         return new Effect(NONE,nullptr,value,duration,delay);
     }
+    if(id=="ablaze")
+    {
+        return new Effect(ABLAZE,nullptr,value,duration,delay);
+    }
+    if(id=="t_ablaze")
+    {
+        return new Effect(T_ABLAZE,nullptr,value,duration,delay);
+    }
     else
     {return nullptr;}
 }

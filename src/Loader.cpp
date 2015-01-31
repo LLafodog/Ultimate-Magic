@@ -28,6 +28,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
 /// Load the probabilities from a .prob file, all of the .prob files are packed in a tile_probabilities.txt file
 {
     /// Vars
+    if(LOADER_DEBUG)cout << " ========== DATA LOADING ========= " << endl;
     string txt_line;
     ifstream txt_reader(path.c_str());
     unordered_map<string,std::vector<std::pair<std::string,float>>> probabilities;
@@ -41,7 +42,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
         /// Reading the .txt file
         while(getline(txt_reader,txt_line))
         {
-            //cout << " TXT line : " << txt_line <<endl;
+            if(LOADER_DEBUG)cout << " ------ File reading : " << txt_line << ".prob" <<endl;
 
             string prob_line; // will contain the .prob line
             ifstream prob_reader(Global::TO_DATA+"dat/prob/"+txt_line.c_str()+".prob"); // will open it
@@ -87,7 +88,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
                                 }
                                 break;
                                 default:
-                                if(PROBABILITY_DEBUG)cerr<<"[Probability loading] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
+                                if(LOADER_DEBUG)cerr<<"[Probability loading] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
                                 break;
                             }
                         if(temp.second>0 && temp.first!="" ){prob_data.push_back(temp); temp=pair<string,float>();}
@@ -100,15 +101,19 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
             link_prob_name.second=std::vector<std::pair<std::string,float>>(prob_data);
             probabilities.insert(link_prob_name);
 
-/*
-            for(int k(0);k<link_prob_name.second.size();k++)
+            if(LOADER_DEBUG)
             {
-            cout << "Data : " << link_prob_name.second[k].first <<  "|" << link_prob_name.second[k].second << "|" <<  endl;
-            }
-            cout << " Prob_data size: " << link_prob_name.second.size() <<endl;
-*/
 
+                for(int k(0);k<link_prob_name.second.size();k++)
+                {
+                    cout << "Tile : " << link_prob_name.second[k].first <<  " Probability:" << link_prob_name.second[k].second <<  endl;
+                }
+                cout << " Conclusion: Prob_data size: " << link_prob_name.second.size() <<endl << endl;
             }
+
+
+
+        }
 
 
         //cout << "size : " << probabilities.size() << " id : " << probabilities[0].first <<endl;
@@ -121,7 +126,7 @@ typedef void( Loader::*loaderFunction)(std::string);
 bool readFile(std::string path, loaderFunction)
 {
     fstream reader(path.c_str());
-    if(!reader){cerr << " [Loader::readFile] Problem loading " << path << "file"<<endl; return false;}
+    if(!reader && LOADER_DEBUG){cerr << " [Loader::readFile] Problem loading " << path << "file"<<endl; return false;}
     else
     {
         string line;
@@ -196,9 +201,18 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
         }
 
     }
+    if(LOADER_DEBUG)
+    {
+        cout    << " Tile id : " << id << endl
+                << " Effects: " << endl;
+        for(int i(0);i<effect.size();i++)
+        {
+            cout << " ----- Effect ID linked: " << effect[i] << " with value of : " << values[i] << endl;
+        }
+
+    }
     for(int i(0);i<effect.size();i++)
     {
-        //cout << " Ask effectEngine for : " << effect[i] << " with value of : " << values[i] << endl;
         Effect* e=EffectEngine::getInstance()->get(effect[i],values[i]);
         if(e!=nullptr){effects.push_back(e);}
     }
@@ -217,11 +231,12 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
 
 std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
 {
+    if(LOADER_DEBUG){cout << " ========== PREMADE TILES ============= " << endl;}
     std::unordered_map<std::string,Tile*> tiles;
     tiles.clear();
 
     fstream reader(path.c_str());
-    if(!reader){cerr << " [Loader::getPremadeTiles] Problem loading " << path << "file"<<endl; return tiles;}
+    if(!reader && LOADER_DEBUG){cerr << " [Loader::getPremadeTiles] Problem loading " << path << "file"<<endl; return tiles;}
     else
     {
         string line;

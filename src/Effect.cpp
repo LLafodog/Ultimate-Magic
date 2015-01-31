@@ -3,6 +3,8 @@
 #include "Object.h"
 #include"Alive.h"
 
+#include"EffectEngine.h"
+
 
 
 Effect::Effect(int id, Object* o, double value, int duration, int delay)
@@ -54,7 +56,14 @@ void Effect::act()
         {
             case ABLAZE:
             {
-                 m_object->getAlive()->suffer(m_value/(m_duration/m_delay));
+                Alive* a=m_object->getAlive();
+                 if(a){a->suffer(m_value/(m_duration/m_delay));}
+                    else{end();}
+
+            }break;
+            case T_ABLAZE:
+            {
+                 m_object->addEffect(new Effect(ABLAZE,m_object,2)); end();
 
             }break;
 
