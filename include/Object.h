@@ -20,6 +20,7 @@ class Object :public Collisionnable
         /* ============= CASUAL METHODS ============= */
         virtual void update();
         virtual void addEffect(Effect* e);
+        virtual void addTileEffect(Effect* e);
         void updateCurrentTileEffect();
 
         /* ============= GETTER ===================== */
@@ -27,10 +28,10 @@ class Object :public Collisionnable
         virtual bool isVisible() const      {return m_visible;}
         virtual Alive* getAlive()           {return m_alive;}
         virtual bool isPlayer()             {return false;}
-        Effect* getTileEffect()             {return m_tileEffect;}
+        std::vector<Effect*> getTileEffects()             {return m_tileEffects;}
 
         /// ========== SETTER =============
-        virtual void setTileEffect( Effect* e) {if(e!=nullptr){m_tileEffect=e;}}
+        //virtual void setTileEffects( vector<Effect* e) {if(e!=nullptr){m_tileEffect=e;}}
 
         virtual ~Object();
 
@@ -41,7 +42,7 @@ class Object :public Collisionnable
         Alive* m_alive;
 
         std::vector<Effect*> m_effects;
-        Effect* m_tileEffect;
+        std::vector<Effect*> m_tileEffects;
 
 };
 

@@ -11,7 +11,7 @@ class TileEngine
         TileEngine();
 
         static TileEngine* getInstance() {return m_self;}
-        Tile* get(std::string id);
+        Tile* get(std::string id, double altitude=0);
 
         void load();
 

@@ -2,6 +2,7 @@
 
 
 #include "Global.h"
+#include "Defines.h"
 
 using namespace std;
 #include<iostream>
@@ -86,7 +87,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
                                 }
                                 break;
                                 default:
-                                cerr<<"[Probability loading] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
+                                if(PROBABILITY_DEBUG)cerr<<"[Probability loading] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
                                 break;
                             }
                         if(temp.second>0 && temp.first!="" ){prob_data.push_back(temp); temp=pair<string,float>();}
@@ -140,10 +141,11 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
 
     //New Object datas
 
-    string id="", effect="";
+    string id="";
+    vector<string> effect; effect.clear();
     bool solid=false;
-    Effect* e=nullptr;
-    double value=0;
+    vector<Effect*> effects; effects.clear();
+    vector<double> values; values.clear();
 
     for(unsigned int i(0);i<=line.size();i++)
     {
@@ -174,37 +176,38 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
                 }
                 break;
 
-                case 3: ///id
-                {
-                    effect=word;
-                }
-                break;
-
-                case 4: ///width multiplicator
-                {
-                    value=Global::strtoi(word);
-                }
-                break;
-
-
                 default:
-                    cerr<<"[Object line] Word number " << wordNumber << " has been misunderstood (val="<<word<<" and negliged."<<endl;
-                break;
+                {
+                    if(wordNumber%2==1)
+                    {
+                        effect.push_back(word);
+                        values.push_back(0);
+                        //cout << " Supposed effect: " << word << endl;
+                    }
+                    if(wordNumber%2==0)
+                    {
+                        values.pop_back();
+                        values.push_back(Global::strtoi(word));
+                        //cout << " Supposed value: " << word << endl;
+                    }
+                }break;
             }
             word="";
         }
 
     }
-    e=EffectEngine::getInstance()->get(effect,value);
-
-    cout << " Added tile : id: " << id << " solid : " << boolalpha << solid << " effect : " << effect << " value : " << value <<endl;
-    if(e!=nullptr)
+    for(int i(0);i<effect.size();i++)
     {
-        e->setValue(value);
-        result.second=new Tile(id,0,solid,e);
+        //cout << " Ask effectEngine for : " << effect[i] << " with value of : " << values[i] << endl;
+        Effect* e=EffectEngine::getInstance()->get(effect[i],values[i]);
+        if(e!=nullptr){effects.push_back(e);}
     }
-    else{result.second=new Tile(id,0,solid,new Effect(NONE,nullptr));}
-
+    Tile* ti=new Tile(id,0,solid,nullptr);
+    for(Effect* eff:effects)
+    {
+        ti->addEffect(eff);
+    }
+    result.second=ti;
     result.first=id;
     return result;
 

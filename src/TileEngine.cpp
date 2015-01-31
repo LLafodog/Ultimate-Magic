@@ -2,6 +2,16 @@
 
 #include"Loader.h"
 #include"Global.h"
+
+//useless
+#include "Effect.h"
+
+
+
+
+
+
+
 TileEngine* TileEngine::m_self=nullptr;
 
 TileEngine::TileEngine()
@@ -23,15 +33,22 @@ void TileEngine::load()
 
 }
 
-Tile* TileEngine::get(std::string id)
+Tile* TileEngine::get(std::string id, double altitude)
 {
-    Tile* ti=m_tiles[id];
-    if(ti==nullptr)
+    Tile* t=m_tiles[id];
+    if(t==nullptr)
     {
-    cerr << " Problem with tile id: " << id << endl;
-    return new Tile(*m_tiles["error"]);
+    cerr << " [TileEngine] Problem with tile id: " << id << endl;
+    //return nullptr;
+    return new Tile(*get("error"));
     }
-    return new Tile(*ti);
+    else
+    {
+        Tile* ti=new Tile(*t);
+        ti->setAltitude(altitude);
+        //if(ti->getID()!="error")cout << rand()%21 << " Tile : " << ti->getID() << " NBeffect: " << ti->getEffects().size() << " with first: " << ti->getEffect(0)->getID() << " value: " << ti->getEffect(0)->getValue() <<endl;
+        return ti;
+    }
 }
 
 TileEngine::~TileEngine()

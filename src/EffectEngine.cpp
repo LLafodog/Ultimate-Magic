@@ -2,6 +2,8 @@
 
 #include"Effect.h"
 
+#include<iostream>
+
 EffectEngine* EffectEngine::m_self=nullptr;
 
 EffectEngine::EffectEngine()
@@ -15,6 +17,10 @@ Effect* EffectEngine::get(std::string id, double value, int duration, int delay)
     if(id=="speed")
     {
         return new Effect(CHANGE_SPEED,nullptr,value,duration,delay);
+    }
+    if(id=="none")
+    {
+        return new Effect(NONE,nullptr,value,duration,delay);
     }
     else
     {return nullptr;}

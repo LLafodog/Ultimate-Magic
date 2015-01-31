@@ -49,6 +49,7 @@
 		<Unit filename="../include/Collisionnable.h" />
 		<Unit filename="../include/Controller.h" />
 		<Unit filename="../include/Core.h" />
+		<Unit filename="../include/Defines.h" />
 		<Unit filename="../include/Effect.h" />
 		<Unit filename="../include/EffectEngine.h" />
 		<Unit filename="../include/EntityGraphic.h" />

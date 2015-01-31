@@ -2,7 +2,8 @@
 #include "Alive.h"
 #include"Global.h"
 #include"World.h"
-#include"Effect.h"
+
+#include"EffectEngine.h"
 
 #include<string>
 
@@ -17,7 +18,7 @@ Object::Object( std::string id, sf::FloatRect rect, World* w, bool solid, float 
 
     m_alive=nullptr;
 
-    m_tileEffect=new Effect(NONE,this);
+    m_tileEffects.clear();//m_tileEffects.push_back(new Effect(NONE,this));
 }
 
 Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSolid(), o->getPositionX(), o->getPositionY(), o->getSize().x, o->getSize().y)
@@ -29,33 +30,60 @@ Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSo
 
 void Object::updateCurrentTileEffect()
 {
-    float   x=getCenterWithHitbox().x/Global::TILE_WIDTH,
+    /// Get the current tile effect
+   float    x=getCenterWithHitbox().x/Global::TILE_WIDTH,
             y=getCenterWithHitbox().y/Global::TILE_HEIGHT;
-            //if(m_id == "dragon")cout << " x: " << x << " y : " << y << endl;
+    vector<Effect*> e=m_world->getTileEffects(x,y);
 
-    Effect* e=m_world->getTileEffect(x,y);
-
-
-    if(m_tileEffect!=nullptr && e!=nullptr)
-    {
-        if(e->getID()==m_tileEffect->getID() && e->getValue()==m_tileEffect->getValue() )
+    /// Comparing if this is the same tile as before
+        bool same=e.size() == m_tileEffects.size();
+        if(same)
         {
-            m_tileEffect->restart();
+            for(int i(0);i<m_tileEffects.size();i++)
+            {
+                if(m_tileEffects[i]!=nullptr && e[i]!=nullptr)
+                {
+                    /// Differents if not the same name or the same value
+                    if(m_tileEffects[i]->getID()!=e[i]->getID() || m_tileEffects[i]->getValue()!=e[i]->getValue()) {same=false;}
+                }
+
+            }
         }
+
+        /// If this is the same tile, then restart the effects
+        if(same)
+            {
+                for(Effect* eff:m_tileEffects)eff->restart();
+            }
+        /// Otherwise replace them
         else
         {
-            //if(m_tileEffect->isActive())
-            {m_tileEffect->end();}
-            delete m_tileEffect;
+            /// First end them and delete them
+            for(int i(0);i<m_tileEffects.size();i++)
+            {
+                delete m_tileEffects[i];
+            }
+            // Empty the vector
+            m_tileEffects.clear();
 
-            m_tileEffect=e;
-            m_tileEffect->setObject(this);
-            m_tileEffect->setActive(true);
+            /// Now add the new ones
+            for(Effect* eff:e)
+            {
+                addTileEffect(eff);
+            }
+        }
+
+    /// Now let's update the active and delete the unactive
+    for(int i(0);i<m_tileEffects.size();i++)
+    {
+        Effect* eff=m_tileEffects[i];
+
+        if(eff!=nullptr)
+        {
+            eff->update();
         }
     }
-
-    m_tileEffect->update();
-
+//cout << " En tout : " << m_tileEffects.size() << "Effect : " << eff->getID() << " " << eff->getValue() << endl; }
 
 }
 
@@ -63,18 +91,24 @@ void Object::addEffect(Effect* e)
 {
     if(e!=nullptr)
     {
-        m_effects.push_back(e);
         e->setObject(this);
         e->setActive(true);
+        m_effects.push_back(e);
+    }
+}
 
+void Object::addTileEffect(Effect* e)
+{
+    if(e!=nullptr)
+    {
+        e->setObject(this);
+        e->setActive(true);
+        m_tileEffects.push_back(e);
     }
 }
 
 void Object::update()
 {
-
-
-
     for(int i(0);i<m_effects.size();i++)
     {
         //cout << "id : " << m_id << " nb of effects : " <<  m_effects.size() << "id : " << m_effects[i]->getID() << " duration : " << m_effects[i]->getElapsedTime() << " speed : " << m_speed << endl;
@@ -91,5 +125,5 @@ void Object::update()
 Object::~Object()
 {
     for(Effect* e:m_effects){delete e;}
-    delete m_tileEffect;
+    for(Effect* e:m_tileEffects){delete e;}
 }

@@ -74,8 +74,16 @@ const std::string World::getTileID(int i, int j)
 
 Tile* World::getTile(int i, int j)
 {
-    if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr ) {return m_tiles[j][i];}
-    else{return TileEngine::getInstance()->get("error");}
+    //if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr ) {return m_tiles[j][i];}
+    if(i<m_tiles.size() && i>=0 &&j<m_tiles[i].size() && j>=0 && m_tiles[i][j] != nullptr )
+    {
+        return m_tiles[i][j];
+    }
+    else
+    {
+        return TileEngine::getInstance()->get("error");
+        //return nullptr; // change HERE
+    }
 }
 
 void World::addPlayer()
@@ -122,56 +130,44 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs)
     {
 
 
+        /// Clé d'accès: KW1
+        Tile* old_ti=m_tiles[y][x];
 
-        Tile* ti=TileEngine::getInstance()->get(id);
-
-        /// KEEP THE ALTITUDE !!
-        double altitude = getTile(x,y)->getAltitude();
-        delete getTile(x,y);
-        ti->setAltitude(altitude);
-        ///
-
-        m_tiles[y][x]=ti;
+        //cout << " Changed tile ("<<x<<","<<y<<") in " << id <<"."<<endl;
+        old_ti=TileEngine::getInstance()->get(id,old_ti->getAltitude());
+        m_tiles[y][x]=old_ti;
 
         //m_tiles[y][x]->setID(id);
         needToBeUpdated();
-        //cout << " Changed tile ("<<x<<","<<y<<") in " << id <<"."<<endl;
+
     }
     //else {    cout << " Tryied to change tile ("<<x<<","<<y<<") in " << id <<"."<<endl;}
 }
 
 
 
-Effect* World::getTileEffect(int i, int j)
+vector<Effect*> World::getTileEffects(int i, int j)
 {
-    if(getTile(i,j) != nullptr)
+       Tile* ti=getTile(i,j);
+       // cout << ti->getID() << endl;
+
+       vector<Effect*> result; result.clear();
+    if(ti!= nullptr)
     {
+        vector<Effect*> tileEffects=ti->getEffects();
 
-        Tile* ti=getTile(i,j);
-        Effect* tile=ti->getEffect();
-        if(ti!=nullptr && tile!=nullptr)
+            for(Effect* eff:tileEffects)
+            {
+                /// recopy
+                if(eff!=nullptr){result.push_back(new Effect(*eff));}
+                //cout << " Add tile effect : " << eff->getID() << "with value " << eff->getValue() << endl;
+            }
+
+        if(result.size()==0)
         {
-            Effect* e=new Effect(*tile);
-            return e;
+            result.push_back(new Effect(NONE,nullptr)); // debug ?
         }
-        else return new Effect(NONE,nullptr);
-
-        /*
-        string tile=getTileID(i,j);
-
-        if(tile =="water" || tile=="dark_water")
-        {
-            return(new Effect(CHANGE_SPEED,o,80));
-            //cout << " World: J'ai ralenti notre ami " << o->getID() << endl;
-        }
-
-        else
-        {
-            return(new Effect(NONE,o));
-        }
-        */
-    }
-
+    }return result;
 
 }
 

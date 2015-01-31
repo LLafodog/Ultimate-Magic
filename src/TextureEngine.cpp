@@ -8,6 +8,8 @@
 //read
 #include<fstream>
 
+#include"Defines.h"
+
 #include<cstdlib>
 using namespace sf;
 using namespace std;
@@ -60,7 +62,7 @@ Texture* TextureEngine::get(string name, unsigned int j)
 void TextureEngine::load()
 {
     /// DISPLAY
-    std::cout<<"Textures and Animations loading..."<<std::endl;
+    if(TEXTURE_DEBUG)std::cout<<"Textures and Animations loading..."<<std::endl;
     //var
     string path=Global::TO_DATA+"dat/textures_loading.txt";
 
@@ -167,7 +169,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         }
 
     }
-    cout << "- Loading  " << path << " texture." << endl;
+    if(TEXTURE_DEBUG)cout << "- Loading  " << path << " texture." << endl;
     //cout << "File : " << path << " nb_x: " << nb_x << " nb_y :" << nb_y << " width " << w << " height " << h << endl;
 
 
@@ -192,7 +194,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         }
 
         m_textures.insert(pair<std::string,vector<Texture*>>(path+suffix,v));
-        cout << "-- Successfully added " << path+suffix << " texture." << endl;
+        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path+suffix << " texture." << endl;
 
 /*
         m_names.push_back(path+suffix);
@@ -202,7 +204,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
 
 
         AnimationEngine::getInstance()->addAnimation(a);
-        cout << "-- Successfully added " << path+suffix << " animation." << endl;
+        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path+suffix << " animation." << endl;
     }
 
     /// Including particles
@@ -219,7 +221,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
             v.push_back(t);
 
         m_textures.insert(pair<std::string,vector<Texture*>>(path,v));
-        cout << "-- Successfully added " << path << " texture_particles." << endl;
+        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path << " texture_particles." << endl;
 /*
         m_names.push_back(path);
         m_textures.push_back(v);
@@ -228,7 +230,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
 
 
         AnimationEngine::getInstance()->addAnimation(a);
-        cout << "-- Successfully added " << path<< " animation_particles." << endl;
+        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path<< " animation_particles." << endl;
     }
     return true;
 }

@@ -90,8 +90,8 @@ void Camera::updateView()
     //Speed depending on the FPS
     float speedX=1/Global::FPS;
     float speedY=1/Global::FPS;
-    float signX; if(xp-xv!=0) signX=abs(xp-xv)/(xp-xv);
-    float signY; if(yp-yv!=0) signY=abs(yp-yv)/(yp-yv);
+    float signX=0; if(xp-xv!=0) signX=abs(xp-xv)/(xp-xv);
+    float signY=0; if(yp-yv!=0) signY=abs(yp-yv)/(yp-yv);
 
     speedX*=pow(xp-xv,2)/10; //Magic !
     speedY*=pow(yp-yv,2)/10; //Magic !
@@ -101,7 +101,7 @@ void Camera::updateView()
 
         /// If the player isn't in the view, we re-position the view
        FloatRect center(Vector2f(xv-m_view.getSize().x/2,yv-m_view.getSize().x/2),m_view.getSize());
-       if(!center.contains(xp,yp)){m_view.setCenter(xp,yp); updateView();}
+       if(!center.contains(xp,yp)){m_view.setCenter(xp,yp);}
 
 
        /// Now let's see if we're out of the world:

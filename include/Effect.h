@@ -22,7 +22,7 @@ class Effect
         Effect(int id, Object* o, double value=0, int duration=1000, int delay=10);
 
         /// ========= CASUAL METHODS ============
-        virtual void restart() {m_clock.restart();}
+        virtual void restart() {m_clock.restart();m_active=true;}
         virtual void end();
         virtual void update();
         virtual void act();
