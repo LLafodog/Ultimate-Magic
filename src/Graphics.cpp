@@ -366,8 +366,7 @@ const void Graphics::drawVisibleObjects()
 
 const void Graphics::drawObject(VObject* o)
 {
-
-    if(o->getObject()->getAlive()!=nullptr)
+    if(o->getObject()->getAlive()!=nullptr )
     {
         drawAboutAlive(o);
     }
@@ -417,8 +416,10 @@ const void Graphics::drawLifeBar(VObject* o)
         fulllifebar.setPosition(position);
         lifebar.setPosition(position);
 
-        fulllifebar.setFillColor(Color::Black);
-        lifebar.setFillColor(Color::Red);
+        double alpha=255;
+        if(a->isDead()){alpha=255*a->getDisapearingRatio();}
+        fulllifebar.setFillColor(Color(0,0,0,alpha));
+        lifebar.setFillColor(Color(195,0,0,alpha));
         //cout << "drawn in x:" << x << " y: " << y << " lenght of " << w <<endl;
         m_window->draw(fulllifebar);
         m_window->draw(lifebar);

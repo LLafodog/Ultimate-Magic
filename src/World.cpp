@@ -112,12 +112,13 @@ void World::update()
     for(int i(0); i<m_objects.size(); i++)
     {
         Object* o=m_objects[i];
-        if(o!=nullptr)
+        if(o!=nullptr && o->getAlive()!=nullptr)
         {
 
-            if(o->getAlive()->isDead()){delete o; m_objects.erase(m_objects.begin()+i);}
+            if(o->getAlive()->isDead() && o->getAlive()->getDisapearingRatio()<=0){ cout << " deleted " ;delete o; m_objects.erase(m_objects.begin()+i);}
                 else{o->update();}
         }
+        else{m_objects.erase(m_objects.begin()+i);}
     }
 }
 

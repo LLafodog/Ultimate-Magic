@@ -28,6 +28,9 @@ class Alive
         void setHealth(float h) {m_health=h;}
         const float getLifeRatio(){if(m_maxHealth!=0)return m_health/m_maxHealth; return false;} /// Usefull for lifebar
 
+        /// DEAD
+        const float getDisapearingRatio();
+
         /// HEALTH REGENERATION
         const float getHealthRegen() {return m_healthRegen;}
         void setHealthRegen(float hr) {m_healthRegen=hr;}
@@ -44,6 +47,9 @@ class Alive
         float m_health;
         float m_maxHealth;
         float m_healthRegen;
+
+        sf::Clock m_deadClock;
+        const float m_deadDuration=5000; // CONST HARD CODE
 
         /// STATUS
         bool m_alive;

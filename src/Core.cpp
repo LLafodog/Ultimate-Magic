@@ -94,11 +94,13 @@ void Core::load()
 
 void Core::update()
 {
+    //graphics
+    m_graphics->update();
     //datas
     updateFPS();
     m_world->update();
-    //graphics
-    m_graphics->update();
+
+
 
     // debug
     //m_graphics->drawAllTextures();

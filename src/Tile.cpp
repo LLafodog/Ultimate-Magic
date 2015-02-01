@@ -20,5 +20,5 @@ void Tile::initEffect()
 
 Tile::~Tile()
 {
-    //delete m_effect;
+    //for(Effect* eff:m_effects){delete eff;}
 }

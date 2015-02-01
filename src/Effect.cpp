@@ -91,12 +91,16 @@ void Effect::act()
 
 void Effect::end()
 {
-    if(m_id==CHANGE_SPEED)
+    if(m_object!=nullptr)
     {
-        if(m_object!=nullptr)m_object->restoreSpeed();
-        //cout << " Restore speed = " << m_object->getSpeed() << rand()%10 ;
+        if(m_id==CHANGE_SPEED)
+        {
+            m_object->restoreSpeed();
+            //cout << " Restore speed = " << m_object->getSpeed() << rand()%10 ;
+        }
+        m_active=false;
     }
-    m_active=false;
+
 }
 
 Effect::~Effect()

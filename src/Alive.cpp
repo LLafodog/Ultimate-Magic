@@ -22,6 +22,7 @@ Alive::Alive(float maxHealth, float healthRegen, bool alive)
 
     /// Allows a litle pause when hit
     m_invincibleClock.restart();
+    //m_deadClock.restart();
     m_invincible=false;
 }
 
@@ -32,13 +33,20 @@ void Alive::die()
     m_alive=false;
     m_health=0;
     m_healthRegen=0;
+    m_deadClock.restart();
+}
+
+const float Alive::getDisapearingRatio()
+{
+    float alpha=1-1.0f*m_deadClock.getElapsedTime().asMilliseconds()/m_deadDuration;
+    return max(0.0f,alpha);
 }
 
 void Alive::suffer(float damage) //TO DO with effects
 /// Suffer from damages and next effects.
 /// Look if die in the end.
 {
-    if(!m_invincible)
+    if(!m_invincible && !isDead())
     {
         if(m_health>0)
         {

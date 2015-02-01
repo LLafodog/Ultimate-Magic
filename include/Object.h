@@ -30,6 +30,7 @@ class Object :public Collisionnable
         virtual bool isPlayer()             {return false;}
         std::vector<Effect*> getTileEffects()             {return m_tileEffects;}
 
+
         /// ========== SETTER =============
         //virtual void setTileEffects( vector<Effect* e) {if(e!=nullptr){m_tileEffect=e;}}
         void setAlive(Alive* a) {m_alive=a;}
@@ -44,6 +45,8 @@ class Object :public Collisionnable
 
         std::vector<Effect*> m_effects;
         std::vector<Effect*> m_tileEffects;
+
+
 
 };
 

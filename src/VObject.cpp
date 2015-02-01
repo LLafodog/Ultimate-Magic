@@ -6,6 +6,7 @@
 
 #include "Alive.h"
 #include "Tile.h"
+#include "TextureEngine.h"
 
 using namespace std;
 using namespace sf;
@@ -34,15 +35,14 @@ void VObject::update()
         char currentOrientation=m_object->getOrientation();
         if(currentOrientation!=m_orientation)changeOrientation(currentOrientation);
         setPosition(m_object->getPosition());
-        /// PROBLEM
-
 
 
         // if dead then look dead
         Alive* a=m_object->getAlive();
         if(a!=nullptr && a->isDead())
         {
-                m_animations=AnimationEngine::getInstance()->getAllOf("dead_"+m_object->getID());
+            auto vec=AnimationEngine::getInstance()->getAllOf("dead_"+m_object->getID());
+                m_animations=vec;
                 changeOrientation("first");
                 m_animation->run();
             //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
@@ -60,6 +60,32 @@ void VObject::update()
 
 
 }
+
+const sf::ConvexShape* VObject::getApparence()
+{
+    if(m_animation!=nullptr)m_cs.setTexture(m_animation->getCurrentFrame());
+    else{cerr<< " [Tile::getApparence] Problem with id: " << m_id << endl; m_cs.setTexture(TextureEngine::getInstance()->get("error"));}
+    if(m_object!= nullptr && m_object->getAlive()!=nullptr && m_object->getAlive()->isDead())
+    {
+        double alpha=255*max(0.0f,m_object->getAlive()->getDisapearingRatio());
+        if(alpha!=0)
+        {
+            m_cs.setFillColor(Color(255,255,255,alpha));
+        }
+        else
+        {
+            m_active=false;
+        }
+
+
+    }
+    return &m_cs;
+}
+
+
+
+
+
 void VObject::changeOrientation(std::string orientation) //to do something ?
 {
     changeOrientation('n');
@@ -91,5 +117,5 @@ const sf::FloatRect VObject::getHitbox()
 
 VObject::~VObject()
 {
-
+    for(auto a:m_animations){delete a;}
 }

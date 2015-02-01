@@ -2,7 +2,7 @@
 #define DEFINES_INCLUDED
 
 #define TEXTURE_DEBUG 0
-#define LOADER_DEBUG 1
+#define LOADER_DEBUG 0
 
 
 #endif // DEFINES_INCLUDED

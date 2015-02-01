@@ -23,6 +23,7 @@ class VObject : public EntityGraphic
 
         /* =============== CONVERSION ================== */
         virtual const bool isVObject() {return true;}
+        virtual const sf::ConvexShape* getApparence();
 
 
 
