@@ -40,17 +40,12 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
         v.push_back(get("dragon3"));
         return v;
     }
-    else if(name=="dead_player")
-    {
-        v.push_back(get("error"));
-        return v;
-    }
-
-    /** =================== TILE ================== */
     else
     {
-    v.push_back(get(name));
-    return v;
+        Animation* a=get(name);
+        if(a==nullptr){return getAllOf("error");}
+
+        v.push_back(a);return v;
     }
 }
 

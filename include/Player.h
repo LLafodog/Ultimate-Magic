@@ -24,6 +24,9 @@ class Player : public Object
         void initStats();
         void setController(Controller* c) {m_controller=c;}
 
+        /** ============ CASUAL METHODS =============== **/
+        void action();
+
 
         /* ============= EFFECT ==================== */
         void addEffect(Effect* e) {m_effects.push_back(e);}

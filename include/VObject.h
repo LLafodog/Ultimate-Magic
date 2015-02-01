@@ -19,6 +19,7 @@ class VObject : public EntityGraphic
         /* =============== GETTER ====================== */
         const sf::FloatRect getHitbox();
         Object* getObject() {return m_object;}
+        bool isActive() {return m_active;}
 
         /* =============== CONVERSION ================== */
         virtual const bool isVObject() {return true;}
@@ -32,6 +33,7 @@ class VObject : public EntityGraphic
         std::vector<Animation*> m_animations;
         Object* m_object;
         char m_orientation;
+        bool m_active;
 
 
 };

@@ -10,7 +10,7 @@
 
 
 /// EFFECTS
-#include "Effect.h"
+#include "EffectEngine.h"
 
 #include"Alive.h"
 
@@ -57,8 +57,17 @@ void Player::update()
             }
             catch(exception& e){cout << e.what();}
 
-            if(m_controller->action()) {std::cout<<"Action.";}
+            if(m_controller->action()) {action();}
         }else {m_isMoving=false;}
+    }
+}
+
+void Player::action()
+{
+    if(isInCollision())
+    {
+        Object* target=dynamic_cast<Object*>(m_collision);
+        if(target!=nullptr)target->addEffect(EffectEngine::getInstance()->get("ablaze",250,10000));
     }
 }
 

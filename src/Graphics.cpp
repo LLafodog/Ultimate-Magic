@@ -86,7 +86,7 @@ void Graphics::initTiles()
 
 void Graphics::initObjects()
 {
-    m_objects.erase(m_objects.begin(),m_objects.end());
+    m_objects.clear();
     needToRefresh=true;
 
     //Objects
@@ -132,15 +132,24 @@ void Graphics::updateObjects()
     {
         VObject* t=m_objects[i];
         t->update();
-        float   x=t->getPositionX(),
-                y=t->getPositionY();
 
-        ///Is in the camera view ?
-        if(m_camera->isIn(x,y))
+        if(t!=nullptr && t->isActive())
         {
-            t->setVisible(true);
-            m_visibleObjects.push_back(t);
-        }else{t->setVisible(false);}
+            float   x=t->getPositionX(),
+                    y=t->getPositionY();
+
+            ///Is in the camera view ?
+            if(m_camera->isIn(x,y))
+            {
+                t->setVisible(true);
+                m_visibleObjects.push_back(t);
+            }else{t->setVisible(false);}
+        }
+        else
+        {
+            delete t;
+            m_objects.erase(m_objects.begin()+i);
+        }
     }
     // cout << m_visibleObjects.size()-1<<endl; //to know how many visibles
 

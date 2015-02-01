@@ -1,6 +1,7 @@
 #include "ObjectEngine.h"
 
 #include "Global.h"
+#include "Alive.h"
 
 using namespace sf;
 
@@ -20,7 +21,9 @@ Object* ObjectEngine::getPremade(std::string id, float x, float y)
     if(id=="pine_tree" || id=="pn" || id=="pine")
     {
         FloatRect hitbox =FloatRect(width/3,height,width/3,2*height/3);
-        return new Object("pine_tree",hitbox,nullptr,true,x,y,width,2*height);
+        Object* o=new Object("pine_tree",hitbox,nullptr,true,x,y,width,2*height);
+            o->setAlive(new Alive(500,0));
+        return o;
     }
 
     return nullptr;

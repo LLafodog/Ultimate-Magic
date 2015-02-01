@@ -14,38 +14,48 @@ VObject::VObject(Object* o): EntityGraphic(new Tile(o->getID()),o->getPositionX(
 {
     m_object=o;
     m_orientation='n';
+
+
+    m_active=true;
     m_animations=AnimationEngine::getInstance()->getAllOf(o->getID());
     changeOrientation(m_orientation);
     //cout<<o->getId()<<endl;
     update();
-
-
-
 }
 
 void VObject::update()
 {
-    // Tile update
-    EntityGraphic::update();
-
-    // Orientation update
-    char currentOrientation=m_object->getOrientation();
-    if(currentOrientation!=m_orientation)changeOrientation(currentOrientation);
-    setPosition(m_object->getPosition());
-
-    // if dead then look dead
-    Alive* a=m_object->getAlive();
-    if(a!=nullptr && a->isDead())
+    if(m_object!=nullptr)
     {
-            m_animations=AnimationEngine::getInstance()->getAllOf("dead_player");
-            changeOrientation("first");
-            m_animation->run();
-        //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
+        // Tile update
+        EntityGraphic::update();
+
+        // Orientation update
+        char currentOrientation=m_object->getOrientation();
+        if(currentOrientation!=m_orientation)changeOrientation(currentOrientation);
+        setPosition(m_object->getPosition());
+        /// PROBLEM
+
+
+
+        // if dead then look dead
+        Alive* a=m_object->getAlive();
+        if(a!=nullptr && a->isDead())
+        {
+                m_animations=AnimationEngine::getInstance()->getAllOf("dead_"+m_object->getID());
+                changeOrientation("first");
+                m_animation->run();
+            //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
+        }
+        if(m_animation!=nullptr && m_object!=nullptr)
+        {
+        if(m_object->isMoving()){m_animation->run();}
+        else{m_animation->stop();} // To do: if dead animation quand même running
+        }
     }
-    if(m_animation!=nullptr && m_object!=nullptr)
+    else
     {
-    if(m_object->isMoving()){m_animation->run();}
-    else{m_animation->stop();} // To do: if dead animation quand même running
+        m_active=false;
     }
 
 

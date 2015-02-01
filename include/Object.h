@@ -32,6 +32,7 @@ class Object :public Collisionnable
 
         /// ========== SETTER =============
         //virtual void setTileEffects( vector<Effect* e) {if(e!=nullptr){m_tileEffect=e;}}
+        void setAlive(Alive* a) {m_alive=a;}
 
         virtual ~Object();
 

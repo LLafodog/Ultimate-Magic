@@ -88,7 +88,7 @@ Tile* World::getTile(int i, int j)
 
 void World::addPlayer()
 {
-    Player* p=new Player("dragon",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,10,100,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
+    Player* p=new Player("dragon",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,35,100,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
     m_objects.push_back(p);
 
 }
@@ -111,7 +111,13 @@ void World::update()
 {
     for(int i(0); i<m_objects.size(); i++)
     {
-        if(m_objects[i]!=nullptr)m_objects[i]->update();
+        Object* o=m_objects[i];
+        if(o!=nullptr)
+        {
+
+            if(o->getAlive()->isDead()){delete o; m_objects.erase(m_objects.begin()+i);}
+                else{o->update();}
+        }
     }
 }
 

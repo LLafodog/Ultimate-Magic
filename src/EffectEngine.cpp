@@ -24,6 +24,7 @@ Effect* EffectEngine::get(std::string id, double value, int duration, int delay)
     }
     if(id=="ablaze")
     {
+        /// ABLAZE :  Afflicts value damage over delay time
         return new Effect(ABLAZE,nullptr,value,duration,delay);
     }
     if(id=="t_ablaze")
