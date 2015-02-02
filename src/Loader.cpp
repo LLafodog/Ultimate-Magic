@@ -272,6 +272,7 @@ pair<string,double> Loader::readPropLine(string line)
         if(linei!='\n' && linei!=' ' && i!=line.size()) //look if we are adding the data, not the tool to read it (spaces not even read)
         {
             word+=linei;
+            if(linei=='%'){i=line.size();} // Allow me to comment a .prop file
         }
         else if(word!="")  //security
         {

@@ -11,15 +11,10 @@ Identity::Identity(string id)
     m_id=id;
 
 
-    m_alive=new Alive();
+
     /// /!\ Resistance of 1 is NORMAL, not 100% !
-    m_status=
-    {
-        {"fire_resistance",1},
-        {"slow_resistance",1},
-        {"poison_resistance",1}
-    };
     m_status=Loader::getInstance()->getObjectDatas(m_id);
+    m_alive=new Alive(m_status["max_health"],m_status["health_regeneration"]);
 
 }
 

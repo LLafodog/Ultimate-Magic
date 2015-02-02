@@ -30,23 +30,24 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
 {
     vector<Animation*> v=vector<Animation*>();
 
-    /** =========== PLAYER =========== */ /// TO DO : méthode générale
-    if(name=="player")
+    for(int i(0);i<4;i++)
     {
-
-        v.push_back(get("player"));
-        v.push_back(get("player1"));
-        v.push_back(get("player2"));
-        v.push_back(get("player3"));
-        return v;
+        /// Load four animation, for each direction.
+        if(get(name+to_string(i))!=nullptr)
+        {
+            v.push_back(get(name+to_string(i)));
+        }
+        /// Some haven't to do so, so we had the basic and conclude the for.
+        else if(get(name)!=nullptr)
+        {
+            v.push_back(get(name));
+            if(i!=0)i=4;
+        }
     }
-    else
-    {
-        Animation* a=get(name);
-        if(a==nullptr){return getAllOf("error");}
+    // in order to give something in case of error
+    if(v.size()==0){return(getAllOf("error"));}
 
-        v.push_back(a);return v;
-    }
+    return v;
 }
 
 void AnimationEngine::free()

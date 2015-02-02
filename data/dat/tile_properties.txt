@@ -3,8 +3,8 @@ light_grass false none
 dark_grass false none
 sand false speed 10  
 error true none
-ground false none
+ground false none 
 water false speed 50
 dark_water false speed 80
-invisible true none
+invisible false none
 snow false speed 30

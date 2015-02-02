@@ -120,8 +120,10 @@ void Collisionnable::colMove(int signX, int signY)
 
         // We move, we look if in collision, and if yes we are we back. To great.
         moveOnF(signX*canGoH,signY*canGoV);
-        if(isInCollisionWithObjects(m_world->getObjects()))moveOnF(-signX*canGoH,-signY*canGoV, false);
-
+        if(isInCollisionWithObjects(m_world->getObjects()))
+        {
+            moveOnF(-signX*canGoH,-signY*canGoV, false);
+        }
 
     }else{std::cerr<<"Collisionnable without world detected."<<std::endl;}
 

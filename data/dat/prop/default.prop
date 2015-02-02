@@ -1,0 +1,8 @@
+% 1 is normal resistance
+% 0 is insensibiliy
+% 2,3...n is how many time you will multiply the effect so be careful !
+fire_resistance 1
+slow_resistance 1
+poison_resistance 1
+max_health 100
+health_regeneration 0

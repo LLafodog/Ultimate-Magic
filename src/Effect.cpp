@@ -104,7 +104,7 @@ void Effect::end()
 {
     if(m_object!=nullptr)
     {
-        if(m_id==CHANGE_SPEED)
+        if(m_id==CHANGE_SPEED || m_id==TERRESTRIAL_BLOCK || m_id==POISONNED)
         {
             m_object->restoreSpeed();
             //cout << " Restore speed = " << m_object->getSpeed() << rand()%10 ;

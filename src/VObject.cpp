@@ -39,18 +39,18 @@ void VObject::update()
 
         // if dead then look dead
         Alive* a=m_object->getAlive();
-        if(a!=nullptr && a->isDead())
+        if(a!=nullptr && a->isDead() && m_object!=nullptr)
         {
             auto vec=AnimationEngine::getInstance()->getAllOf("dead_"+m_object->getID());
-                m_animations=vec;
+                m_animations.swap(vec);
                 changeOrientation("first");
                 m_animation->run();
             //if(a->isPoisonned()){m_animations=AnimationEngine::getAllOf("poisonned_player");} //etc
         }
         if(m_animation!=nullptr && m_object!=nullptr)
         {
-        if(m_object->isMoving()){m_animation->run();}
-        else{m_animation->stop();} // To do: if dead animation quand même running
+        if(!m_object->isMoving()){m_animation->stop();}
+        else{m_animation->run();} // To do: if dead animation quand même running
         }
     }
     else

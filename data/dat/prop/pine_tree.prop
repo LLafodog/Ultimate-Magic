@@ -1,3 +1,5 @@
-fire_resistance 1
+fire_resistance 2.5
 slow_resistance 1
 poison_resistance 1
+max_health 500
+health_regeneration 1
