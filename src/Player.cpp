@@ -12,13 +12,14 @@
 /// EFFECTS
 #include "EffectEngine.h"
 
-#include"Alive.h"
+#include"Identity.h"
+    #include"Alive.h"
+
 
 Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) :
     Object(id,rect,w,true,x,y,width,height,visible)
 {
     m_controller=c;
-    m_alive=new Alive();
     initStats();
 }
 
@@ -40,12 +41,12 @@ void Player::update()
     /* ================== OBJECT =============== */
     Object::update();
     /* ================== ALIVE =============== */
-    m_alive->update();
+    m_identity->update();
                                                     //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
     //to throw
     if(m_collide){m_collide=false;}
     /// MOVING
-    if(!m_alive->isDead() )
+    if(!m_identity->getAlive()->isDead() )
     {
         /* ================== PLAYER =============== */
         if(m_controller!=0 && !m_controller->noOp())

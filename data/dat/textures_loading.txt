@@ -2,7 +2,7 @@ P grass 1 1 32 32
 P light_grass 1 1 32 32  
 P dark_grass 1 1 32 32 
 P sand 1 1 16 16  
-S dragon 4 4 96 96 100 0 false 
+S player 4 4 96 96 100 0 false 
 S error 1 1 32 32 
 P ground 1 1 32 32 
 P water 2 1 32 32 

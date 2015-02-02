@@ -7,8 +7,9 @@
 #include <iostream>
 
 class World;
-class Alive;
 class Effect;
+class Identity;
+class Alive;
 
 class Object :public Collisionnable
 {
@@ -26,14 +27,15 @@ class Object :public Collisionnable
         /* ============= GETTER ===================== */
         virtual std::string getID() const   {return m_id;}
         virtual bool isVisible() const      {return m_visible;}
-        virtual Alive* getAlive()           {return m_alive;}
+        virtual Identity* getIdentity() {return m_identity;}
+            virtual Alive* getAlive();
         virtual bool isPlayer()             {return false;}
         std::vector<Effect*> getTileEffects()             {return m_tileEffects;}
 
 
         /// ========== SETTER =============
         //virtual void setTileEffects( vector<Effect* e) {if(e!=nullptr){m_tileEffect=e;}}
-        void setAlive(Alive* a) {m_alive=a;}
+        void setAlive(Alive* a);
 
         virtual ~Object();
 
@@ -41,7 +43,7 @@ class Object :public Collisionnable
         bool m_visible;
         std::string m_id;
 
-        Alive* m_alive;
+        Identity* m_identity;
 
         std::vector<Effect*> m_effects;
         std::vector<Effect*> m_tileEffects;

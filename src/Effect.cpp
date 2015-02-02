@@ -1,7 +1,9 @@
 #include "Effect.h"
 
 #include "Object.h"
-#include"Alive.h"
+
+#include"Identity.h"
+    #include"Alive.h"
 
 #include"EffectEngine.h"
 
@@ -52,32 +54,41 @@ void Effect::act()
     {
         // player effect:
         //if(m_object->getID()=="dragon")cout << " Object " << m_object->getID() << " ID: " << m_id << " val : " << m_value << " duratio " << m_duration << endl;
+        Identity* idty=m_object->getIdentity();
         switch(m_id)
         {
             case ABLAZE:
             {
+                double damageAfterResistance=m_value;
+                damageAfterResistance*=idty->getData("fire_resistance");
                 Alive* a=m_object->getAlive();
-                 if(a){a->suffer(m_value/(m_duration/m_delay));}
+                 if(a && damageAfterResistance!=0){a->suffer(damageAfterResistance/(m_duration/m_delay));}
                     else{end();}
 
             }break;
             case T_ABLAZE:
             {
-                 m_object->addEffect(new Effect(ABLAZE,m_object,2)); end();
+                 m_object->addEffect(new Effect(ABLAZE,m_object,m_value));
 
             }break;
 
             case POISONNED:
             {
+                double speedChange=m_value;
+                speedChange*=idty->getData("slow_resistance");
+
+                double poisonChange=m_value;
+                poisonChange*=idty->getData("poison_resistance");
                 if(m_singleEffect){m_singleEffect=false; m_object->addEffect(new Effect(CHANGE_SPEED,m_object,50,2000));}
-                m_object->getAlive()->suffer(m_value);
+                m_object->getAlive()->suffer(poisonChange);
 
             }break;
 
             case CHANGE_SPEED:
             {
-
-                if(m_singleEffect){m_singleEffect=false; m_object->setSpeedFactor(1-(m_value/100));}
+                double speedChange=m_value;
+                speedChange*=idty->getData("slow_resistance");
+                if(m_singleEffect){m_singleEffect=false; m_object->setSpeedFactor(max(0.01,1-(speedChange/100)));}
                 //cout << " New speed = " << m_object->getSpeed() << rand()%10 ;
 
             }break;

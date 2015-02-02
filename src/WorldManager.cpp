@@ -136,7 +136,7 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
     /// find the right biome
     vector<pair<string,float>> probabilities=m_tileProbabilities[biome];
 
-    for(int i(0);i<END_ENUM_PROBABILITIES;i++)
+    for(unsigned int i(0);i<END_ENUM_PROBABILITIES;i++)
     {
         if(i<probabilities.size() && Global::Proba(probabilities[i].second))
         {

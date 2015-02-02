@@ -22,7 +22,7 @@ class Perlin
 
         void display();
 
-        double get(int i, int j) {if(i<m_height && j<m_width){return m_tab[i][j];}}
+        double get(int i, int j) {if(i<m_height && j<m_width){return m_tab[i][j];}return -1;}
         const int getWidth() {return m_width;}
         const int getHeight() {return m_height;}
 

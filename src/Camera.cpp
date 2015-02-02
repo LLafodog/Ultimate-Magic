@@ -33,9 +33,7 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
             xr=m_view.getSize().x/2,
             yr=m_view.getSize().y/2,
             wr=m_world->getWidth()*Global::TILE_WIDTH,
-            hr=m_world->getHeight()*Global::TILE_HEIGHT,
-            width=Global::TILE_WIDTH,
-            height=Global::TILE_HEIGHT;
+            hr=m_world->getHeight()*Global::TILE_HEIGHT;
 
     //If 12 tiles is bigger than the world then
     if(2*xr >wr){m_view.setSize(wr,2*yr);} // reajusting the width

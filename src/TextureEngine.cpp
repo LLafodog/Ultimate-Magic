@@ -121,7 +121,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
     // animation
     int frameD=500,animeD=0; bool random=true;
 
-    for(int i(0);i<line.size();i++)
+    for(unsigned int i(0);i<line.size();i++)
     {
         char letter=line[i];
         if(letter!='S' && letter != 'P' && letter!='\n' && letter !=' ' )

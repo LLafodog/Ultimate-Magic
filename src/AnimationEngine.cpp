@@ -31,13 +31,13 @@ std::vector<Animation*> AnimationEngine::getAllOf(std::string name)
     vector<Animation*> v=vector<Animation*>();
 
     /** =========== PLAYER =========== */ /// TO DO : méthode générale
-    if(name=="dragon")
+    if(name=="player")
     {
 
-        v.push_back(get("dragon"));
-        v.push_back(get("dragon1"));
-        v.push_back(get("dragon2"));
-        v.push_back(get("dragon3"));
+        v.push_back(get("player"));
+        v.push_back(get("player1"));
+        v.push_back(get("player2"));
+        v.push_back(get("player3"));
         return v;
     }
     else

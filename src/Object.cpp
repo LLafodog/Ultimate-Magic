@@ -1,7 +1,9 @@
 #include "Object.h"
-#include "Alive.h"
+#include "Identity.h"
 #include"Global.h"
 #include"World.h"
+
+#include"Identity.h"
 
 #include"EffectEngine.h"
 
@@ -16,7 +18,7 @@ Object::Object( std::string id, sf::FloatRect rect, World* w, bool solid, float 
     m_effects=std::vector<Effect*>() ;
 
 
-    m_alive=nullptr;
+    m_identity=new Identity(m_id);
 
     m_tileEffects.clear();//m_tileEffects.push_back(new Effect(NONE,this));
 }
@@ -39,7 +41,7 @@ void Object::updateCurrentTileEffect()
         bool same=e.size() == m_tileEffects.size();
         if(same)
         {
-            for(int i(0);i<m_tileEffects.size();i++)
+            for(unsigned int i(0);i<m_tileEffects.size();i++)
             {
                 if(m_tileEffects[i]!=nullptr && e[i]!=nullptr)
                 {
@@ -59,7 +61,7 @@ void Object::updateCurrentTileEffect()
         else
         {
             /// First end them and delete them
-            for(int i(0);i<m_tileEffects.size();i++)
+            for(unsigned int i(0);i<m_tileEffects.size();i++)
             {
                 delete m_tileEffects[i];
             }
@@ -74,7 +76,7 @@ void Object::updateCurrentTileEffect()
         }
 
     /// Now let's update the active and delete the unactive
-    for(int i(0);i<m_tileEffects.size();i++)
+    for(unsigned int i(0);i<m_tileEffects.size();i++)
     {
         Effect* eff=m_tileEffects[i];
 
@@ -109,7 +111,7 @@ void Object::addTileEffect(Effect* e)
 
 void Object::update()
 {
-    for(int i(0);i<m_effects.size();i++)
+    for(unsigned int i(0);i<m_effects.size();i++)
     {
         //cout << "id : " << m_id << " nb of effects : " <<  m_effects.size() << "id : " << m_effects[i]->getID() << " duration : " << m_effects[i]->getElapsedTime() << " speed : " << m_speed << endl;
         Effect* e=m_effects[i];
@@ -121,6 +123,15 @@ void Object::update()
 
 }
 
+Alive* Object::getAlive()
+{
+    return m_identity->getAlive();
+}
+
+void Object::setAlive(Alive* a)
+{
+    m_identity->setAlive(a);
+}
 
 Object::~Object()
 {

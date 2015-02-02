@@ -41,7 +41,6 @@ class Player : public Object
 
         /* ============= CONVERSION ========================= */
         virtual bool isPlayer() {return true;}
-        virtual Alive* getAlive() {return m_alive;}
 
 
 

@@ -6,6 +6,8 @@
 
 #include<unordered_map>
 
+using namespace std;
+
 class Tile;
 
 class Loader
@@ -20,12 +22,13 @@ class Loader
         void free() {delete m_self;}
 
 
-        typedef void( Loader::*loaderFunction)(std::string);
-            bool readFile(std::string path,loaderFunction);
-                std::pair<std::string,Tile*> readTileLine(std::string line);
+        typedef void( Loader::*loaderFunction)(string);
+                pair<string,Tile*> readTileLine(string line);
+                pair<string,double> readPropLine(string line);
 
-        std::unordered_map<std::string,Tile*> getPremadeTiles(std::string path);
-        std::unordered_map<std::string,std::vector<std::pair<std::string,float>>> getTileProbabilities(std::string path);
+        unordered_map<string,Tile*> getPremadeTiles(string path);
+        unordered_map<string,vector<pair<string,float>>> getTileProbabilities(string path);
+        unordered_map<string,double> getObjectDatas(string id);
 
         virtual ~Loader();
 

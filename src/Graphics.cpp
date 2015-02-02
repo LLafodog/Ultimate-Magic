@@ -64,10 +64,10 @@ void Graphics::initTiles()
 
     ///background
     //The tiles are loaded in the wrong ordre so we MUST invert each time.
-    for(unsigned int i(0);i<m_world->getHeight();i++)
+    for(int i(0);i<m_world->getHeight();i++)
     {
         std::vector<EntityGraphic*> v;
-        for(unsigned int j(0);j<m_world->getWidth();j++)
+        for(int j(0);j<m_world->getWidth();j++)
         {
             //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
 
@@ -288,7 +288,7 @@ const void Graphics::drawVisibleArea()
                 /// /!\ INT is REALLY IMPORTANT
                 for (int j=xp-wp-1;j<=xp+wp+1;j++)
                 {
-                    if(i<m_tiles.size() && i>=0 && j<m_tiles[i].size() && j>=0)
+                    if(i<(int)m_tiles.size() && i>=0 && j<(int)m_tiles[i].size() && j>=0)
                     {
                     //cout<<"i: " << i << " j: " << j << " id: " << m_tiles[j][i]->getID() <<endl;
                     drawTile(m_tiles[i][j]);

@@ -104,7 +104,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
             if(LOADER_DEBUG)
             {
 
-                for(int k(0);k<link_prob_name.second.size();k++)
+                for(unsigned int k(0);k<link_prob_name.second.size();k++)
                 {
                     cout << "Tile : " << link_prob_name.second[k].first <<  " Probability:" << link_prob_name.second[k].second <<  endl;
                 }
@@ -122,21 +122,6 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
    return probabilities;
 }
 
-typedef void( Loader::*loaderFunction)(std::string);
-bool readFile(std::string path, loaderFunction)
-{
-    fstream reader(path.c_str());
-    if(!reader && LOADER_DEBUG){cerr << " [Loader::readFile] Problem loading " << path << "file"<<endl; return false;}
-    else
-    {
-        string line;
-        while(getline(reader,line))
-        {
-            loaderFunction(line);
-        }
-        return true;
-    }
-}
 
 pair<string,Tile*> Loader::readTileLine(std::string line)
 {
@@ -205,13 +190,13 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
     {
         cout    << " Tile id : " << id << endl
                 << " Effects: " << endl;
-        for(int i(0);i<effect.size();i++)
+        for(unsigned int i(0);i<effect.size();i++)
         {
             cout << " ----- Effect ID linked: " << effect[i] << " with value of : " << values[i] << endl;
         }
 
     }
-    for(int i(0);i<effect.size();i++)
+    for(unsigned int i(0);i<effect.size();i++)
     {
         Effect* e=EffectEngine::getInstance()->get(effect[i],values[i]);
         if(e!=nullptr){effects.push_back(e);}
@@ -251,6 +236,72 @@ std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
 
 
     }
+}
+
+
+
+unordered_map<string,double> Loader::getObjectDatas(string id)
+{
+/// ne rentre pas dans la boucle O.o
+    unordered_map<string,double> result; result.clear();
+    string path=Global::TO_DATA+"dat/prop/"+id+".prop";
+    fstream reader(path.c_str());
+    if(!reader ){if(LOADER_DEBUG){cerr << " [Loader::getObjectDatas] Problem loading " << path << "file"<<endl;} return result;}
+    else
+    {
+        string line;
+        while(getline(reader,line))
+        {
+            result.insert(readPropLine(line));
+        }
+    }
+    return result;
+
+}
+
+pair<string,double> Loader::readPropLine(string line)
+{
+    pair<string,double> result;
+
+    string word="";
+    unsigned int wordNumber=0;
+    for(unsigned int i(0);i<=line.size();i++)
+    {
+        char linei=line[i];
+        //cout << linei; //
+        if(linei!='\n' && linei!=' ' && i!=line.size()) //look if we are adding the data, not the tool to read it (spaces not even read)
+        {
+            word+=linei;
+        }
+        else if(word!="")  //security
+        {
+            wordNumber++;
+
+            ///transcription
+            switch(wordNumber)
+            {
+                case 1: ///data
+                {
+                    result.first=word;
+                }
+                break;
+
+                case 2: ///value
+                {
+                    result.second=Global::strtoi(word);
+                }
+                break;
+
+                default:
+                {
+                }break;
+            }
+            word="";
+        }
+
+    }
+    if(LOADER_DEBUG)cout << " Line read as a Propertie file : " << result.first << " ; " << result.second << endl;
+    return result;
 }
 
 Loader::~Loader()

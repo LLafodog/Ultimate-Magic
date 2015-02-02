@@ -72,7 +72,7 @@ const std::string World::getTileID(int i, int j)
 }
 */
 
-Tile* World::getTile(int i, int j)
+Tile* World::getTile(unsigned int i, unsigned int j)
 {
     //if(j<m_tiles.size() && j>=0 &&i<m_tiles[j].size() && i>=0 && m_tiles[j][i] != nullptr ) {return m_tiles[j][i];}
     if(i<m_tiles.size() && i>=0 &&j<m_tiles[i].size() && j>=0 && m_tiles[i][j] != nullptr )
@@ -88,7 +88,7 @@ Tile* World::getTile(int i, int j)
 
 void World::addPlayer()
 {
-    Player* p=new Player("dragon",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,35,100,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
+    Player* p=new Player("player",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,35,100,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
     m_objects.push_back(p);
 
 }
@@ -109,13 +109,13 @@ void World::addObject(Object* o)
 
 void World::update()
 {
-    for(int i(0); i<m_objects.size(); i++)
+    for(unsigned int i(0); i<m_objects.size(); i++)
     {
         Object* o=m_objects[i];
         if(o!=nullptr && o->getAlive()!=nullptr)
         {
 
-            if(o->getAlive()->isDead() && o->getAlive()->getDisapearingRatio()<=0){ cout << " deleted " ;delete o; m_objects.erase(m_objects.begin()+i);}
+            if(o->getAlive()->isDead() && o->getAlive()->getDisapearingRatio()<=0){delete o; m_objects.erase(m_objects.begin()+i);}
                 else{o->update();}
         }
         else{m_objects.erase(m_objects.begin()+i);}
@@ -180,7 +180,7 @@ vector<Effect*> World::getTileEffects(int i, int j)
 
 World::~World()
 {
-    for(int i(0);i<m_tiles.size();i++)
+    for(unsigned int i(0);i<m_tiles.size();i++)
     {
         for(Tile* t: m_tiles[i]){delete t;}
     }

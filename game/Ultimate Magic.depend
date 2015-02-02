@@ -2306,7 +2306,7 @@
 	<string>
 	<iostream>
 
-1422800790 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/AnimationEngine.cpp
+1422873664 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/AnimationEngine.cpp
 	"AnimationEngine.h"
 	<vector>
 	<iostream>
@@ -2324,7 +2324,7 @@
 	<string>
 	<unordered_map>
 
-1422211671 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Camera.cpp
+1422868541 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Camera.cpp
 	"Camera.h"
 	"Positionnable.h"
 	"World.h"
@@ -2338,18 +2338,18 @@
 	<SFML/Graphics.hpp>
 	"Global.h"
 
-1422811708 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
+1422868434 /home/llafodog/Programmation/C++/Ultimate-Magic/include/World.h
 	<SFML/System/Vector2.hpp>
 	<vector>
 	<string>
 	"Tile.h"
 
-1422798619 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Player.h
+1422868962 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Player.h
 	<string>
 	<iostream>
 	"Object.h"
 
-1422812466 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Object.h
+1422869971 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Object.h
 	"Collisionnable.h"
 	"Global.h"
 	<iostream>
@@ -2423,7 +2423,7 @@
 	<fstream>
 	"TextureEngine.h"
 
-1422817639 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Graphics.cpp
+1422868726 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Graphics.cpp
 	"Graphics.h"
 	"Player.h"
 	"World.h"
@@ -2444,21 +2444,23 @@
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/KeyboardController.cpp
 	"KeyboardController.h"
 
-1422811559 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Object.cpp
+1422871826 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Object.cpp
 	"Object.h"
-	"Alive.h"
+	"Identity.h"
 	"Global.h"
 	"World.h"
+	"Identity.h"
 	"EffectEngine.h"
 	<string>
 
-1422799090 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Player.cpp
+1422869186 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Player.cpp
 	"Player.h"
 	"Global.h"
 	"World.h"
 	"Controller.h"
 	<iostream>
 	"EffectEngine.h"
+	"Identity.h"
 	"Alive.h"
 
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/PlayerManager.cpp
@@ -2468,7 +2470,7 @@
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Positionnable.cpp
 	"Positionnable.h"
 
-1422731890 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
+1422868726 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
 	"TextureEngine.h"
 	"Global.h"
 	"AnimationEngine.h"
@@ -2484,7 +2486,7 @@
 	"Tile.h"
 	"Effect.h"
 
-1422817288 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
+1422873599 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/World.cpp
 	"World.h"
 	"Player.h"
 	"Villager.h"
@@ -2500,7 +2502,7 @@
 	<fstream>
 	<cmath>
 
-1422194091 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
+1422868726 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/WorldManager.cpp
 	"WorldManager.h"
 	<SFML/Graphics.hpp>
 	<fstream>
@@ -3160,7 +3162,7 @@
 	<SFML/Graphics.hpp>
 	"Behavior.h"
 
-1421057819 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Perlin.h
+1422868726 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Perlin.h
 	<vector>
 
 1422190469 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Perlin.cpp
@@ -3169,7 +3171,7 @@
 	<iostream>
 	<cmath>
 
-1422735742 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Loader.cpp
+1422873471 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Loader.cpp
 	"Loader.h"
 	"Global.h"
 	"Defines.h"
@@ -3179,7 +3181,7 @@
 	"Effect.h"
 	"EffectEngine.h"
 
-1422125495 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Loader.h
+1422872358 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Loader.h
 	<vector>
 	<string>
 	<unordered_map>
@@ -3196,9 +3198,10 @@
 	<SFML/Graphics.hpp>
 	<vector>
 
-1422811542 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Effect.cpp
+1422871562 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Effect.cpp
 	"Effect.h"
 	"Object.h"
+	"Identity.h"
 	"Alive.h"
 	"EffectEngine.h"
 
@@ -3233,5 +3236,15 @@
 	<unordered_map>
 	"Tile.h"
 
-1422809811 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Defines.h
+1422873498 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Defines.h
+
+1422872716 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Identity.cpp
+	"Identity.h"
+	"Alive.h"
+	"Loader.h"
+	<iostream>
+
+1422871757 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Identity.h
+	<string>
+	<unordered_map>
 
