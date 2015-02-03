@@ -59,6 +59,7 @@ Texture* TextureEngine::get(string name, unsigned int j)
         return nullptr;
 }
 
+#include"Defines.h"
 void TextureEngine::load()
 {
     /// DISPLAY
@@ -71,7 +72,7 @@ void TextureEngine::load()
     if(ptr==nullptr || !Global::readFile(Global::TO_DATA+"dat/textures.txt",ptr)){cerr<<"Problem loading the textures !"<<endl;} */
 
     ifstream reader(path.c_str());
-    if(!reader){cerr << " [TextureEngine::load] Problem loading " << path << "file"<<endl;}
+    if(!reader && IMPORTANT_DEBUG){cerr << " [TextureEngine::load] Problem loading " << path << "file"<<endl;}
     else
     {
         //cout << "path : " << path <<endl;
@@ -185,7 +186,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         for(int j(0);j<nb_x;j++) //horizontal
         {
             Texture* t= new Texture;
-            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(j*w,i*h,w,h))) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
+            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(j*w,i*h,w,h)) && IMPORTANT_DEBUG) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
             else{a->addFrame(t);}
             v.push_back(t);
             //See everything:
@@ -216,7 +217,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         // cout << " Name :" << path << " w: " << w << " h: " << h <<endl;
         Animation* a=new Animation(path,frameD,animeD,random);
             Texture* t= new Texture;
-            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(0,0,w,h))) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
+            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(0,0,w,h)) && IMPORTANT_DEBUG) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
             else{a->addFrame(t);}
             v.push_back(t);
 
@@ -234,72 +235,6 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
     }
     return true;
 }
-/*
-void const TextureEngine::createAnimations()
-/// TO DO with file.anim
-{
-
-        string line;
-        ifstream reader(Global::TO_DATA+"dat/animations_setup.txt");
-
-        if(!reader){cerr << " Problem loading animations. " << endl;}
-        else
-        {
-            while(getline(reader,line))
-            {
-                //dat
-                int frameD=500,animD=0;
-                bool random=true;
-                string name="";
-                /// Reading
-                string word="";
-                int wordnumber=0;
-
-                for(char letter: line)
-                {
-                    if(letter!='\n' && letter !=' ')
-                    {
-                    word+=letter;
-                    }
-                    else if(word!="")
-                    {
-                        wordnumber++;
-
-                        switch(wordnumber)
-                        {
-                        case 1: //id
-                            name=word;
-                            break;
-                        case 2: // frameD
-                            frameD=Global::strtoi(word);
-                            break;
-                        case 3: // animD
-                            animD=Global::strtoi(word);
-                            break;
-
-                        case 4: // random anim ?
-                            random=(word=="random");
-                            break;
-
-                        default: break;
-                        }
-                    }
-                    cout << " FRAMED : " << frameD << " ANIMD : " << animD << " random : " << random << " name : " << name <<endl;
-                    AnimationEngine::getInstance()->addAnimation(new Animation(name,frameD,animD,random));
-                }
-
-
-            }
-        }
-        reader.close();
-
-}
-
-    //for(int j(0);j<m_names.size();j++)cout << "name: " << m_names[j] <<endl;
-    //cout << " TE max: " << getMax() << " AE max: " << AnimationEngine::getInstance()->getMax() <<endl;
-
-
-*/
 
 void TextureEngine::free()
 {

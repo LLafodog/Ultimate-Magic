@@ -1,11 +1,6 @@
 #include "Alive.h"
 
-//testing
-#include<iostream>
-
 using namespace std;
-
-//const int Alive::m_timesleeping=500; //0.5sec
 
 Alive::Alive(float maxHealth, float healthRegen, bool alive)
 {
@@ -37,6 +32,7 @@ void Alive::die()
 }
 
 const float Alive::getDisapearingRatio()
+/// Decide when the object will be deleted, allows transparency so far.
 {
     float alpha=1-1.0f*m_deadClock.getElapsedTime().asMilliseconds()/m_deadDuration;
     return max(0.0f,alpha);
@@ -76,7 +72,11 @@ void Alive::update()
     if(m_invincibleClock.getElapsedTime().asMilliseconds()<=m_timesleeping)
     {
         m_invincible=true;
-    }else {m_invincible=false;}
+    }
+    else
+    {
+        m_invincible=false;
+    }
 
 }
 

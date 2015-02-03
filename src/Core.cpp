@@ -80,14 +80,12 @@ void Core::initGraphics()
 
 void Core::load()
 {
+
     new Loader();
     new TileEngine();
     m_wm=new WorldManager();
-    m_ae=new AnimationEngine();
+//    m_ae=new AnimationEngine();
     m_te=new TextureEngine();
-
-
-
 
     //AnimationEngine::load(); //Need the textures
 }

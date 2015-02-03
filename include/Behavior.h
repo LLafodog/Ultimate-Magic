@@ -4,6 +4,9 @@
 class Object;
 
 class Behavior
+/**
+    Virtual class that will consist in the core of AI.
+**/
 {
     public:
         Behavior(Object* o=nullptr);

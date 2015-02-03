@@ -4,6 +4,8 @@
 #define TEXTURE_DEBUG 0
 #define LOADER_DEBUG 0
     #define LOADER_DEBUG_DETAILS 0
+#define IMPORTANT_DEBUG 1
+#define TECHNICAL_DEBUG 1
 
 
 #endif // DEFINES_INCLUDED

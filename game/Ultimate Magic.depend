@@ -2294,26 +2294,24 @@
 1421057819 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Core.h
 	<SFML/Graphics.hpp>
 
-1421057819 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Animation.cpp
+1422976080 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Animation.cpp
 	"Animation.h"
-	<iostream>
-	"TextureEngine.h"
-	"AnimationEngine.h"
+	"Defines.h"
 
-1422017602 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Animation.h
+1422975659 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Animation.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<string>
 	<iostream>
 
-1422886774 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/AnimationEngine.cpp
+1422976282 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/AnimationEngine.cpp
 	"AnimationEngine.h"
 	<vector>
 	<iostream>
 	"TextureEngine.h"
 	"Global.h"
 
-1422019881 /home/llafodog/Programmation/C++/Ultimate-Magic/include/AnimationEngine.h
+1422976485 /home/llafodog/Programmation/C++/Ultimate-Magic/include/AnimationEngine.h
 	"Animation.h"
 	<string>
 	<vector>
@@ -2331,7 +2329,7 @@
 	"Player.h"
 	<iostream>
 
-1422201234 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Camera.h
+1422977055 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Camera.h
 	<SFML/Graphics.hpp>
 
 1421947115 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Positionnable.h
@@ -2360,7 +2358,7 @@
 1419175623 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Controller.h
 	<SFML/Graphics.hpp>
 
-1422817288 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Core.cpp
+1422976357 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Core.cpp
 	"Core.h"
 	"Global.h"
 	"Graphics.h"
@@ -2472,7 +2470,7 @@
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Positionnable.cpp
 	"Positionnable.h"
 
-1422974151 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
+1422975436 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
 	"TextureEngine.h"
 	"Global.h"
 	"AnimationEngine.h"
@@ -2481,6 +2479,7 @@
 	<fstream>
 	"Defines.h"
 	<cstdlib>
+	"Defines.h"
 
 1419538045 D
 
@@ -3119,9 +3118,8 @@
 	"Core.h"
 	<ctime>
 
-1422817523 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Alive.cpp
+1422976079 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Alive.cpp
 	"Alive.h"
-	<iostream>
 
 1422814285 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Alive.h
 	<SFML/Graphics.hpp>
@@ -3137,7 +3135,7 @@
 	"Behavior.h"
 	"Object.h"
 
-1420477598 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Behavior.h
+1422976968 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Behavior.h
 
 1422018850 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/NPC.cpp
 	"NPC.h"
@@ -3239,7 +3237,7 @@
 	<unordered_map>
 	"Tile.h"
 
-1422974170 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Defines.h
+1422975617 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Defines.h
 
 1422971079 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Identity.cpp
 	"Identity.h"

@@ -3,11 +3,6 @@
 using namespace sf;
 using namespace std;
 
-#include<iostream>
-
-#include "TextureEngine.h"
-#include "AnimationEngine.h"
-
 Animation::Animation(string name, float frameD, float animD, bool randomAnimDelay)
 ///Create before adding manually textures
 {
@@ -18,12 +13,10 @@ Animation::Animation(string name, float frameD, float animD, bool randomAnimDela
     m_running=true;
     m_random=randomAnimDelay;
     m_ID=name;
-    //m_textures=AnimationEngine::getInstance()->get(name)->getTextures();
-
-//    m_textures=TextureEngine::getInstance()->getAllOf(name);
 }
 
 Animation::Animation(Animation* a)
+/// Constructor recopy by pointer.
 {
     m_ID=a->getID();
     m_frameDelay=a->getFrameDelay();
@@ -35,8 +28,9 @@ Animation::Animation(Animation* a)
     m_random=a->isRandom();
 }
 
-
+#include"Defines.h"
 const sf::Texture* Animation::getCurrentFrame()
+/// An animation is based on many frames, this methods gives the current one.
 {
     if((unsigned int)m_current<m_textures.size())
     {
@@ -44,7 +38,7 @@ const sf::Texture* Animation::getCurrentFrame()
     }
     else
     {
-        std::cerr<<"[Animation ] Current anim greater than the capacity !"<<std::endl;
+        if(TECHNICAL_DEBUG)std::cerr<<"[Animation ] Current anim greater than the capacity !"<<std::endl;
         return nullptr;
     }
 }
@@ -77,7 +71,8 @@ void Animation::update()
                 m_current++;
                 m_clocky.restart();
             }
-        }else
+        }
+        else
         {
             ///Else we wait the time between the animation stoping everything
             if(time>m_frameDelay+m_animationDelay || !m_running) // added the frameDelay cuz the last one is skipped otherwise // We restart from the beginning if stopped
@@ -88,7 +83,7 @@ void Animation::update()
                 /// If we want random delay between animations
                 if(m_random)
                 {
-                m_animationDelay=rand()%1000+100; /// randome delay e [100;1100] ms.
+                    m_animationDelay=rand()%1000+100; /// randome delay e [100;1100] ms.
                 }
             }
         }
@@ -97,5 +92,5 @@ void Animation::update()
 
 Animation::~Animation()
 {
-    //dtor
+
 }

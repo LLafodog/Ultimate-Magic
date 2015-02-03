@@ -2,28 +2,36 @@
 #define ANIMATIONENGINE_H
 
 #include"Animation.h"
+
 #include<string>
 #include<vector>
 #include<unordered_map>
 
+using namespace std;
+
 class AnimationEngine
+/**
+    This class is a tool to manage all the animations.
+    All of its animation are created from textureEngine, then this class manages the whole thing.
+**/
 {
     public:
-        AnimationEngine();
-        static AnimationEngine* getInstance() {return m_self;}
+
+        static AnimationEngine* getInstance();
             void free();
 
-         Animation* get(std::string name);
-             std::vector<Animation*> getAllOf(std::string name);
+         Animation* get(string name);
+             vector<Animation*> getAllOf(string name);
 
-        void addAnimation(Animation* a) {if(a!=nullptr){m_animations.insert(std::pair<std::string,Animation*>(a->getID(),a));}}
+        void addAnimation(Animation* a) {if(a!=nullptr){m_animations.insert(pair<string,Animation*>(a->getID(),a));}}
          const unsigned int getMax() {return m_animations.size();}
 
         virtual ~AnimationEngine();
 
     protected:
+        AnimationEngine();
         static AnimationEngine* m_self;
-        std::unordered_map<std::string,Animation*> m_animations;
+        unordered_map<string,Animation*> m_animations;
 
 };
 

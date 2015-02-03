@@ -6,37 +6,38 @@
 class Positionnable;
 class World;
 
+using namespace sf;
+
 class Camera
+/**
+    This class control the view of the window, the main one with the player centered.
+**/
 {
     public:
 
-        Camera(sf::RenderWindow* w, Positionnable* p, World* wo);
-        //Pos
+        Camera(RenderWindow* w, Positionnable* p, World* wo);
+
+        /// ========== CASUAL METHODS ========
+        void updateView();
+        void zoom(float f);
+        bool move(float x, float y);
+        bool isIn(float x, float y);
+
+        /// ========== SETTER ========
         void setPositionnable (Positionnable* p) {m_pos=p;}
+        void setViewSize(int w,int h) {m_view.setSize(w,h);}
+        void setView(View v) {m_view=v;}
+
+        /// ========== GETTER ========
         Positionnable* getPos() {return m_pos;}
-        //View
-            //size
-            void setViewSize(int w,int h) {m_view.setSize(w,h);}
-            const sf::Vector2f getViewSize() {return m_view.getSize();}
-
-            //update
-            void updateView();
-            bool move(float x, float y);
-            float getDistanceFromTarget();
-            void zoom(float f);
-            //getter setter
-            void setView(sf::View v) {m_view=v;}
-            sf::View getView() {return m_view;}
-
-            //tools
-            bool isIn(float x, float y);
-
-
+        const Vector2f getViewSize() {return m_view.getSize();}
+        View getView() {return m_view;}
 
         virtual ~Camera();
+
     protected:
-        sf::View m_view;
-        sf::RenderWindow* m_window;
+        View m_view;
+        RenderWindow* m_window;
         Positionnable* m_pos;
         World* m_world;
 };

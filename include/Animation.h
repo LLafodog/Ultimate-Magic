@@ -7,6 +7,9 @@
 
 #include <iostream>
 
+using namespace std;
+using namespace sf;
+
 class Animation
 /**
     Class Animation aims to display various number of texture regarding a clock and looping at every time.
@@ -14,23 +17,23 @@ class Animation
 {
     public:
 
-        Animation(std::string name, float frameD=100, float animD=1000, bool randomAnimDelay=false);
+        Animation(string name, float frameD=100, float animD=1000, bool randomAnimDelay=false);
         Animation(Animation* a);
 
-        void addFrame(sf::Texture* t) {if(t!=nullptr)m_textures.push_back(t);}
+        void addFrame(Texture* t) {if(t!=nullptr)m_textures.push_back(t);}
 
         /* ================ GETTER ============= */
         const float getFrameDelay() {return m_frameDelay;}
         const float getAnimationDelay() {return m_animationDelay;}
-        const sf::Texture* getCurrentFrame();
-        const std::vector<sf::Texture*> getTextures() {return m_textures;}
+        const Texture* getCurrentFrame();
+        const vector<Texture*> getTextures() {return m_textures;}
         const bool isRandom() {return m_random;}
-        const std::string getID() {return m_ID;}
+        const string getID() {return m_ID;}
 
         /* ================ SETTER ============= */
         void setFrameDelay( float val) {if(val>0)m_frameDelay=val;}
         void setAnimationDelay(float val) {if(val>=0)m_animationDelay=val;}
-        void setTextures(std::vector<sf::Texture*> v) {if(v!=std::vector<sf::Texture*>())m_textures=v;}
+        void setTextures(vector<Texture*> v) {if(v!=vector<Texture*>())m_textures=v;}
 
         /* ================ CASUAL METHODS =============== */
         void run();
@@ -41,12 +44,12 @@ class Animation
         virtual ~Animation();
 
     protected:
-        std::string m_ID;
-        std::vector<sf::Texture*> m_textures;
+        string m_ID;
+        vector<Texture*> m_textures;
         int m_current;
         float m_frameDelay;
         float m_animationDelay;
-        sf::Clock m_clocky;
+        Clock m_clocky;
         bool m_running;
         bool m_random;
 };
