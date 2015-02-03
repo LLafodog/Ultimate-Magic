@@ -1,7 +1,7 @@
 grass false none 
 light_grass false none
 dark_grass false none
-sand false speed 10  
+sand false speed 10 
 error true none
 ground false none 
 water false speed 50

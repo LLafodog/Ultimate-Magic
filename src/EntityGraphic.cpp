@@ -54,6 +54,15 @@ EntityGraphic::EntityGraphic(Object* o) : Positionnable(o->getPositionX(),o->get
     }
 }
 
+EntityGraphic::EntityGraphic(string particle) : Positionnable(-Global::TILE_WIDTH,-Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT)
+{
+    m_id=particle;
+    m_tile=nullptr;
+    m_visible=true;
+    initSquare();
+    if(!isVObject()){m_animation=AnimationEngine::getInstance()->get(m_id);}//if it is a tile, not an object.
+}
+
 
 void EntityGraphic::initSquare(float width, float height)
 {
@@ -66,6 +75,12 @@ void EntityGraphic::initSquare(float width, float height)
     m_cs= cs;
 
 }
+
+void EntityGraphic::setShapeSize(Vector2f v)
+{
+    initSquare(v.x,v.y);
+}
+
 
 const sf::ConvexShape* EntityGraphic::getApparence()
 {

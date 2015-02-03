@@ -22,6 +22,11 @@ VObject::VObject(Object* o): EntityGraphic(new Tile(o->getID()),o->getPositionX(
     changeOrientation(m_orientation);
     //cout<<o->getId()<<endl;
     update();
+
+    /// Particles (poison fire...)
+    m_particle=new EntityGraphic(m_object);
+
+
 }
 
 void VObject::update()
@@ -64,7 +69,9 @@ void VObject::update()
 const sf::ConvexShape* VObject::getApparence()
 {
     if(m_animation!=nullptr)m_cs.setTexture(m_animation->getCurrentFrame());
-    else{cerr<< " [Tile::getApparence] Problem with id: " << m_id << endl; m_cs.setTexture(TextureEngine::getInstance()->get("error"));}
+    else{cerr<< " [VObject::getApparence] Problem with id: " << m_id << endl; m_cs.setTexture(TextureEngine::getInstance()->get("error"));}
+
+    // Transparency while disapearing
     if(m_object!= nullptr && m_object->getAlive()!=nullptr && m_object->getAlive()->isDead())
     {
         double alpha=255*max(0.0f,m_object->getAlive()->getDisapearingRatio());
@@ -82,13 +89,40 @@ const sf::ConvexShape* VObject::getApparence()
     return &m_cs;
 }
 
+#include"Identity.h"
+void VObject::draw(RenderWindow* w)
+{
+    if(w)
+    {
+        w->draw(*getApparence());
+       /* if(m_object)
+        {
+            for(auto status:m_object->getIdentity()->getDatas())
+            {
+                string  data =status.first;
+                if(data.compare(0,3,"in_")==0 && status.second)
+                {
+                    m_particle->setAnimation(AnimationEngine::getInstance()->get(status.first));
+                    m_particle->update();
+                    m_particle->setPosition(getPosition());
 
+                    RectangleShape rc(getSize()); rc.setPosition(getPosition());
+                    rc.setTexture(TextureEngine::getInstance()->get("in_fire"));
+                    w->draw(rc);
+                    //w->draw(*m_particle->getApparence());
+
+                }
+            }
+        }
+*/
+    }
+}
 
 
 
 void VObject::changeOrientation(std::string orientation) //to do something ?
 {
-    changeOrientation('n');
+    changeOrientation('n'); /// WHAT THE HELL DUDE ?!
 }
 
 void VObject::changeOrientation(char c)

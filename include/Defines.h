@@ -3,6 +3,7 @@
 
 #define TEXTURE_DEBUG 0
 #define LOADER_DEBUG 0
+    #define LOADER_DEBUG_DETAILS 0
 
 
 #endif // DEFINES_INCLUDED

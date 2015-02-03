@@ -1,3 +1,8 @@
+% P for Particule: if you put P then the TextureEngine will look for a name_particles.png to make the transition
+% S for Simple: the other way to load something
+% Example:
+%	X namePNG nb_x nb_y width height frameDelay AnimDelay random?
+% IMPORTANT ! LET A FREE SPACE AT THE END OTHERWISE DON'T READ !
 P grass 1 1 32 32 
 P light_grass 1 1 32 32  
 P dark_grass 1 1 32 32 
@@ -10,3 +15,4 @@ P dark_water 1 1 32 32
 S invisible 1 1 32 32 
 S pine_tree 8 1 128 128 
 P snow 1 1 32 32
+S in_fire 3 1 32 64 100 

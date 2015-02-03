@@ -6,3 +6,4 @@ slow_resistance 1
 poison_resistance 1
 max_health 100
 health_regeneration 0
+in_fire 0

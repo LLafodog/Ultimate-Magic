@@ -2380,7 +2380,7 @@
 	<string>
 	"EntityGraphic.h"
 
-1422187570 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Graphics.h
+1422974488 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Graphics.h
 	<SFML/Graphics.hpp>
 	"Global.h"
 	<vector>
@@ -2423,7 +2423,7 @@
 	<fstream>
 	"TextureEngine.h"
 
-1422868726 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Graphics.cpp
+1422974493 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Graphics.cpp
 	"Graphics.h"
 	"Player.h"
 	"World.h"
@@ -2440,6 +2440,8 @@
 	<cmath>
 	<SFML/Graphics.hpp>
 	<ctime>
+	"ParticlesPrinter.h"
+	"Identity.h"
 
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/KeyboardController.cpp
 	"KeyboardController.h"
@@ -2470,7 +2472,7 @@
 1419175623 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Positionnable.cpp
 	"Positionnable.h"
 
-1422868726 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
+1422974151 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/TextureEngine.cpp
 	"TextureEngine.h"
 	"Global.h"
 	"AnimationEngine.h"
@@ -2512,7 +2514,7 @@
 	"ObjectEngine.h"
 	"Loader.h"
 
-1422888634 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/VObject.cpp
+1422970367 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/VObject.cpp
 	"VObject.h"
 	"Object.h"
 	"AnimationEngine.h"
@@ -2520,8 +2522,9 @@
 	"Alive.h"
 	"Tile.h"
 	"TextureEngine.h"
+	"Identity.h"
 
-1422812791 /home/llafodog/Programmation/C++/Ultimate-Magic/include/VObject.h
+1422968318 /home/llafodog/Programmation/C++/Ultimate-Magic/include/VObject.h
 	"EntityGraphic.h"
 
 1422798785 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/ObjectEngine.cpp
@@ -3171,7 +3174,7 @@
 	<iostream>
 	<cmath>
 
-1422887370 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Loader.cpp
+1422972400 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Loader.cpp
 	"Loader.h"
 	"Global.h"
 	"Defines.h"
@@ -3198,18 +3201,18 @@
 	<SFML/Graphics.hpp>
 	<vector>
 
-1422888418 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Effect.cpp
+1422889803 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Effect.cpp
 	"Effect.h"
 	"Object.h"
 	"Identity.h"
 	"Alive.h"
 	"EffectEngine.h"
 
-1421950532 /home/llafodog/Programmation/C++/Ultimate-Magic/include/EntityGraphic.h
+1422973836 /home/llafodog/Programmation/C++/Ultimate-Magic/include/EntityGraphic.h
 	"Positionnable.h"
 	"Global.h"
 
-1422019467 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/EntityGraphic.cpp
+1422973843 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/EntityGraphic.cpp
 	"EntityGraphic.h"
 	"TextureEngine.h"
 	"Global.h"
@@ -3236,15 +3239,29 @@
 	<unordered_map>
 	"Tile.h"
 
-1422873498 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Defines.h
+1422974170 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Defines.h
 
-1422887241 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Identity.cpp
+1422971079 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/Identity.cpp
 	"Identity.h"
 	"Alive.h"
 	"Loader.h"
 	<iostream>
 
-1422871757 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Identity.h
+1422971079 /home/llafodog/Programmation/C++/Ultimate-Magic/include/Identity.h
 	<string>
 	<unordered_map>
+
+1422974488 source:/home/llafodog/Programmation/C++/Ultimate-Magic/src/ParticlesPrinter.cpp
+	"ParticlesPrinter.h"
+	<iostream>
+	"Identity.h"
+	"EntityGraphic.h"
+	"Tile.h"
+	"VObject.h"
+	"Object.h"
+
+1422973273 /home/llafodog/Programmation/C++/Ultimate-Magic/include/ParticlesPrinter.h
+	<string>
+	<unordered_map>
+	<SFML/Graphics.hpp>
 

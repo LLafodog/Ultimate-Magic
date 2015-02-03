@@ -28,7 +28,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
 /// Load the probabilities from a .prob file, all of the .prob files are packed in a tile_probabilities.txt file
 {
     /// Vars
-    if(LOADER_DEBUG)cout << " ========== DATA LOADING ========= " << endl;
+    if(LOADER_DEBUG)cout << " ========== PROBABILITIES LOADING ========= " << endl;
     string txt_line;
     ifstream txt_reader(path.c_str());
     unordered_map<string,std::vector<std::pair<std::string,float>>> probabilities;
@@ -101,9 +101,8 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
             link_prob_name.second=std::vector<std::pair<std::string,float>>(prob_data);
             probabilities.insert(link_prob_name);
 
-            if(LOADER_DEBUG)
+            if(LOADER_DEBUG_DETAILS)
             {
-
                 for(unsigned int k(0);k<link_prob_name.second.size();k++)
                 {
                     cout << "Tile : " << link_prob_name.second[k].first <<  " Probability:" << link_prob_name.second[k].second <<  endl;
@@ -192,7 +191,7 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
                 << " Effects: " << endl;
         for(unsigned int i(0);i<effect.size();i++)
         {
-            cout << " ----- Effect ID linked: " << effect[i] << " with value of : " << values[i] << endl;
+            cout << " ----- Effect ID linked: " << effect[i] << " with value of : " << values[i] << endl<<endl;
         }
 
     }
@@ -242,7 +241,7 @@ std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
 
 unordered_map<string,double> Loader::getObjectDatas(string id)
 {
-/// ne rentre pas dans la boucle O.o
+    if(LOADER_DEBUG_DETAILS)cout<<"===== READING INFORMATION ABOUT : " << id << "========= " << endl;
     unordered_map<string,double> result; result.clear();
     string path=Global::TO_DATA+"dat/prop/"+id+".prop";
     fstream reader(path.c_str());
@@ -265,14 +264,16 @@ pair<string,double> Loader::readPropLine(string line)
 
     string word="";
     unsigned int wordNumber=0;
+    bool comment=false;
     for(unsigned int i(0);i<=line.size();i++)
     {
+        if(line[0]=='%'){comment=true;}else{comment=false;}// Allow me to comment a .prop file
         char linei=line[i];
+
         //cout << linei; //
         if(linei!='\n' && linei!=' ' && i!=line.size()) //look if we are adding the data, not the tool to read it (spaces not even read)
         {
             word+=linei;
-            if(linei=='%'){i=line.size();} // Allow me to comment a .prop file
         }
         else if(word!="")  //security
         {
@@ -301,7 +302,7 @@ pair<string,double> Loader::readPropLine(string line)
         }
 
     }
-    if(LOADER_DEBUG)cout << " Line read as a Propertie file : " << result.first << " ; " << result.second << endl;
+    if(LOADER_DEBUG_DETAILS && !comment)cout << " Line read as a Propertie file : " << result.first << " ; " << result.second << endl;
     return result;
 }
 

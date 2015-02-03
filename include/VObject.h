@@ -3,6 +3,9 @@
 
 #include "EntityGraphic.h"
 
+using namespace std;
+using namespace sf;
+
 class Object;
 class Animation;
 
@@ -14,16 +17,17 @@ class VObject : public EntityGraphic
         /* =============== CASUAL METHODS ============== */
         virtual void update();
         void changeOrientation(char c);
-            void changeOrientation(std::string orientation);
+            void changeOrientation(string orientation);
+        void draw(RenderWindow* w);
 
         /* =============== GETTER ====================== */
-        const sf::FloatRect getHitbox();
+        const FloatRect getHitbox();
         Object* getObject() {return m_object;}
         bool isActive() {return m_active;}
 
         /* =============== CONVERSION ================== */
         virtual const bool isVObject() {return true;}
-        virtual const sf::ConvexShape* getApparence();
+        virtual const ConvexShape* getApparence();
 
 
 
@@ -31,10 +35,11 @@ class VObject : public EntityGraphic
         virtual ~VObject();
 
     protected:
-        std::vector<Animation*> m_animations;
+        vector<Animation*> m_animations;
         Object* m_object;
         char m_orientation;
         bool m_active;
+        EntityGraphic* m_particle;
 
 
 };

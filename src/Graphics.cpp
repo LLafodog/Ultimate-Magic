@@ -27,6 +27,7 @@ using namespace sf;
 
 bool Graphics::needToRefresh=true;
 
+#include"ParticlesPrinter.h"
 Graphics::Graphics(RenderWindow* w, World* wo)
 {
    m_window=w;
@@ -42,13 +43,16 @@ Graphics::Graphics(RenderWindow* w, World* wo)
    m_camera=new Camera(m_window,wo->getObject(0),wo);//to do reperer le player
    init();
 
+
+/// PP !!!!!!
    // in case of error
    //m_error =new EntityGraphic("error",-50,-50);
    m_error = new EntityGraphic(TileEngine::getInstance()->get("ground"),-50,-50,true);
 
 
    m_particle= new RectangleShape(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
-   m_shadow = new RectangleShape(*m_particle);
+
+   m_pp=new ParticlesPrinter();
 }
 
 void Graphics::init()
@@ -189,24 +193,6 @@ const void Graphics::draw()
 
 }
 
-
-
-
-void Graphics::drawShadow(EntityGraphic* t)
-{
-    /// SHADOW
-    Tile* ti=t->getTile();
-    double alt=ti->getAltitude();
-    double shadow = 0;
-    short lim=40;
-    short shadow_max=120;
-    if(alt<40){shadow=shadow_max*(1.0-(alt+100-lim)/100.0);}
-
-    m_shadow->setFillColor(Color(100,100,100,shadow));
-    m_shadow->setPosition(t->getPosition());
-    m_window->draw(*m_shadow);
-}
-
 void Graphics::drawTileParticles(EntityGraphic* t)
 {
         /// Now trying to smooth a bit
@@ -266,8 +252,9 @@ const void Graphics::drawTile(EntityGraphic*t)
     {
 
         m_window->draw(*(t->getApparence()));
+        m_pp->drawAboutTile(t,m_window);
+        /// PP
         drawTileParticles(t);
-        drawShadow(t);
     }
 }
 
@@ -364,13 +351,17 @@ const void Graphics::drawVisibleObjects()
 
 }
 
+#include"Identity.h"
 const void Graphics::drawObject(VObject* o)
 {
     if(o->getObject()->getAlive()!=nullptr )
     {
         drawAboutAlive(o);
     }
-    m_window->draw(*o->getApparence());
+    o->draw(m_window);
+    m_pp->drawAboutObject(o,m_window);
+    //m_window->draw(*o->getApparence());
+//    m_particles->drawAbout(o);
 
 }
 
@@ -457,7 +448,7 @@ Graphics::~Graphics()
 {
    for(VObject* vo:m_objects){delete vo;}
    for(auto e:m_tiles){for(auto f:e){delete f;};}
-   delete m_shadow;
    delete m_particle;
    delete m_camera;
+   delete m_pp;
 }

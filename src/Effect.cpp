@@ -62,8 +62,13 @@ void Effect::act()
                 double damageAfterResistance=m_value;
                 damageAfterResistance*=idty->getData("fire_resistance");
                 Alive* a=m_object->getAlive();
-                 if(a && damageAfterResistance!=0){a->suffer(damageAfterResistance/(m_duration/m_delay));}
+
+                /// Doing the damages regarding the resistance
+                if(a && damageAfterResistance!=0){a->suffer(damageAfterResistance/(m_duration/m_delay));}
                     else{end();}
+
+                /// Actualizing the status
+                idty->setData("in_fire",true);
 
             }break;
             case T_ABLAZE:
@@ -110,7 +115,13 @@ void Effect::end()
             //cout << " Restore speed = " << m_object->getSpeed() << rand()%10 ;
         }
         m_active=false;
+        if(m_id==ABLAZE)
+        {
+            m_object->getIdentity()->setData("in_fire",false);
+        }
     }
+
+
 
 }
 

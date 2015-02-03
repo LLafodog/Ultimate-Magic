@@ -95,12 +95,13 @@ void TextureEngine::load()
 
 void TextureEngine::readLine(string line)
 {
-    if(line.size()>0 || true )
+    if(line.size()>0 )
     {
         switch(line[0])
         {
             case 'S': {loadPNG(line);}break;
             case 'P': {loadPNG(line,true);} break;
+            case '%': case' ': break;// comment line
             default: cerr<<"[TextureEngine] This line:" << line << " has been misunderstood and negliged."<<endl;break;
         }
     }
@@ -119,7 +120,7 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
     int nb_x=1,nb_y=2,w=3, h=4;
 
     // animation
-    int frameD=500,animeD=0; bool random=true;
+    int frameD=666,animeD=0; bool random=true;
 
     for(unsigned int i(0);i<line.size();i++)
     {
@@ -127,7 +128,6 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         if(letter!='S' && letter != 'P' && letter!='\n' && letter !=' ' )
         {
         word+=letter;
-
         }
         else if(word!="") // permet autant d'espace qu'on veut
         {

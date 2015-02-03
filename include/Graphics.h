@@ -12,11 +12,14 @@ class EntityGraphic;
 class Object;
 class Camera;
 class VObject;
+class ParticlesPrinter;
+
+using namespace sf;
 
 class Graphics
 {
     public:
-        Graphics(sf::RenderWindow* w, World* wo=0);
+        Graphics(RenderWindow* w, World* wo=0);
     ///init
         void init();
             void initObjects();
@@ -26,7 +29,6 @@ class Graphics
             const void drawAll();
             const void drawTile(EntityGraphic*t);
             const void drawVisibleArea();
-                void drawShadow(EntityGraphic* t);
                 void drawTileParticles(EntityGraphic* t);
             const void drawVisibleObjects();
             const void drawObject(VObject* o);
@@ -58,14 +60,15 @@ class Graphics
     vector<vector<EntityGraphic*>> m_tiles;
     vector<VObject*> m_objects;
     vector<VObject*> m_visibleObjects;
-    sf::RenderWindow* m_window;
+    RenderWindow* m_window;
     World* m_world;
     Camera* m_camera;
     bool m_details; //allow to draw all details like lifebar
 
     EntityGraphic* m_error;
-    sf::RectangleShape* m_shadow;
-    sf::RectangleShape* m_particle;
+    RectangleShape* m_particle;
+    ParticlesPrinter* m_pp;
+
 
 };
 
