@@ -40,7 +40,7 @@ void ParticlesPrinter::drawAboutTile(EntityGraphic* e, RenderWindow* w)
     short shadow_max=120;
     if(alt<40){shadow=shadow_max*(1.0-(alt+100-lim)/100.0);}
 
-    RectangleShape shadowG(Vector2f(Global::TILE_WIDTH, Global::TILE_HEIGHT));
+    RectangleShape shadowG(Vector2f(TILE_WIDTH, TILE_HEIGHT));
     shadowG.setFillColor(Color(100,100,100,shadow));
     shadowG.setPosition(e->getPosition());
     w->draw(shadowG);

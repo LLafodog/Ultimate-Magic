@@ -17,7 +17,7 @@ Core::Core(sf::RenderWindow* window)
         assert(load());
         m_window->setVerticalSyncEnabled(true);
          //texture graphics load
-        init(); // Initialise son graphics (les textures), le FPS et crée le monde.
+        init(); // Initialise son graphics (les textures), le Global::FPS et crée le monde.
     }
 
 }
@@ -35,7 +35,7 @@ void Core::init()
 
     ///FPS
     m_clock.restart();
-    m_fps=0;
+    m_FPS=0;
     m_timeStart=time(NULL);
 
     /// LET'S GO !
@@ -86,9 +86,9 @@ void Core::draw()
 
 }
 
-float Global::FPS;
+#include"Global.h"
 void Core::updateFPS()
-/// Really important methods, all the movements are base on the FPS (accessible in the Global cuz Go-to-hell-if-you-annoy-me)
+/// Really important methods, all the movements are base on the Global::FPS (accessible in the Global cuz Go-to-hell-if-you-annoy-me)
 /// Other fact, it puts it on the window's title bar.
 // Use microseconds.
 {
@@ -96,7 +96,7 @@ void Core::updateFPS()
     if(time(NULL)-m_timeStart>0) // as they(re both integers, if it is over 0seconds it actually means that 1 has passed.
     {
         m_timeStart=time(NULL);
-        std::string s="Ultimate Magic |FPS: "  +  to_string(Global::FPS)    ;
+        std::string s="Ultimate Magic |Global::FPS: "  +  to_string(Global::FPS)    ;
         m_window->setTitle(s);
     }
 }

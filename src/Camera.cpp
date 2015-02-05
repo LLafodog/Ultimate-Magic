@@ -28,7 +28,7 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     // Here is decided the size (12 tiles)
     assert(m_pos!=nullptr);
     {
-        m_view=View(m_pos->getPosition(),Vector2f(12*Global::TILE_WIDTH,10*Global::TILE_HEIGHT));
+        m_view=View(m_pos->getPosition(),Vector2f(12*TILE_WIDTH,10*TILE_HEIGHT));
     }
 
     /// Centering
@@ -45,8 +45,8 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
                 yt=m_view.getCenter().y,
                 xr=m_view.getSize().x/2,
                 yr=m_view.getSize().y/2,
-                wr=m_world->getWidth()*Global::TILE_WIDTH,
-                hr=m_world->getHeight()*Global::TILE_HEIGHT;
+                wr=m_world->getWidth()*TILE_WIDTH,
+                hr=m_world->getHeight()*TILE_HEIGHT;
 
         //If 12 tiles is bigger than the world then
         if(2*xr >wr)
@@ -77,8 +77,8 @@ bool Camera::move(float x, float y)
             yv=m_view.getCenter().y,
             wv=m_view.getSize().x/2,
             hv=m_view.getSize().y/2,
-            ww=m_world->getWidth()*Global::TILE_WIDTH,
-            hw=m_world->getHeight()*Global::TILE_HEIGHT;
+            ww=m_world->getWidth()*TILE_WIDTH,
+            hw=m_world->getHeight()*TILE_HEIGHT;
 
     bool moveH=false, moveV=false;
 
@@ -105,7 +105,7 @@ bool Camera::move(float x, float y)
 void Camera::updateView()
 /**
     From the last update the target can have moved, in everycas here is what happend:
-        First, it calculates the speed of the view regarding the FPS,
+        First, it calculates the speed of the view regarding the Global::FPS,
         Then,  it replace the view regarding the world, the target and everything that can be a problem.
 **/
 {
@@ -116,7 +116,7 @@ void Camera::updateView()
             xv=m_view.getCenter().x,
             yv=m_view.getCenter().y;
 
-    /// Calculating the speed of the view regarding the FPS
+    /// Calculating the speed of the view regarding the Global::FPS
     /// The camera follow its target dynamicly, here it calculates the distance and return a value that allow quite progressive following.
     float speedX=1/Global::FPS;
     float speedY=1/Global::FPS;
@@ -159,12 +159,12 @@ void Camera::updateView()
 
     if(xbot<0)
     {
-        m_view.setCenter(m_world->getWidth()*Global::TILE_WIDTH-m_view.getSize().x/2-1,yv);
+        m_view.setCenter(m_world->getWidth()*TILE_WIDTH-m_view.getSize().x/2-1,yv);
         updateView();
     }
     if(ybot<0)
     {
-        m_view.setCenter(xv,m_world->getHeight()*Global::TILE_HEIGHT-m_view.getSize().y/2-1);
+        m_view.setCenter(xv,m_world->getHeight()*TILE_HEIGHT-m_view.getSize().y/2-1);
         updateView();
     }
 
@@ -177,8 +177,8 @@ void Camera::zoom(float f)
     if(f!=0)
     {
         if(
-            (f>1 && m_view.getSize().x+ m_view.getSize().y<2*(m_world->getWidth()*Global::TILE_WIDTH+m_world->getHeight()*Global::TILE_HEIGHT))
-            ||  (f<1 && m_view.getSize().x+ m_view.getSize().y>2*Global::TILE_WIDTH+2*Global::TILE_HEIGHT))
+            (f>1 && m_view.getSize().x+ m_view.getSize().y<2*(m_world->getWidth()*TILE_WIDTH+m_world->getHeight()*TILE_HEIGHT))
+            ||  (f<1 && m_view.getSize().x+ m_view.getSize().y>2*TILE_WIDTH+2*TILE_HEIGHT))
             m_view.zoom(f);
     }
 
@@ -190,10 +190,10 @@ bool Camera::isIn(float x, float y)
     Works with the SFML/FloatRect.
 **/
 {
-    FloatRect rect( m_view.getCenter().x-m_view.getSize().x/2-Global::TILE_WIDTH,
-                    m_view.getCenter().y-m_view.getSize().y/2-Global::TILE_HEIGHT*2,
-                    m_view.getSize().x+Global::TILE_WIDTH,
-                    m_view.getSize().y+Global::TILE_HEIGHT*2);
+    FloatRect rect( m_view.getCenter().x-m_view.getSize().x/2-TILE_WIDTH,
+                    m_view.getCenter().y-m_view.getSize().y/2-TILE_HEIGHT*2,
+                    m_view.getSize().x+TILE_WIDTH,
+                    m_view.getSize().y+TILE_HEIGHT*2);
     return rect.contains(x,y);
 }
 

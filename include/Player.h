@@ -19,7 +19,7 @@ class Player : public Object
     public:
 
         //Player();
-        Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true);
+        Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
 
         void initStats();
         void setController(Controller* c) {m_controller=c;}

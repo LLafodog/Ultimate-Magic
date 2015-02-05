@@ -88,7 +88,7 @@ Tile* World::getTile(unsigned int i, unsigned int j)
 
 void World::addPlayer()
 {
-    Player* p=new Player("player",Core::m_controller,sf::FloatRect(0,Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT),this,35,100,Global::TILE_WIDTH,Global::TILE_HEIGHT*2, true);
+    Player* p=new Player("player",Core::m_controller,sf::FloatRect(0,TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT),this,35,100,TILE_WIDTH,TILE_HEIGHT*2, true);
     m_objects.push_back(p);
 
 }
@@ -129,8 +129,8 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs)
 
     if(!abs)
     {
-        x/=Global::TILE_WIDTH;
-        y/=Global::TILE_HEIGHT;
+        x/=TILE_WIDTH;
+        y/=TILE_HEIGHT;
     }
 
     if(x>0 && y>0 && x<m_width && y<m_height)// && m_tiles[y][x]!=nullptr)

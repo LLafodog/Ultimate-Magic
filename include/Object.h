@@ -15,7 +15,7 @@ class Object :public Collisionnable
 {
     public:
         //Object();
-        Object( std::string id,  sf::FloatRect rect,World* w, bool solid=true, float x=0, float y=0,float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT, bool visible=true);
+        Object( std::string id,  sf::FloatRect rect,World* w, bool solid=true, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
         Object(Object* o);
 
         /* ============= CASUAL METHODS ============= */

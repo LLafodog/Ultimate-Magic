@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Global.h"
+#include "Defines.h"
 #include <vector>
 
 class Player;
@@ -15,16 +15,20 @@ class VObject;
 class ParticlesPrinter;
 
 using namespace sf;
+using namespace std;
 
 class Graphics
+/**
+    Graphics Engine, each and every visual you have is drawn HERE !
+**/
 {
     public:
         Graphics(RenderWindow* w, World* wo=0);
-    ///init
+    /// ========== INITIALIZATION ============
         void init();
             void initObjects();
             void initTiles();
-    ///drawing
+    /// ========== DRAWING METHODS ===========
         const void draw();
             const void drawAll();
             const void drawTile(EntityGraphic*t);
@@ -34,20 +38,21 @@ class Graphics
             const void drawObject(VObject* o);
                 const void drawAboutAlive(VObject* );
             const void drawLifeBar(VObject* o);
-        const void clear() {m_window->clear(Global::BDC);}
+        const void clear() {m_window->clear(BDC);}
         static bool needToRefresh;
 
-    ///for testing
+    /// ========= INFO ===========
         const void getInfo();
 
-    ///MaJ
+    ///========== UPDATE =========
         void update();
             void updateTiles();
             void updateObjects();
         void sortObjects();
             bool needResort;
         void setAllowDetails(bool b){m_details=b;}
-    ///Camera
+
+    /// ========= CAMERA =========
         Camera* getCamera() {return m_camera;}
         virtual ~Graphics();
 
@@ -55,7 +60,7 @@ class Graphics
 
     protected:
     int m_time;
-    int m_refreshTime;
+    const int m_refreshTime=600 ; // 10 minutes
 
     vector<vector<EntityGraphic*>> m_tiles;
     vector<VObject*> m_objects;

@@ -1,5 +1,5 @@
 #include "Graphics.h"
-
+/*
 #include "Player.h"
 #include "World.h"
 #include "EntityGraphic.h"
@@ -23,7 +23,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <ctime>
-using namespace sf;
+*/
 
 bool Graphics::needToRefresh=true;
 
@@ -34,7 +34,6 @@ Graphics::Graphics(RenderWindow* w, World* wo)
 
    //Refresh
    m_time=time(NULL);
-   m_refreshTime=60*10; //auto-refresh every 600sec
 
    //World
    m_world=wo;
@@ -44,28 +43,25 @@ Graphics::Graphics(RenderWindow* w, World* wo)
    init();
 
 
-/// PP !!!!!!
-   // in case of error
-   //m_error =new EntityGraphic("error",-50,-50);
+    // PP
    m_error = new EntityGraphic(TileEngine::getInstance()->get("ground"),-50,-50,true);
-
-
-   m_particle= new RectangleShape(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
-
+   m_particle= new RectangleShape(Vector2f(TILE_WIDTH,TILE_HEIGHT));
    m_pp=new ParticlesPrinter();
 }
 
 void Graphics::init()
 {
-    m_details=false;
+    m_details=false; // lifebar etc
     initTiles();
     initObjects();
 }
 
 void Graphics::initTiles()
+/**
+    Read the world tiles and init every visual entities that mathces.
+**/
 {
     m_tiles.clear();
-
     ///background
     //The tiles are loaded in the wrong ordre so we MUST invert each time.
     for(int i(0);i<m_world->getHeight();i++)
@@ -73,15 +69,9 @@ void Graphics::initTiles()
         std::vector<EntityGraphic*> v;
         for(int j(0);j<m_world->getWidth();j++)
         {
-            //cout << " wsize : " << m_world->getTiles().size()  << " wheight: " << m_world->getTiles()[i].size() <<endl; // from what
-
-            //EntityGraphic* t=new EntityGraphic(id,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT);
-
             Tile* ti=m_world->getTile(j,i);
             if(ti==nullptr){ti=TileEngine::getInstance()->get("error");}
-            EntityGraphic* t=new EntityGraphic(ti,j*Global::TILE_WIDTH,i*Global::TILE_HEIGHT,true);
-
-            //cout << " new tile : x: " <<j*Global::TILE_WIDTH << " y: " << i*Global::TILE_HEIGHT <<endl; // to know where the tiles are created
+            EntityGraphic* t=new EntityGraphic(ti,j*TILE_WIDTH,i*TILE_HEIGHT,true);
             v.push_back(t);
         }
         m_tiles.push_back(v);
@@ -89,6 +79,7 @@ void Graphics::initTiles()
 }
 
 void Graphics::initObjects()
+/// Read the world object and init every visual entities that mathces.
 {
     m_objects.clear();
     needToRefresh=true;
@@ -102,6 +93,9 @@ void Graphics::initObjects()
 }
 
 void Graphics::update()
+/**
+    Updates the tiles, objects and camera.
+**/
 {
     if((time(NULL)-m_time)%m_refreshTime==0){needToRefresh=true;} //auto refresh
     m_camera->updateView();
@@ -117,7 +111,8 @@ void Graphics::update()
         }
 }
 
-void Graphics::updateTiles() //Done : in the visible area -> No, otherwise the anim stop each time it goes out of camera (strange concept if a moving tree is right there and fix each time we go)
+void Graphics::updateTiles()
+/// Explicit
 {
     for(unsigned int i(0);i<m_tiles.size();i++)
     {
@@ -129,7 +124,7 @@ void Graphics::updateTiles() //Done : in the visible area -> No, otherwise the a
 }
 
 void Graphics::updateObjects()
-/// Reinitialize the visible objects
+/// Explicit (visual)
 {
     m_visibleObjects.clear();
     for(unsigned int i(0);i<m_objects.size();i++)
@@ -197,8 +192,8 @@ void Graphics::drawTileParticles(EntityGraphic* t)
 {
         /// Now trying to smooth a bit
         // var
-        int x=t->getPositionX()/Global::TILE_WIDTH,
-            y=t->getPositionY()/Global::TILE_HEIGHT;
+        int x=t->getPositionX()/TILE_WIDTH,
+            y=t->getPositionY()/TILE_HEIGHT;
         float xabs=t->getPositionX(),
               yabs=t->getPositionY();
 
@@ -214,7 +209,7 @@ void Graphics::drawTileParticles(EntityGraphic* t)
                         /// PARTICLES
 
 /// =================== Third method ========================
-        RectangleShape rc(Vector2f(Global::TILE_WIDTH,Global::TILE_HEIGHT));
+        RectangleShape rc(Vector2f(TILE_WIDTH,TILE_HEIGHT));
         if(actual != up && up!="error")
         {
             m_particle->setTexture(te->get(up+"_particles"));
@@ -264,10 +259,10 @@ const void Graphics::drawVisibleArea()
     {
             /// Positions in tile expression
             /// /!\ INT is REALLY IMPORTANT
-            int xp=m_camera->getView().getCenter().x/Global::TILE_WIDTH,
-                yp=m_camera->getView().getCenter().y/Global::TILE_HEIGHT,
-                wp=m_camera->getView().getSize().x/Global::TILE_WIDTH/2,
-                hp=m_camera->getView().getSize().y/Global::TILE_HEIGHT/2;
+            int xp=m_camera->getView().getCenter().x/TILE_WIDTH,
+                yp=m_camera->getView().getCenter().y/TILE_HEIGHT,
+                wp=m_camera->getView().getSize().x/TILE_WIDTH/2,
+                hp=m_camera->getView().getSize().y/TILE_HEIGHT/2;
 
             /// /!\ INT is REALLY IMPORTANT
             for(int i=yp-hp-1;i<=yp+hp+1;i++)
@@ -281,7 +276,7 @@ const void Graphics::drawVisibleArea()
                     drawTile(m_tiles[i][j]);
                     }
                     else{ /// Completing the wholes
-                    m_error->setPosition(i*Global::TILE_HEIGHT,j*Global::TILE_WIDTH);
+                    m_error->setPosition(i*TILE_HEIGHT,j*TILE_WIDTH);
                     drawTile(m_error);
 
                     }
@@ -393,7 +388,7 @@ const void Graphics::drawLifeBar(VObject* o)
                 y=o->getPositionY(),
                 w=o->getSize().x,
                 wquart=w/4,
-                hr=Global::TILE_HEIGHT>>3; //height of the life bar
+                hr=TILE_HEIGHT>>3; //height of the life bar
 
         float lratio=a->getLifeRatio();
         //cout << "x: " << x << " y: " << y << " w " << w << " ratio : " << lratio << endl;
@@ -432,8 +427,8 @@ const void Graphics::drawAll()
             for (int j=0;j<t_width;j++)
             {
                 //Tile position
-                int x=j*Global::TILE_HEIGHT;
-                int y=i*Global::TILE_WIDTH;
+                int x=j*TILE_HEIGHT;
+                int y=i*TILE_WIDTH;
 
                 if(x>=0 && y>=0 && j<m_world->getHeight() && i<m_world->getWidth()) //In order to stay in the vector(tiles)
                 {
@@ -448,7 +443,10 @@ Graphics::~Graphics()
 {
    for(VObject* vo:m_objects){delete vo;}
    for(auto e:m_tiles){for(auto f:e){delete f;};}
-   delete m_particle;
    delete m_camera;
    delete m_pp;
+
+   // to throw
+   delete m_particle;
+   delete m_error;
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Global.h"
+#include "Defines.h"
 #include "Core.h"
 
 #include<ctime>
@@ -15,7 +15,7 @@ int main()
     srand(time(NULL));
 
     // the game window starts
-    RenderWindow window(VideoMode(Global::WINDOW_WIDTH,Global::WINDOW_HEIGHT),"Useless title");
+    RenderWindow window(VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),"Useless title");
 
     // let's play !
     Core core(&window);

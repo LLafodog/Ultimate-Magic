@@ -49,7 +49,7 @@ EntityGraphic::EntityGraphic(Object* o) : Positionnable(o->getPositionX(),o->get
     }
 }
 
-EntityGraphic::EntityGraphic(string particle) : Positionnable(-Global::TILE_WIDTH,-Global::TILE_HEIGHT,Global::TILE_WIDTH,Global::TILE_HEIGHT)
+EntityGraphic::EntityGraphic(string particle) : Positionnable(-TILE_WIDTH,-TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT)
 /**
     Some effects need to be visual (fire, wet etc) so this constructor is usefull to draw it easily without all this position ...
 **/

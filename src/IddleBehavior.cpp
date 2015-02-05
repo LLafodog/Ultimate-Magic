@@ -48,8 +48,8 @@ void IddleBehavior::choseRandomLocation()
     if(m_object!=nullptr && m_object->getWorld()!=nullptr)
     {
         World* w=m_object->getWorld();
-        float new_x=rand()%w->getWidth()*Global::TILE_WIDTH,
-            new_y=rand()%w->getHeight()*Global::TILE_HEIGHT;
+        float new_x=rand()%w->getWidth()*TILE_WIDTH,
+            new_y=rand()%w->getHeight()*TILE_HEIGHT;
             //cout << "x: " << new_x <<" y " << new_y <<endl;
         m_destination=Vector2f(new_x,new_y);
         //cout << " Chosed a new location !" <<endl;

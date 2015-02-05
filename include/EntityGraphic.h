@@ -20,12 +20,12 @@ class EntityGraphic : public Positionnable
 {
     public:
 
-        EntityGraphic(Tile* t, int x, int y, bool visible=false, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
+        EntityGraphic(Tile* t, int x, int y, bool visible=false, float width=TILE_WIDTH, float height=TILE_HEIGHT);
         EntityGraphic(Object* o); // VObject herits from entity
         EntityGraphic(string particle); // Fire, poison, wind  etc.
 
         /** ========== CASUAL METHODS ========== **/
-        void initSquare(float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
+        void initSquare(float width=TILE_WIDTH, float height=TILE_HEIGHT);
         virtual void update();
 
 

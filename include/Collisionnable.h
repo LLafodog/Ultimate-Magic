@@ -8,6 +8,7 @@ class World;
 class Object;
 
 using namespace sf;
+using namespace std;
 
 class Collisionnable : public Movable
 /**
@@ -17,7 +18,7 @@ class Collisionnable : public Movable
 {
     public:
 
-        Collisionnable(FloatRect hitbox,World* w, bool solid=true, float x=0, float y=0, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
+        Collisionnable(FloatRect hitbox,World* w, bool solid=true, float x=0, float y=0, float width=TILE_WIDTH, float height=TILE_HEIGHT);
 
         /// =========== CASUAL METHODS =======
         virtual void colMove(int signX, int signY);

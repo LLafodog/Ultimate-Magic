@@ -9,7 +9,7 @@ class Movable : public Positionnable
 {
     public:
 
-        Movable(World* w,float x=0, float y=0, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
+        Movable(World* w,float x=0, float y=0, float width=TILE_WIDTH, float height=TILE_HEIGHT);
 
 
         /// ============ GETTER =============

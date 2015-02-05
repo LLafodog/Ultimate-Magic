@@ -83,8 +83,8 @@ void Collisionnable::colMove(int signX, int signY)
         bool canGoH=true, canGoV=true; // the bools that will decide if we can move in the right direction
 
 
-        float   tw= Global::TILE_WIDTH,
-                th= Global::TILE_HEIGHT;
+        float   tw= TILE_WIDTH,
+                th= TILE_HEIGHT;
 
         float   xt=(m_x+m_hitbox.left)/tw,
                 yt=(m_y+m_hitbox.top)/th,

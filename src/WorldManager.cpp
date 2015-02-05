@@ -166,7 +166,7 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 
                 }break;
 
-                case P_OBJ1:{;w->addObject(ObjectEngine::getPremade(probabilities[i].first,x*Global::TILE_WIDTH,y*Global::TILE_HEIGHT));}break;
+                case P_OBJ1:{;w->addObject(ObjectEngine::getPremade(probabilities[i].first,x*TILE_WIDTH,y*TILE_HEIGHT));}break;
 
                 default: {w->modifyTile(Vector2f(x,y),probabilities[i].first,true);} break; //basic
             }

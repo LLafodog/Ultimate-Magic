@@ -33,8 +33,8 @@ Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSo
 void Object::updateCurrentTileEffect()
 {
     /// Get the current tile effect
-   float    x=getCenterWithHitbox().x/Global::TILE_WIDTH,
-            y=getCenterWithHitbox().y/Global::TILE_HEIGHT;
+   float    x=getCenterWithHitbox().x/TILE_WIDTH,
+            y=getCenterWithHitbox().y/TILE_HEIGHT;
     vector<Effect*> e=m_world->getTileEffects(x,y);
 
     /// Comparing if this is the same tile as before

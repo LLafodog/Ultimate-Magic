@@ -47,7 +47,7 @@ class Core
         Graphics* m_graphics;
         World* m_world;
         Clock m_clock;
-        float m_fps;
+        float m_FPS;
         int m_timeStart;
 };
 

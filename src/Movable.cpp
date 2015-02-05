@@ -12,6 +12,8 @@ Movable::Movable(World* w, float x, float y, float width, float height) : Positi
     m_orientation='n'; // cuz first anim and every one has at least one anim.
 }
 
+#include"Global.h"
+#include<iostream>
 void Movable::moveOn(float x, float y, bool changeOrientation)
 {
     if(m_world!=nullptr)
@@ -22,8 +24,8 @@ void Movable::moveOn(float x, float y, bool changeOrientation)
     float speedX=x/Global::FPS,
         speedY=y/Global::FPS,
 
-        wr=m_world->getWidth()*Global::TILE_WIDTH-m_width,
-        hr=m_world->getHeight()*Global::TILE_HEIGHT-m_height;
+        wr=m_world->getWidth()*TILE_WIDTH-m_width,
+        hr=m_world->getHeight()*TILE_HEIGHT-m_height;
 
     if(m_x+speedX>=0 && m_x+speedX<=wr) {m_x+=x/Global::FPS;}
     if(m_y+speedY>=0 && m_y+speedY<=hr) {m_y+=y/Global::FPS;}

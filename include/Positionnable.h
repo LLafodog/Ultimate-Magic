@@ -3,12 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Global.h"
+#include "Defines.h"
 
 class Positionnable
 {
     public:
-        Positionnable(float x=0, float y=0, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
+        Positionnable(float x=0, float y=0, float width=TILE_WIDTH, float height=TILE_HEIGHT);
 
         virtual ~Positionnable();
 
