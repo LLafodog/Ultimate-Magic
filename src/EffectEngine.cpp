@@ -2,17 +2,25 @@
 
 #include"Effect.h"
 
-#include<iostream>
-
 EffectEngine* EffectEngine::m_self=nullptr;
 
 EffectEngine::EffectEngine()
 {
-    if(m_self==nullptr){m_self=this;}
+    m_self=this;
 }
 
+EffectEngine* EffectEngine::getInstance()
+/// Singloton
+{
+    if(m_self==nullptr){m_self=new EffectEngine();}
+    return m_self;
+
+}
 
 Effect* EffectEngine::get(std::string id, double value, int duration, int delay)
+/**.
+    As already told, effects will be hard to manage with time. I guess this method will simplify my life. :)
+**/
 {
     if(id=="speed")
     {

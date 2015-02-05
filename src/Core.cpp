@@ -1,107 +1,83 @@
 #include "Core.h"
 
-#include "Global.h"
-
-#include "Graphics.h"
-#include "Camera.h"
-
-#include "World.h"
-#include "WorldManager.h"
-#include "PlayerManager.h"
-
-#include "TextureEngine.h"
-#include "AnimationEngine.h"
-#include "ObjectEngine.h"
-#include "TileEngine.h"
-
-#include "Controller.h"
-#include "KeyboardController.h"
-
-#include "Loader.h"
-
-#include <iostream>
-#include <sstream>
-#include <string>
-
-//test
-#include "EntityGraphic.h"
-
-
-float Global::FPS;
-
 using namespace sf;
 using namespace std;
 
+#include"KeyboardController.h"
 Controller* Core::m_controller=new KeyboardController();
 
-
+#include<assert.h>
 Core::Core(sf::RenderWindow* window)
+/// Loads everything.
 {
     m_window=window;
-    if(window!=nullptr)
+
+    if(window!=nullptr) /// Load initiates all the singlotons in the right order.
     {
+        assert(load());
         m_window->setVerticalSyncEnabled(true);
-        load(); //texture graphics load
+         //texture graphics load
         init(); // Initialise son graphics (les textures), le FPS et crée le monde.
     }
 
 }
 
+#include"Graphics.h"
+#include"WorldManager.h"
 void Core::init()
+/// Play quite the same role that the constructor.
 {
-    //World
-    //initWorldFromFile(Global::TO_DATA+"worlds/version0.world");
-    //initWorld(50,50);
+    /// World
     m_world=WorldManager::getInstance()->newWorld();
-    //Graphics
-    initGraphics();
 
+    /// Graphics
+    m_graphics=new Graphics(m_window,m_world);
 
-    //FPS
+    ///FPS
     m_clock.restart();
     m_fps=0;
     m_timeStart=time(NULL);
+
+    /// LET'S GO !
+    run();
 }
 
-void Core::initWorldFromFile(std::string pathfile, int players)
-{
-    m_world=new World(pathfile,players);
-}
-
-void Core::initWorld(int w, int h)
-{
-    m_world=new World(w,h);
-}
-
-void Core::initGraphics()
-{
-    m_graphics=new Graphics(m_window,m_world);
-}
-
-void Core::load()
+#include"TextureEngine.h"
+#include"AnimationEngine.h"
+#include"Loader.h"
+#include"TileEngine.h"
+#include"EffectEngine.h"
+bool Core::load()
+/// Loads and initiates all the singlotons in the right order.
 {
 
+    if(
+        TextureEngine::getInstance()==nullptr
+    ||  AnimationEngine::getInstance()==nullptr
+    ||  WorldManager::getInstance()==nullptr
+    ||  EffectEngine::getInstance()==nullptr
+
+    )return false;
+
+    /// TO DO :
     new Loader();
     new TileEngine();
-    m_wm=new WorldManager();
-//    m_ae=new AnimationEngine();
-    m_te=new TextureEngine();
 
-    //AnimationEngine::load(); //Need the textures
+    return true;
 }
 
 void Core::update()
+/// Update everythings.
 {
-    //graphics
+    /// Graphics
+    /// IMPORTANT : Always before world's update (otherwise objects can be deleted right before drawn)
     m_graphics->update();
-    //datas
-    updateFPS();
+
+    /// Datas
     m_world->update();
 
-
-
-    // debug
-    //m_graphics->drawAllTextures();
+    /// FPS
+    updateFPS();
 }
 
 void Core::draw()
@@ -110,27 +86,26 @@ void Core::draw()
 
 }
 
+float Global::FPS;
 void Core::updateFPS()
+/// Really important methods, all the movements are base on the FPS (accessible in the Global cuz Go-to-hell-if-you-annoy-me)
+/// Other fact, it puts it on the window's title bar.
+// Use microseconds.
 {
-
     Global::FPS=1000000.f/m_clock.restart().asMicroseconds();
-    if(time(NULL)-m_timeStart>0) //l'entier minore la différence de seconde à 0 donc affiche chaque seconde.
+    if(time(NULL)-m_timeStart>0) // as they(re both integers, if it is over 0seconds it actually means that 1 has passed.
     {
         m_timeStart=time(NULL);
-        ostringstream c;
-        c << Global::FPS;
-        std::string s="Ultimate Magic |FPS: "  +  c.str()    ;
+        std::string s="Ultimate Magic |FPS: "  +  to_string(Global::FPS)    ;
         m_window->setTitle(s);
     }
 }
 
+#include"Camera.h"
 void Core::run()
+/// Here is the classic SFML loop.
 {
-
-    /* TEST */
-
-    /////////////////
-    if(m_window!=nullptr)
+    assert(m_window!=nullptr);
     {
         while (m_window->isOpen())
         {
@@ -158,47 +133,50 @@ void Core::run()
                         }
                         default: break;
                     }
-                //Combine
-                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::R)){Graphics::needToRefresh=true;} //Let you refresh when you wanna
-                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::C)){m_graphics->clear();} //Let you clear when you wanna
-                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();} //Let you know evrything when you wanna
-                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::P)){m_graphics->getCamera()->getView().setCenter(m_world->getObject(0)->getPosition());} //Let you know evrything when you wanna
+                /// Combinaisons
+                //Lets you refresh when you wanna
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::R)){Graphics::needToRefresh=true;}
+
+                //Lets you clear when you wanna
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::C)){m_graphics->clear();}
+
+                //Lets you know evrything when you wanna
+                if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();}
+
+
+                /// Lets the user drawing every details.
                 if(Keyboard::isKeyPressed(Keyboard::Tab)) {m_graphics->setAllowDetails(true);}else {m_graphics->setAllowDetails(false);}
 
             }
+
             update();
             draw();
-
-
-
         }
-    } else {cerr<<"the window didn't open."<<endl;}
+    }
 }
 
 void Core::showInfo()
+/// Should show every information we can hen Ctrl + I is pressed.
 {
-
-
-    cout << "======= WORLD ============" <<endl;
-    cout << " Width : " << m_world->getWidth() << " Height: " << m_world->getHeight() << endl << " Number of objects : " << m_world->getNumberObjects() <<endl;
-    //cout << "======= OBJECTS ==========" <<endl;
-    //for(int i(0);i<m_world->getNumberObjects();i++){cout << m_world->getObject(i)->getID() << "x: " << m_world->getObject(i)->getPositionX() << " y: " << m_world->getObject(i)->getPositionY()  << endl;} cout <<endl;
-    /*
-    cout << "======= PLAYER ==========" << endl;
-    cout << " x: " << m_world->getObject(0)->getPositionX() << " y: " << m_world->getObject(0)->getPositionY() << " alive : " << m_world->getObject(0)->getAlive()->isDead() <<endl;
-    */
-    cout << "======= CAMERA ==========" <<endl;
-    cout << "x: " << m_graphics->getCamera()->getPos()->getPositionX() << " y: " << m_graphics->getCamera()->getPos()->getPositionY() <<endl;
+    cout << "======= WORLD ============" <<endl
+        << " Width : " << m_world->getWidth() << " Height: " << m_world->getHeight() << endl << " Number of objects : " << m_world->getNumberObjects() <<endl
+        << "======== CAMERA ==========" <<endl
+        << "x: " << m_graphics->getCamera()->getPos()->getPositionX() << " y: " << m_graphics->getCamera()->getPos()->getPositionY() <<endl;
+        //<< "======== GRAPHICS =========" << endl;
+//        m_graphics->showInfo();
 }
 
 
 Core::~Core()
 {
-   delete m_graphics;
    delete m_controller;
+   delete m_graphics;
 
-   m_te->free();
-   m_wm->free();
+   /// Singloton
+   WorldManager::getInstance()->free();
+   TextureEngine::getInstance()->free();
+   AnimationEngine::getInstance()->free();
    Loader::getInstance()->free();
+
 
 }

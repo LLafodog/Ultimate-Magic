@@ -20,17 +20,14 @@ TextureEngine* TextureEngine::m_self=nullptr;
 
 TextureEngine::TextureEngine()
 {
-    if(m_self==nullptr)
-    {
-    m_self=this;
     m_textures.clear();
-    /*
-    m_textures=vector<vector<Texture*>>();
-    m_names=std::vector<std::string>();
-    */
     load();
-    //createAnimations();
-    }
+}
+
+TextureEngine* TextureEngine::getInstance()
+{
+    if(m_self==nullptr){m_self=new TextureEngine();}
+        return m_self;
 }
 
 /*

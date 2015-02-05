@@ -11,9 +11,8 @@ class TextureEngine
 {
     public:
 
-        TextureEngine();
         /// ========== STATIC =========
-        static TextureEngine* getInstance() {return m_self;}
+        static TextureEngine* getInstance();
         void free();
 
 
@@ -33,7 +32,7 @@ class TextureEngine
             virtual ~TextureEngine();
 
     protected:
-
+        TextureEngine();
         static TextureEngine* m_self;
         std::unordered_map<std::string,std::vector<sf::Texture*>> m_textures;
 };

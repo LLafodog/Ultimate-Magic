@@ -24,6 +24,7 @@ bool Global::readFile(std::string path, WMf)
 }
 
 const string Global::TO_DATA="../data/";
+//float Global::FPS=0;
 
 const sf::Color Global::BDC=sf::Color(4,139,154);
 

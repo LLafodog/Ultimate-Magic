@@ -19,7 +19,6 @@ int main()
 
     // let's play !
     Core core(&window);
-    core.run();
 
 
     return 0;

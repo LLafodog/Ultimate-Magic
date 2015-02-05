@@ -13,20 +13,21 @@ using namespace std;
 using namespace sf;
 
 class EntityGraphic : public Positionnable
+/**
+    Here is the basic entity drawable in the game. Everything will come from it.
+    It has a convexshape (allowing to use isometric maybe futher) and an animation to draw on it.
+**/
 {
     public:
 
-        //EntityGraphic(string id, int x=0, int y=0, bool visible=true, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
         EntityGraphic(Tile* t, int x, int y, bool visible=false, float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
-        EntityGraphic(Object* o);
-        EntityGraphic(string particle);
+        EntityGraphic(Object* o); // VObject herits from entity
+        EntityGraphic(string particle); // Fire, poison, wind  etc.
 
         /** ========== CASUAL METHODS ========== **/
         void initSquare(float width=Global::TILE_WIDTH, float height=Global::TILE_HEIGHT);
-
-
-        /// ANIMATION
         virtual void update();
+
 
         /** ================== SETTER ================ **/
         void setVisible(bool b) {m_visible=b;}

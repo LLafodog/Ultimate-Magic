@@ -14,21 +14,23 @@
 using namespace sf;
 using namespace std;
 
-WorldManager* WorldManager::self=nullptr;
+WorldManager* WorldManager::m_self=nullptr;
 
 WorldManager::WorldManager()
 {
-    if(self==nullptr)
-    {
-    self=this;
-    m_worlds={};
+    m_worlds.clear();
     m_actual=nullptr;
+
+    /// Loading
     getProbabilities(Global::TO_DATA+"dat/biomes.txt");
-
-    }
-
 }
 
+
+WorldManager* WorldManager::getInstance()
+{
+    if(m_self==nullptr){m_self=new WorldManager();}
+    return m_self;
+}
 
 World* WorldManager::newWorld()
 {
@@ -451,7 +453,7 @@ void WorldManager::free()
     for(Perlin* p: m_humidity){delete p;}
     //for(World* w: m_worlds){delete w;}
     for(auto w:m_worlds){for(auto x:w){delete x;}}
-    delete self;
+    delete m_self;
 }
 
 WorldManager::~WorldManager()

@@ -5,7 +5,7 @@ AnimationEngine* AnimationEngine::m_self=nullptr;
 
 
 AnimationEngine::AnimationEngine()
-// Emptying the members
+/// Emptying the members
 {
     if (AnimationEngine::m_self==nullptr)
     {
@@ -15,7 +15,7 @@ AnimationEngine::AnimationEngine()
 }
 
 AnimationEngine* AnimationEngine::getInstance()
-// Allow the design pattern singloton
+/// Allows the design pattern singloton
 {
     if(m_self==nullptr)
     {

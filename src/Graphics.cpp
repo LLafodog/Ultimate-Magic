@@ -169,7 +169,7 @@ const void Graphics::getInfo()
         //Taille de la view ?
             << " /******** CAMERA SIZE ************/" <<endl<<
             m_camera->getView().getSize().x <<"   " <<m_camera->getView().getSize().y << endl
-            << " Distance from target: " << m_camera->getDistanceFromTarget() <<endl
+//            << " Distance from target: " << m_camera->getDistanceFromTarget() <<endl
             << "///////////////////////////////////" <<endl
             << "/////////// OBJECTS ///////////////" << endl
             << "visibles: " << m_visibleObjects.size() << endl

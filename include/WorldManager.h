@@ -15,10 +15,8 @@ class WorldManager
 {
     public:
 
-        WorldManager();
 
-        static WorldManager* getInstance() {return self;}
-        void free();
+        static WorldManager* getInstance();
 
 
 
@@ -37,12 +35,16 @@ class WorldManager
                 void readObjectLine(std::string line);
                     void readPremadeLine(std::string line);
 
-       virtual ~WorldManager();
+
+
+        void free();
+        virtual ~WorldManager();
 
 
 
     protected:
-        static WorldManager* self;
+        WorldManager();
+        static WorldManager* m_self;
 
         World* m_actual;
         std::vector<Perlin*> m_alt;
