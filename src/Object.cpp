@@ -1,6 +1,6 @@
-#include "Object.h"
+#include<Object.hpp>
 
-#include"Identity.h"
+#include<Identity.hpp>
 Object::Object( std::string id, sf::FloatRect rect, World* w, bool solid, float x, float y,float width, float height, bool visible) : Collisionnable(rect,w,solid, x,y,width,height),
 m_visible(visible),
 m_id(id)
@@ -18,8 +18,8 @@ m_id(o->getID())
     initSpeed(m_identity->getData("speed"));
 }
 
-#include"World.h"
-#include"Effect.h"
+#include<World.hpp>
+#include<Effect.hpp>
 void Object::updateCurrentTileEffect()
 /// Update the effects from the current tile.
 {
@@ -122,7 +122,7 @@ Alive* Object::getAlive()
     return nullptr;
 }
 
-#include"Alive.h"
+#include<Alive.hpp>
 bool Object::mustBeDeleted()
 {
     if(m_identity && m_identity->getAlive())

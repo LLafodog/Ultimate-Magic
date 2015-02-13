@@ -1,4 +1,4 @@
-#include "Positionnable.h"
+#include<Positionnable.hpp>
 
 Positionnable::Positionnable(float x, float y, float width, float height) :
 m_x(x),

@@ -1,4 +1,4 @@
-#include "Player.h"
+#include<Player.hpp>
 
 Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) :
 
@@ -8,9 +8,9 @@ m_controller(c)
 
 }
 
-#include"Identity.h"
-#include"Alive.h"
-#include"Controller.h"
+#include<Identity.hpp>
+#include<Alive.hpp>
+#include<Controller.hpp>
 void Player::update()
 {
     /* ================== OBJECT =============== */
@@ -38,7 +38,7 @@ void Player::update()
     }
 }
 
-#include"EffectEngine.h"
+#include<EffectEngine.hpp>
 void Player::action()
 {
     if(isInCollision())

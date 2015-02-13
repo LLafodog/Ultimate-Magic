@@ -1,4 +1,4 @@
-#include "TileEngine.h"
+#include<TileEngine.hpp>
 
 TileEngine* TileEngine::m_self=nullptr;
 
@@ -16,9 +16,9 @@ TileEngine* TileEngine::getInstance()
     return m_self;
 }
 
-#include"Defines.h"
-#include "Global.h" //to do tile prop in define
-#include"Loader.h"
+#include<Defines.hpp>
+#include<Global.hpp> //to do tile prop in define
+#include<Loader.hpp>
 void TileEngine::load()
 /// Load the TILE PROPERTIES FILE
 {

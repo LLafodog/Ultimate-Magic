@@ -1,18 +1,18 @@
-#include "EntityGraphic.h"
+#include<EntityGraphic.hpp>
 /*
-#include "TextureEngine.h"
-#include "Global.h"
-#include "Animation.h"
-#include "AnimationEngine.h"
-#include "Tile.h"
-#include "Object.h"
+#include<TextureEngine.hpp>
+#include<Global.hpp>
+#include<Animation.hpp>
+#include<AnimationEngine.hpp>
+#include<Tile.hpp>
+#include<Object.hpp>
 */
 
 using namespace sf;
 
 
-#include"Tile.h"
-#include"AnimationEngine.h"
+#include<Tile.hpp>
+#include<AnimationEngine.hpp>
 EntityGraphic::EntityGraphic(Tile* t, int x, int y, bool visible, float width, float height) : Positionnable(x,y,width,height),
 m_tile(t),
 m_visible(visible)
@@ -34,7 +34,7 @@ m_visible(visible)
     }
 }
 
-#include"Object.h"
+#include<Object.hpp>
 EntityGraphic::EntityGraphic(Object* o) : Positionnable(o->getPositionX(),o->getPositionY(),o->getSize().x, o->getSize().y)
 /**
     VObject are classes that manage the visual of an object, so as its mother, entitygraphics must adapter itself.
@@ -85,8 +85,8 @@ void EntityGraphic::setShapeSize(Vector2f v)
     initSquare(v.x,v.y);
 }
 
-#include"Defines.h"
-#include"TextureEngine.h"
+#include<Defines.hpp>
+#include<TextureEngine.hpp>
 const sf::ConvexShape* EntityGraphic::getApparence()
 /// Allows a window to draw the Entity by puting a texture on the shape.
 {

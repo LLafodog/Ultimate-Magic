@@ -1,9 +1,9 @@
-#include "Core.h"
+#include<Core.hpp>
 
 using namespace sf;
 using namespace std;
 
-#include"KeyboardController.h"
+#include<KeyboardController.hpp>
 Controller* Core::m_controller=new KeyboardController();
 
 #include<assert.h>
@@ -21,8 +21,8 @@ m_window(window)
 
 }
 
-#include"Graphics.h"
-#include"WorldManager.h"
+#include<Graphics.hpp>
+#include<WorldManager.hpp>
 void Core::init()
 /// Play quite the same role that the constructor.
 {
@@ -41,11 +41,11 @@ void Core::init()
     run();
 }
 
-#include"TextureEngine.h"
-#include"AnimationEngine.h"
-#include"Loader.h"
-#include"TileEngine.h"
-#include"EffectEngine.h"
+#include<TextureEngine.hpp>
+#include<AnimationEngine.hpp>
+#include<Loader.hpp>
+#include<TileEngine.hpp>
+#include<EffectEngine.hpp>
 bool Core::load()
 /// Loads and initiates all the singlotons in the right order.
 {
@@ -85,7 +85,7 @@ void Core::draw()
 
 }
 
-#include"Global.h"
+#include<Global.hpp>
 void Core::updateFPS()
 /// Really important methods, all the movements are base on the Global::FPS (accessible in the Global cuz Go-to-hell-if-you-annoy-me)
 /// Other fact, it puts it on the window's title bar.
@@ -100,7 +100,7 @@ void Core::updateFPS()
     }
 }
 
-#include"Camera.h"
+#include<Camera.hpp>
 void Core::run()
 /// Here is the classic SFML loop.
 {

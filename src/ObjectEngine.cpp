@@ -1,6 +1,6 @@
-#include "ObjectEngine.h"
+#include<ObjectEngine.hpp>
 
-#include"Defines.h"
+#include<Defines.hpp>
 Object* ObjectEngine::get(std::string id, float x, float y, float w_mult, float h_mult, bool visible, bool solid, sf::FloatRect rct)
 {
     float   width=TILE_WIDTH*w_mult,

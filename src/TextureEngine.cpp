@@ -1,4 +1,4 @@
-#include "TextureEngine.h"
+#include<TextureEngine.hpp>
 
 TextureEngine* TextureEngine::m_self=nullptr;
 
@@ -23,8 +23,8 @@ Texture* TextureEngine::get(string name, unsigned int j)
         return nullptr;
 }
 
-#include"Defines.h"
-#include"Global.h"
+#include<Defines.hpp>
+#include<Global.hpp>
 #include<iostream>
 #include<fstream>
 void TextureEngine::load()
@@ -73,8 +73,8 @@ void TextureEngine::readLine(string line)
 
 }
 
-#include"Global.h"
-#include"AnimationEngine.h"
+#include<Global.hpp>
+#include<AnimationEngine.hpp>
 bool TextureEngine::loadPNG(string line, bool particles)
 {
     /// Reading

@@ -1,9 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Defines.h"
-#include "Core.h"
-
+#include<Defines.hpp>
+#include<Core.hpp>
 #include<ctime>
 
 using namespace std;

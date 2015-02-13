@@ -1,6 +1,6 @@
-#include "World.h"
+#include<World.hpp>
 
-#include"Tile.h"
+#include<Tile.hpp>
 World::World(int w, int h, std::string val)
 // Generate a whole world with the same tile.
 {
@@ -21,7 +21,7 @@ World::World(int w, int h, std::string val)
     addPlayer();
 }
 
-#include"WorldManager.h"
+#include<WorldManager.hpp>
 World::World(string pathfile, int players)
 // Is supposed to load a .world file
 {
@@ -40,7 +40,7 @@ const bool World::isThisTileSolid(float i, float j)
     return true;
 }
 
-#include"TileEngine.h"
+#include<TileEngine.hpp>
 Tile* World::getTile(unsigned int i, unsigned int j)
 /// Simple 2D access
 {
@@ -54,10 +54,10 @@ Tile* World::getTile(unsigned int i, unsigned int j)
     }
 }
 
-#include"Core.h"
+#include<Core.hpp>
 #include<SFML/Graphics.hpp>
-#include"Defines.h"
-#include"Player.h"
+#include<Defines.hpp>
+#include<Player.hpp>
 void World::addPlayer()
 // TO DO
 /// Add a player from a .player file.
@@ -66,7 +66,7 @@ void World::addPlayer()
     m_objects.push_back(p);
 }
 
-#include"Object.h"
+#include<Object.hpp>
 void World::addObject(Object* o)
 /// Add an object to the world's object
 {
@@ -77,7 +77,7 @@ void World::addObject(Object* o)
     }
 }
 
-#include"Alive.h"
+#include<Alive.hpp>
 void World::update()
 /// Updates every objects and deleted the one that aren't necessary anymore.
 {
@@ -120,7 +120,7 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs)
 }
 
 
-#include"Effect.h"
+#include<Effect.hpp>
 vector<Effect*> World::getTileEffects(int i, int j)
 /// Acceed a tile in the vector and copy its effects.
 {

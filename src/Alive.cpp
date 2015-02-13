@@ -1,4 +1,4 @@
-#include "Alive.h"
+#include<Alive.hpp>
 
 using namespace std;
 

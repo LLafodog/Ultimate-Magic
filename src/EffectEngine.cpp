@@ -1,6 +1,6 @@
-#include "EffectEngine.h"
+#include<EffectEngine.hpp>
 
-#include"Effect.h"
+#include<Effect.hpp>
 
 EffectEngine* EffectEngine::m_self=nullptr;
 

@@ -1,7 +1,7 @@
-#include "IddleBehavior.h"
-#include "Object.h"
-#include "Alive.h"
-#include "World.h"
+#include<IddleBehavior.hpp>
+#include<Object.hpp>
+#include<Alive.hpp>
+#include<World.hpp>
 
 #include<iostream>
 

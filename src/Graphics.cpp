@@ -1,14 +1,14 @@
-#include "Graphics.h"
+#include<Graphics.hpp>
 
 
 bool Graphics::needToRefresh=true;
 
-#include"ParticlesPrinter.h"
-#include"Camera.h"
-#include"World.h"
-#include"Object.h"
-#include"TileEngine.h"
-#include"EntityGraphic.h"
+#include<ParticlesPrinter.hpp>
+#include<Camera.hpp>
+#include<World.hpp>
+#include<Object.hpp>
+#include<TileEngine.hpp>
+#include<EntityGraphic.hpp>
 Graphics::Graphics(RenderWindow* w, World* wo) :
     m_window(w),
     m_world(wo)
@@ -55,7 +55,7 @@ void Graphics::initTiles()
     }
 }
 
-#include"VObject.h"
+#include<VObject.hpp>
 void Graphics::initObjects()
 /// Read the world object and init every visual entities that mathces.
 {
@@ -273,7 +273,7 @@ const void Graphics::drawVisibleObjects()
 
 }
 
-#include"Identity.h"
+#include<Identity.hpp>
 const void Graphics::drawObject(VObject* o)
 {
     o->draw(m_details);

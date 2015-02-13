@@ -1,10 +1,10 @@
-#include "Identity.h"
+#include<Identity.hpp>
 
-#include"Loader.h"
+#include<Loader.hpp>
 /// Is used from everyone to have a draft. If someont look for a particular thing, it searchs in the default and use the true one.
 const unordered_map<string,double> Identity::DEFAULT_DATAS=Loader::getInstance()->getObjectDatas("default");
 
-#include"Alive.h"
+#include<Alive.hpp>
 Identity::Identity(string id) : m_id(id)
 {
     /// /!\ Resistance of 1 is NORMAL, not 100% !

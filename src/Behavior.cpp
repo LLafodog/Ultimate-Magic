@@ -1,5 +1,5 @@
-#include "Behavior.h"
-#include "Object.h"
+#include<Behavior.hpp>
+#include<Object.hpp>
 
 Behavior::Behavior(Object* o) : m_object(o)
 {

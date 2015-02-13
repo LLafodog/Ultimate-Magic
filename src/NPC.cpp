@@ -1,6 +1,6 @@
-#include "NPC.h"
+#include<NPC.hpp>
 
-#include"Behavior.h"
+#include<Behavior.hpp>
 
 NPC::NPC(Object* o, Behavior* b) : Object(o),
 m_behavior(b)

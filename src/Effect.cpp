@@ -1,4 +1,4 @@
-#include "Effect.h"
+#include<Effect.hpp>
 
 Effect::Effect(int id, Object* o, double value, int duration, int delay) :
 m_object(o),
@@ -35,9 +35,9 @@ void Effect::update()
 
 }
 
-#include"Identity.h"
-#include"Object.h"
-#include"Alive.h"
+#include<Identity.hpp>
+#include<Object.hpp>
+#include<Alive.hpp>
 void Effect::act()
 {
     if(m_object!=nullptr)

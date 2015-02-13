@@ -1,4 +1,4 @@
-#include "ParticlesPrinter.h"
+#include<ParticlesPrinter.hpp>
 
 #include<iostream>
 ParticlesPrinter::ParticlesPrinter(RenderWindow* w) : m_window(w)
@@ -6,8 +6,8 @@ ParticlesPrinter::ParticlesPrinter(RenderWindow* w) : m_window(w)
     init();
 }
 
-#include "Identity.h"
-#include"EntityGraphic.h"
+#include<Identity.hpp>
+#include<EntityGraphic.hpp>
 void ParticlesPrinter::init()
 {
     for(auto status:Identity::DEFAULT_DATAS)
@@ -22,7 +22,7 @@ void ParticlesPrinter::init()
     }
 }
 
-#include"Tile.h"
+#include<Tile.hpp>
 void ParticlesPrinter::print(string key, float x, float y)
 {
     if(m_window)
@@ -58,7 +58,7 @@ void ParticlesPrinter::drawAboutTile(EntityGraphic* e, World* wo)
     }
 }
 
-#include"World.h"
+#include<World.hpp>
 void ParticlesPrinter::drawTileParticles(EntityGraphic* t, World* wo)
 /// You know, with rectangles this is hard to have a fluidity sensation, so  I draw particles around every tile that is a the limit in order to smooth a bit.
 {
@@ -99,9 +99,9 @@ void ParticlesPrinter::drawTileParticles(EntityGraphic* t, World* wo)
         }
 }
 
-#include"VObject.h"
-#include"Object.h"
-#include"World.h"
+#include<VObject.hpp>
+#include<Object.hpp>
+#include<World.hpp>
 void ParticlesPrinter::drawAboutObject(VObject* o)
 {
     Object* obj=nullptr;

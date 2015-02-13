@@ -1,10 +1,10 @@
-#include "WorldManager.h"
+#include<WorldManager.hpp>
 
 using namespace sf;
 WorldManager* WorldManager::m_self=nullptr;
 
-#include"Global.h"
-#include"Defines.h"
+#include<Global.hpp>
+#include<Defines.hpp>
 WorldManager::WorldManager()
 {
     m_worlds.clear();
@@ -22,8 +22,8 @@ WorldManager* WorldManager::getInstance()
     return m_self;
 }
 
-#include"Perlin.h"
-#include"Tile.h"
+#include<Perlin.hpp>
+#include<Tile.hpp>
 World* WorldManager::newWorld()
 /// Create a whole new world based on Perlin noise (two levels with humidity) with random size.
 {
@@ -110,7 +110,7 @@ enum ENUM_PROBABILITIES
     END_ENUM_PROBABILITIES
 };
 
-#include"Loader.h"
+#include<Loader.hpp>
 void WorldManager::getProbabilities(std::string path)
 /// Load a .prob file that is the summary of what biome contains which tile.
 {
@@ -118,8 +118,8 @@ void WorldManager::getProbabilities(std::string path)
 }
 
 
-#include"Global.h"
-#include"ObjectEngine.h"
+#include<Global.hpp>
+#include<ObjectEngine.hpp>
 void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 /// Pick which element is place a this position, is it a snow tile ? If so, shall it be alone or in a cross snow ?
 {
@@ -176,7 +176,7 @@ void WorldManager::loadWorld(string pathfile, World* wo)
     }
 }
 
-#include"Defines.h"
+#include<Defines.hpp>
 void WorldManager::readWorldLine(string line)
 {
 

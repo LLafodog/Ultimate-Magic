@@ -1,10 +1,10 @@
-#include "Camera.h"
+#include<Camera.hpp>
 
 using namespace std;
 
 #include <iostream>
-#include "Positionnable.h"
-#include "World.h"
+#include<Positionnable.hpp>
+#include<World.hpp>
 #include<assert.h>
 Camera::Camera(RenderWindow* w, Positionnable* p, World* wo) :
 m_window(w),
@@ -96,7 +96,7 @@ bool Camera::move(float x, float y)
 
 }
 
-#include"Global.h"
+#include<Global.hpp>
 void Camera::updateView()
 /**
     From the last update the target can have moved, in everycas here is what happend:

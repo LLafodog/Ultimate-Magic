@@ -1,12 +1,12 @@
-#include "VObject.h"
+#include<VObject.hpp>
 
 using namespace std;
 using namespace sf;
 
-#include"Object.h"
-#include"Tile.h"
+#include<Object.hpp>
+#include<Tile.hpp>
 
-#include"AnimationEngine.h"
+#include<AnimationEngine.hpp>
 VObject::VObject(Object* o, RenderWindow* w): EntityGraphic(new Tile(o->getID()),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y),
 m_object(o),
 m_orientation('n'),
@@ -18,7 +18,7 @@ m_active(true)
     update();
 }
 
-#include"Alive.h"
+#include<Alive.hpp>
 void VObject::update()
 /// Updates the animation, looking if dead and if the object changed its direction.
 {
@@ -118,8 +118,8 @@ const void VObject::drawLifeBar()
     }
 }
 
-#include"Defines.h"
-#include"TextureEngine.h"
+#include<Defines.hpp>
+#include<TextureEngine.hpp>
 const sf::ConvexShape* VObject::getApparence()
 /// Redefinition of the entityGraphic::getApparence()
 /// That so it can disappear with class :p
@@ -145,7 +145,7 @@ const sf::ConvexShape* VObject::getApparence()
     return &m_cs;
 }
 
-#include"Identity.h"
+#include<Identity.hpp>
 void VObject::draw(bool details)
 /// Explicit.
 {

@@ -1,4 +1,4 @@
-#include "Loader.h"
+#include<Loader.hpp>
 
 // singloton
 Loader* Loader::m_self=nullptr;
@@ -14,10 +14,10 @@ Loader* Loader::getInstance()
     if(m_self==nullptr){m_self= new Loader();}
     return m_self;
 }
-#include"Defines.h"
+#include<Defines.hpp>
 #include<iostream>
 #include<fstream>
-#include"Global.h"
+#include<Global.hpp>
 unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileProbabilities(string path)
 /// Load the probabilities from a .prob file, all of the .prob files are packed in a tile_probabilities.txt file
 {
@@ -115,8 +115,8 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
    return probabilities;
 }
 
-#include"EffectEngine.h"
-#include"Tile.h"
+#include<EffectEngine.hpp>
+#include<Tile.hpp>
 pair<string,Tile*> Loader::readTileLine(std::string line)
 /// read a line from a tile_properties.txt file
 {

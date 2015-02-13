@@ -1,6 +1,6 @@
-#include "Tile.h"
+#include<Tile.hpp>
 
-#include"Effect.h"
+#include<Effect.hpp>
 
 Tile::Tile(std::string id, double altitude, bool solid, Effect* e) :
 m_id(id),
