@@ -1,7 +1,7 @@
 #include "ParticlesPrinter.h"
 
 #include<iostream>
-ParticlesPrinter::ParticlesPrinter()
+ParticlesPrinter::ParticlesPrinter(RenderWindow* w) : m_window(w)
 {
     init();
 }
@@ -22,17 +22,20 @@ void ParticlesPrinter::init()
     }
 }
 
+#include"Tile.h"
 void ParticlesPrinter::print(string key, float x, float y)
 {
-    cout << " lolilol empty method " << endl;
+    if(m_window)
+    {
+        EntityGraphic* eg= new EntityGraphic(new Tile(key,100),x,y);
+        m_window->draw(*eg->getApparence());
+        delete eg;
+    }
 }
 
-#include"Tile.h"
-void ParticlesPrinter::drawAboutTile(EntityGraphic* e, RenderWindow* w)
+void ParticlesPrinter::drawShadow(EntityGraphic* e) /// Care to rectangle !
 {
-    if(e && w)
-    {
-    /// SHADOW
+ /// SHADOW
     Tile* ti=e->getTile();
     double alt=ti->getAltitude();
     double shadow = 0;
@@ -43,17 +46,67 @@ void ParticlesPrinter::drawAboutTile(EntityGraphic* e, RenderWindow* w)
     RectangleShape shadowG(Vector2f(TILE_WIDTH, TILE_HEIGHT));
     shadowG.setFillColor(Color(100,100,100,shadow));
     shadowG.setPosition(e->getPosition());
-    w->draw(shadowG);
+    m_window->draw(shadowG);
+}
+
+void ParticlesPrinter::drawAboutTile(EntityGraphic* e, World* wo)
+{
+    if(e && m_window)
+    {
+    drawShadow(e);
+    drawTileParticles(e,wo);
     }
+}
+
+#include"World.h"
+void ParticlesPrinter::drawTileParticles(EntityGraphic* t, World* wo)
+/// You know, with rectangles this is hard to have a fluidity sensation, so  I draw particles around every tile that is a the limit in order to smooth a bit.
+{
+        // var
+        int x=t->getPositionX()/TILE_WIDTH,
+            y=t->getPositionY()/TILE_HEIGHT;
+        float xabs=t->getPositionX(),
+              yabs=t->getPositionY();
+
+        // neighboors
+        string  up      = wo->getTile(x,y-1)->getID(),
+                down    = wo->getTile(x,y+1)->getID(),
+                left    = wo->getTile(x-1,y)->getID(),
+                right   = wo->getTile(x+1,y)->getID(),
+                actual = t->getID();
+
+                        /// PARTICLES
+
+/// =================== Third method ========================
+        if(actual != up && up!="error")
+        {
+            print(up+"_particles",xabs,yabs);
+        }
+
+        if(actual != left && left!="error")
+        {
+            print(left+"_particles",xabs,yabs);
+        }
+
+        if(actual != right && right!="error")
+        {
+            print(right+"_particles",xabs,yabs);
+        }
+
+        if(actual != down && down!="error")
+        {
+            print(down+"_particles",xabs,yabs);
+        }
 }
 
 #include"VObject.h"
 #include"Object.h"
-void ParticlesPrinter::drawAboutObject(VObject* o, RenderWindow* w)
+#include"World.h"
+void ParticlesPrinter::drawAboutObject(VObject* o)
 {
     Object* obj=nullptr;
     if(o)obj=o->getObject();
-    if(obj)
+    if(obj && m_window)
     {
         for(auto status:obj->getIdentity()->getDatas())
         {
@@ -68,7 +121,7 @@ void ParticlesPrinter::drawAboutObject(VObject* o, RenderWindow* w)
                     eg->setPosition(o->getPosition());
                     eg->setShapeSize(obj->getSize());
                     eg->update();
-                    w->draw(*eg->getApparence());
+                    m_window->draw(*eg->getApparence());
                 }
 
                 //w->draw(*m_particle->getApparence());
@@ -80,6 +133,5 @@ void ParticlesPrinter::drawAboutObject(VObject* o, RenderWindow* w)
 
 ParticlesPrinter::~ParticlesPrinter()
 {
-    for (auto a:m_particles){delete a.second;
-    }
+    for (auto a:m_particles){delete a.second;}
 }

@@ -66,13 +66,11 @@
 		<Unit filename="../include/ParticlesPrinter.h" />
 		<Unit filename="../include/Perlin.h" />
 		<Unit filename="../include/Player.h" />
-		<Unit filename="../include/PlayerManager.h" />
 		<Unit filename="../include/Positionnable.h" />
 		<Unit filename="../include/TextureEngine.h" />
 		<Unit filename="../include/Tile.h" />
 		<Unit filename="../include/TileEngine.h" />
 		<Unit filename="../include/VObject.h" />
-		<Unit filename="../include/Villager.h" />
 		<Unit filename="../include/World.h" />
 		<Unit filename="../include/WorldManager.h" />
 		<Unit filename="../src/Alive.cpp" />
@@ -99,13 +97,11 @@
 		<Unit filename="../src/ParticlesPrinter.cpp" />
 		<Unit filename="../src/Perlin.cpp" />
 		<Unit filename="../src/Player.cpp" />
-		<Unit filename="../src/PlayerManager.cpp" />
 		<Unit filename="../src/Positionnable.cpp" />
 		<Unit filename="../src/TextureEngine.cpp" />
 		<Unit filename="../src/Tile.cpp" />
 		<Unit filename="../src/TileEngine.cpp" />
 		<Unit filename="../src/VObject.cpp" />
-		<Unit filename="../src/Villager.cpp" />
 		<Unit filename="../src/World.cpp" />
 		<Unit filename="../src/WorldManager.cpp" />
 		<Unit filename="main.cpp" />

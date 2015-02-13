@@ -1,10 +1,6 @@
 #include "ObjectEngine.h"
 
-#include "Global.h"
-#include "Alive.h"
-
-using namespace sf;
-
+#include"Defines.h"
 Object* ObjectEngine::get(std::string id, float x, float y, float w_mult, float h_mult, bool visible, bool solid, sf::FloatRect rct)
 {
     float   width=TILE_WIDTH*w_mult,
@@ -22,7 +18,6 @@ Object* ObjectEngine::getPremade(std::string id, float x, float y)
     {
         FloatRect hitbox =FloatRect(width/3,height,width/3,2*height/3);
         Object* o=new Object("pine_tree",hitbox,nullptr,true,x,y,width,2*height);
-            o->setAlive(new Alive(500,0));
         return o;
     }
 

@@ -1,11 +1,5 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-
-#include <string>
-
-//test
-#include <iostream>
-
 //herit
 #include "Object.h"
 
@@ -15,44 +9,28 @@ class Alive;
 class Effect;
 
 class Player : public Object
+/**
+    An object that can think like a human... Due to the fact that it actually is a human is a player.
+**/
 {
     public:
-
-        //Player();
         Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
-
-        void initStats();
         void setController(Controller* c) {m_controller=c;}
 
         /** ============ CASUAL METHODS =============== **/
-        void action();
-
-
-        /* ============= EFFECT ==================== */
-        void addEffect(Effect* e) {m_effects.push_back(e);}
-        /* ============= GETTER ==================== */
-        const World* getWorld() {return m_world;}
-
-
         void update();
-
-        /* ============= COLLISIONNABLE ===================== */
-        void collide(Object* o);
-
-        /* ============= CONVERSION ========================= */
+        /// ============= GETTER ====================
+        const World* getWorld() {return m_world;}
+        ///  ============= COLLISIONNABLE =====================
+        void collide(Object* o); // redefinition
+        /// ============= CONVERSION =========================
         virtual bool isPlayer() {return true;}
-
-
 
         virtual ~Player();
 
     protected:
-    //Intrasecly
-    std::string m_name;
-    int m_mana;
-    float m_attack;
-    float m_magic;
-    //Controls
+    void action();
+
     Controller* m_controller;
 
 };

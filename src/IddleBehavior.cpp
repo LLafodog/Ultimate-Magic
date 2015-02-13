@@ -8,7 +8,7 @@
 using namespace sf;
 using namespace std;
 
-
+// In order to stop the movement
 bool quiteEquals(Vector2f a, Vector2f b)
 {
     return(abs(a.x-b.x) < 10 && abs(a.y-b.y) < 10);
@@ -32,6 +32,7 @@ void IddleBehavior::pickActionTime()
 
 /// ======== CASUALS ============
 void IddleBehavior::think()
+/// Chose a new location if in collision.
 {
     if(m_object!=nullptr)
     {
@@ -44,6 +45,7 @@ void IddleBehavior::think()
 
 
 void IddleBehavior::choseRandomLocation()
+/// Pick a point in the world which will become the destination of this.
 {
     if(m_object!=nullptr && m_object->getWorld()!=nullptr)
     {
@@ -60,7 +62,6 @@ void IddleBehavior::choseRandomLocation()
 void IddleBehavior::update()
 {
     think();
-    //cout << " I want to move to " << m_destination.x << " " << m_destination.y << endl;
     moveTowardDestination();
 }
 
@@ -76,7 +77,6 @@ void IddleBehavior::moveTowardDestination()
         signY=y/abs(y);
         if(abs(x)<32){signX=0;}
         if(abs(y)<32){signY=0;}
-        //cout << "x: " << signX << " y: " << signY <<endl;
         if(m_clock.getElapsedTime().asMilliseconds()>m_timePaused){m_object->colMove(signX,signY);}
         if(m_clock.getElapsedTime().asMilliseconds()>m_timePaused+m_timeAction){m_clock.restart();pickActionTime();}
     }

@@ -1,40 +1,34 @@
 #include "Loader.h"
 
-
-#include "Global.h"
-#include "Defines.h"
-
-using namespace std;
-#include<iostream>
-#include<fstream>
-
-#include"Tile.h"
-#include"Effect.h"
-#include"EffectEngine.h"
-
+// singloton
 Loader* Loader::m_self=nullptr;
 
 
 Loader::Loader()
 {
-    if(m_self==nullptr)
-    {
-        m_self=this;
-        //cout << "loader created. " << endl;
-    }
+
 }
 
+Loader* Loader::getInstance()
+{
+    if(m_self==nullptr){m_self= new Loader();}
+    return m_self;
+}
+#include"Defines.h"
+#include<iostream>
+#include<fstream>
+#include"Global.h"
 unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileProbabilities(string path)
 /// Load the probabilities from a .prob file, all of the .prob files are packed in a tile_probabilities.txt file
 {
     /// Vars
-    if(LOADER_DEBUG)cout << " ========== PROBABILITIES LOADING ========= " << endl;
+    if(LOADER_DEBUG_DETAILS)cout << " ========== PROBABILITIES LOADING ========= " << endl;
     string txt_line;
     ifstream txt_reader(path.c_str());
     unordered_map<string,std::vector<std::pair<std::string,float>>> probabilities;
 
     /// Opening the txt file
-    if(!txt_reader.is_open()){cerr << " Problem opening " << path << "file. " <<endl;}
+    if(!txt_reader.is_open() && LOADER_DEBUG){cerr << " Problem opening " << path << "file. " <<endl;}
     else
     {
         pair<string,std::vector<std::pair<std::string,float>>> link_prob_name;
@@ -42,7 +36,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
         /// Reading the .txt file
         while(getline(txt_reader,txt_line))
         {
-            if(LOADER_DEBUG)cout << " ------ File reading : " << txt_line << ".prob" <<endl;
+            if(LOADER_DEBUG_DETAILS)cout << " ------ File reading : " << txt_line << ".prob" <<endl;
 
             string prob_line; // will contain the .prob line
             ifstream prob_reader(Global::TO_DATA+"dat/prob/"+txt_line.c_str()+".prob"); // will open it
@@ -51,7 +45,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
             std::vector<std::pair<std::string,float>> prob_data;
 
             /// OPENING THE .PROB FILE
-            if(!prob_reader.is_open()){cerr << " Problem opening " << txt_line << ".prob file. " <<endl;}
+            if(!prob_reader.is_open() && LOADER_DEBUG){cerr << " Problem opening " << txt_line << ".prob file. " <<endl;}
             else
             {
             pair<string,float> temp={"nope",-1};
@@ -121,8 +115,10 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
    return probabilities;
 }
 
-
+#include"EffectEngine.h"
+#include"Tile.h"
 pair<string,Tile*> Loader::readTileLine(std::string line)
+/// read a line from a tile_properties.txt file
 {
     pair<string,Tile*> result;
     string word="";
@@ -185,7 +181,7 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
         }
 
     }
-    if(LOADER_DEBUG)
+    if(LOADER_DEBUG_DETAILS)
     {
         cout    << " Tile id : " << id << endl
                 << " Effects: " << endl;
@@ -214,8 +210,9 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
 
 
 std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
+/// return all the premade tiles reading a tile_properties.txt file
 {
-    if(LOADER_DEBUG){cout << " ========== PREMADE TILES ============= " << endl;}
+    if(LOADER_DEBUG_DETAILS){cout << " ========== PREMADE TILES ============= " << endl;}
     std::unordered_map<std::string,Tile*> tiles;
     tiles.clear();
 
@@ -240,6 +237,7 @@ std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
 
 
 unordered_map<string,double> Loader::getObjectDatas(string id)
+/// Return the properties of an object from a id.prop file
 {
     if(LOADER_DEBUG_DETAILS)cout<<"===== READING INFORMATION ABOUT : " << id << "========= " << endl;
     unordered_map<string,double> result; result.clear();
@@ -259,6 +257,7 @@ unordered_map<string,double> Loader::getObjectDatas(string id)
 }
 
 pair<string,double> Loader::readPropLine(string line)
+/// Read a line from a .prop file
 {
     pair<string,double> result;
 

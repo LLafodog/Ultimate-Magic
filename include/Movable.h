@@ -6,11 +6,17 @@
 class World;
 
 class Movable : public Positionnable
+/**
+    Something that has a position can possibly move, here we do everything that regard the movement.
+**/
 {
     public:
 
         Movable(World* w,float x=0, float y=0, float width=TILE_WIDTH, float height=TILE_HEIGHT);
 
+        /// ============ METHODS =============
+        void moveOn(float x, float y, bool changeOrientation=true);
+            void moveOnF(int nSpeedX, int nSpeedY, bool changeOrientation=true) {moveOn(nSpeedX*m_effectiveSpeed,nSpeedY*m_effectiveSpeed,changeOrientation);}
 
         /// ============ GETTER =============
         const bool isMoving() {return m_isMoving;}
@@ -23,9 +29,6 @@ class Movable : public Positionnable
         const float getSpeed() {return m_speed;}
         const float getEffectiveSpeed() {return m_speed;}
         void setSpeedFactor(float factor) {m_effectiveSpeed*=factor;}
-        /// ============ METHODS =============
-        void moveOn(float x, float y, bool changeOrientation=true);
-            void moveOnF(int nSpeedX, int nSpeedY, bool changeOrientation=true) {moveOn(nSpeedX*m_effectiveSpeed,nSpeedY*m_effectiveSpeed,changeOrientation);}
 
         /// ============ SETTER =================
         void restoreSpeed() {m_effectiveSpeed=m_speed;}

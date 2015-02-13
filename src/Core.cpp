@@ -7,11 +7,10 @@ using namespace std;
 Controller* Core::m_controller=new KeyboardController();
 
 #include<assert.h>
-Core::Core(sf::RenderWindow* window)
+Core::Core(sf::RenderWindow* window) :
 /// Loads everything.
+m_window(window)
 {
-    m_window=window;
-
     if(window!=nullptr) /// Load initiates all the singlotons in the right order.
     {
         assert(load());
@@ -56,12 +55,11 @@ bool Core::load()
     ||  AnimationEngine::getInstance()==nullptr
     ||  WorldManager::getInstance()==nullptr
     ||  EffectEngine::getInstance()==nullptr
+    ||  Loader::getInstance()==nullptr
+    ||  TileEngine::getInstance()==nullptr
 
     )return false;
 
-    /// TO DO :
-    new Loader();
-    new TileEngine();
 
     return true;
 }
@@ -70,11 +68,12 @@ void Core::update()
 /// Update everythings.
 {
     /// Graphics
-    /// IMPORTANT : Always before world's update (otherwise objects can be deleted right before drawn)
-    m_graphics->update();
+
 
     /// Datas
     m_world->update();
+    /// IMPORTANT : Always before world's update (otherwise objects can be deleted right before drawn)
+    m_graphics->update();
 
     /// FPS
     updateFPS();

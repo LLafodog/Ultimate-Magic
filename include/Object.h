@@ -2,9 +2,8 @@
 #define OBJECT_H
 
 #include "Collisionnable.h"
-#include "Global.h"
-
 #include <iostream>
+using namespace std;
 
 class World;
 class Effect;
@@ -12,41 +11,42 @@ class Identity;
 class Alive;
 
 class Object :public Collisionnable
+/**
+    In the world many things can be set. The object is the more basic one, it is a collisionnable that can suffer from effects regarding ma,y statistics.
+**/
 {
     public:
         //Object();
-        Object( std::string id,  sf::FloatRect rect,World* w, bool solid=true, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
+        Object( string id,  sf::FloatRect rect,World* w, bool solid=true, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
         Object(Object* o);
 
         /* ============= CASUAL METHODS ============= */
         virtual void update();
         virtual void addEffect(Effect* e);
         virtual void addTileEffect(Effect* e);
-        void updateCurrentTileEffect();
 
         /* ============= GETTER ===================== */
-        virtual std::string getID() const   {return m_id;}
+        virtual string getID() const   {return m_id;}
         virtual bool isVisible() const      {return m_visible;}
         virtual Identity* getIdentity() {return m_identity;}
             virtual Alive* getAlive();
         virtual bool isPlayer()             {return false;}
-        std::vector<Effect*> getTileEffects()             {return m_tileEffects;}
+        vector<Effect*> getTileEffects()             {return m_tileEffects;}
+        bool mustBeDeleted();
 
 
         /// ========== SETTER =============
-        //virtual void setTileEffects( vector<Effect* e) {if(e!=nullptr){m_tileEffect=e;}}
-        void setAlive(Alive* a);
 
         virtual ~Object();
 
     protected:
+        void updateCurrentTileEffect();
+
         bool m_visible;
-        std::string m_id;
-
+        string m_id;
         Identity* m_identity;
-
-        std::vector<Effect*> m_effects;
-        std::vector<Effect*> m_tileEffects;
+        vector<Effect*> m_effects;
+        vector<Effect*> m_tileEffects;
 
 
 

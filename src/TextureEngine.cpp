@@ -1,82 +1,48 @@
 #include "TextureEngine.h"
-#include "Global.h"
-
-#include "AnimationEngine.h"
-
-#include <iostream>
-#include <vector>
-//read
-#include<fstream>
-
-#include"Defines.h"
-
-#include<cstdlib>
-using namespace sf;
-using namespace std;
-
-//std::vector<std::string> TextureEngine::m_names=std::vector<std::string> ();
 
 TextureEngine* TextureEngine::m_self=nullptr;
 
 TextureEngine::TextureEngine()
+// Singleton
 {
     m_textures.clear();
     load();
 }
 
 TextureEngine* TextureEngine::getInstance()
+/// Singleton
 {
     if(m_self==nullptr){m_self=new TextureEngine();}
         return m_self;
 }
 
-/*
-int TextureEngine::convertID(std::string id)
-{
-    for(int i(0); i<m_names.size();i++)
-    {
-        if(m_names[i]==id){return i;}
-    }
-    cout << " [TextureEngine] Can't convert the id " << id << " into a known texture. Please add it to 'dat/textures.txt'. Return invisible instead." << endl;
-    return convertID("invisible");
-}
-*/
-/*
-Texture* TextureEngine::get(string id, unsigned int j)
-{
-    if(j<m_textures[id].size())
-    {
-        return m_textures[id][j];
-    } else {std::cout <<"[TextureEngine] get("<<id<<","<<j<<") impossible."<<std::endl;return nullptr;}
-}
-*/
 Texture* TextureEngine::get(string name, unsigned int j)
+/// Main use of the class, return one of the textures it loaded.
 {
         if(j<m_textures[name].size() && j>=0)return(m_textures[name][j]);
         return nullptr;
 }
 
 #include"Defines.h"
+#include"Global.h"
+#include<iostream>
+#include<fstream>
 void TextureEngine::load()
+/**
+    In charge to load each and every PNG file.
+**/
 {
     /// DISPLAY
-    if(TEXTURE_DEBUG)std::cout<<"Textures and Animations loading..."<<std::endl;
+    if(TEXTURE_DEBUG_DETAILS)cout<<"Textures and Animations loading..."<<endl;
     //var
-    string path=Global::TO_DATA+"dat/textures_loading.txt";
-
-
-    /*void(TextureEngine::*ptr)(string)=&TextureEngine::readLine;
-    if(ptr==nullptr || !Global::readFile(Global::TO_DATA+"dat/textures.txt",ptr)){cerr<<"Problem loading the textures !"<<endl;} */
-
+    string path=Global::TO_DATA+TEXTURE_FILE;
     ifstream reader(path.c_str());
     if(!reader && IMPORTANT_DEBUG){cerr << " [TextureEngine::load] Problem loading " << path << "file"<<endl;}
     else
     {
-        //cout << "path : " << path <<endl;
         string line;
         while(getline(reader,line))
         {
-           //cout << "line : " << line <<endl;
            readLine(line);
         }
     }
@@ -92,6 +58,7 @@ void TextureEngine::load()
 }
 
 void TextureEngine::readLine(string line)
+/// Read a line from the texture_loading.txt file
 {
     if(line.size()>0 )
     {
@@ -106,9 +73,10 @@ void TextureEngine::readLine(string line)
 
 }
 
-bool TextureEngine::loadPNG(std::string line, bool particles)
+#include"Global.h"
+#include"AnimationEngine.h"
+bool TextureEngine::loadPNG(string line, bool particles)
 {
-
     /// Reading
     string word="",path="troll";
     int wordnumber=0;
@@ -167,10 +135,11 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         }
 
     }
-    if(TEXTURE_DEBUG)cout << "- Loading  " << path << " texture." << endl;
-    //cout << "File : " << path << " nb_x: " << nb_x << " nb_y :" << nb_y << " width " << w << " height " << h << endl;
-
-
+    if(TEXTURE_DEBUG_DETAILS)
+    {
+        cout << "- Loading  " << path << " texture." << endl;
+        //cout << "File : " << path << " nb_x: " << nb_x << " nb_y :" << nb_y << " width " << w << " height " << h << endl;
+    }
 
     /// Including textures
     for(int i(0); i<nb_y;i++)
@@ -178,31 +147,21 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
 
         vector<Texture*> v;
         string suffix=""; if(i!=0)suffix+=to_string(i);
-        // cout << " Name :" << path << " w: " << w << " h: " << h <<endl;
         Animation* a=new Animation(path+suffix,frameD,animeD,random);
         for(int j(0);j<nb_x;j++) //horizontal
         {
             Texture* t= new Texture;
-            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(j*w,i*h,w,h)) && IMPORTANT_DEBUG) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
+            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(j*w,i*h,w,h)) && IMPORTANT_DEBUG) {cerr<<"problem loading the textures. " << path<<endl; return false;}
             else{a->addFrame(t);}
             v.push_back(t);
-            //See everything:
-            //cout<<fileName<<"  i:" <<i<<"  j:"<<j<<endl;
-
         }
 
-        m_textures.insert(pair<std::string,vector<Texture*>>(path+suffix,v));
-        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path+suffix << " texture." << endl;
+        m_textures.insert(pair<string,vector<Texture*>>(path+suffix,v));
+        if(TEXTURE_DEBUG_DETAILS)cout << "-- Successfully added " << path+suffix << " texture." << endl;
 
-/*
-        m_names.push_back(path+suffix);
-        m_textures.push_back(v);
-*/
         /// Animation
-
-
         AnimationEngine::getInstance()->addAnimation(a);
-        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path+suffix << " animation." << endl;
+        if(TEXTURE_DEBUG_DETAILS)cout << "-- Successfully added " << path+suffix << " animation." << endl;
     }
 
     /// Including particles
@@ -214,26 +173,22 @@ bool TextureEngine::loadPNG(std::string line, bool particles)
         // cout << " Name :" << path << " w: " << w << " h: " << h <<endl;
         Animation* a=new Animation(path,frameD,animeD,random);
             Texture* t= new Texture;
-            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(0,0,w,h)) && IMPORTANT_DEBUG) {std::cerr<<"problem loading the textures. " << path<<std::endl; return false;}
+            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(0,0,w,h)) && IMPORTANT_DEBUG) {cerr<<"problem loading the textures. " << path<<endl; return false;}
             else{a->addFrame(t);}
             v.push_back(t);
 
-        m_textures.insert(pair<std::string,vector<Texture*>>(path,v));
-        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path << " texture_particles." << endl;
-/*
-        m_names.push_back(path);
-        m_textures.push_back(v);
-*/
+        m_textures.insert(pair<string,vector<Texture*>>(path,v));
+        if(TEXTURE_DEBUG_DETAILS)cout << "-- Successfully added " << path << " texture_particles." << endl;
+
         /// Animation
-
-
         AnimationEngine::getInstance()->addAnimation(a);
-        if(TEXTURE_DEBUG)cout << "-- Successfully added " << path<< " animation_particles." << endl;
+        if(TEXTURE_DEBUG_DETAILS)cout << "-- Successfully added " << path<< " animation_particles." << endl;
     }
     return true;
 }
 
 void TextureEngine::free()
+// Explicit
 {
     for(auto a:m_textures)
     {

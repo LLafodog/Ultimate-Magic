@@ -1,36 +1,27 @@
 #include "Object.h"
-#include "Identity.h"
-#include"Global.h"
-#include"World.h"
 
 #include"Identity.h"
-
-#include"EffectEngine.h"
-
-#include<string>
-
-Object::Object( std::string id, sf::FloatRect rect, World* w, bool solid, float x, float y,float width, float height, bool visible) : Collisionnable(rect,w,solid, x,y,width,height)
+Object::Object( std::string id, sf::FloatRect rect, World* w, bool solid, float x, float y,float width, float height, bool visible) : Collisionnable(rect,w,solid, x,y,width,height),
+m_visible(visible),
+m_id(id)
 {
-    m_visible=visible;
-    m_id=id;
-    m_orientation='n'; //n cuz first anime
-
-    m_effects=std::vector<Effect*>() ;
-
-
+    m_effects.clear();
+    m_tileEffects.clear();
     m_identity=new Identity(m_id);
-
-    m_tileEffects.clear();//m_tileEffects.push_back(new Effect(NONE,this));
+    initSpeed(m_identity->getData("speed"));
 }
 
-Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSolid(), o->getPositionX(), o->getPositionY(), o->getSize().x, o->getSize().y)
+Object::Object(Object* o): Collisionnable(o->getHitbox(), o->getWorld(), o->isSolid(), o->getPositionX(), o->getPositionY(), o->getSize().x, o->getSize().y) ,
+m_visible(o->isVisible()),
+m_id(o->getID())
 {
-    m_visible=o->isVisible();
-    m_id=o->getID();
-    m_orientation=o->getOrientation();
+    initSpeed(m_identity->getData("speed"));
 }
 
+#include"World.h"
+#include"Effect.h"
 void Object::updateCurrentTileEffect()
+/// Update the effects from the current tile.
 {
     /// Get the current tile effect
    float    x=getCenterWithHitbox().x/TILE_WIDTH,
@@ -85,11 +76,10 @@ void Object::updateCurrentTileEffect()
             eff->update();
         }
     }
-//cout << " En tout : " << m_tileEffects.size() << "Effect : " << eff->getID() << " " << eff->getValue() << endl; }
-
 }
 
 void Object::addEffect(Effect* e)
+/// Explicit.
 {
     if(e!=nullptr)
     {
@@ -100,6 +90,7 @@ void Object::addEffect(Effect* e)
 }
 
 void Object::addTileEffect(Effect* e)
+/// Same.
 {
     if(e!=nullptr)
     {
@@ -110,6 +101,7 @@ void Object::addTileEffect(Effect* e)
 }
 
 void Object::update()
+/// Again.
 {
     for(unsigned int i(0);i<m_effects.size();i++)
     {
@@ -118,23 +110,32 @@ void Object::update()
         if(e!=nullptr && e->isActive()){e->update();}
         else{delete e;m_effects.erase(m_effects.begin()+i);}
     }
-
     updateCurrentTileEffect();
+    m_identity->update();
 
 }
 
 Alive* Object::getAlive()
+/// Borring to repeat.
 {
-    return m_identity->getAlive();
+    if(m_identity)return m_identity->getAlive();
+    return nullptr;
 }
 
-void Object::setAlive(Alive* a)
+#include"Alive.h"
+bool Object::mustBeDeleted()
 {
-    m_identity->setAlive(a);
+    if(m_identity && m_identity->getAlive())
+    {
+        return m_identity->getAlive()->isDead()&&m_identity->getAlive()->getDisapearingRatio()<0;
+    }
+    else return false;
+
 }
 
 Object::~Object()
 {
     for(Effect* e:m_effects){delete e;}
     for(Effect* e:m_tileEffects){delete e;}
+    delete m_identity;
 }

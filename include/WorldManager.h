@@ -9,31 +9,24 @@
 #include<string>
 #include<unordered_map>
 
+using namespace std;
+
 class Perlin;
 
 class WorldManager
+/**
+    World's God, it can totally manage the change concerning a world, it contains all the worlds already visited and can create new ones.
+**/
 {
     public:
-
-
         static WorldManager* getInstance();
-
-
-
         World* newWorld();
 
         /// Loading Data
-        void getProbabilities(std::string path);
-        void pickElementOf(World* w, int x, int y, std::string biome);
-        void purgeWorld(World* wo);
+        void getProbabilities(string path);
 
         /// Loading World
-        void loadWorld(std::string pathfile, World* wo);
-            void readWorldLine(std::string line);
-                void readInformationLine(std::string line);
-                void readTileLine(std::string line);
-                void readObjectLine(std::string line);
-                    void readPremadeLine(std::string line);
+        void loadWorld(string pathfile, World* wo);
 
 
 
@@ -43,18 +36,26 @@ class WorldManager
 
 
     protected:
+        void pickElementOf(World* w, int x, int y, string biome);
+        void purgeWorld(World* wo);
+
+
+        void readWorldLine(string line);
+        void readInformationLine(string line);
+        void readTileLine(string line);
+        void readObjectLine(string line);
+        void readPremadeLine(string line);
         WorldManager();
+
         static WorldManager* m_self;
-
         World* m_actual;
-        std::vector<Perlin*> m_alt;
-        std::vector<Perlin*> m_humidity;
-        std::vector<std::vector<World*>> m_worlds;
 
-        std::unordered_map<std::string,std::vector<std::pair<std::string,float>>> m_tileProbabilities;
+        /// Every world is based on an altitude and a humidity. TO DO: in world ?
+        vector<Perlin*> m_alt;
+        vector<Perlin*> m_humidity;
+        vector<vector<World*>> m_worlds;
 
-        //std::vector<std::pair<std::string,std::vector<std::pair<std::string,float>>>> m_tileProbabilities;
-        //std::vector<std::pair<std::string,vector<std::string>>> m_properties;
+        unordered_map<string,vector<pair<string,float>>> m_tileProbabilities; //haha
 };
 
 #endif // WORLDMANAGER_H

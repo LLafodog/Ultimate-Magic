@@ -26,18 +26,8 @@ class Graphics
         Graphics(RenderWindow* w, World* wo=0);
     /// ========== INITIALIZATION ============
         void init();
-            void initObjects();
-            void initTiles();
     /// ========== DRAWING METHODS ===========
         const void draw();
-            const void drawAll();
-            const void drawTile(EntityGraphic*t);
-            const void drawVisibleArea();
-                void drawTileParticles(EntityGraphic* t);
-            const void drawVisibleObjects();
-            const void drawObject(VObject* o);
-                const void drawAboutAlive(VObject* );
-            const void drawLifeBar(VObject* o);
         const void clear() {m_window->clear(BDC);}
         static bool needToRefresh;
 
@@ -46,10 +36,6 @@ class Graphics
 
     ///========== UPDATE =========
         void update();
-            void updateTiles();
-            void updateObjects();
-        void sortObjects();
-            bool needResort;
         void setAllowDetails(bool b){m_details=b;}
 
     /// ========= CAMERA =========
@@ -59,9 +45,24 @@ class Graphics
 
 
     protected:
+    // Init
+    void initObjects();
+    void initTiles();
+    // Update
+    void updateTiles();
+    void updateObjects();
+    void sortObjects();
+    bool needResort;
+    // Draw
+    const void drawAll();
+    const void drawTile(EntityGraphic*t);
+    const void drawVisibleArea();
+    const void drawVisibleObjects();
+    const void drawObject(VObject* o);
+
+    // vars
     int m_time;
     const int m_refreshTime=600 ; // 10 minutes
-
     vector<vector<EntityGraphic*>> m_tiles;
     vector<VObject*> m_objects;
     vector<VObject*> m_visibleObjects;

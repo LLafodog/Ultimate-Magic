@@ -2,10 +2,9 @@
 
 #include "World.h"
 
-Movable::Movable(World* w, float x, float y, float width, float height) : Positionnable(x,y,width,height)
+Movable::Movable(World* w, float x, float y, float width, float height) : Positionnable(x,y,width,height),
+m_world(w)
 {
-    m_world=w;
-
     m_speed=0;
     m_effectiveSpeed=m_speed;
     m_isMoving=true;

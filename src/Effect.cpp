@@ -1,28 +1,17 @@
 #include "Effect.h"
 
-/*
-#include "Object.h"
-
-#include"Identity.h"
-    #include"Alive.h"
-
-#include"EffectEngine.h"
-*/
-
-
-Effect::Effect(int id, Object* o, double value, int duration, int delay)
+Effect::Effect(int id, Object* o, double value, int duration, int delay) :
+m_object(o),
+m_id(id),
+m_value(value),
+m_duration(duration),
+m_delay(delay)
 {
-    m_id=id;
-    m_object=o;
-    m_value=value;
     m_singleEffect=true; // Let an effect that acts only once to do so
     m_active=true;
 
-    m_clock.restart();
-        m_duration=duration;
-
-    m_between.restart();
-        m_delay=delay;
+    m_clock.restart(); //whole time effect
+    m_between.restart(); // time between each iteration
 }
 
 void Effect::update()

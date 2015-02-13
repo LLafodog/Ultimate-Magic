@@ -13,7 +13,9 @@ using namespace sf;
 
 #include"Tile.h"
 #include"AnimationEngine.h"
-EntityGraphic::EntityGraphic(Tile* t, int x, int y, bool visible, float width, float height) : Positionnable(x,y,width,height)
+EntityGraphic::EntityGraphic(Tile* t, int x, int y, bool visible, float width, float height) : Positionnable(x,y,width,height),
+m_tile(t),
+m_visible(visible)
 /**
     World is based on a 2D map of tiles that has properties like effects, solidity etc, here is the most used contructor.
 **/
@@ -110,5 +112,5 @@ void EntityGraphic::update()
 
 EntityGraphic::~EntityGraphic()
 {
-    delete m_tile;
+
 }

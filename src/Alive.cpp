@@ -2,22 +2,19 @@
 
 using namespace std;
 
-Alive::Alive(float maxHealth, float healthRegen, bool alive)
+Alive::Alive(float maxHealth, float healthRegen, bool alive) :
+m_health(maxHealth),
+m_maxHealth(maxHealth),
+m_healthRegen(healthRegen),
+m_alive(alive)
 {
     /// It begins full life
-    m_health=maxHealth;
-    m_maxHealth=maxHealth;
 
     /// Health Regeneration initialized
-    m_healthRegen=healthRegen;
     m_timeBetweenHeal=1000; /// ms !
-
-    /// Better start alive...
-    m_alive=alive;
 
     /// Allows a litle pause when hit
     m_invincibleClock.restart();
-    //m_deadClock.restart();
     m_invincible=false;
 }
 

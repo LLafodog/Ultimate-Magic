@@ -3,13 +3,13 @@
 using namespace std;
 
 #include <iostream>
-
 #include "Positionnable.h"
 #include "World.h"
-#include "Global.h"
-
 #include<assert.h>
-Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
+Camera::Camera(RenderWindow* w, Positionnable* p, World* wo) :
+m_window(w),
+m_pos(p),
+m_world(wo)
 /**
     Main method:
         Decide the size of the view,
@@ -19,11 +19,6 @@ Camera::Camera(RenderWindow* w, Positionnable* p, World* wo)
     Eventually it replace the view if it is blocked somewhere.
 **/
 {
-    /// Initialization
-    m_window=w;
-    m_pos=p;
-    m_world=wo;
-
     /// Sizing the view
     // Here is decided the size (12 tiles)
     assert(m_pos!=nullptr);

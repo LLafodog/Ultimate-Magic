@@ -25,7 +25,6 @@ class EntityGraphic : public Positionnable
         EntityGraphic(string particle); // Fire, poison, wind  etc.
 
         /** ========== CASUAL METHODS ========== **/
-        void initSquare(float width=TILE_WIDTH, float height=TILE_HEIGHT);
         virtual void update();
 
 
@@ -49,8 +48,9 @@ class EntityGraphic : public Positionnable
         virtual ~EntityGraphic();
 
         protected:
-        ConvexShape m_cs;
+        void initSquare(float width=TILE_WIDTH, float height=TILE_HEIGHT);
 
+        ConvexShape m_cs;
         bool m_visible;
         float m_width;
         float m_height;

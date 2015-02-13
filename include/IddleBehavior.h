@@ -6,6 +6,9 @@
 
 
 class IddleBehavior : public Behavior
+/**
+    Basic behavior, do anything but nothing :)
+**/
 {
     public:
 

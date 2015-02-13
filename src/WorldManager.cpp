@@ -1,73 +1,58 @@
 #include "WorldManager.h"
 
-#include<SFML/Graphics.hpp>
-
-#include<fstream>
-
-#include "Tile.h"
-
-#include "Perlin.h"
-#include "Global.h"
-#include "ObjectEngine.h"
-#include "Loader.h"
-
 using namespace sf;
-using namespace std;
-
 WorldManager* WorldManager::m_self=nullptr;
 
+#include"Global.h"
+#include"Defines.h"
 WorldManager::WorldManager()
 {
     m_worlds.clear();
     m_actual=nullptr;
 
     /// Loading
-    getProbabilities(Global::TO_DATA+"dat/biomes.txt");
+    getProbabilities(Global::TO_DATA+"dat/"+BIOME_PROBABILITIES_FILE);
 }
 
 
 WorldManager* WorldManager::getInstance()
+/// Singleton
 {
     if(m_self==nullptr){m_self=new WorldManager();}
     return m_self;
 }
 
+#include"Perlin.h"
+#include"Tile.h"
 World* WorldManager::newWorld()
+/// Create a whole new world based on Perlin noise (two levels with humidity) with random size.
 {
     // The tiles will be deducted from here
-    int step=rand()%15+10;
-    int w=rand()%50+50;
-    int h=rand()%50+50;
-    int style=rand()%10;
+    int step=rand()%15+10;  // 10-25
+    int w=rand()%50+50;     // 50-100
+    int h=rand()%50+50;     // 50-100
+    int style=rand()%10;    // 0-10
 
-    Perlin* alt=new Perlin(w,h,step,style);
-    m_alt.push_back(alt); // petit monde
+    Perlin* alt=new Perlin(w,h,step,style); // Generate the world and adjuste the size.
+    m_alt.push_back(alt);
 
-
-
-    Perlin* humid= new Perlin(w,h,step,style);
+    Perlin* humid= new Perlin(alt->getWidth(),alt->getHeight(),step,style);
     m_humidity.push_back(humid);
-    //m_alt->display();
 
-    // Create the game-world
+    World* wo=new World(alt->getWidth(),alt->getHeight()); // Generate a new world totally basic with error tile
 
-
-    World* wo=new World(alt->getWidth(),alt->getHeight());
-
-
-    for (int i(0);i<h;i++)
+    for (size_t i(0);i<h;i++)
     {
-        for(int j(0);j<w;j++)
+        for(size_t j(0);j<w;j++)
         {
         // D'après http://fr.wikipedia.org/wiki/Altitude#mediaviewer/File:Earth_elevation_histogram_fr.jpg sur les 35 premiers %
-        // to do: with .wdat value
+        // to do: with .wdat value !!!!!!
             double altitude=alt->get(i,j);
             double humidity=humid->get(i,j);
 
             Tile* t=wo->getTile(i,j);
             if(t!=nullptr)t->setAltitude(altitude);
 
-            /// TO IMPROVE WITH .GENERATE FILE
             if(altitude<=5){pickElementOf(wo,i,j,"deep_sea");}
 
             if(altitude>5 && altitude<=14.28) // water etc
@@ -105,7 +90,6 @@ World* WorldManager::newWorld()
             }
         }
     }
-
     m_actual=wo;
     return wo;
 }
@@ -116,6 +100,7 @@ World* WorldManager::newWorld()
 ///     ================================    ///
 
 enum ENUM_PROBABILITIES
+/// Used to read a .prob file.
 {
     P_BASIC,
     P_AUX1,
@@ -125,17 +110,20 @@ enum ENUM_PROBABILITIES
     END_ENUM_PROBABILITIES
 };
 
+#include"Loader.h"
 void WorldManager::getProbabilities(std::string path)
+/// Load a .prob file that is the summary of what biome contains which tile.
 {
     m_tileProbabilities=Loader::getInstance()->getTileProbabilities(path);
-    //cout << " Size : " << m_tileProbabilities.size() << " Id : " << m_tileProbabilities[0].first <<endl;
 }
 
 
-
+#include"Global.h"
+#include"ObjectEngine.h"
 void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
+/// Pick which element is place a this position, is it a snow tile ? If so, shall it be alone or in a cross snow ?
 {
-    /// find the right biome
+    // find the right biome
     vector<pair<string,float>> probabilities=m_tileProbabilities[biome];
 
     for(unsigned int i(0);i<END_ENUM_PROBABILITIES;i++)
@@ -148,21 +136,15 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
                 {
                     /// Draw a cross with an alea error;
                     /*
-                                   X A X
-                                   A A A
-                                   X A X
+                                    A? A A?
+                                    A  A A
+                                    A? A A?
 
                     */
+                    /// One out of two chance on each case.
                     if(rand()%2==0){w->modifyTile(Vector2f(x-1,y-1),probabilities[i].first,true);}  if(rand()%2==0){w->modifyTile(Vector2f(x,y-1),probabilities[i].first,true);}    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y-1),probabilities[i].first,true);}
                     if(rand()%2==0){w->modifyTile(Vector2f(x-1,y),probabilities[i].first,true);}    if(rand()%2==0){w->modifyTile(Vector2f(x,y),probabilities[i].first,true);}  if(rand()%2==0){w->modifyTile(Vector2f(x+1,y),probabilities[i].first,true);}
                     if(rand()%2==0){w->modifyTile(Vector2f(x-1,y+1),probabilities[i].first,true);}  if(rand()%2==0){w->modifyTile(Vector2f(x,y+1),probabilities[i].first,true);}    if(rand()%2==0){w->modifyTile(Vector2f(x+1,y+1),probabilities[i].first,true);}
-
-
-
-
-
-
-
 
                 }break;
 
@@ -178,26 +160,23 @@ void WorldManager::pickElementOf(World* w, int x, int y, std::string biome)
 
 
 /// =============== Loading world from a file ! ====================================================
-
 void WorldManager::loadWorld(string pathfile, World* wo)
 ///Used to read a .world file
 {
-
     if(wo!=nullptr)
     {
         m_actual=wo;
         ///Destruction of old world
         m_actual->setTiles(vector<vector<Tile*>>());
         for(Object* o:m_actual->getObjects()){if(!o->isPlayer()){delete o;};}
-            m_actual->setObjects(vector<Object*>());
+            m_actual->free();
 
         void(WorldManager::*ptr)(string)=&WorldManager::readWorldLine;
         Global::readFile(pathfile,ptr);
-
-
-
     }
 }
+
+#include"Defines.h"
 void WorldManager::readWorldLine(string line)
 {
 
@@ -226,7 +205,7 @@ void WorldManager::readWorldLine(string line)
                 break;
 
                 default:
-                cerr << " line ( "<<line << " ) has been misunderstood and negliged. "<<endl;
+                if(TECHNICAL_DEBUG)cerr << " line ( "<<line << " ) has been misunderstood and negliged. "<<endl;
                 break;
             }
 
@@ -295,7 +274,6 @@ void WorldManager::readTileLine(string line)
 
         }
     }
-    //cout<<"here: " << word<<endl; //controls the words understood
     m_actual->addTileLine(v);
 }
 
@@ -439,13 +417,6 @@ void WorldManager::readPremadeLine(string line)
     }
     m_actual->addObject(ObjectEngine::getPremade(id,x,y));
 }
-
-
-
-
-
-
-
 
 void WorldManager::free()
 {

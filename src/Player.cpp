@@ -1,41 +1,16 @@
 #include "Player.h"
 
-#include "Global.h"
-#include "World.h"
-#include "Controller.h"
+Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) :
 
-//errors
-#include <iostream>
-//
+Object(id,rect,w,true,x,y,width,height,visible),
+m_controller(c)
+{
 
-
-/// EFFECTS
-#include "EffectEngine.h"
+}
 
 #include"Identity.h"
-    #include"Alive.h"
-
-
-Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) :
-    Object(id,rect,w,true,x,y,width,height,visible)
-{
-    m_controller=c;
-    initStats();
-}
-
-void Player::initStats()
-{
-
-    initSpeed(320);
-    //intrasecly
-    m_name="Anonymous";
-    m_mana=0;
-    m_attack=1;
-    m_magic=0;
-}
-
-
-
+#include"Alive.h"
+#include"Controller.h"
 void Player::update()
 {
     /* ================== OBJECT =============== */
@@ -63,6 +38,7 @@ void Player::update()
     }
 }
 
+#include"EffectEngine.h"
 void Player::action()
 {
     if(isInCollision())

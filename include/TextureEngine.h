@@ -3,38 +3,40 @@
 
 
 #include <SFML/Graphics.hpp>
-#include <string>
-
 #include<unordered_map>
 
+using namespace std;
+using namespace sf;
+
 class TextureEngine
+/**
+    This class is responsible for every texture that appears in the game. This is quite the most important class and is loaded in an assert.
+**/
 {
     public:
-
-        /// ========== STATIC =========
         static TextureEngine* getInstance();
         void free();
 
-
-
-        /* ============ LOADING =============== */
+        /// ============ LOADING ===============
          void load();
-             void readLine(std::string line);
-             void test(std::string line);
-             bool loadPNG(std::string line, bool particles=false);
-        /* ============ ANIMATION ============= */
+             void readLine(string line);
+             void test(string line);
+             bool loadPNG(string line, bool particles=false);
+
+        /// ============ ANIMATION =============
         void const createAnimations();
 
-        /* ============= GETTER =============== */
-         sf::Texture* get(std::string name, unsigned int j=0);
+        /// ============= GETTER ===============
+         Texture* get(string name, unsigned int j=0);
          const unsigned int getMax() {return m_textures.size();}
-         const unsigned int getMax(std::string id) {return m_textures[id].size();}
-            virtual ~TextureEngine();
+         const unsigned int getMax(string id) {return m_textures[id].size();}
+
+        virtual ~TextureEngine();
 
     protected:
         TextureEngine();
         static TextureEngine* m_self;
-        std::unordered_map<std::string,std::vector<sf::Texture*>> m_textures;
+        unordered_map<string,vector<Texture*>> m_textures;
 };
 
 #endif // TEXTUREENGINE_H

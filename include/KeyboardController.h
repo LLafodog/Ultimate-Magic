@@ -5,6 +5,9 @@
 
 
 class KeyboardController : public Controller
+/**
+    A controller used from a keyboard.
+**/
 {
     public:
         KeyboardController();

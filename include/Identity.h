@@ -9,6 +9,9 @@ using namespace std;
 class Alive;
 
 class Identity
+/**
+    This class has on purpose to contain every data an object can have. Everything is load from the loader and stocked in a u_map.
+**/
 {
     public:
 

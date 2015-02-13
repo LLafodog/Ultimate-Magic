@@ -3,15 +3,15 @@
 using namespace sf;
 using namespace std;
 
-Animation::Animation(string name, float frameD, float animD, bool randomAnimDelay)
+Animation::Animation(string name, float frameD, float animD, bool randomAnimDelay) :
+m_frameDelay(frameD),
+m_animationDelay(animD),
+m_random(randomAnimDelay)
 ///Create before adding manually textures
 {
-    m_frameDelay=frameD;
-    m_animationDelay=animD;
     m_current=0;
     m_clocky.restart();
     m_running=true;
-    m_random=randomAnimDelay;
     m_ID=name;
 }
 

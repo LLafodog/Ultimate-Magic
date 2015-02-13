@@ -24,12 +24,10 @@ class Core
         Core(RenderWindow* window);
 
         /// ======== CONSTRUCTION =============
-        virtual void init();
         bool load();
 
         /// ======== UPDATE =============
         void update();
-            void updateFPS();
 
         /// ======== CASUAL METHODS =============
         void run();
@@ -43,6 +41,10 @@ class Core
         virtual ~Core();
 
     protected:
+
+        virtual void init();
+        void updateFPS();
+
         RenderWindow* m_window;
         Graphics* m_graphics;
         World* m_world;

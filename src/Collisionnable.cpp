@@ -1,22 +1,18 @@
 #include "Collisionnable.h"
 
-#include "World.h"
-#include <vector>
-#include <cmath>
-#include "Object.h"
-
 using namespace sf;
 using namespace std;
 
-Collisionnable::Collisionnable( sf::FloatRect hitbox, World* w, bool solid,  float x, float y, float width, float height) : Movable(w,x,y,width,height)
+Collisionnable::Collisionnable( sf::FloatRect hitbox, World* w, bool solid,  float x, float y, float width, float height) : Movable(w,x,y,width,height),
+m_hitbox(hitbox),
+m_solid(solid)
 {
-    m_hitbox=hitbox;
-    m_solid=solid;
     m_collide=false;
     m_collision=nullptr;
     m_between.restart();
 }
 
+#include "Object.h"
 bool Collisionnable::inCollisionWith(Object* c)
 /// Return true if the floatrect of Object's hitbox intersects this'
 {
@@ -75,6 +71,7 @@ void Collisionnable::collide(Object* c)
 }
 
 #include"Defines.h"
+#include"World.h"
 void Collisionnable::colMove(int signX, int signY)
 /// Move if the world allows it, else not.
 {

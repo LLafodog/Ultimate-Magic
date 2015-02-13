@@ -1,55 +1,32 @@
 #include "Graphics.h"
-/*
-#include "Player.h"
-#include "World.h"
-#include "EntityGraphic.h"
 
-#include "Object.h"
-#include "Alive.h"
-
-#include "VObject.h"
-
-#include "Global.h"
-
-#include "TextureEngine.h"
-#include "AnimationEngine.h"
-#include "TileEngine.h"
-
-#include "Camera.h"
-
-#include "Tile.h"
-
-#include<cmath>
-
-#include <SFML/Graphics.hpp>
-#include <ctime>
-*/
 
 bool Graphics::needToRefresh=true;
 
 #include"ParticlesPrinter.h"
-Graphics::Graphics(RenderWindow* w, World* wo)
+#include"Camera.h"
+#include"World.h"
+#include"Object.h"
+#include"TileEngine.h"
+#include"EntityGraphic.h"
+Graphics::Graphics(RenderWindow* w, World* wo) :
+    m_window(w),
+    m_world(wo)
 {
-   m_window=w;
-
    //Refresh
    m_time=time(NULL);
-
-   //World
-   m_world=wo;
-
    //camera
    m_camera=new Camera(m_window,wo->getObject(0),wo);//to do reperer le player
    init();
 
-
-    // PP
+   // PP
    m_error = new EntityGraphic(TileEngine::getInstance()->get("ground"),-50,-50,true);
    m_particle= new RectangleShape(Vector2f(TILE_WIDTH,TILE_HEIGHT));
-   m_pp=new ParticlesPrinter();
+   m_pp=new ParticlesPrinter(m_window);
 }
 
 void Graphics::init()
+/// Launch the initialization of every tiles
 {
     m_details=false; // lifebar etc
     initTiles();
@@ -78,6 +55,7 @@ void Graphics::initTiles()
     }
 }
 
+#include"VObject.h"
 void Graphics::initObjects()
 /// Read the world object and init every visual entities that mathces.
 {
@@ -87,7 +65,7 @@ void Graphics::initObjects()
     //Objects
     for(Object* o:m_world->getObjects())
     {
-        m_objects.push_back(new VObject(o));
+        m_objects.push_back(new VObject(o,m_window));
     }
 
 }
@@ -188,58 +166,7 @@ const void Graphics::draw()
 
 }
 
-void Graphics::drawTileParticles(EntityGraphic* t)
-{
-        /// Now trying to smooth a bit
-        // var
-        int x=t->getPositionX()/TILE_WIDTH,
-            y=t->getPositionY()/TILE_HEIGHT;
-        float xabs=t->getPositionX(),
-              yabs=t->getPositionY();
 
-        // neighboors
-        string  up      = m_world->getTile(x,y-1)->getID(),
-                down    = m_world->getTile(x,y+1)->getID(),
-                left    = m_world->getTile(x-1,y)->getID(),
-                right   = m_world->getTile(x+1,y)->getID(),
-                actual = t->getID();
-
-        TextureEngine* te=TextureEngine::getInstance();
-
-                        /// PARTICLES
-
-/// =================== Third method ========================
-        RectangleShape rc(Vector2f(TILE_WIDTH,TILE_HEIGHT));
-        if(actual != up && up!="error")
-        {
-            m_particle->setTexture(te->get(up+"_particles"));
-            m_particle->setPosition(xabs,yabs);
-                m_window->draw(*m_particle);
-        }
-
-        if(actual != left && left!="error")
-        {
-            m_particle->setTexture(te->get(left+"_particles"));
-            m_particle->setPosition(xabs,yabs);
-                m_window->draw(*m_particle);
-        }
-
-        if(actual != right && right!="error")
-        {
-            m_particle->setTexture(te->get(right+"_particles"));
-            m_particle->setPosition(xabs,yabs);
-                m_window->draw(*m_particle);
-        }
-
-        if(actual != down && down!="error")
-        {
-            m_particle->setTexture(te->get(down+"_particles"));
-            m_particle->setPosition(xabs,yabs);
-                m_window->draw(*m_particle);
-        }
-
-
-}
 
 const void Graphics::drawTile(EntityGraphic*t)
 {
@@ -247,9 +174,9 @@ const void Graphics::drawTile(EntityGraphic*t)
     {
 
         m_window->draw(*(t->getApparence()));
-        m_pp->drawAboutTile(t,m_window);
+        m_pp->drawAboutTile(t,m_world);
         /// PP
-        drawTileParticles(t);
+        //drawTileParticles(t);
     }
 }
 
@@ -349,69 +276,11 @@ const void Graphics::drawVisibleObjects()
 #include"Identity.h"
 const void Graphics::drawObject(VObject* o)
 {
-    if(o->getObject()->getAlive()!=nullptr )
-    {
-        drawAboutAlive(o);
-    }
-    o->draw(m_window);
-    m_pp->drawAboutObject(o,m_window);
+    o->draw(m_details);
+    m_pp->drawAboutObject(o);
     //m_window->draw(*o->getApparence());
 //    m_particles->drawAbout(o);
 
-}
-
-const void Graphics::drawAboutAlive(VObject* o)
-/// Here we draw everything that concern an alive object
-{
-    Alive* a=o->getObject()->getAlive();
-    if( a!= nullptr && (m_details ||a->getLifeRatio()!=1))
-    ///We draw the life bar if we wanna see the details, or we aren't full Life
-    {
-        drawLifeBar(o);
-    }
-
-
-}
-
-const void Graphics::drawLifeBar(VObject* o)
-/**
-    Draw a life bar with two rectange:  one totally black representing the full life
-                                        one red representig the life (how mainstream)
-**/
-{
-    if(o!=nullptr && o->getObject()!=nullptr )
-    {
-        Alive* a=o->getObject()->getAlive();
-        if(a!=nullptr) //if has a life // just be secure
-        {
-        float   x=o->getPositionX(),
-                y=o->getPositionY(),
-                w=o->getSize().x,
-                wquart=w/4,
-                hr=TILE_HEIGHT>>3; //height of the life bar
-
-        float lratio=a->getLifeRatio();
-        //cout << "x: " << x << " y: " << y << " w " << w << " ratio : " << lratio << endl;
-        Vector2f    fullsize(w+wquart*2,hr),
-                    lifesize((w+wquart*2)*lratio,hr),
-                    position(x-wquart,y-hr-1);
-
-        RectangleShape  fulllifebar(fullsize),
-                        lifebar(lifesize);
-
-        fulllifebar.setPosition(position);
-        lifebar.setPosition(position);
-
-        double alpha=255;
-        if(a->isDead()){alpha=255*a->getDisapearingRatio();}
-        fulllifebar.setFillColor(Color(0,0,0,alpha));
-        lifebar.setFillColor(Color(195,0,0,alpha));
-        //cout << "drawn in x:" << x << " y: " << y << " lenght of " << w <<endl;
-        m_window->draw(fulllifebar);
-        m_window->draw(lifebar);
-
-        }
-    }
 }
 
 
