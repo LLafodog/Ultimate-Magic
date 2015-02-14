@@ -10,6 +10,7 @@ m_solid(solid)
     m_collide=false;
     m_collision=nullptr;
     m_between.restart();
+    
 }
 
 #include<Object.hpp>
@@ -141,7 +142,6 @@ void Collisionnable::colMove(int signX, int signY)
 
 
 }
-
 
 const bool Collisionnable::isInCollisionWithObjects(vector<Object*> v)
 /// Look in the vector if in collision with an object

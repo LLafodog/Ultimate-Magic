@@ -82,10 +82,21 @@ void Object::addEffect(Effect* e)
 /// Explicit.
 {
     if(e!=nullptr)
-    {
-        e->setObject(this);
-        e->setActive(true);
-        m_effects.push_back(e);
+      {
+	bool goOn=true;
+	if(e->onlyOneAllowed())
+	  // Verify if not already suffering from same effect but conserve better/worse one
+	  {
+	    int id= e->getID();
+	    for(Effect* eff:m_effects){if(eff && eff->getID()==id && eff->getValue()<=e->getValue() )goOn=false;}
+	  }
+	
+	if(goOn)
+	  {
+	    e->setObject(this);
+	    e->setActive(true);
+	    m_effects.push_back(e);
+	  }
     }
 }
 

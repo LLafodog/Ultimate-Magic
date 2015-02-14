@@ -143,6 +143,24 @@ vector<Effect*> World::getTileEffects(int i, int j)
 
 }
 
+
+pair<Object*,double> World::findNearestNeightboor(Object* target)
+// We look for every object the closest (excepte us) and return it. Nullptr if no object.
+{
+  float distance(-1);
+  Object* near=nullptr;
+  for(Object* o :m_objects)
+    {
+      if(o && target && o!=target)
+	{
+	  float distanceFromObject=abs(o->getPositionX()-target->getPositionX()) + abs(o->getPositionY()-target->getPositionY());
+	  if(distanceFromObject<distance || distance <0){distance=distanceFromObject; near=o;}
+	}
+    }
+  return pair<Object*,double>(near,distance);
+}
+
+
 void World::free()
 /// Explicit.
 {

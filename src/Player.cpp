@@ -5,7 +5,7 @@ Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, floa
 Object(id,rect,w,true,x,y,width,height,visible),
 m_controller(c)
 {
-
+  m_attackSpeed.restart();
 }
 
 #include<Identity.hpp>
@@ -39,16 +39,38 @@ void Player::update()
 }
 
 #include<EffectEngine.hpp>
+#include<World.hpp>
 void Player::action()
+/// Decide regarding some data what happen (attack, talk etc)
 {
-    if(isInCollision())
+  /// Find closest neighboor
+  pair<Object*,double> pair=m_world->findNearestNeightboor(this);
+  Object* nearest=pair.first;
+  double distance=pair.second;
+
+  if(m_attackSpeed.getElapsedTime().asMilliseconds()>=m_identity->getData("attack_speed") && distance <= m_identity->getData("range") )
     {
-        Object* target=dynamic_cast<Object*>(m_collision);
-        if(target!=nullptr)target->addEffect(EffectEngine::getInstance()->get("ablaze",250,10000));
+      attack(nearest);
+    }
+}
+
+#include<Identity.hpp>
+void Player::attack(Object* target)
+/// Attack a target
+{
+  if(target)
+    {
+      // TEST
+        target->addEffect(EffectEngine::getInstance()->get("ablaze",250,10000));
+	if(target->getIdentity()->getAlive())
+	  {
+	    target->getIdentity()->getAlive()->suffer(m_identity->getData("attack"));
+	    m_attackSpeed.restart();
+	  }
     }
 }
 
 Player::~Player()
 {
-
+  // nada
 }

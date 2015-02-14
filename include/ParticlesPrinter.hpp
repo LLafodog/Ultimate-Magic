@@ -14,32 +14,32 @@ class World;
 
 class ParticlesPrinter
 /**
-    Sometimes, I need to print a particular graphic, I now use ParticlesPrinter that can do that, and is responsible for shadows, transistions and visual effects.
+   Sometimes, I need to print a particular graphic, I now use ParticlesPrinter that can do that, and is responsible for shadows, transistions and visual effects.
 **/
 {
-    public:
-        ParticlesPrinter(RenderWindow* w);
+public:
+  ParticlesPrinter(RenderWindow* w);
 
 
-        /** ========= CASUAL METHODS =========== */
-        void print(string key, float x, float y);
-        void drawAboutTile(EntityGraphic* e, World* wo);
-        void drawAboutObject(VObject* o);
+  /** ========= CASUAL METHODS =========== */
+  void print(string key, float x, float y);
+  void drawAboutTile(EntityGraphic* e, World* wo);
+  void drawAboutObject(VObject* o);
 
-        /// GETTER
-        const EntityGraphic* get(string key) {return m_particles[key];}
+  /// GETTER
+  const EntityGraphic* get(string key) {return m_particles[key];}
 
 
 
-        virtual ~ParticlesPrinter();
+  virtual ~ParticlesPrinter();
 
-    protected:
-            void init();
-            void drawShadow(EntityGraphic* e);
-            void drawTileParticles(EntityGraphic* t, World* wo);
+protected:
+  void init();
+  void drawShadow(EntityGraphic* e);
+  void drawTileParticles(EntityGraphic* t, World* wo);
 
-            unordered_map<string,EntityGraphic*> m_particles;
-            RenderWindow* m_window;
+  unordered_map<string,EntityGraphic*> m_particles;
+  RenderWindow* m_window;
 };
 
 #endif // PARTICLESPRINTER_H

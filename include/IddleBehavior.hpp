@@ -7,32 +7,32 @@
 
 class IddleBehavior : public Behavior
 /**
-    Basic behavior, do anything but nothing :)
+   Basic behavior, do anything but nothing :)
 **/
 {
-    public:
+public:
 
-        IddleBehavior(Object* o=nullptr);
+  IddleBehavior(Object* o=nullptr);
 
-        /// ======== SETTER ============
-        virtual void setObject(Object* o) {m_object=o;}
+  /// ======== SETTER ============
+  virtual void setObject(Object* o) {m_object=o;}
 
-        /// ======== GETTER =============
-        virtual Object* getObject(){return m_object;}
+  /// ======== GETTER =============
+  virtual Object* getObject(){return m_object;}
 
-        /// ======== CASUALS ============
-        virtual void think();
-        void choseRandomLocation();
-        virtual void update();
-            void moveTowardDestination();
-            void pickActionTime();
+  /// ======== CASUALS ============
+  virtual void think();
+  void choseRandomLocation();
+  virtual void update();
+  void moveTowardDestination();
+  void pickActionTime();
 
-        virtual ~IddleBehavior();
-    protected:
-        sf::Vector2f m_destination;
-        sf::Clock m_clock;
-        int m_timePaused;
-        int m_timeAction;
+  virtual ~IddleBehavior();
+protected:
+  sf::Vector2f m_destination;
+  sf::Clock m_clock;
+  int m_timePaused;
+  int m_timeAction;
 };
 
 #endif // IDDLEBEHAVIOR_H

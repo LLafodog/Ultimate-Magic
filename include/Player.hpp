@@ -3,6 +3,9 @@
 //herit
 #include<Object.hpp>
 
+#include<SFML/System/Clock.hpp>
+using namespace sf;
+
 class Controller;
 class World;
 class Alive;
@@ -10,28 +13,32 @@ class Effect;
 
 class Player : public Object
 /**
-    An object that can think like a human... Due to the fact that it actually is a human is a player.
+   An object that can think like a human... Due to the fact that it actually is a human is a player.
 **/
 {
-    public:
-        Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
-        void setController(Controller* c) {m_controller=c;}
+public:
+  Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
+  void setController(Controller* c) {m_controller=c;}
 
-        /** ============ CASUAL METHODS =============== **/
-        void update();
-        /// ============= GETTER ====================
-        const World* getWorld() {return m_world;}
-        ///  ============= COLLISIONNABLE =====================
-        void collide(Object* o); // redefinition
-        /// ============= CONVERSION =========================
-        virtual bool isPlayer() {return true;}
+  /** ============ CASUAL METHODS =============== **/
+  void update();
+  /// ============= GETTER ====================
+  const World* getWorld() {return m_world;}
+  ///  ============= COLLISIONNABLE =====================
+  void collide(Object* o); // redefinition
+  /// ============= CONVERSION =========================
+  virtual bool isPlayer() {return true;}
 
-        virtual ~Player();
+  virtual ~Player();
 
-    protected:
-    void action();
+protected:
+  void action();
+  void attack(Object* target);
 
-    Controller* m_controller;
+  Clock m_attackSpeed;
+   
+
+  Controller* m_controller;
 
 };
 

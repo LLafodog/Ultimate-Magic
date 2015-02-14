@@ -5,25 +5,25 @@ class Object;
 
 class Behavior
 /**
-    Virtual class that will consist in the core of AI.
+   Virtual class that will consist in the core of AI.
 **/
 {
-    public:
-        Behavior(Object* o=nullptr);
+public:
+  Behavior(Object* o=nullptr);
 
-        /// ======== SETTER ============
-        virtual void setObject(Object* o)=0;
+  /// ======== SETTER ============
+  virtual void setObject(Object* o)=0;
 
-        /// ======== GETTER =============
-        virtual Object* getObject()=0;
+  /// ======== GETTER =============
+  virtual Object* getObject()=0;
 
-        /// ======== CASUALS ============
-        virtual void think()=0;
-        virtual void update()=0;
+  /// ======== CASUALS ============
+  virtual void think()=0;
+  virtual void update()=0;
 
-        virtual ~Behavior();
-    protected:
-    Object* m_object;
+  virtual ~Behavior();
+protected:
+  Object* m_object;
 };
 
 #endif // BEHAVIOR_H
