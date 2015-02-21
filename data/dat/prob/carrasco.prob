@@ -1,0 +1,7 @@
+% Amazonian_forest membre
+% Faible couverture végétale, xérophile, arbustive (7 à 8 m), se développe sur les sols de sable blanc recouverts d'une mince couche d'humus noir.
+
+black_humus 0.03 
+sand 0.05 
+light_grass 0.3 
+mountain_ground 0.8 

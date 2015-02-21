@@ -1,0 +1,20 @@
+grass false none 
+light_grass false none
+dark_grass false none
+sand false speed 10 
+error true none
+ground false none 
+water false speed 50
+dark_water false speed 80
+invisible false none
+snow false speed 30 
+moss false speed 10  
+forest_grass false none 
+stagnant_water false speed 50 
+forest_gravel false none 
+light_water false speed 30 
+deep_forest_grass false none 
+dry_grass false none 
+dry_ground false none
+black_humus false none 
+mountain_ground false none  

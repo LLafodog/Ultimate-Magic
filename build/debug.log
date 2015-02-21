@@ -1,0 +1,127 @@
+ =========== WORLDS TYPE ============ 
+ Loader: I found link to amazonian_forest.wdat 
+===== READING INFORMATION ABOUT : default========= 
+ Line read as a Propertie file : fire_resistance ; 1
+ Line read as a Propertie file : slow_resistance ; 1
+ Line read as a Propertie file : poison_resistance ; 1
+ Line read as a Propertie file : max_health ; 100
+ Line read as a Propertie file : health_regeneration ; 0
+ Line read as a Propertie file : in_fire ; 0
+ Line read as a Propertie file : speed ; 0
+ Line read as a Propertie file : range ; 100
+ Line read as a Propertie file : attack_speed ; 1000
+ Line read as a Propertie file : attack ; 0
+ ========== PROBABILITIES LOADING ========= 
+ ------ File reading : deep_forest.prob
+Tile : dark_grass Probability:0.99
+Tile : grass Probability:0.01
+Tile : water Probability:0.001
+Tile : pine_tree Probability:0.3
+ Conclusion: Prob_data size: 4
+
+ ------ File reading : desert.prob
+Tile : sand Probability:0.99
+Tile : ground Probability:0.01
+Tile : water Probability:0.001
+ Conclusion: Prob_data size: 3
+
+ ------ File reading : error.prob
+Tile : error Probability:1
+ Conclusion: Prob_data size: 1
+
+ ------ File reading : forest.prob
+Tile : dark_grass Probability:0.99
+Tile : grass Probability:0.01
+Tile : light_grass Probability:0.001
+Tile : pine_tree Probability:0.01
+ Conclusion: Prob_data size: 4
+
+ ------ File reading : grassland.prob
+Tile : grass Probability:0.99
+Tile : light_grass Probability:0.2
+Tile : dark_grass Probability:0.2
+Tile : pine_tree Probability:0.01
+ Conclusion: Prob_data size: 4
+
+ ------ File reading : mount.prob
+Tile : ground Probability:0.99
+Tile : dark_grass Probability:0.01
+Tile : water Probability:0.01
+Tile : pine_tree Probability:0.001
+ Conclusion: Prob_data size: 4
+
+ ------ File reading : sea.prob
+Tile : water Probability:0.99
+Tile : sand Probability:0.01
+Tile : light_grass Probability:0.001
+ Conclusion: Prob_data size: 3
+
+ ------ File reading : deep_sea.prob
+Tile : dark_water Probability:0.99
+Tile : water Probability:0.2
+ Conclusion: Prob_data size: 2
+
+ ------ File reading : beach.prob
+Tile : sand Probability:1
+ Conclusion: Prob_data size: 1
+
+ ------ File reading : snow.prob
+Tile : snow Probability:0.99
+ Conclusion: Prob_data size: 1
+
+ ------ File reading : ground.prob
+Tile : ground Probability:1
+Tile : light_grass Probability:0.01
+ Conclusion: Prob_data size: 2
+
+ ========== PREMADE TILES ============= 
+ Tile id : grass
+ Effects: 
+ ----- Effect ID linked: none with value of : 0
+
+ Tile id : light_grass
+ Effects: 
+ ----- Effect ID linked: none with value of : 0
+
+ Tile id : dark_grass
+ Effects: 
+ ----- Effect ID linked: none with value of : 0
+
+ Tile id : sand
+ Effects: 
+ ----- Effect ID linked: speed with value of : 10
+
+ Tile id : error
+ Effects: 
+ ----- Effect ID linked: none with value of : 0
+
+ Tile id : ground
+ Effects: 
+ ----- Effect ID linked: none with value of : 0
+
+ Tile id : water
+ Effects: 
+ ----- Effect ID linked: speed with value of : 50
+
+ Tile id : dark_water
+ Effects: 
+ ----- Effect ID linked: speed with value of : 80
+
+ Tile id : invisible
+ Effects: 
+ ----- Effect ID linked: none with value of : 0
+
+ Tile id : snow
+ Effects: 
+ ----- Effect ID linked: speed with value of : 30
+
+ Line read as a Propertie file : fire_resistance ; 1
+ Line read as a Propertie file : slow_resistance ; 1
+ Line read as a Propertie file : poison_resistance ; 1
+ Line read as a Propertie file : max_health ; 100
+ Line read as a Propertie file : health_regeneration ; 1
+ Line read as a Propertie file : in_fire ; 0
+ Line read as a Propertie file : speed ; 320
+ Line read as a Propertie file : range ; 100
+ Line read as a Propertie file : attack_speed ; 1000
+ Line read as a Propertie file : attack ; 10

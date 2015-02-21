@@ -14,7 +14,7 @@ class Tile
 **/
 {
 public:
-  Tile(std::string id, double altitude=0, bool solid=false, Effect* e=nullptr);
+  Tile(std::string id,  bool solid=false, Effect* e=nullptr, double altitude=0, double humidity=0);
 
   /// ========= CASUAL METHODS ========
   void addEffect(Effect* e) {if(e!=nullptr)m_effects.push_back(e);}
@@ -29,6 +29,7 @@ public:
   /// ========= SETTER =========
   void setID(std::string val) {m_id = val;}
   void setAltitude(double val) {m_altitude=val;}
+  void setHumidity(double val) {m_humidity=val;}
   void setEffects(std::vector<Effect*> eff) {m_effects=eff;}
 
   virtual ~Tile();
@@ -38,6 +39,7 @@ protected:
 
   std::string m_id;
   double m_altitude;
+  double m_humidity;
   bool m_solid;
   std::vector<Effect*> m_effects;
 };

@@ -1,5 +1,4 @@
 #include<NPC.hpp>
-
 #include<Behavior.hpp>
 
 NPC::NPC(Object* o, Behavior* b) : Object(o),

@@ -1,4 +1,10 @@
 #include<TextureEngine.hpp>
+#include<AnimationEngine.hpp>
+#include<Global.hpp>
+#include<fstream>
+#include<iostream>
+#include<Global.hpp>
+#include<Defines.hpp>
 
 TextureEngine* TextureEngine::m_self=nullptr;
 
@@ -23,10 +29,10 @@ Texture* TextureEngine::get(string name, unsigned int j)
         return nullptr;
 }
 
-#include<Defines.hpp>
-#include<Global.hpp>
-#include<iostream>
-#include<fstream>
+
+
+
+
 void TextureEngine::load()
 /**
     In charge to load each and every PNG file.
@@ -35,7 +41,7 @@ void TextureEngine::load()
     /// DISPLAY
     if(TEXTURE_DEBUG_DETAILS)cout<<"Textures and Animations loading..."<<endl;
     //var
-    string path=Global::TO_DATA+TEXTURE_FILE;
+    string path=TO_DATA+"dat/"+TEXTURE_FILE;
     ifstream reader(path.c_str());
     if(!reader && IMPORTANT_DEBUG){cerr << " [TextureEngine::load] Problem loading " << path << "file"<<endl;}
     else
@@ -73,8 +79,8 @@ void TextureEngine::readLine(string line)
 
 }
 
-#include<Global.hpp>
-#include<AnimationEngine.hpp>
+
+
 bool TextureEngine::loadPNG(string line, bool particles)
 {
     /// Reading
@@ -141,7 +147,7 @@ bool TextureEngine::loadPNG(string line, bool particles)
         //cout << "File : " << path << " nb_x: " << nb_x << " nb_y :" << nb_y << " width " << w << " height " << h << endl;
     }
 
-    /// Including textures
+
     for(int i(0); i<nb_y;i++)
     {
 
@@ -151,7 +157,7 @@ bool TextureEngine::loadPNG(string line, bool particles)
         for(int j(0);j<nb_x;j++) //horizontal
         {
             Texture* t= new Texture;
-            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(j*w,i*h,w,h)) && IMPORTANT_DEBUG) {cerr<<"problem loading the textures. " << path<<endl; return false;}
+            if(!t->loadFromFile(TO_DATA+"img/"+path+".png",IntRect(j*w,i*h,w,h)) && IMPORTANT_DEBUG) {cerr<<"problem loading the textures. " << path<<endl; return false;}
             else{a->addFrame(t);}
             v.push_back(t);
         }
@@ -164,7 +170,7 @@ bool TextureEngine::loadPNG(string line, bool particles)
         if(TEXTURE_DEBUG_DETAILS)cout << "-- Successfully added " << path+suffix << " animation." << endl;
     }
 
-    /// Including particles
+
     if(particles)
     {
         path+="_particles";
@@ -173,7 +179,7 @@ bool TextureEngine::loadPNG(string line, bool particles)
         // cout << " Name :" << path << " w: " << w << " h: " << h <<endl;
         Animation* a=new Animation(path,frameD,animeD,random);
             Texture* t= new Texture;
-            if(!t->loadFromFile(Global::TO_DATA+"img/"+path+".png",IntRect(0,0,w,h)) && IMPORTANT_DEBUG) {cerr<<"problem loading the textures. " << path<<endl; return false;}
+            if(!t->loadFromFile(TO_DATA+"img/"+path+".png",IntRect(0,0,w,h)) && IMPORTANT_DEBUG) {cerr<<"problem loading the textures. " << path<<endl; return false;}
             else{a->addFrame(t);}
             v.push_back(t);
 

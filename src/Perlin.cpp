@@ -1,5 +1,4 @@
 #include<Perlin.hpp>
-
 #include<cstdlib>
 #include<iostream>
 #include<cmath>

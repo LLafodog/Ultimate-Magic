@@ -52,8 +52,6 @@ class EntityGraphic : public Positionnable
 
         ConvexShape m_cs;
         bool m_visible;
-        float m_width;
-        float m_height;
         string m_id;
         Animation* m_animation;
         Tile* m_tile;

@@ -6,56 +6,24 @@
 
 #IncludeRegexTransform: 
 
-../include/Alive.hpp
-SFML/Graphics.hpp
--
-
-../include/Collisionnable.hpp
-Movable.hpp
--
-SFML/Graphics.hpp
--
-
-../include/Controller.hpp
+../include/Camera.hpp
 SFML/Graphics.hpp
 -
 
 ../include/Defines.hpp
 string
 -
-SFML/Graphics.hpp
+SFML/Graphics/Color.hpp
 -
 
-../include/Effect.hpp
+../include/Global.hpp
 SFML/Graphics.hpp
 -
 vector
 -
-
-../include/EffectEngine.hpp
-Effect.hpp
--
-
-../include/Identity.hpp
-string
--
-unordered_map
--
-
-../include/Movable.hpp
-Positionnable.hpp
--
-
-../include/Object.hpp
-Collisionnable.hpp
--
 iostream
 -
-
-../include/Player.hpp
-Object.hpp
--
-SFML/System/Clock.hpp
+string
 -
 
 ../include/Positionnable.hpp
@@ -612,19 +580,17 @@ vector
 string
 -
 
-/home/llafodog/Programmation/C++/Ultimate-Magic/src/Player.cpp
-Player.hpp
+/home/llafodog/Programmation/C++/Ultimate-Magic/src/Camera.cpp
+Camera.hpp
 -
-Identity.hpp
+Global.hpp
 -
-Alive.hpp
--
-Controller.hpp
--
-EffectEngine.hpp
+assert.h
 -
 World.hpp
 -
-Identity.hpp
+Positionnable.hpp
+-
+iostream
 -
 

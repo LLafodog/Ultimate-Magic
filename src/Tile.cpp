@@ -1,10 +1,10 @@
 #include<Tile.hpp>
-
 #include<Effect.hpp>
 
-Tile::Tile(std::string id, double altitude, bool solid, Effect* e) :
+Tile::Tile(std::string id, bool solid, Effect* e, double altitude, double humidity) :
   m_id(id),
   m_altitude(altitude),
+  m_humidity(humidity),
   m_solid(solid)
 {
   m_effects.clear();

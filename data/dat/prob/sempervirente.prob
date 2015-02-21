@@ -1,0 +1,8 @@
+% Amazonian_forest membre
+% Sempervirente: zone sèche avec peu d'arbre situé en basse altitude dont l'herbe est grasse ou normale.
+
+forest_gravel 0.05 
+moss 0.1 
+light_grass 0.3 
+dry_grass 0.7 
+forest_grass 1 

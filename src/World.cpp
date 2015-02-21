@@ -1,7 +1,22 @@
 #include<World.hpp>
-
+#include<Effect.hpp>
+#include<Alive.hpp>
+#include<Object.hpp>
+#include<Player.hpp>
+#include<Defines.hpp>
+#include<SFML/Graphics.hpp>
+#include<Core.hpp>
+#include<TileEngine.hpp>
 #include<Tile.hpp>
-World::World(int w, int h, std::string val)
+#include<WorldManager.hpp>
+#include<Perlin.hpp>
+
+World::World(int w, int h, std::string val) :
+  m_width(w),
+  m_height(h),
+  m_updated(false),
+  m_alt(nullptr),
+  m_humidity(nullptr)
 // Generate a whole world with the same tile.
 {
     for(size_t i(0);i<h;i++)
@@ -13,15 +28,11 @@ World::World(int w, int h, std::string val)
         }
         m_tiles.push_back(temp);
     }
-    m_width=w;
-    m_height=h;
-    m_updated=false;
-
-    // TO improve
+    // Key: PLY0
     addPlayer();
 }
 
-#include<WorldManager.hpp>
+
 World::World(string pathfile, int players)
 // Is supposed to load a .world file
 {
@@ -40,7 +51,7 @@ const bool World::isThisTileSolid(float i, float j)
     return true;
 }
 
-#include<TileEngine.hpp>
+
 Tile* World::getTile(unsigned int i, unsigned int j)
 /// Simple 2D access
 {
@@ -54,19 +65,26 @@ Tile* World::getTile(unsigned int i, unsigned int j)
     }
 }
 
-#include<Core.hpp>
-#include<SFML/Graphics.hpp>
-#include<Defines.hpp>
-#include<Player.hpp>
+double World::getHumidityAt(size_t x, size_t y)
+{
+if(m_humidity ){return m_humidity->get(x,y); }
+return -1;
+}
+
+double World::getAltitudeAt(size_t x, size_t y)
+{
+if(m_alt){return m_alt->get(x,y); }
+return -1;
+}
+
 void World::addPlayer()
-// TO DO
-/// Add a player from a .player file.
+// PLY1
 {
     Player* p=new Player("player",Core::m_controller,sf::FloatRect(0,TILE_HEIGHT,TILE_WIDTH,TILE_HEIGHT),this,35,100,TILE_WIDTH,TILE_HEIGHT*2, true);
     m_objects.push_back(p);
 }
 
-#include<Object.hpp>
+
 void World::addObject(Object* o)
 /// Add an object to the world's object
 {
@@ -77,7 +95,7 @@ void World::addObject(Object* o)
     }
 }
 
-#include<Alive.hpp>
+
 void World::update()
 /// Updates every objects and deleted the one that aren't necessary anymore.
 {
@@ -120,7 +138,7 @@ void World::modifyTile(sf::Vector2f v, string id, bool abs)
 }
 
 
-#include<Effect.hpp>
+
 vector<Effect*> World::getTileEffects(int i, int j)
 /// Acceed a tile in the vector and copy its effects.
 {

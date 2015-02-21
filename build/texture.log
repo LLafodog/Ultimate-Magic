@@ -1,0 +1,50 @@
+ =========== WORLDS TYPE ============ 
+ ------ Loader: I found link to amazonian_forest .wdat as index 0
+===== READING INFORMATION ABOUT : default========= 
+ ========== PROBABILITIES LOADING ========= 
+ ------ File reading : campina.prob
+ ------ File reading : carrasco.prob
+ ------ File reading : error.prob
+ ------ File reading : igapo.prob
+ ------ File reading : sempervirente.prob
+ ------ File reading : supralittoral.prob
+ ------ File reading : tropicale.prob
+ ------ File reading : varzea.prob
+ ========== PREMADE TILES ============= 
+ ===> Tile id : grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : light_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : dark_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : sand Effects: 
+ ----- Effect ID linked: speed with value of : 10
+ ===> Tile id : error Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : ground Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : water Effects: 
+ ----- Effect ID linked: speed with value of : 50
+ ===> Tile id : dark_water Effects: 
+ ----- Effect ID linked: speed with value of : 80
+ ===> Tile id : invisible Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : snow Effects: 
+ ----- Effect ID linked: speed with value of : 30
+ -------------- END PREMADE TILES --------------- 
+ Loader::getWdat : Added altitude(0;20).
+ Loader::getWdat : Added humidity (0;30) with path sempervirente
+ Loader::getWdat : Added humidity (30;80) with path igapo
+ Loader::getWdat : Added humidity (80;100) with path varzea
+ Loader::getWdat : Added altitude(20;45).
+ Loader::getWdat : Added humidity (0;60) with path sempervirente
+ Loader::getWdat : Added humidity (60;90) with path campina
+ Loader::getWdat : Added humidity (90;100) with path igapo
+ Loader::getWdat : Added altitude(45;80).
+ Loader::getWdat : Added humidity (0;20) with path campina
+ Loader::getWdat : Added humidity (20;95) with path tropicale
+ Loader::getWdat : Added humidity (95;100) with path igapo
+ Loader::getWdat : Added altitude(80;100).
+ Loader::getWdat : Added humidity (0;50) with path campina
+ Loader::getWdat : Added humidity (50;100) with path carrasco
+ ============ Loader::getWdat : END =============== 

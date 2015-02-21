@@ -5,6 +5,11 @@
 #include <SFML/Graphics.hpp>
 #include<unordered_map>
 
+// DEBUG
+#define TEXTURE_DEBUG 1
+#define TEXTURE_DEBUG_DETAILS 1
+
+
 using namespace std;
 using namespace sf;
 

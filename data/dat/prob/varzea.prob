@@ -1,0 +1,10 @@
+% Amazonian_forest membre
+% est la forêt amazonienne qui est inondée de façon saisonnière en période de crue. En période de basses eaux,
+% lors de l'étiage, cette zone est découverte à l'exception des igapos (mares permanentes). 
+% Ce sont des zones fertiles en raison des alluvions qui y sont régulièrement déposés et souvent mises en culture.
+
+moss 0.1 
+stagnant_water 0.3 
+forest_grass 0.6 
+deep_forest_grass 0.8 
+swamp 1 

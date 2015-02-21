@@ -1,28 +1,40 @@
 #include<Core.hpp>
+#include<Camera.hpp>
+#include<Global.hpp>
+#include<EffectEngine.hpp>
+#include<TileEngine.hpp>
+#include<Loader.hpp>
+#include<AnimationEngine.hpp>
+#include<TextureEngine.hpp>
+#include<WorldManager.hpp>
+#include<Graphics.hpp>
+#include<assert.h>
+#include<KeyboardController.hpp>
 
 using namespace sf;
 using namespace std;
 
-#include<KeyboardController.hpp>
+
 Controller* Core::m_controller=new KeyboardController();
 
-#include<assert.h>
+
 Core::Core(sf::RenderWindow* window) :
 /// Loads everything.
 m_window(window)
 {
-    if(window!=nullptr) /// Load initiates all the singlotons in the right order.
+    if(window!=nullptr) /// Load initiates all the singletons in the right order.
     {
         assert(load());
         m_window->setVerticalSyncEnabled(true);
+	m_window->setKeyRepeatEnabled(false);
          //texture graphics load
         init(); // Initialise son graphics (les textures), le Global::FPS et crée le monde.
     }
 
 }
 
-#include<Graphics.hpp>
-#include<WorldManager.hpp>
+
+
 void Core::init()
 /// Play quite the same role that the constructor.
 {
@@ -41,13 +53,13 @@ void Core::init()
     run();
 }
 
-#include<TextureEngine.hpp>
-#include<AnimationEngine.hpp>
-#include<Loader.hpp>
-#include<TileEngine.hpp>
-#include<EffectEngine.hpp>
+
+
+
+
+
 bool Core::load()
-/// Loads and initiates all the singlotons in the right order.
+/// Loads and initiates all the singletons in the right order.
 {
 
     if(
@@ -85,7 +97,7 @@ void Core::draw()
 
 }
 
-#include<Global.hpp>
+
 void Core::updateFPS()
 /// Really important methods, all the movements are base on the Global::FPS (accessible in the Global cuz Go-to-hell-if-you-annoy-me)
 /// Other fact, it puts it on the window's title bar.
@@ -100,7 +112,7 @@ void Core::updateFPS()
     }
 }
 
-#include<Camera.hpp>
+
 void Core::run()
 /// Here is the classic SFML loop.
 {
@@ -142,7 +154,6 @@ void Core::run()
                 //Lets you know evrything when you wanna
                 if(Keyboard::isKeyPressed(Keyboard::LControl)&&Keyboard::isKeyPressed(Keyboard::I)){showInfo();}
 
-
                 /// Lets the user drawing every details.
                 if(Keyboard::isKeyPressed(Keyboard::Tab)) {m_graphics->setAllowDetails(true);}else {m_graphics->setAllowDetails(false);}
 
@@ -171,7 +182,7 @@ Core::~Core()
    delete m_controller;
    delete m_graphics;
 
-   /// Singloton
+   /// Singleton
    WorldManager::getInstance()->free();
    TextureEngine::getInstance()->free();
    AnimationEngine::getInstance()->free();

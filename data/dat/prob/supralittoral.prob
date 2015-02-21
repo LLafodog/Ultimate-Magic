@@ -1,0 +1,8 @@
+% L'étage supralittoral
+% L'étage supralittoral est la partie la plus haute du littoral.
+% Cet étage n'est humecté que par les embruns, les marées d’équinoxe ou les plus hautes vagues des tempêtes.
+
+deep_water 0.05
+light_sand 0.2
+water 0.3
+light_water 1

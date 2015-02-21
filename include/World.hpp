@@ -11,6 +11,7 @@ class Player;
 class Object;
 class Effect;
 class Tile;
+class Perlin;
 
 class World
 /**
@@ -42,11 +43,15 @@ public:
   pair<Object*,double> findNearestNeightboor(Object* target);
   Tile* getTile(unsigned int i, unsigned int j);
   Object* getObject(unsigned int i) {if(i<m_objects.size() && i>=0){return m_objects[i];} else{return nullptr;}}
+  double getHumidityAt(size_t x, size_t y);
+  double getAltitudeAt(size_t x, size_t y);
   /// ============ SETTER =============
   void setTiles(vector<vector<Tile*>>tiles)  {m_tiles=tiles; m_width=m_tiles.size(); m_height=m_tiles[0].size();needToBeUpdated();}
   void modifyTile(Vector2f v, string id,bool abs=false);
   void setWidth(int w) {m_width=w;}
   void setHeight(int h) {m_height=h;}
+  void setAltitudeTable(Perlin* alt) {m_alt=alt;}
+  void setHumidityTable(Perlin* hum) {m_humidity=hum;}
 
   virtual ~World();
 
@@ -58,13 +63,8 @@ protected:
   int m_width;
   int m_height;
   bool m_updated;
-
-  //reading constantes to do
-  const char tileSeparator='T';
-  const char objectSeparator='O';
-  const char informationSeparator='I';
-  const char commentSeparator='%';
-  const char premadeSeparator='o';
+  Perlin* m_alt;
+  Perlin* m_humidity;
 };
 
 #endif // WORLD_H

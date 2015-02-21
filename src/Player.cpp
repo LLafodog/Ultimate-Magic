@@ -1,4 +1,10 @@
 #include<Player.hpp>
+#include<Identity.hpp>
+#include<World.hpp>
+#include<EffectEngine.hpp>
+#include<Controller.hpp>
+#include<Alive.hpp>
+#include<Identity.hpp>
 
 Player::Player(std::string id, Controller* c,  sf::FloatRect rect,World* w, float x, float y, float width, float height, bool visible) :
 
@@ -8,18 +14,16 @@ m_controller(c)
   m_attackSpeed.restart();
 }
 
-#include<Identity.hpp>
-#include<Alive.hpp>
-#include<Controller.hpp>
+
+
+
 void Player::update()
 {
     /* ================== OBJECT =============== */
     Object::update();
     /* ================== ALIVE =============== */
     m_identity->update();
-                                                    //cout << "Is dead ?: " << isDead() << " Health : " << getHealth() << " Health Regeneration :" << m_healthRegen <<endl;
-    //to throw
-    if(m_collide){m_collide=false;}
+
     /// MOVING
     if(!m_identity->getAlive()->isDead() )
     {
@@ -38,8 +42,8 @@ void Player::update()
     }
 }
 
-#include<EffectEngine.hpp>
-#include<World.hpp>
+
+
 void Player::action()
 /// Decide regarding some data what happen (attack, talk etc)
 {
@@ -54,7 +58,7 @@ void Player::action()
     }
 }
 
-#include<Identity.hpp>
+
 void Player::attack(Object* target)
 /// Attack a target
 {

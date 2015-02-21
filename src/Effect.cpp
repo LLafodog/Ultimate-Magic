@@ -1,4 +1,7 @@
 #include<Effect.hpp>
+#include<Alive.hpp>
+#include<Identity.hpp>
+#include<Object.hpp>
 
 Effect::Effect(int id, Object* o, double value, int duration, int delay) :
   m_object(o),
@@ -17,10 +20,10 @@ Effect::Effect(int id, Object* o, double value, int duration, int delay) :
 }
 
 
-#include<Object.hpp>
-#include<Identity.hpp>
+
+
 void Effect::init()
-// Init the properties, to do with .eff file ?
+// EFF0
 {
   switch(m_id)
     {
@@ -55,7 +58,7 @@ void Effect::update()
 
 }
 
-#include<Alive.hpp>
+
 void Effect::act()
 {
   if(m_object!=nullptr)

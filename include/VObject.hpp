@@ -41,7 +41,7 @@ protected:
 
 
   vector<Animation*> m_animations;
-  Object* m_object;
+  Object* m_object; // WTF
   RenderWindow* m_window;
   char m_orientation;
   bool m_active;

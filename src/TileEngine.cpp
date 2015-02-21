@@ -1,4 +1,8 @@
 #include<TileEngine.hpp>
+#include<iostream>
+#include<Loader.hpp>
+#include<Global.hpp>
+#include<Defines.hpp>
 
 TileEngine* TileEngine::m_self=nullptr;
 
@@ -16,9 +20,9 @@ TileEngine* TileEngine::getInstance()
   return m_self;
 }
 
-#include<Defines.hpp>
-#include<Global.hpp> //to do tile prop in define
-#include<Loader.hpp>
+
+
+
 void TileEngine::load()
 /// Load the TILE PROPERTIES FILE
 {
@@ -26,7 +30,7 @@ void TileEngine::load()
   m_tiles=l->getPremadeTiles(Global::TO_DATA+"dat/"+TILE_PROPERTIES_FILE);
 }
 
-#include<iostream>
+
 Tile* TileEngine::get(std::string id, double altitude)
 {
   Tile* t=m_tiles[id];

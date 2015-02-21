@@ -5,7 +5,7 @@
 
 class EffectEngine
 /**
-   Singloton that works as an Effect factory. Actually it is really basic and maybe it doesn't deserve to live
+   Singleton that works as an Effect factory. Actually it is really basic and maybe it doesn't deserve to live
    But as quite the most part of the gameplay, I guess effects can be hard to manage in the future.
 **/
 {

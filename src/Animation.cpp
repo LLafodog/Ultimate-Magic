@@ -1,4 +1,5 @@
 #include<Animation.hpp>
+#include<Defines.hpp>
 
 using namespace sf;
 using namespace std;
@@ -28,7 +29,7 @@ Animation::Animation(Animation* a)
     m_random=a->isRandom();
 }
 
-#include<Defines.hpp>
+
 const sf::Texture* Animation::getCurrentFrame()
 /// An animation is based on many frames, this methods gives the current one.
 {

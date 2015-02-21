@@ -1,0 +1,10 @@
+% Amazonian_forest membre
+% La caatinga est une forêt épineuse, qui consiste essentiellement en petits arbres épineux qui ne vivent que 
+% de manière saisonnière. Cactus, buissons épineux, et herbes adaptées à l'aridité constituent le manteau végétal. 
+% Bien des plantes poussent, fleurissent et meurent seulement durant la brève saison pluvieuse.
+% Le nom caatinga est issu de la langue Tupi et signifie « forêt blanche » ou « végétation blanche » (de caa, « forêt », « végétation » et tinga, « blanc »).
+
+dry_ground 0.05 
+dry_grass 0.3 
+mountain_ground 0.3 
+light_grass 1 

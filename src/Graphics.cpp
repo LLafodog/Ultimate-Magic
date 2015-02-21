@@ -1,14 +1,16 @@
 #include<Graphics.hpp>
+#include<Identity.hpp>
+#include<VObject.hpp>
+#include<EntityGraphic.hpp>
+#include<TileEngine.hpp>
+#include<Object.hpp>
+#include<World.hpp>
+#include<Camera.hpp>
+#include<ParticlesPrinter.hpp>
 
 
 bool Graphics::needToRefresh=true;
 
-#include<ParticlesPrinter.hpp>
-#include<Camera.hpp>
-#include<World.hpp>
-#include<Object.hpp>
-#include<TileEngine.hpp>
-#include<EntityGraphic.hpp>
 Graphics::Graphics(RenderWindow* w, World* wo) :
     m_window(w),
     m_world(wo)
@@ -16,7 +18,7 @@ Graphics::Graphics(RenderWindow* w, World* wo) :
    //Refresh
    m_time=time(NULL);
    //camera
-   m_camera=new Camera(m_window,wo->getObject(0),wo);//to do reperer le player
+   m_camera=new Camera(m_window,wo->getObject(0),wo);
    init();
 
    // PP
@@ -55,7 +57,7 @@ void Graphics::initTiles()
     }
 }
 
-#include<VObject.hpp>
+
 void Graphics::initObjects()
 /// Read the world object and init every visual entities that mathces.
 {
@@ -273,7 +275,7 @@ const void Graphics::drawVisibleObjects()
 
 }
 
-#include<Identity.hpp>
+
 const void Graphics::drawObject(VObject* o)
 {
     o->draw(m_details);

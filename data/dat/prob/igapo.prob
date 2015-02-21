@@ -1,0 +1,8 @@
+% Amazonian_forest membre
+% En Amazonie, Igapo est une partie de la forêt qui reste marécageuse après le retrait des eaux de crue dans les zones basses de la plaine d'inondation (varzea) 
+% ou en raison des bourrelets le long des rives qui empêchent que toute l'eau revienne au fleuve.
+
+moss 0.1
+deep_forest_grass 0.3 
+stagnant_water 0.6 
+swamp 1 

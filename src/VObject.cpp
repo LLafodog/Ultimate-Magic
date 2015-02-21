@@ -1,12 +1,15 @@
 #include<VObject.hpp>
+#include<Identity.hpp>
+#include<TextureEngine.hpp>
+#include<Defines.hpp>
+#include<Alive.hpp>
+#include<AnimationEngine.hpp>
+#include<Tile.hpp>
+#include<Object.hpp>
 
 using namespace std;
 using namespace sf;
 
-#include<Object.hpp>
-#include<Tile.hpp>
-
-#include<AnimationEngine.hpp>
 VObject::VObject(Object* o, RenderWindow* w): EntityGraphic(new Tile(o->getID()),o->getPositionX(), o->getPositionY(),o->isVisible(),o->getSize().x,o->getSize().y),
 					      m_object(o),
 					      m_orientation('n'),
@@ -18,7 +21,7 @@ VObject::VObject(Object* o, RenderWindow* w): EntityGraphic(new Tile(o->getID())
   update();
 }
 
-#include<Alive.hpp>
+
 void VObject::update()
 /// Updates the animation, looking if dead and if the object changed its direction.
 {
@@ -107,7 +110,7 @@ const void VObject::drawLifeBar()
 	  // While disappearing, the lifebar must desappear too.
 	  double alpha=255;
 	  if(a->isDead()){alpha=255*a->getDisapearingRatio();}
-	  fulllifebar.setFillColor(Color(0,0,0,alpha)); // TO DO: texture
+	  fulllifebar.setFillColor(Color(0,0,0,alpha)); // GR0
 	  lifebar.setFillColor(Color(195,0,0,alpha));
 	  //
 
@@ -118,8 +121,8 @@ const void VObject::drawLifeBar()
     }
 }
 
-#include<Defines.hpp>
-#include<TextureEngine.hpp>
+
+
 const sf::ConvexShape* VObject::getApparence()
 /// Redefinition of the entityGraphic::getApparence()
 /// That so it can disappear with class :p
@@ -145,7 +148,7 @@ const sf::ConvexShape* VObject::getApparence()
   return &m_cs;
 }
 
-#include<Identity.hpp>
+
 void VObject::draw(bool details)
 /// Explicit.
 {

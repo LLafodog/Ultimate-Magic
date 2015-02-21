@@ -1,4 +1,7 @@
 #include<Collisionnable.hpp>
+#include<World.hpp>
+#include<Defines.hpp>
+#include<Object.hpp>
 
 using namespace sf;
 using namespace std;
@@ -13,7 +16,7 @@ m_solid(solid)
     
 }
 
-#include<Object.hpp>
+
 bool Collisionnable::inCollisionWith(Object* c)
 /// Return true if the floatrect of Object's hitbox intersects this'
 {
@@ -71,8 +74,8 @@ void Collisionnable::collide(Object* c)
     c->setCollision(this);
 }
 
-#include<Defines.hpp>
-#include<World.hpp>
+
+
 void Collisionnable::colMove(int signX, int signY)
 /// Move if the world allows it, else not.
 {

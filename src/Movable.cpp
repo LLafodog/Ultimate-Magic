@@ -1,6 +1,9 @@
 #include<Movable.hpp>
-
+#include<iostream>
+#include<Global.hpp>
 #include<World.hpp>
+
+
 
 Movable::Movable(World* w, float x, float y, float width, float height) : Positionnable(x,y,width,height),
 									  m_world(w)
@@ -11,8 +14,8 @@ Movable::Movable(World* w, float x, float y, float width, float height) : Positi
   m_orientation='n'; // cuz first anim and every one has at least one anim.
 }
 
-#include<Global.hpp>
-#include<iostream>
+
+
 void Movable::moveOn(float x, float y, bool changeOrientation)
 {
   if(m_world!=nullptr)

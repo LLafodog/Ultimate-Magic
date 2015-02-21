@@ -1,23 +1,59 @@
 #include<Loader.hpp>
-
-// singloton
+#include<Tile.hpp>
+#include<EffectEngine.hpp>
+#include<Global.hpp>
+#include<fstream>
+#include<iostream>
+#include<Defines.hpp>
+#include<assert.h>
+// singleton
 Loader* Loader::m_self=nullptr;
 
 
 Loader::Loader()
 {
+  m_wdats=loadWorldTypes();
+}
 
+
+
+
+unordered_map<unsigned short,string> Loader::loadWorldTypes()
+{
+  if(LOADER_DEBUG_DETAILS){cout << " =========== WORLDS TYPE ============ \n" ;}
+  fstream reader(TO_DATA+"/dat/"+WORLD_TYPE_FILE);
+  unordered_map<unsigned short,string> res; res.clear();
+  if(!reader && LOADER_DEBUG){cerr << " Loader: can't access .wdat files. \n"; return res;}
+  else
+    {
+      short number=0;
+      string wdat="";
+      while(getline(reader,wdat))
+	{
+	  if(wdat!="")
+	    {
+	      if(LOADER_DEBUG_DETAILS){cout << " ------ Loader: I found link to " << wdat << ".wdat as index "<<   number  << "\n";}
+	      string file="";
+	      for(char letter:wdat)
+		{
+		  if(letter!=' ' && letter!='%')file+=letter;
+		}
+	      res.insert(pair<unsigned short,string>(number,file));
+	      number++;
+	    }
+	}
+      reader.close();
+      return res;
+    }
 }
 
 Loader* Loader::getInstance()
 {
-    if(m_self==nullptr){m_self= new Loader();}
-    return m_self;
+  if(m_self==nullptr){m_self= new Loader();}
+  return m_self;
 }
-#include<Defines.hpp>
-#include<iostream>
-#include<fstream>
-#include<Global.hpp>
+
+
 unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileProbabilities(string path)
 /// Load the probabilities from a .prob file, all of the .prob files are packed in a tile_probabilities.txt file
 {
@@ -61,6 +97,7 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
                 for(unsigned int i(0);i<=prob_line.size();i++)
                     {
                     char linei=prob_line[i];
+		    if(linei=='%')break;
                     if(linei!='\n' && linei!=' ' && i!=prob_line.size()) // useless char
                     {
                     word+=linei; // building the word
@@ -95,17 +132,6 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
             link_prob_name.second=std::vector<std::pair<std::string,float>>(prob_data);
             probabilities.insert(link_prob_name);
 
-            if(LOADER_DEBUG_DETAILS)
-            {
-                for(unsigned int k(0);k<link_prob_name.second.size();k++)
-                {
-                    cout << "Tile : " << link_prob_name.second[k].first <<  " Probability:" << link_prob_name.second[k].second <<  endl;
-                }
-                cout << " Conclusion: Prob_data size: " << link_prob_name.second.size() <<endl << endl;
-            }
-
-
-
         }
 
 
@@ -115,8 +141,105 @@ unordered_map<string,std::vector<std::pair<std::string,float>>> Loader::getTileP
    return probabilities;
 }
 
-#include<EffectEngine.hpp>
-#include<Tile.hpp>
+WDAT Loader::getWdat(string name)
+{
+  WDAT result;
+  short n_alt=-1;
+  if(name=="")name="error";
+  fstream reader(TO_DATA+"dat/wdat/"+name+".wdat");
+  if(!reader && LOADER_DEBUG){cerr << " Loader::getWdat(): Problem opening to "" "<< TO_DATA+"dat/wdat/"+name+".wdat"<< " "" file. \n";assert(reader);} 
+  else
+    {
+      string line="";
+      string word="";
+
+      while(getline(reader,line)) // parsing
+	{
+	  // Var to read
+	  int wordNumber=-1;
+	  bool isInA=true; // to know where i am supposed to add the data (which pair)
+	  short altmax=-1,
+	    altmin=-1,
+	    hummin=-1,
+	    hummax=-1;
+	  string path="";
+	  //
+	  if(line!="" && line[0]!=' ' && line[0]!='%') // comment in the file
+	    {
+	      for(short i(0);i<line.size();++i)
+		{
+		  char letter=line[i];
+		  if(letter!='\n' && letter!=' '&& i!=line.size()-1) 
+                    {
+                    word+=letter; // building the word
+                    }
+                    else if(word!="") ///security
+		    {
+		      wordNumber++;
+		      switch(wordNumber)
+			{
+			case 0: // INDICATOR
+			  {
+			    isInA=(word=="A");
+			  }break;
+
+			case 1: // MIN
+			  {
+			    if(isInA)
+			      {
+				altmin=Global::strtoi(word);
+			      }
+			    else
+			      {
+				hummin=Global::strtoi(word);
+			      }
+			  }break;
+
+			case 2: // MAX
+			  {
+			    if(isInA)
+			      {
+				altmax=Global::strtoi(word);
+			      }
+			    else
+			      {
+				hummax=Global::strtoi(word);
+			      }
+			  }break;
+
+			case 3: 
+			  {
+			    path=word;break;
+			  }
+			default:break;
+			}
+		      word="";
+		    }
+		} // end of line
+	      if(isInA)
+		{
+		  n_alt++;
+		  result.addElement(altmin,altmax);
+		  cout << " Loader::getWdat : Added altitude("<<altmin<<";"<<altmax<<")." << endl;
+		}
+	      else
+		{
+		  result.altitudes[n_alt]->addElement(hummin,hummax,path);
+		  cout << " Loader::getWdat : Added humidity ("<<hummin<<";"<<hummax<<") with path " << path << endl;
+		}
+	    }
+	}
+      cout << " ============ Loader::getWdat : END =============== \n";
+    }
+  return result;
+}
+
+
+
+
+
+
+
 pair<string,Tile*> Loader::readTileLine(std::string line)
 /// read a line from a tile_properties.txt file
 {
@@ -183,20 +306,19 @@ pair<string,Tile*> Loader::readTileLine(std::string line)
     }
     if(LOADER_DEBUG_DETAILS)
     {
-        cout    << " Tile id : " << id << endl
+        cout    << " ===> Tile id : " << id
                 << " Effects: " << endl;
         for(unsigned int i(0);i<effect.size();i++)
         {
-            cout << " ----- Effect ID linked: " << effect[i] << " with value of : " << values[i] << endl<<endl;
+            cout << " ----- Effect ID linked: " << effect[i] << " with value of : " << values[i] << endl;
         }
-
     }
     for(unsigned int i(0);i<effect.size();i++)
     {
         Effect* e=EffectEngine::getInstance()->get(effect[i],values[i]);
         if(e!=nullptr){effects.push_back(e);}
     }
-    Tile* ti=new Tile(id,0,solid,nullptr);
+    Tile* ti=new Tile(id,solid,nullptr);
     for(Effect* eff:effects)
     {
         ti->addEffect(eff);
@@ -216,8 +338,8 @@ std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
     std::unordered_map<std::string,Tile*> tiles;
     tiles.clear();
 
-    fstream reader(path.c_str());
-    if(!reader && LOADER_DEBUG){cerr << " [Loader::getPremadeTiles] Problem loading " << path << "file"<<endl; return tiles;}
+    fstream reader(path.c_str()); 
+    if(!reader && LOADER_DEBUG){cerr << " [Loader::getPremadeTiles] Problem loading " << path << "file"<<endl; assert(reader); return tiles;}
     else
     {
         string line;
@@ -225,12 +347,8 @@ std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
         {
             tiles.insert(readTileLine(line));
         }
+ if(LOADER_DEBUG_DETAILS){	cout << " -------------- END PREMADE TILES --------------- " << endl;}
         return tiles;
-
-
-
-
-
     }
 }
 
@@ -239,7 +357,7 @@ std::unordered_map<std::string,Tile*> Loader::getPremadeTiles(std::string path)
 unordered_map<string,double> Loader::getObjectDatas(string id)
 /// Return the properties of an object from a id.prop file
 {
-    if(LOADER_DEBUG_DETAILS)cout<<"===== READING INFORMATION ABOUT : " << id << "========= " << endl;
+    if(LOADER_DEBUG_DETAILS && id=="default")cout<<"===== READING INFORMATION ABOUT : " << id << "========= " << endl;
     unordered_map<string,double> result; result.clear();
     string path=Global::TO_DATA+"dat/prop/"+id+".prop";
     fstream reader(path.c_str());
@@ -301,7 +419,6 @@ pair<string,double> Loader::readPropLine(string line)
         }
 
     }
-    if(LOADER_DEBUG_DETAILS && !comment)cout << " Line read as a Propertie file : " << result.first << " ; " << result.second << endl;
     return result;
 }
 

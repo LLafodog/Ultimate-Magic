@@ -9,7 +9,7 @@ using namespace sf;
 
 class Positionnable
 /**
-    In suc ha game we need to save a position, so everything that must have a position is (by def) a positionnable.
+    In such a game we need to save a position, so everything that must have a position is (by def) a positionnable.
     Within this context, everything that must be placed, must be seen, so must have a size.. :)
 **/
 {

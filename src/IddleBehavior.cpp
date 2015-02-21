@@ -2,7 +2,6 @@
 #include<Object.hpp>
 #include<Alive.hpp>
 #include<World.hpp>
-
 #include<iostream>
 
 using namespace sf;

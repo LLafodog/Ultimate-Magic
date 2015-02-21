@@ -1982,6 +1982,7 @@ CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o
  ../include/Effect.hpp
  ../include/Movable.hpp
  ../include/Object.hpp
+ ../include/Perlin.hpp
  ../include/Player.hpp
  ../include/Positionnable.hpp
  ../include/SFML/Config.hpp

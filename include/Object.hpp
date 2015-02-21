@@ -17,7 +17,8 @@ class Object :public Collisionnable
 {
     public:
         //Object();
-        Object( string id,  sf::FloatRect rect,World* w, bool solid=true, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true);
+  Object( string id,  sf::FloatRect rect,World* w, bool solid=true, float x=0, float y=0,float width=TILE_WIDTH, float height=TILE_HEIGHT, bool visible=true); 
+  // ObjCol0
         Object(Object* o);
 
         /* ============= CASUAL METHODS ============= */
@@ -42,7 +43,7 @@ class Object :public Collisionnable
     protected:
         void updateCurrentTileEffect();
 
-        bool m_visible;
+  bool m_visible; // to throw
         string m_id;
         Identity* m_identity;
         vector<Effect*> m_effects;

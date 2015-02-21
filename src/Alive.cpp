@@ -35,7 +35,7 @@ const float Alive::getDisapearingRatio()
     return max(0.0f,alpha);
 }
 
-void Alive::suffer(float damage) //TO DO with effects
+void Alive::suffer(float damage)
 /// Suffer from damages and next effects.
 /// Look if die in the end.
 {

@@ -1,7 +1,7 @@
 #include<Global.hpp>
-
 #include<Defines.hpp>
 #include <fstream>
+
 bool Global::readFile(std::string path, WMf)
 /// Classic loop that is borring to rewrite.
 {

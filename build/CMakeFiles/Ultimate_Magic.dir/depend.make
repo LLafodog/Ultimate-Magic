@@ -1981,6 +1981,7 @@ CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/Defines.hpp
 CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/Effect.hpp
 CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/Movable.hpp
 CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/Object.hpp
+CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/Perlin.hpp
 CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/Player.hpp
 CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/Positionnable.hpp
 CMakeFiles/Ultimate_Magic.dir/src/World.cpp.o: ../include/SFML/Config.hpp

@@ -1,0 +1,286 @@
+ =========== WORLDS TYPE ============ 
+ ------ Loader: I found link to amazonian_forest .wdat as index 0
+===== READING INFORMATION ABOUT : default========= 
+Textures and Animations loading...
+- Loading  grass texture.
+-- Successfully added grass texture.
+-- Successfully added grass animation.
+-- Successfully added grass_particles texture_particles.
+-- Successfully added grass_particles animation_particles.
+- Loading  light_grass texture.
+-- Successfully added light_grass texture.
+-- Successfully added light_grass animation.
+-- Successfully added light_grass_particles texture_particles.
+-- Successfully added light_grass_particles animation_particles.
+- Loading  dark_grass texture.
+-- Successfully added dark_grass texture.
+-- Successfully added dark_grass animation.
+-- Successfully added dark_grass_particles texture_particles.
+-- Successfully added dark_grass_particles animation_particles.
+- Loading  sand texture.
+-- Successfully added sand texture.
+-- Successfully added sand animation.
+-- Successfully added sand_particles texture_particles.
+-- Successfully added sand_particles animation_particles.
+- Loading  player texture.
+-- Successfully added player texture.
+-- Successfully added player animation.
+-- Successfully added player1 texture.
+-- Successfully added player1 animation.
+-- Successfully added player2 texture.
+-- Successfully added player2 animation.
+-- Successfully added player3 texture.
+-- Successfully added player3 animation.
+- Loading  error texture.
+-- Successfully added error texture.
+-- Successfully added error animation.
+- Loading  ground texture.
+-- Successfully added ground texture.
+-- Successfully added ground animation.
+-- Successfully added ground_particles texture_particles.
+-- Successfully added ground_particles animation_particles.
+- Loading  water texture.
+-- Successfully added water texture.
+-- Successfully added water animation.
+-- Successfully added water_particles texture_particles.
+-- Successfully added water_particles animation_particles.
+- Loading  dark_water texture.
+-- Successfully added dark_water texture.
+-- Successfully added dark_water animation.
+-- Successfully added dark_water_particles texture_particles.
+-- Successfully added dark_water_particles animation_particles.
+- Loading  invisible texture.
+-- Successfully added invisible texture.
+-- Successfully added invisible animation.
+- Loading  pine_tree texture.
+-- Successfully added pine_tree texture.
+-- Successfully added pine_tree animation.
+- Loading  snow texture.
+-- Successfully added snow texture.
+-- Successfully added snow animation.
+-- Successfully added snow_particles texture_particles.
+-- Successfully added snow_particles animation_particles.
+- Loading  in_fire texture.
+-- Successfully added in_fire texture.
+-- Successfully added in_fire animation.
+- Loading  moss texture.
+-- Successfully added moss texture.
+-- Successfully added moss animation.
+- Loading  forest_grass texture.
+-- Successfully added forest_grass texture.
+-- Successfully added forest_grass animation.
+-- Successfully added forest_grass_particles texture_particles.
+-- Successfully added forest_grass_particles animation_particles.
+ ========== PROBABILITIES LOADING ========= 
+ ------ File reading : campina.prob
+ ------ File reading : carrasco.prob
+ ------ File reading : error.prob
+ ------ File reading : igapo.prob
+ ------ File reading : sempervirente.prob
+ ------ File reading : supralittoral.prob
+ ------ File reading : tropicale.prob
+ ------ File reading : varzea.prob
+ ========== PREMADE TILES ============= 
+ ===> Tile id : grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : light_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : dark_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : sand Effects: 
+ ----- Effect ID linked: speed with value of : 10
+ ===> Tile id : error Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : ground Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : water Effects: 
+ ----- Effect ID linked: speed with value of : 50
+ ===> Tile id : dark_water Effects: 
+ ----- Effect ID linked: speed with value of : 80
+ ===> Tile id : invisible Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : snow Effects: 
+ ----- Effect ID linked: speed with value of : 30
+ -------------- END PREMADE TILES --------------- 
+ Loader::getWdat : Added altitude(0;20).
+ Loader::getWdat : Added humidity (0;30) with path sempervirente
+ Loader::getWdat : Added humidity (30;80) with path igapo
+ Loader::getWdat : Added humidity (80;100) with path varzea
+ Loader::getWdat : Added altitude(20;45).
+ Loader::getWdat : Added humidity (0;60) with path sempervirente
+ Loader::getWdat : Added humidity (60;90) with path campina
+ Loader::getWdat : Added humidity (90;100) with path igapo
+ Loader::getWdat : Added altitude(45;80).
+ Loader::getWdat : Added humidity (0;20) with path campina
+ Loader::getWdat : Added humidity (20;95) with path tropicale
+ Loader::getWdat : Added humidity (95;100) with path igapo
+ Loader::getWdat : Added altitude(80;100).
+ Loader::getWdat : Added humidity (0;50) with path campina
+ Loader::getWdat : Added humidity (50;100) with path carrasco
+ ============ Loader::getWdat : END =============== 
+ =========== WORLDS TYPE ============ 
+ ------ Loader: I found link to amazonian_forest .wdat as index 0
+===== READING INFORMATION ABOUT : default========= 
+Textures and Animations loading...
+- Loading  grass texture.
+-- Successfully added grass texture.
+-- Successfully added grass animation.
+-- Successfully added grass_particles texture_particles.
+-- Successfully added grass_particles animation_particles.
+- Loading  light_grass texture.
+-- Successfully added light_grass texture.
+-- Successfully added light_grass animation.
+-- Successfully added light_grass_particles texture_particles.
+-- Successfully added light_grass_particles animation_particles.
+- Loading  dark_grass texture.
+-- Successfully added dark_grass texture.
+-- Successfully added dark_grass animation.
+-- Successfully added dark_grass_particles texture_particles.
+-- Successfully added dark_grass_particles animation_particles.
+- Loading  sand texture.
+-- Successfully added sand texture.
+-- Successfully added sand animation.
+-- Successfully added sand_particles texture_particles.
+-- Successfully added sand_particles animation_particles.
+- Loading  player texture.
+-- Successfully added player texture.
+-- Successfully added player animation.
+-- Successfully added player1 texture.
+-- Successfully added player1 animation.
+-- Successfully added player2 texture.
+-- Successfully added player2 animation.
+-- Successfully added player3 texture.
+-- Successfully added player3 animation.
+- Loading  error texture.
+-- Successfully added error texture.
+-- Successfully added error animation.
+- Loading  ground texture.
+-- Successfully added ground texture.
+-- Successfully added ground animation.
+-- Successfully added ground_particles texture_particles.
+-- Successfully added ground_particles animation_particles.
+- Loading  water texture.
+-- Successfully added water texture.
+-- Successfully added water animation.
+-- Successfully added water_particles texture_particles.
+-- Successfully added water_particles animation_particles.
+- Loading  dark_water texture.
+-- Successfully added dark_water texture.
+-- Successfully added dark_water animation.
+-- Successfully added dark_water_particles texture_particles.
+-- Successfully added dark_water_particles animation_particles.
+- Loading  invisible texture.
+-- Successfully added invisible texture.
+-- Successfully added invisible animation.
+- Loading  pine_tree texture.
+-- Successfully added pine_tree texture.
+-- Successfully added pine_tree animation.
+- Loading  snow texture.
+-- Successfully added snow texture.
+-- Successfully added snow animation.
+-- Successfully added snow_particles texture_particles.
+-- Successfully added snow_particles animation_particles.
+- Loading  in_fire texture.
+-- Successfully added in_fire texture.
+-- Successfully added in_fire animation.
+- Loading  moss texture.
+-- Successfully added moss texture.
+-- Successfully added moss animation.
+-- Successfully added moss_particles texture_particles.
+-- Successfully added moss_particles animation_particles.
+- Loading  forest_grass texture.
+-- Successfully added forest_grass texture.
+-- Successfully added forest_grass animation.
+-- Successfully added forest_grass_particles texture_particles.
+-- Successfully added forest_grass_particles animation_particles.
+- Loading  stagnant_water texture.
+-- Successfully added stagnant_water texture.
+-- Successfully added stagnant_water animation.
+-- Successfully added stagnant_water_particles texture_particles.
+-- Successfully added stagnant_water_particles animation_particles.
+- Loading  forest_gravel texture.
+-- Successfully added forest_gravel texture.
+-- Successfully added forest_gravel animation.
+-- Successfully added forest_gravel_particles texture_particles.
+-- Successfully added forest_gravel_particles animation_particles.
+- Loading  light_water texture.
+-- Successfully added light_water texture.
+-- Successfully added light_water animation.
+-- Successfully added light_water_particles texture_particles.
+-- Successfully added light_water_particles animation_particles.
+- Loading  deep_forest_grass texture.
+-- Successfully added deep_forest_grass texture.
+-- Successfully added deep_forest_grass animation.
+-- Successfully added deep_forest_grass_particles texture_particles.
+-- Successfully added deep_forest_grass_particles animation_particles.
+- Loading  dry_grass texture.
+-- Successfully added dry_grass texture.
+-- Successfully added dry_grass animation.
+-- Successfully added dry_grass_particles texture_particles.
+-- Successfully added dry_grass_particles animation_particles.
+- Loading  dry_ground texture.
+-- Successfully added dry_ground texture.
+-- Successfully added dry_ground animation.
+ ========== PROBABILITIES LOADING ========= 
+ ------ File reading : campina.prob
+ ------ File reading : carrasco.prob
+ ------ File reading : error.prob
+ ------ File reading : igapo.prob
+ ------ File reading : sempervirente.prob
+ ------ File reading : supralittoral.prob
+ ------ File reading : tropicale.prob
+ ------ File reading : varzea.prob
+ ========== PREMADE TILES ============= 
+ ===> Tile id : grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : light_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : dark_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : sand Effects: 
+ ----- Effect ID linked: speed with value of : 10
+ ===> Tile id : error Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : ground Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : water Effects: 
+ ----- Effect ID linked: speed with value of : 50
+ ===> Tile id : dark_water Effects: 
+ ----- Effect ID linked: speed with value of : 80
+ ===> Tile id : invisible Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : snow Effects: 
+ ----- Effect ID linked: speed with value of : 30
+ ===> Tile id : moss Effects: 
+ ----- Effect ID linked: speed with value of : 10
+ ===> Tile id : forest_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : stagnant_water Effects: 
+ ----- Effect ID linked: speed with value of : 50
+ ===> Tile id : forest_gravel Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : light_water Effects: 
+ ----- Effect ID linked: speed with value of : 30
+ ===> Tile id : deep_forest_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : dry_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : dry_ground Effects: 
+ ----- Effect ID linked: none with value of : 0
+ -------------- END PREMADE TILES --------------- 
+ Loader::getWdat : Added altitude(0;20).
+ Loader::getWdat : Added humidity (0;30) with path sempervirente
+ Loader::getWdat : Added humidity (30;80) with path igapo
+ Loader::getWdat : Added humidity (80;100) with path varzea
+ Loader::getWdat : Added altitude(20;45).
+ Loader::getWdat : Added humidity (0;60) with path sempervirente
+ Loader::getWdat : Added humidity (60;90) with path campina
+ Loader::getWdat : Added humidity (90;100) with path igapo
+ Loader::getWdat : Added altitude(45;80).
+ Loader::getWdat : Added humidity (0;20) with path campina
+ Loader::getWdat : Added humidity (20;95) with path tropicale
+ Loader::getWdat : Added humidity (95;100) with path igapo
+ Loader::getWdat : Added altitude(80;100).
+ Loader::getWdat : Added humidity (0;50) with path campina
+ Loader::getWdat : Added humidity (50;100) with path carrasco
+ ============ Loader::getWdat : END =============== 

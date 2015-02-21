@@ -1,0 +1,53 @@
+ =========== WORLDS TYPE ============ 
+ ------ Loader: I found link to amazonian_forest .wdat as index 0
+===== READING INFORMATION ABOUT : default========= 
+ ========== PROBABILITIES LOADING ========= 
+ ------ File reading : deep_forest.prob
+ ------ File reading : desert.prob
+ ------ File reading : error.prob
+ ------ File reading : forest.prob
+ ------ File reading : grassland.prob
+ ------ File reading : mount.prob
+ ------ File reading : sea.prob
+ ------ File reading : deep_sea.prob
+ ------ File reading : beach.prob
+ ------ File reading : snow.prob
+ ------ File reading : ground.prob
+ ========== PREMADE TILES ============= 
+ ===> Tile id : grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : light_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : dark_grass Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : sand Effects: 
+ ----- Effect ID linked: speed with value of : 10
+ ===> Tile id : error Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : ground Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : water Effects: 
+ ----- Effect ID linked: speed with value of : 50
+ ===> Tile id : dark_water Effects: 
+ ----- Effect ID linked: speed with value of : 80
+ ===> Tile id : invisible Effects: 
+ ----- Effect ID linked: none with value of : 0
+ ===> Tile id : snow Effects: 
+ ----- Effect ID linked: speed with value of : 30
+ -------------- END PREMADE TILES --------------- 
+ NAME : 
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).
+ Added altitude(-1;-1).

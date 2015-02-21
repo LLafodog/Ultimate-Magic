@@ -1,0 +1,26 @@
+% This kind of forest is very dense, many trees and basicly full of grass
+%    Forêt tropicale: dense, arbre haut(15m), herbe grasse, humide, très dense, ombragé
+%    Forêt sempervirente saisonnière : Zone sèche, moins d'arbre, forest moins dense, herbe plus sèche.
+%    Forêt de campina : Arbre très haut(30m), altitude basse, herbe grass et normale, ombragé
+%    Forêt de carrasco : haute altitude, peu d'arbre petit(7-8m), sol blanc/gris (terre)
+%    Forêt de varzea: ultra humid, arbre bas  genre fougère, proche rivière DONE
+%    Forêt d'igapo: marécage, très humide, plutot bas, arbre bas, large, eau croupie.
+
+A 0 20 
+H 0 30 sempervirente 
+H 30 80 igapo  
+H 80 100 varzea 
+
+A 20 45 
+H 0 60 sempervirente 
+H 60 90 campina 
+H 90 100 igapo 
+
+A 45 80 
+H 0 20 campina 
+H 20 95 tropicale 
+H 95 100 igapo 
+
+A 80 100 
+H 0 50 campina 
+H 50 100 carrasco 

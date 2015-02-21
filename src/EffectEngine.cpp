@@ -1,5 +1,4 @@
 #include<EffectEngine.hpp>
-
 #include<Effect.hpp>
 
 EffectEngine* EffectEngine::m_self=nullptr;
